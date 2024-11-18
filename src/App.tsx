@@ -9,11 +9,11 @@ export default () => {
         <Navigation />
       </div>
 
-      <div className="flex justify-between">
-        <div className="fixed left-0 top-0 bottom-0 w-1/5 overflow-y-scroll border-r border-r-gray-200">
+      <div className="flex justify-between relative h-screen">
+        <div className="fixed bottom-0 h-[calc(100vh-96px)] w-1/5 overflow-y-scroll border-r border-r-gray-200">
           <Sidebar />
         </div>
-        <div className="fixed right-0 top-0 bottom-0 w-4/5 overflow-y-scroll">
+        <div className="absolute right-0 w-4/5 overflow-y-scroll">
           <PokemonDetails />
         </div>
       </div>
