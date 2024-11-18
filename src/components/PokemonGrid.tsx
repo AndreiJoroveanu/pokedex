@@ -1,9 +1,9 @@
-import { useState } from "react";
 import PokemonCard from "./PokemonCard.tsx";
 import ChangePageButtons from "./ChangePageButtons.tsx";
+import { usePokemon } from "../shared/PokemonContext.tsx";
 
 export default () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const { currentPage, setCurrentPage } = usePokemon();
   const noOfPokemon = 1025;
   const pokemonPerPage = 20;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage); // to change noOfPokemon to filtered Pokémon
@@ -33,7 +33,7 @@ export default () => {
   };
 
   return (
-    <div className="p-4 py-28 flex flex-col items-center">
+    <div className="p-4 flex flex-col items-center">
       <div className="mb-4">
         {ChangePageButtons({
           currentPage,

@@ -19,7 +19,7 @@ export default ({ index }: { index: number }) => {
   return (
     <div>
       {pokemon && (
-        <div className="border border-gray-200 flex flex-col justify-between rounded shadow-lg">
+        <div className="border border-gray-200 flex flex-col justify-between rounded shadow-lg hover:shadow-xl transition-shadow">
           <Link to={`/pokemon/${pokemon.id}`}>
             <img
               src={pokemon?.sprites.other?.[
@@ -31,7 +31,7 @@ export default ({ index }: { index: number }) => {
 
             <div className="p-4">
               <h1 className="capitalize text-2xl font-bold">
-                {index}. {pokemon?.species.name}
+                {pokemon?.id}. {pokemon?.species.name}
               </h1>
               <p>
                 {pokemon?.types.length === 1 ? "Type: " : "Types: "}
