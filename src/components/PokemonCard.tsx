@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Pokemon, PokemonClient } from "pokenode-ts";
 import { Link } from "react-router-dom";
 
-export default ({ index }: { index: number }) => {
+export default ({ name }: { name: string }) => {
   const [pokemon, setPokemon] = useState<Pokemon>();
 
   useEffect(() => {
     const api = new PokemonClient();
     const fetchPokemon = async () => {
       await api
-        .getPokemonById(index)
+        .getPokemonByName(name)
         .then((data) => setPokemon(data))
         .catch((error) => console.error(error));
     };
