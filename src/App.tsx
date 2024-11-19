@@ -8,9 +8,9 @@ import PokemonGrid from "./components/PokemonGrid.tsx";
 import Sidebar from "./components/Sidebar.tsx";
 import Navigation from "./components/Navigation.tsx";
 import PokemonDetails from "./components/PokemonDetails.tsx";
-import { PokemonProvider } from "./shared/PokemonContext.tsx";
+import PokemonProvider from "./shared/PokemonProvider.tsx";
 
-export default () => {
+const App = () => {
   return (
     <Router>
       <PokemonProvider>
@@ -50,3 +50,5 @@ export default () => {
     </Router>
   );
 };
+
+export default App;

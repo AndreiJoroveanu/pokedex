@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default () => {
+const Navigation = () => {
   return (
     <div className="flex justify-between items-center w-full px-24">
       <Link to={"/pokemon"}>
@@ -31,3 +31,4 @@ export default () => {
     </div>
   );
 };
+export default Navigation;

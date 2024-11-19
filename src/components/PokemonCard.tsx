@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Pokemon, PokemonClient } from "pokenode-ts";
 import { Link } from "react-router-dom";
 
-export default ({ name }: { name: string }) => {
+const PokemonCard = ({ name }: { name: string }) => {
   const [pokemon, setPokemon] = useState<Pokemon>();
 
   useEffect(() => {
@@ -11,10 +11,10 @@ export default ({ name }: { name: string }) => {
       await api
         .getPokemonByName(name)
         .then((data) => setPokemon(data))
-        .catch((error) => console.error(error));
+        .catch((error) => console.error("Error fetching Pokémon data", error));
     };
     fetchPokemon().then();
-  }, []);
+  });
 
   return (
     <div>
@@ -49,3 +49,4 @@ export default ({ name }: { name: string }) => {
     </div>
   );
 };
+export default PokemonCard;

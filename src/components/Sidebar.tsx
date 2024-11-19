@@ -1,4 +1,4 @@
-export default () => {
+const Sidebar = () => {
   return (
     // (h-screen is just to force overscroll, isn't needed)
     <div className="p-4 h-screen">
@@ -6,3 +6,4 @@ export default () => {
     </div>
   );
 };
+export default Sidebar;

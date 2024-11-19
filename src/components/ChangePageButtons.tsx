@@ -7,7 +7,7 @@ interface ChangePageButtonsProps {
   noOfSideButtons: number;
 }
 
-export default ({
+const ChangePageButtons = ({
   currentPage,
   setCurrentPage,
   noOfPages,
@@ -60,3 +60,4 @@ export default ({
     </div>
   );
 };
+export default ChangePageButtons;

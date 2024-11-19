@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Pokemon, PokemonClient, PokemonSpecies } from "pokenode-ts";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default () => {
+const PokemonDetails = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [pokemon, setPokemon] = useState<Pokemon>();
@@ -14,15 +14,17 @@ export default () => {
       await api
         .getPokemonById(Number(id))
         .then((data) => setPokemon(data))
-        .catch((error) => console.error(error));
+        .catch((error) => console.error("Error fetching Pokémon data", error));
 
       await api
         .getPokemonSpeciesById(Number(id))
         .then((data) => setPokemonSpecies(data))
-        .catch((error) => console.error(error));
+        .catch((error) =>
+          console.error("Error fetching Pokémon species data", error),
+        );
     };
     fetchPokemon().then();
-  }, []);
+  });
 
   return (
     <div className="p-4">
@@ -80,3 +82,4 @@ export default () => {
     </div>
   );
 };
+export default PokemonDetails;

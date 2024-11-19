@@ -1,15 +1,15 @@
 import PokemonCard from "./PokemonCard.tsx";
 import ChangePageButtons from "./ChangePageButtons.tsx";
-import { usePokemon } from "../shared/PokemonContext.tsx";
+import { usePokemon } from "../hooks/usePokemon.ts";
 
-export default () => {
+const PokemonGrid = () => {
   const { currentPage, setCurrentPage, pokemonList } = usePokemon();
   const noOfPokemon = 1025;
   const pokemonPerPage = 20;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage); // to change noOfPokemon to filtered Pokémon
 
   const renderPokemon = () => {
-    let items = [];
+    const items = [];
     if (pokemonList.length) {
       for (
         let i = (currentPage - 1) * pokemonPerPage;
@@ -37,3 +37,4 @@ export default () => {
     </div>
   );
 };
+export default PokemonGrid;
