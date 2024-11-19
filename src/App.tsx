@@ -37,7 +37,7 @@ const App = () => {
             />
 
             <Route
-              path="/pokemon/:id"
+              path="/pokemon/:name"
               element={
                 <div className="py-24">
                   <PokemonDetails />

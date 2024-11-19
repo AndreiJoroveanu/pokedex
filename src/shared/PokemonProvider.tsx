@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { PokemonClient } from "pokenode-ts";
 import PokemonContext from "../context/PokemonContext";
 
@@ -15,17 +15,20 @@ const PokemonProvider = ({ children }: { children: ReactNode }) => {
     const api = new PokemonClient();
     const fetchPokemon = async () => {
       await api
-        .listPokemons(0, 10000)
+        .listPokemons(0, 1025)
         .then((response) => setPokemonList(response.results))
         .catch((error) => console.error("Failed to fetch Pokémon list", error));
     };
     fetchPokemon().then();
   }, []);
 
+  const contextValues = useMemo(
+    () => ({ currentPage, setCurrentPage, pokemonList }),
+    [currentPage, pokemonList],
+  );
+
   return (
-    <PokemonContext.Provider
-      value={{ currentPage, setCurrentPage, pokemonList }}
-    >
+    <PokemonContext.Provider value={contextValues}>
       {children}
     </PokemonContext.Provider>
   );

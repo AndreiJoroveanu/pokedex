@@ -4,22 +4,20 @@ import { usePokemon } from "../hooks/usePokemon.ts";
 
 const PokemonGrid = () => {
   const { currentPage, setCurrentPage, pokemonList } = usePokemon();
-  const noOfPokemon = 1025;
+  const noOfPokemon = pokemonList.length;
   const pokemonPerPage = 20;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage); // to change noOfPokemon to filtered Pokémon
 
   const renderPokemon = () => {
     const items = [];
-    if (pokemonList.length) {
-      for (
-        let i = (currentPage - 1) * pokemonPerPage;
-        i < Math.min(currentPage * pokemonPerPage, noOfPokemon);
-        i++
-      ) {
-        items.push(<PokemonCard key={i} name={pokemonList[i].name} />);
-      }
-      return items;
+    for (
+      let i = (currentPage - 1) * pokemonPerPage;
+      i < Math.min(currentPage * pokemonPerPage, noOfPokemon);
+      i++
+    ) {
+      items.push(<PokemonCard key={i} name={pokemonList[i].name} />);
     }
+    return items;
   };
 
   return (

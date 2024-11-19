@@ -14,13 +14,13 @@ const PokemonCard = ({ name }: { name: string }) => {
         .catch((error) => console.error("Error fetching Pokémon data", error));
     };
     fetchPokemon().then();
-  });
+  }, [name]);
 
   return (
     <div>
       {pokemon && (
         <div className="border border-gray-200 flex flex-col justify-between rounded shadow-lg hover:shadow-xl transition-shadow">
-          <Link to={`/pokemon/${pokemon.id}`}>
+          <Link to={`/pokemon/${pokemon.species.name}`} state={{ pokemon }}>
             <img
               src={pokemon?.sprites.other?.[
                 "official-artwork"
