@@ -1,12 +1,27 @@
 import PokemonCard from "./PokemonCard.tsx";
 import ChangePageButtons from "./ChangePageButtons.tsx";
 import { usePokemon } from "../hooks/usePokemon.ts";
+import { useEffect } from "react";
+import { PokemonClient } from "pokenode-ts";
 
 const PokemonGrid = () => {
-  const { currentPage, setCurrentPage, pokemonList } = usePokemon();
+  const { currentPage, setCurrentPage, setAllPokemon, pokemonList } =
+    usePokemon();
   const noOfPokemon = pokemonList.length;
   const pokemonPerPage = 20;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage); // to change noOfPokemon to filtered Pokémon
+
+  useEffect(() => {
+    const api = new PokemonClient();
+    const fetchPokemon = async () => {
+      await api
+        .listPokemons(0, 1025)
+        .then((response) => setAllPokemon(response.results))
+        .catch((error) => console.error("Failed to fetch Pokémon list", error));
+    };
+    fetchPokemon().then();
+    console.log("test");
+  }, [setAllPokemon]);
 
   const renderPokemon = () => {
     const items = [];
