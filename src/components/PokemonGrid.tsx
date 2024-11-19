@@ -20,19 +20,18 @@ const PokemonGrid = () => {
         .catch((error) => console.error("Failed to fetch Pokémon list", error));
     };
     fetchPokemon().then();
-    console.log("test");
   }, [setAllPokemon]);
 
-  const renderPokemon = () => {
-    const items = [];
+  const getPokemonIds = () => {
+    const pokemonCards = [];
     for (
       let i = (currentPage - 1) * pokemonPerPage;
       i < Math.min(currentPage * pokemonPerPage, noOfPokemon);
       i++
     ) {
-      items.push(<PokemonCard key={i} name={pokemonList[i].name} />);
+      pokemonCards.push(i);
     }
-    return items;
+    return pokemonCards;
   };
 
   return (
@@ -46,7 +45,12 @@ const PokemonGrid = () => {
         })}
       </div>
 
-      <div className="grid grid-cols-5 gap-4">{renderPokemon()}</div>
+      <div className="grid grid-cols-5 gap-4">
+        {pokemonList.length &&
+          getPokemonIds().map((index) => (
+            <PokemonCard key={index} name={pokemonList[index].name} />
+          ))}
+      </div>
     </div>
   );
 };

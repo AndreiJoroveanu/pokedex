@@ -14,7 +14,7 @@ const Sidebar = () => {
             onClick={() =>
               setCurrentType(currentType === type.name ? "" : type.name)
             }
-            className={`capitalize border px-4 py-2 rounded-full shadow-md hover:shadow-lg ${type.name === currentType ? "bg-black text-white" : "hover:bg-gray-100"} hover:shadow-lg transition-shadow`}
+            className={`capitalize border px-4 py-2 rounded-full shadow-md hover:shadow-lg ${currentType === type.name ? "bg-black text-white" : "hover:bg-gray-100"} hover:shadow-lg transition-shadow`}
           >
             {type.name}
           </button>

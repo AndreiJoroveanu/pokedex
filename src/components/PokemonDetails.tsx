@@ -33,9 +33,7 @@ const PokemonDetails = () => {
 
       {/* Image (official artwork) */}
       <img
-        src={pokemon?.sprites.other?.[
-          "official-artwork"
-        ].front_default?.toString()}
+        src={pokemon?.sprites.other?.home.front_default?.toString()}
         alt={pokemon?.name}
         className="object-contain"
       />
