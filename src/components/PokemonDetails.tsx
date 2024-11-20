@@ -31,36 +31,36 @@ const PokemonDetails = () => {
         Back
       </button>
 
-      {/* Image (official artwork) */}
+      {/* Image (Pokémon HOME artwork) */}
       <img
-        src={pokemon?.sprites.other?.home.front_default?.toString()}
-        alt={pokemon?.name}
+        src={pokemon.sprites.other?.home.front_default?.toString()}
+        alt={pokemon.name}
         className="object-contain"
       />
 
       {/* Name */}
       <h1 className="capitalize text-2xl font-bold">
-        {pokemon?.id}. {pokemon?.species.name}
+        {pokemon.id}. {pokemon.species.name}
       </h1>
 
       {/* Types */}
       <p>
-        {pokemon?.types.length === 1 ? "Type: " : "Types: "}
-        {pokemon?.types.map((type, index) => (
-          <span key={index} className="capitalize">
+        {pokemon.types.length === 1 ? "Type: " : "Types: "}
+        {pokemon.types.map((type) => (
+          <span key={type.type.name} className="capitalize">
             {" "}
-            {type?.type.name}
+            {type.type.name}
           </span>
         ))}
       </p>
 
       {/* Abilities */}
       <p>
-        {pokemon?.abilities.length === 1 ? "Ability: " : "Abilities: "}
-        {pokemon?.abilities.map((ability, index) => (
-          <span key={index} className="capitalize">
+        {pokemon.abilities.length === 1 ? "Ability: " : "Abilities: "}
+        {pokemon.abilities.map((ability) => (
+          <span key={ability.ability.name} className="capitalize">
             {" "}
-            {ability?.ability.name}
+            {ability.ability.name}
           </span>
         ))}
       </p>

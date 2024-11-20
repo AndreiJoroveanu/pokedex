@@ -2,11 +2,11 @@ import { createContext } from "react";
 import { PokemonListType } from "../shared/PokemonProvider.tsx";
 
 interface PokemonContextType {
+  changeCurrentPage: (page: number) => void;
+  changeCurrentType: (type: string) => void;
   currentPage: number;
-  setCurrentPage: (page: number) => void;
   currentType: string;
-  setCurrentType: (type: string) => void;
-  setAllPokemon: (pokemon: PokemonListType[]) => void;
+  loadAllPokemon: (pokemon: PokemonListType[]) => void;
   pokemonList: PokemonListType[];
   pokemonTypes: PokemonListType[];
 }

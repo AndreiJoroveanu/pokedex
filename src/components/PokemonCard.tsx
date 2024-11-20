@@ -19,30 +19,30 @@ const PokemonCard = ({ name }: { name: string }) => {
   return (
     <div>
       {pokemon && (
-        <div className="border border-gray-200 flex flex-col justify-between rounded shadow-lg hover:shadow-xl transition-shadow">
-          <Link to={`/pokemon/${pokemon.species.name}`} state={{ pokemon }}>
+        <Link to={`/pokemon/${pokemon.species.name}`} state={{ pokemon }}>
+          <div className="border border-gray-200 rounded shadow-lg hover:shadow-xl transition-shadow">
             <img
-              src={pokemon?.sprites.other?.home.front_default?.toString()}
-              alt={pokemon?.name}
+              src={pokemon.sprites.other?.home.front_default?.toString()}
+              alt={pokemon.name}
               className="object-contain"
             />
 
             <div className="p-4">
-              <h1 className="capitalize text-2xl font-bold">
-                {pokemon?.id}. {pokemon?.species.name}
+              <h1 className="capitalize text-xl font-bold">
+                {pokemon.id}. {pokemon.species.name}
               </h1>
               <p>
-                {pokemon?.types.length === 1 ? "Type: " : "Types: "}
-                {pokemon?.types.map((type, index) => (
-                  <span key={index} className="capitalize">
+                {pokemon.types.length === 1 ? "Type: " : "Types: "}
+                {pokemon.types.map((type) => (
+                  <span key={type.type.name} className="capitalize">
                     {" "}
-                    {type?.type.name}
+                    {type.type.name}
                   </span>
                 ))}
               </p>
             </div>
-          </Link>
-        </div>
+          </div>
+        </Link>
       )}
     </div>
   );

@@ -5,33 +5,34 @@ import { useEffect } from "react";
 import { PokemonClient } from "pokenode-ts";
 
 const PokemonGrid = () => {
-  const { currentPage, setCurrentPage, setAllPokemon, pokemonList } =
+  const { currentPage, changeCurrentPage, loadAllPokemon, pokemonList } =
     usePokemon();
   const noOfPokemon = pokemonList.length;
   const pokemonPerPage = 20;
-  const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage); // to change noOfPokemon to filtered Pokémon
+  const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage);
 
+  // TODO: Make this a hook?
   useEffect(() => {
     const api = new PokemonClient();
     const fetchPokemon = async () => {
       await api
         .listPokemons(0, 1025)
-        .then((response) => setAllPokemon(response.results))
+        .then((response) => loadAllPokemon(response.results))
         .catch((error) => console.error("Failed to fetch Pokémon list", error));
     };
     fetchPokemon().then();
-  }, [setAllPokemon]);
+  }, []);
 
   const getPokemonIds = () => {
-    const pokemonCards = [];
+    const pokemonIds: number[] = [];
     for (
-      let i = (currentPage - 1) * pokemonPerPage;
-      i < Math.min(currentPage * pokemonPerPage, noOfPokemon);
-      i++
+      let id = (currentPage - 1) * pokemonPerPage;
+      id < Math.min(currentPage * pokemonPerPage, noOfPokemon);
+      id++
     ) {
-      pokemonCards.push(i);
+      pokemonIds.push(id);
     }
-    return pokemonCards;
+    return pokemonIds;
   };
 
   return (
@@ -39,17 +40,16 @@ const PokemonGrid = () => {
       <div className="mb-4">
         {ChangePageButtons({
           currentPage,
-          setCurrentPage,
+          changeCurrentPage,
           noOfPages,
           noOfSideButtons: 3,
         })}
       </div>
 
-      <div className="grid grid-cols-5 gap-4">
-        {pokemonList.length &&
-          getPokemonIds().map((index) => (
-            <PokemonCard key={index} name={pokemonList[index].name} />
-          ))}
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
+        {getPokemonIds().map((id) => (
+          <PokemonCard key={pokemonList[id].name} name={pokemonList[id].name} />
+        ))}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { PokemonClient } from "pokenode-ts";
 import PokemonContext from "../context/PokemonContext";
 
@@ -27,7 +27,7 @@ const PokemonProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (currentType) {
       const fetchPokemon = async () => {
-        // Need to somehow decouple the API calls from here
+        // TODO: Need to somehow decouple the API calls from here, or just make this less ugly
         const api = new PokemonClient();
         await api
           .getTypeByName(currentType)
@@ -68,21 +68,22 @@ const PokemonProvider = ({ children }: { children: ReactNode }) => {
     fetchTypes().then();
   }, []);
 
-  const contextValues = useMemo(
-    () => ({
-      currentPage,
-      setCurrentPage,
-      currentType,
-      setCurrentType,
-      setAllPokemon,
-      pokemonList,
-      pokemonTypes,
-    }),
-    [currentPage, currentType, pokemonList, pokemonTypes],
-  );
+  const changeCurrentPage = (page: number) => setCurrentPage(page);
+  const changeCurrentType = (type: string) => setCurrentType(type);
+  const loadAllPokemon = (pokemon: PokemonListType[]) => setAllPokemon(pokemon);
 
   return (
-    <PokemonContext.Provider value={contextValues}>
+    <PokemonContext.Provider
+      value={{
+        changeCurrentPage,
+        changeCurrentType,
+        currentPage,
+        currentType,
+        loadAllPokemon,
+        pokemonList,
+        pokemonTypes,
+      }}
+    >
       {children}
     </PokemonContext.Provider>
   );
