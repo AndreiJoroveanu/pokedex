@@ -4,10 +4,10 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import PokemonGrid from "./components/PokemonGrid.tsx";
+import PokemonGrid from "./pages/PokemonGrid.tsx";
 import Sidebar from "./components/Sidebar.tsx";
 import Navigation from "./components/Navigation.tsx";
-import PokemonDetails from "./components/PokemonDetails.tsx";
+import PokemonDetails from "./pages/PokemonDetails.tsx";
 import PokemonProvider from "./shared/PokemonProvider.tsx";
 
 const App = () => {

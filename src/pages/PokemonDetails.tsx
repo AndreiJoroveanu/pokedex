@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
-import { Pokemon, PokemonClient, PokemonSpecies } from "pokenode-ts";
+import { Pokemon, PokemonSpecies } from "pokenode-ts";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import {
+  fetchPokemonByName,
+  fetchPokemonSpeciesByName,
+} from "../services/apiService.ts";
 
 const PokemonDetails = () => {
   const { name } = useParams<{ name: string }>();
@@ -10,26 +14,16 @@ const PokemonDetails = () => {
 
   useEffect(() => {
     if (name) {
-      const api = new PokemonClient();
-      const fetchPokemon = async () => {
-        await api
-          .getPokemonSpeciesByName(name)
-          .then((data) => setPokemonSpecies(data))
-          .catch((error) =>
-            console.error("Error fetching Pokémon species data", error),
-          );
+      fetchPokemonSpeciesByName(name)
+        .then((data) => setPokemonSpecies(data))
+        .catch((e) => console.error("Error fetching Pokémon species", e));
 
-        if (!pokemon)
-          await api
-            .getPokemonByName(name)
-            .then((data) => setPokemon(data))
-            .catch((error) =>
-              console.error("Error fetching Pokémon data", error),
-            );
-      };
-      fetchPokemon().then();
+      if (!pokemon && pokemonSpecies)
+        fetchPokemonByName(pokemonSpecies.varieties[0].pokemon.name)
+          .then((data) => setPokemon(data))
+          .catch((e) => console.error("Error fetching Pokémon", e));
     }
-  }, [name]);
+  }, [name, pokemonSpecies]);
 
   return (
     <div className="p-4">

@@ -1,8 +1,8 @@
-import PokemonCard from "./PokemonCard.tsx";
-import ChangePageButtons from "./ChangePageButtons.tsx";
+import PokemonCard from "../components/PokemonCard.tsx";
+import ChangePageButtons from "../components/ChangePageButtons.tsx";
 import { usePokemon } from "../hooks/usePokemon.ts";
 import { useEffect } from "react";
-import { PokemonClient } from "pokenode-ts";
+import { fetchAllPokemon } from "../services/apiService.ts";
 
 const PokemonGrid = () => {
   const { currentPage, changeCurrentPage, loadAllPokemon, pokemonList } =
@@ -11,16 +11,10 @@ const PokemonGrid = () => {
   const pokemonPerPage = 20;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage);
 
-  // TODO: Make this a hook?
   useEffect(() => {
-    const api = new PokemonClient();
-    const fetchPokemon = async () => {
-      await api
-        .listPokemons(0, 1025)
-        .then((response) => loadAllPokemon(response.results))
-        .catch((error) => console.error("Failed to fetch Pokémon list", error));
-    };
-    fetchPokemon().then();
+    fetchAllPokemon()
+      .then((data) => loadAllPokemon(data))
+      .catch((error) => console.error("Failed to fetch all Pokémon", error));
   }, []);
 
   const getPokemonIds = () => {

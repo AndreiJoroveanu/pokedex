@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
-import { Pokemon, PokemonClient } from "pokenode-ts";
+import { Pokemon } from "pokenode-ts";
 import { Link } from "react-router-dom";
+import { fetchPokemonByName } from "../services/apiService.ts";
 
 const PokemonCard = ({ name }: { name: string }) => {
   const [pokemon, setPokemon] = useState<Pokemon>();
 
   useEffect(() => {
-    const api = new PokemonClient();
-    const fetchPokemon = async () => {
-      await api
-        .getPokemonByName(name)
-        .then((data) => setPokemon(data))
-        .catch((error) => console.error("Error fetching Pokémon data", error));
-    };
-    fetchPokemon().then();
+    fetchPokemonByName(name)
+      .then((data) => setPokemon(data))
+      .catch((e) => console.error("Error fetching Pokémon", e));
   }, [name]);
 
   return (
