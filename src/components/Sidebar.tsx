@@ -5,7 +5,7 @@ const Sidebar = () => {
 
   return (
     <div className="p-4">
-      <p>Type Filtering:</p>
+      <p className="text-2xl font-bold mb-2">Type Filtering:</p>
       <div className="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
         {pokemonTypes.map((type) => (
           <button

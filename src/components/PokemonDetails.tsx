@@ -4,22 +4,31 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const PokemonDetails = () => {
   const { name } = useParams<{ name: string }>();
-  const { pokemon }: { pokemon: Pokemon } = useLocation().state;
+  const [pokemon, setPokemon] = useState<Pokemon>(useLocation().state?.pokemon);
   const navigate = useNavigate();
   const [pokemonSpecies, setPokemonSpecies] = useState<PokemonSpecies>();
 
   useEffect(() => {
-    const api = new PokemonClient();
-    const fetchPokemon = async () => {
-      if (name)
+    if (name) {
+      const api = new PokemonClient();
+      const fetchPokemon = async () => {
         await api
           .getPokemonSpeciesByName(name)
           .then((data) => setPokemonSpecies(data))
           .catch((error) =>
             console.error("Error fetching Pokémon species data", error),
           );
-    };
-    fetchPokemon().then();
+
+        if (!pokemon)
+          await api
+            .getPokemonByName(name)
+            .then((data) => setPokemon(data))
+            .catch((error) =>
+              console.error("Error fetching Pokémon data", error),
+            );
+      };
+      fetchPokemon().then();
+    }
   }, [name]);
 
   return (
@@ -33,20 +42,20 @@ const PokemonDetails = () => {
 
       {/* Image (Pokémon HOME artwork) */}
       <img
-        src={pokemon.sprites.other?.home.front_default?.toString()}
-        alt={pokemon.name}
+        src={pokemon?.sprites.other?.home.front_default?.toString()}
+        alt={pokemon?.name}
         className="object-contain"
       />
 
       {/* Name */}
       <h1 className="capitalize text-2xl font-bold">
-        {pokemon.id}. {pokemon.species.name}
+        {pokemon?.id}. {pokemon?.species.name}
       </h1>
 
       {/* Types */}
       <p>
-        {pokemon.types.length === 1 ? "Type: " : "Types: "}
-        {pokemon.types.map((type) => (
+        {pokemon?.types.length === 1 ? "Type: " : "Types: "}
+        {pokemon?.types.map((type) => (
           <span key={type.type.name} className="capitalize">
             {" "}
             {type.type.name}
@@ -56,8 +65,8 @@ const PokemonDetails = () => {
 
       {/* Abilities */}
       <p>
-        {pokemon.abilities.length === 1 ? "Ability: " : "Abilities: "}
-        {pokemon.abilities.map((ability) => (
+        {pokemon?.abilities.length === 1 ? "Ability: " : "Abilities: "}
+        {pokemon?.abilities.map((ability) => (
           <span key={ability.ability.name} className="capitalize">
             {" "}
             {ability.ability.name}

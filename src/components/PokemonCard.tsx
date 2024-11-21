@@ -17,7 +17,7 @@ const PokemonCard = ({ name }: { name: string }) => {
   }, [name]);
 
   return (
-    <div>
+    <>
       {pokemon && (
         <Link to={`/pokemon/${pokemon.species.name}`} state={{ pokemon }}>
           <div className="border border-gray-200 rounded shadow-lg hover:shadow-xl transition-shadow">
@@ -44,7 +44,7 @@ const PokemonCard = ({ name }: { name: string }) => {
           </div>
         </Link>
       )}
-    </div>
+    </>
   );
 };
 export default PokemonCard;
