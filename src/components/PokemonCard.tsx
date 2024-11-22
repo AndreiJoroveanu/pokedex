@@ -16,7 +16,7 @@ const PokemonCard = ({ name }: { name: string }) => {
     <>
       {pokemon && (
         <Link to={`/pokemon/${pokemon.species.name}`} state={{ pokemon }}>
-          <div className="border border-gray-200 rounded shadow-lg hover:shadow-xl transition-shadow">
+          <article className="border border-gray-200 rounded shadow-lg hover:shadow-xl transition-shadow">
             <img
               src={pokemon.sprites.other?.home.front_default?.toString()}
               alt={pokemon.name}
@@ -37,7 +37,7 @@ const PokemonCard = ({ name }: { name: string }) => {
                 ))}
               </p>
             </div>
-          </div>
+          </article>
         </Link>
       )}
     </>

@@ -4,7 +4,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   fetchPokemonByName,
   fetchPokemonSpeciesByName,
-} from "../services/apiService.ts";
+} from "../../services/apiService.ts";
 
 const PokemonDetails = () => {
   const { name } = useParams<{ name: string }>();
@@ -26,7 +26,7 @@ const PokemonDetails = () => {
   }, [name, pokemonSpecies]);
 
   return (
-    <div className="p-4">
+    <div className="p-4 py-28">
       <button
         onClick={() => navigate(-1)}
         className="border px-4 py-2 rounded-full hover:bg-gray-100 shadow-md hover:shadow-lg transition-shadow"
