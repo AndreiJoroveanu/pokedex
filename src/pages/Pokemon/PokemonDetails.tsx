@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Pokemon, PokemonSpecies } from "pokenode-ts";
+import { Pokemon, PokemonSpecies } from "pokedex-promise-v2";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   fetchPokemonByName,
@@ -13,17 +13,18 @@ const PokemonDetails = () => {
   const [pokemonSpecies, setPokemonSpecies] = useState<PokemonSpecies>();
 
   useEffect(() => {
-    if (name) {
+    if (name)
       fetchPokemonSpeciesByName(name)
         .then((data) => setPokemonSpecies(data))
         .catch((e) => console.error("Error fetching Pokémon species", e));
+  }, []);
 
-      if (!pokemon && pokemonSpecies)
-        fetchPokemonByName(pokemonSpecies.varieties[0].pokemon.name)
-          .then((data) => setPokemon(data))
-          .catch((e) => console.error("Error fetching Pokémon", e));
-    }
-  }, [name, pokemonSpecies]);
+  useEffect(() => {
+    if (!pokemon && pokemonSpecies)
+      fetchPokemonByName(pokemonSpecies.varieties[0].pokemon.name)
+        .then((data) => setPokemon(data))
+        .catch((e) => console.error("Error fetching Pokémon", e));
+  }, [pokemonSpecies]);
 
   return (
     <div className="p-4 py-28">

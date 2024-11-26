@@ -1,9 +1,9 @@
-import PokemonCard from "../../components/PokemonCard.tsx";
-import ChangePageButtons from "../../components/ChangePageButtons.tsx";
-import { usePokemon } from "../../hooks/usePokemon.ts";
 import { useEffect } from "react";
+import { usePokemon } from "../../hooks/usePokemon.ts";
 import { fetchAllPokemon } from "../../services/apiService.ts";
 import Sidebar from "../../components/Sidebar.tsx";
+import ChangePageButtons from "../../components/ChangePageButtons.tsx";
+import PokemonCard from "../../components/PokemonCard.tsx";
 
 const PokemonGrid = () => {
   const { currentPage, changeCurrentPage, loadAllPokemon, pokemonList } =

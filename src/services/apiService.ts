@@ -1,9 +1,15 @@
-import { PokemonClient } from "pokenode-ts";
+import Pokedex from "pokedex-promise-v2";
 
-const api = new PokemonClient();
+const api = new Pokedex({
+  protocol: "https",
+  hostName: "pokeapi.co",
+  versionPath: "/api/v2/",
+  cacheLimit: 1000 * 60 * 60 * 24 * 30, // 1 month
+  timeout: 20 * 1000, // 20 seconds
+});
 
 export const fetchAllPokemon = async () =>
-  (await api.listPokemons(0, 1025)).results;
+  (await api.getPokemonsList({ limit: 1025 })).results;
 
 export const fetchPokemonByName = async (name: string) =>
   await api.getPokemonByName(name);
@@ -12,7 +18,7 @@ export const fetchPokemonSpeciesByName = async (name: string) =>
   await api.getPokemonSpeciesByName(name);
 
 export const fetchPokemonTypes = async () =>
-  (await api.listTypes(0, 18)).results;
+  (await api.getTypesList({ limit: 18 })).results;
 
 export const fetchAllPokemonByType = async (type: string) =>
   (await api.getTypeByName(type)).pokemon

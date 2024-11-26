@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Pokemon } from "pokenode-ts";
+import { Pokemon } from "pokedex-promise-v2";
 import { Link } from "react-router-dom";
 import { fetchPokemonByName } from "../services/apiService.ts";
 
