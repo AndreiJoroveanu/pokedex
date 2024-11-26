@@ -12,6 +12,7 @@ const PokemonDetails = () => {
   const navigate = useNavigate();
   const [pokemonSpecies, setPokemonSpecies] = useState<PokemonSpecies>();
 
+  // Get Pokémon species data from the URL parameter
   useEffect(() => {
     if (name)
       fetchPokemonSpeciesByName(name)
@@ -19,6 +20,8 @@ const PokemonDetails = () => {
         .catch((e) => console.error("Error fetching Pokémon species", e));
   }, []);
 
+  // If the user manually inputted a URL, fetch the
+  // data that would otherwise be passed via a state
   useEffect(() => {
     if (!pokemon && pokemonSpecies)
       fetchPokemonByName(pokemonSpecies.varieties[0].pokemon.name)
@@ -52,8 +55,7 @@ const PokemonDetails = () => {
         {pokemon?.types.length === 1 ? "Type: " : "Types: "}
         {pokemon?.types.map((type) => (
           <span key={type.type.name} className="capitalize">
-            {" "}
-            {type.type.name}
+            {` ${type.type.name}`}
           </span>
         ))}
       </p>
@@ -63,8 +65,7 @@ const PokemonDetails = () => {
         {pokemon?.abilities.length === 1 ? "Ability: " : "Abilities: "}
         {pokemon?.abilities.map((ability) => (
           <span key={ability.ability.name} className="capitalize">
-            {" "}
-            {ability.ability.name}
+            {` ${ability.ability.name}`}
           </span>
         ))}
       </p>

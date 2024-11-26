@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { Pokemon } from "pokedex-promise-v2";
 import { Link } from "react-router-dom";
-import { fetchPokemonByName } from "../services/apiService.ts";
+import { fetchPokemonById } from "../services/apiService.ts";
 
-const PokemonCard = ({ name }: { name: string }) => {
+const PokemonCard = ({ id }: { id: number }) => {
   const [pokemon, setPokemon] = useState<Pokemon>();
 
   useEffect(() => {
-    fetchPokemonByName(name)
+    fetchPokemonById(id)
       .then((data) => setPokemon(data))
       .catch((e) => console.error("Error fetching Pokémon", e));
-  }, [name]);
+  }, [id]);
 
   return (
     <>
@@ -31,8 +31,7 @@ const PokemonCard = ({ name }: { name: string }) => {
                 {pokemon.types.length === 1 ? "Type: " : "Types: "}
                 {pokemon.types.map((type) => (
                   <span key={type.type.name} className="capitalize">
-                    {" "}
-                    {type.type.name}
+                    {` ${type.type.name}`}
                   </span>
                 ))}
               </p>
