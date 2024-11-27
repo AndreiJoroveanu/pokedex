@@ -28,14 +28,15 @@ const PokemonGrid = () => {
 
       <section className="lg:absolute right-0 w-full lg:w-4/5">
         <div className="p-4 flex flex-col items-center">
-          {ChangePageButtons({
-            currentPage,
-            changeCurrentPage,
-            noOfPages,
-            noOfSideButtons: 3,
-          })}
+          {noOfPages > 1 &&
+            ChangePageButtons({
+              currentPage,
+              changeCurrentPage,
+              noOfPages,
+              noOfSideButtons: 3,
+            })}
 
-          <div className="mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
+          <div className="w-full mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
             {getPokemonIds().map((id) => (
               <PokemonCard key={pokemonList[id]} id={pokemonList[id]} />
             ))}

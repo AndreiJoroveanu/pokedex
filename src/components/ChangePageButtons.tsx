@@ -31,7 +31,7 @@ const ChangePageButtons = ({
       <button
         onClick={() => changeCurrentPage(1)}
         disabled={currentPage === 1}
-        className="border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full disabled:opacity-25 enabled:hover:bg-gray-100 shadow-md enabled:hover:shadow-lg transition-shadow"
+        className="border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full disabled:opacity-25 disabled:cursor-not-allowed enabled:hover:bg-gray-100 shadow-md enabled:hover:shadow-lg transition-shadow"
       >
         <TfiControlSkipBackward />
       </button>
@@ -53,7 +53,7 @@ const ChangePageButtons = ({
       <button
         onClick={() => changeCurrentPage(noOfPages)}
         disabled={currentPage === noOfPages}
-        className="border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full disabled:opacity-25 enabled:hover:bg-gray-100 shadow-md enabled:hover:shadow-lg transition-shadow"
+        className="border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full disabled:opacity-25 disabled:cursor-not-allowed enabled:hover:bg-gray-100 shadow-md enabled:hover:shadow-lg transition-shadow"
       >
         <TfiControlSkipForward />
       </button>
