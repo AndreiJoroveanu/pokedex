@@ -27,9 +27,14 @@ const PokemonProvider = ({ children }: { children: ReactNode }) => {
   const [currentGen, setCurrentGen] = useState<string>("");
   const [currentType, setCurrentType] = useState<string>("");
 
+  const [searchQuery, setSearchQuery] = useState<string>("");
+
   const [filteredByGen, setFilteredByGen] = useState<PokemonListType[]>([]);
   const [filteredByType, setFilteredByType] = useState<PokemonListType[]>([]);
 
+  const [beforeQueryFilter, setBeforeQueryFilter] = useState<PokemonListType[]>(
+    [],
+  );
   const [pokemonList, setPokemonList] = useState<PokemonListType[]>([]);
 
   // Reset selected page if the filtering changes
@@ -66,7 +71,7 @@ const PokemonProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     // If there is both a gen and a type selected
     if (currentGen && currentType) {
-      setPokemonList(
+      setBeforeQueryFilter(
         filteredByGen.flatMap((pg) =>
           filteredByType.find((pt) => pt.id === pg.id)
             ? { id: pg.id, name: pg.name }
@@ -75,22 +80,40 @@ const PokemonProvider = ({ children }: { children: ReactNode }) => {
       );
     }
     // If there only is a gen selected
-    else if (currentGen) setPokemonList(filteredByGen);
+    else if (currentGen) setBeforeQueryFilter(filteredByGen);
     // If there only is a type selected
-    else if (currentType) setPokemonList(filteredByType);
+    else if (currentType) setBeforeQueryFilter(filteredByType);
     // If there is nothing selected (display all 1025 Pokémon)
     else {
       fetchAllPokemon()
-        .then((data) => setPokemonList(data))
+        .then((data) => setBeforeQueryFilter(data))
         .catch((e) => console.error("Failed to fetch all Pokémon", e));
-      // setPokemonList(fetchAllPokemon());
     }
   }, [currentGen, currentType, filteredByGen, filteredByType]);
 
+  // Search query filtering
+  useEffect(() => {
+    if (searchQuery.trim().length) {
+      setPokemonList(
+        beforeQueryFilter.filter((p) =>
+          p.name.toLowerCase().includes(searchQuery.toLowerCase()),
+        ),
+      );
+    } else setPokemonList(beforeQueryFilter);
+  }, [beforeQueryFilter, searchQuery]);
+
   // Setter methods
   const changeCurrentPage = (page: number) => setCurrentPage(page);
-  const changeCurrentGen = (type: string) => setCurrentGen(type);
+  const changeCurrentGen = (gen: string) => setCurrentGen(gen);
   const changeCurrentType = (type: string) => setCurrentType(type);
+  const changeSearchQuery = (query: string) => setSearchQuery(query);
+
+  // Clear filtering method
+  const clearFiltering = () => {
+    setCurrentGen("");
+    setCurrentType("");
+    setSearchQuery("");
+  };
 
   return (
     <PokemonContext.Provider
@@ -103,6 +126,9 @@ const PokemonProvider = ({ children }: { children: ReactNode }) => {
         changeCurrentGen,
         currentType,
         changeCurrentType,
+        searchQuery,
+        changeSearchQuery,
+        clearFiltering,
         pokemonList,
       }}
     >

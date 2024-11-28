@@ -4,22 +4,23 @@ import ChangePageButtons from "../../components/ChangePageButtons.tsx";
 import PokemonCard from "../../components/PokemonCard.tsx";
 
 const PokemonGrid = () => {
-  const { currentPage, changeCurrentPage, pokemonList } = usePokemon();
+  const { currentPage, changeCurrentPage, clearFiltering, pokemonList } =
+    usePokemon();
   const noOfPokemon = pokemonList.length;
   const pokemonPerPage = 20;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage);
 
-  // Get the IDs from the page to display
-  const getPokemonIds = () => {
-    const pokemonIds: number[] = [];
+  // Get the indexes from the Pokémon list to display
+  const getPokemonIndexes = () => {
+    const pokemonIndexes: number[] = [];
     for (
-      let id = (currentPage - 1) * pokemonPerPage;
-      id < Math.min(currentPage * pokemonPerPage, noOfPokemon);
-      id++
+      let i = (currentPage - 1) * pokemonPerPage;
+      i < Math.min(currentPage * pokemonPerPage, noOfPokemon);
+      i++
     ) {
-      pokemonIds.push(id);
+      pokemonIndexes.push(i);
     }
-    return pokemonIds;
+    return pokemonIndexes;
   };
 
   return (
@@ -29,6 +30,7 @@ const PokemonGrid = () => {
       <section className="lg:absolute right-0 w-full lg:w-4/5">
         <div className="p-4 flex flex-col items-center">
           {noOfPages > 1 &&
+            // Display buttons if there are more than one page
             ChangePageButtons({
               currentPage,
               changeCurrentPage,
@@ -36,11 +38,29 @@ const PokemonGrid = () => {
               noOfSideButtons: 3,
             })}
 
-          <div className="w-full mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
-            {getPokemonIds().map((id) => (
-              <PokemonCard key={pokemonList[id].name} id={pokemonList[id].id} />
-            ))}
-          </div>
+          {pokemonList.length ? (
+            <div className="w-full mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
+              {getPokemonIndexes().map((i) => (
+                <PokemonCard key={pokemonList[i].name} id={pokemonList[i].id} />
+              ))}
+            </div>
+          ) : (
+            // Display an error if there are no Pokémon found
+            <div className="lg:h-screen lg:-m-28 flex flex-col gap-4 justify-center items-center text-center">
+              <h2 className="text-3xl font-bold">No Pokémon Found</h2>
+
+              <p className="text-gray-700 mb-2">
+                Try other filtering options or another search query
+              </p>
+
+              <button
+                onClick={clearFiltering}
+                className="border w-full py-2 rounded-full shadow-md hover:shadow-lg transition-shadow bg-black text-white"
+              >
+                Clear Filtering
+              </button>
+            </div>
+          )}
         </div>
       </section>
     </div>

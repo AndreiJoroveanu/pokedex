@@ -46,6 +46,7 @@ const ChangePageButtons = ({
             {page}
           </button>
         ) : (
+          // Empty divs so that the rest of the buttons can remain centered
           <div key={index} className="w-8 h-8 sm:w-12 sm:h-12" />
         ),
       )}

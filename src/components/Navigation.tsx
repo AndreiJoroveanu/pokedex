@@ -12,6 +12,7 @@ const Navigation = () => (
 
     <div className="flex sm:gap-2">
       {[
+        // Add the title and the url to add a new link in the navbar
         ["Pokémon", "/pokemon"],
         ["Moves", "/"],
         ["(T.B.D.)", "/"],

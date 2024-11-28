@@ -9,6 +9,9 @@ interface PokemonContextType {
   changeCurrentGen: (gen: string) => void;
   currentType: string;
   changeCurrentType: (type: string) => void;
+  searchQuery: string;
+  changeSearchQuery: (query: string) => void;
+  clearFiltering: () => void;
   pokemonList: { id: number; name: string }[];
 }
 

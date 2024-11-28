@@ -56,20 +56,6 @@ export const fetchAllPokemonByType = async (type: string) =>
           .split("https://pokeapi.co/api/v2/pokemon/")[1]
           .split("/")[0],
       ),
-      name: p.name,
+      name: p.pokemon.name,
     }))
     .filter((p) => p.id < 10000);
-
-// Old stuff, currently unused
-// export const fetchAllPokemon = async () =>
-//   (await api.getPokemonsList({ limit: 1025 })).results;
-//
-// export const fetchAllPokemonByType = async (type: string) =>
-//   (await api.getTypeByName(type)).pokemon
-//     .map((p) => p.pokemon)
-//     .filter(
-//       (p) =>
-//         Number(
-//           p.url.split("https://pokeapi.co/api/v2/pokemon/")[1].split("/")[0],
-//         ) < 10000,
-//     );
