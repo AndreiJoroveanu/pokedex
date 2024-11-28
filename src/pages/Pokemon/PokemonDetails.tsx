@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { Pokemon, PokemonSpecies } from "pokedex-promise-v2";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   fetchPokemonByName,
   fetchPokemonSpeciesByName,

@@ -14,5 +14,4 @@ interface PokemonContextType {
 }
 
 const PokemonContext = createContext<PokemonContextType | undefined>(undefined);
-
 export default PokemonContext;

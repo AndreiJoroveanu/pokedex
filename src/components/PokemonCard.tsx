@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { Pokemon } from "pokedex-promise-v2";
-import { Link } from "react-router-dom";
 import { fetchPokemonById } from "../services/apiService.ts";
 
 const PokemonCard = ({ id }: { id: number }) => {

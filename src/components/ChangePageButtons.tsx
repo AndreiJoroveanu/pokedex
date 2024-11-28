@@ -46,7 +46,7 @@ const ChangePageButtons = ({
             {page}
           </button>
         ) : (
-          <div key={index} className="w-8 h-8 sm:w-12 sm:h-12"></div>
+          <div key={index} className="w-8 h-8 sm:w-12 sm:h-12" />
         ),
       )}
 

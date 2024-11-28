@@ -1,36 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
-const Navigation = () => {
-  return (
-    <nav className="fixed z-10 w-full h-24 bg-white/80 backdrop-blur-md border-b border-gray-400 shadow-lg flex justify-between items-center px-2 sm:px-24">
-      <Link to={"/pokemon"}>
-        <title className="flex items-end text-3xl font-bold px-4 py-2 rounded hover:bg-gray-200 transition-all">
-          P
-          <img src="/pokéball.svg" alt="p" className="w-5 h-5 mb-1" />
-          kédex
-        </title>
-      </Link>
+const Navigation = () => (
+  <nav className="fixed z-10 w-full h-24 bg-white/80 backdrop-blur-md border-b border-gray-400 shadow-lg flex justify-between items-center px-2 sm:px-24">
+    <Link to={"/pokemon"}>
+      <title className="flex items-end text-3xl font-bold px-4 py-2 rounded hover:bg-gray-200 transition-all">
+        P
+        <img src="/pokéball.svg" alt="p" className="w-5 h-5 mb-1" />
+        kédex
+      </title>
+    </Link>
 
-      <div className="flex sm:gap-2">
-        <Link to={"/pokemon"}>
+    <div className="flex sm:gap-2">
+      {[
+        ["Pokémon", "/pokemon"],
+        ["Moves", "/"],
+        ["(T.B.D.)", "/"],
+      ].map(([title, url]) => (
+        <Link to={url}>
           <span className="px-4 py-2 rounded hover:bg-gray-200 hover:border-b-4 border-gray-700 transition-all">
-            Pokémon
+            {title}
           </span>
         </Link>
-
-        <Link to={"/"}>
-          <span className="px-4 py-2 rounded hover:bg-gray-200 hover:border-b-4 border-gray-700 transition-all">
-            Moves
-          </span>
-        </Link>
-
-        <Link to={"/"}>
-          <span className="px-4 py-2 rounded hover:bg-gray-200 hover:border-b-4 border-gray-700 transition-all">
-            (T.B.D.)
-          </span>
-        </Link>
-      </div>
-    </nav>
-  );
-};
+      ))}
+    </div>
+  </nav>
+);
 export default Navigation;
