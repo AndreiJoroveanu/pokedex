@@ -3,28 +3,34 @@ import PokemonContext from "../context/PokemonContext";
 import {
   fetchPokemonGens,
   fetchPokemonTypes,
+  fetchAllPokemon,
   fetchAllPokemonByGen,
   fetchAllPokemonByType,
 } from "../services/apiService.ts";
 
-export interface PokemonListType {
+interface ItemListType {
   name: string;
   url: string;
+}
+
+interface PokemonListType {
+  id: number;
+  name: string;
 }
 
 const PokemonProvider = ({ children }: { children: ReactNode }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const [pokemonGens, setPokemonGens] = useState<PokemonListType[]>([]);
-  const [pokemonTypes, setPokemonTypes] = useState<PokemonListType[]>([]);
+  const [pokemonGens, setPokemonGens] = useState<ItemListType[]>([]);
+  const [pokemonTypes, setPokemonTypes] = useState<ItemListType[]>([]);
 
   const [currentGen, setCurrentGen] = useState<string>("");
   const [currentType, setCurrentType] = useState<string>("");
 
-  const [filteredByGen, setFilteredByGen] = useState<number[]>([]);
-  const [filteredByType, setFilteredByType] = useState<number[]>([]);
+  const [filteredByGen, setFilteredByGen] = useState<PokemonListType[]>([]);
+  const [filteredByType, setFilteredByType] = useState<PokemonListType[]>([]);
 
-  const [pokemonList, setPokemonList] = useState<number[]>([]);
+  const [pokemonList, setPokemonList] = useState<PokemonListType[]>([]);
 
   // Reset selected page if the filtering changes
   useEffect(() => setCurrentPage(1), [currentGen, currentType]);
@@ -60,17 +66,25 @@ const PokemonProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     // If there is both a gen and a type selected
     if (currentGen && currentType) {
-      const setA = new Set(filteredByGen);
-      const setB = new Set(filteredByType);
-      const intersection = new Set([...setA].filter((x) => setB.has(x)));
-      setPokemonList(Array.from(intersection));
+      setPokemonList(
+        filteredByGen.flatMap((pg) =>
+          filteredByType.find((pt) => pt.id === pg.id)
+            ? { id: pg.id, name: pg.name }
+            : [],
+        ),
+      );
     }
     // If there only is a gen selected
     else if (currentGen) setPokemonList(filteredByGen);
     // If there only is a type selected
     else if (currentType) setPokemonList(filteredByType);
     // If there is nothing selected (display all 1025 Pokémon)
-    else setPokemonList([...Array(1025)].map((_, i) => i + 1));
+    else {
+      fetchAllPokemon()
+        .then((data) => setPokemonList(data))
+        .catch((e) => console.error("Failed to fetch all Pokémon", e));
+      // setPokemonList(fetchAllPokemon());
+    }
   }, [currentGen, currentType, filteredByGen, filteredByType]);
 
   // Setter methods

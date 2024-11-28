@@ -38,7 +38,7 @@ const PokemonGrid = () => {
 
           <div className="w-full mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
             {getPokemonIds().map((id) => (
-              <PokemonCard key={pokemonList[id]} id={pokemonList[id]} />
+              <PokemonCard key={pokemonList[id].name} id={pokemonList[id].id} />
             ))}
           </div>
         </div>

@@ -16,7 +16,7 @@ const Navigation = () => (
         ["Moves", "/"],
         ["(T.B.D.)", "/"],
       ].map(([title, url]) => (
-        <Link to={url}>
+        <Link key={title} to={url}>
           <span className="px-4 py-2 rounded hover:bg-gray-200 hover:border-b-4 border-gray-700 transition-all">
             {title}
           </span>

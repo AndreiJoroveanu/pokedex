@@ -27,28 +27,38 @@ export const fetchPokemonGens = async () =>
 export const fetchPokemonTypes = async () =>
   (await api.getTypesList({ limit: 18 })).results;
 
+export const fetchAllPokemon = async () =>
+  (await api.getPokemonsList({ limit: 1025 })).results.map((p) => ({
+    id: Number(
+      p.url.split("https://pokeapi.co/api/v2/pokemon/")[1].split("/")[0],
+    ),
+    name: p.name,
+  }));
+
 export const fetchAllPokemonByGen = async (gen: string) =>
   (await api.getGenerationByName(gen)).pokemon_species
-    .map((p) =>
-      Number(
+    .map((p) => ({
+      id: Number(
         p.url
           .split("https://pokeapi.co/api/v2/pokemon-species/")[1]
           .split("/")[0],
       ),
-    )
-    .sort((a, b) => a - b)
-    .filter((url) => url < 10000);
+      name: p.name,
+    }))
+    .sort((p1, p2) => p1.id - p2.id)
+    .filter((p) => p.id < 10000);
 
 export const fetchAllPokemonByType = async (type: string) =>
   (await api.getTypeByName(type)).pokemon
-    .map((p) =>
-      Number(
+    .map((p) => ({
+      id: Number(
         p.pokemon.url
           .split("https://pokeapi.co/api/v2/pokemon/")[1]
           .split("/")[0],
       ),
-    )
-    .filter((url) => url < 10000);
+      name: p.name,
+    }))
+    .filter((p) => p.id < 10000);
 
 // Old stuff, currently unused
 // export const fetchAllPokemon = async () =>
