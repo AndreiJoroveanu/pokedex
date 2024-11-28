@@ -1,20 +1,33 @@
-import { Navigate, Route, BrowserRouter, Routes } from "react-router";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import PokemonProvider from "./shared/PokemonProvider.tsx";
-import Navigation from "./components/Navigation.tsx";
+import Root from "./components/Root.tsx";
 import PokemonGrid from "./pages/Pokemon/PokemonGrid.tsx";
 import PokemonDetails from "./pages/Pokemon/PokemonDetails.tsx";
 
-const App = () => (
-  <BrowserRouter>
-    <PokemonProvider>
-      <Navigation />
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Navigate to="/pokemon" />,
+  },
+  {
+    path: "/pokemon",
+    element: <Root />,
+    children: [
+      {
+        path: "/pokemon",
+        element: <PokemonGrid />,
+      },
+      {
+        path: "/pokemon/:name",
+        element: <PokemonDetails />,
+      },
+    ],
+  },
+]);
 
-      <Routes>
-        <Route path="/" element={<Navigate to="/pokemon" />} />
-        <Route path="/pokemon" element={<PokemonGrid />} />
-        <Route path="/pokemon/:name" element={<PokemonDetails />} />
-      </Routes>
-    </PokemonProvider>
-  </BrowserRouter>
+const App = () => (
+  <PokemonProvider>
+    <RouterProvider router={router} />
+  </PokemonProvider>
 );
 export default App;
