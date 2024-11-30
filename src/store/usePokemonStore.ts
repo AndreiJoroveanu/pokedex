@@ -21,13 +21,13 @@ const usePokemonStore = create<PokemonStore>((set) => ({
   setCurrentPage: (page) => set({ currentPage: page }),
 
   currentGen: "",
-  setCurrentGen: (gen) => set({ currentGen: gen }),
+  setCurrentGen: (gen) => set({ currentGen: gen, currentPage: 1 }),
 
   currentType: "",
-  setCurrentType: (type) => set({ currentType: type }),
+  setCurrentType: (type) => set({ currentType: type, currentPage: 1 }),
 
   searchQuery: "",
-  setSearchQuery: (query) => set({ searchQuery: query }),
+  setSearchQuery: (query) => set({ searchQuery: query, currentPage: 1 }),
 
   clearFilters: () => {
     set({ currentGen: "", currentType: "", searchQuery: "" });

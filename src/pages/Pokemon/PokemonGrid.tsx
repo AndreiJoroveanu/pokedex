@@ -34,9 +34,6 @@ const PokemonGrid = () => {
   const pokemonPerPage = 20;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage);
 
-  // Reset selected page if the filtering changes
-  useEffect(() => setCurrentPage(1), [currentGen, currentType]);
-
   // Filter by Pokémon generation
   useEffect(() => {
     if (currentGen)
