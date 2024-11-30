@@ -1,5 +1,4 @@
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
-import PokemonProvider from "./shared/PokemonProvider.tsx";
 import Root from "./components/Root.tsx";
 import PokemonGrid from "./pages/Pokemon/PokemonGrid.tsx";
 import PokemonDetails from "./pages/Pokemon/PokemonDetails.tsx";
@@ -25,9 +24,5 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App = () => (
-  <PokemonProvider>
-    <RouterProvider router={router} />
-  </PokemonProvider>
-);
+const App = () => <RouterProvider router={router} />;
 export default App;

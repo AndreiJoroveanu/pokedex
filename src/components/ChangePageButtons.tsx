@@ -2,14 +2,14 @@ import { TfiControlSkipBackward, TfiControlSkipForward } from "react-icons/tfi";
 
 interface ChangePageButtonsProps {
   currentPage: number;
-  changeCurrentPage: (page: number) => void;
+  setCurrentPage: (page: number) => void;
   noOfPages: number;
   noOfSideButtons: number;
 }
 
 const ChangePageButtons = ({
   currentPage,
-  changeCurrentPage,
+  setCurrentPage,
   noOfPages,
   noOfSideButtons,
 }: ChangePageButtonsProps) => {
@@ -29,7 +29,7 @@ const ChangePageButtons = ({
   return (
     <div className="flex gap-2 sm:gap-4">
       <button
-        onClick={() => changeCurrentPage(1)}
+        onClick={() => setCurrentPage(1)}
         disabled={currentPage === 1}
         className="border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full disabled:opacity-25 disabled:cursor-not-allowed enabled:hover:bg-gray-100 shadow-md enabled:hover:shadow-lg transition-shadow"
       >
@@ -40,7 +40,7 @@ const ChangePageButtons = ({
         page ? (
           <button
             key={index}
-            onClick={() => changeCurrentPage(page)}
+            onClick={() => setCurrentPage(page)}
             className={`border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full shadow-md ${page === currentPage ? "bg-black text-white cursor-default" : "hover:bg-gray-100 hover:shadow-lg"} transition-shadow`}
           >
             {page}
@@ -52,7 +52,7 @@ const ChangePageButtons = ({
       )}
 
       <button
-        onClick={() => changeCurrentPage(noOfPages)}
+        onClick={() => setCurrentPage(noOfPages)}
         disabled={currentPage === noOfPages}
         className="border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full disabled:opacity-25 disabled:cursor-not-allowed enabled:hover:bg-gray-100 shadow-md enabled:hover:shadow-lg transition-shadow"
       >

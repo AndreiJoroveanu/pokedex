@@ -1,17 +1,36 @@
-import { usePokemon } from "../hooks/usePokemon.ts";
+import { useEffect, useState } from "react";
+import usePokemonStore from "../store/usePokemonStore.ts";
+import { fetchPokemonGens, fetchPokemonTypes } from "../services/apiService.ts";
+
+interface ItemListType {
+  name: string;
+  url: string;
+}
 
 const Sidebar = () => {
   const {
-    pokemonGens,
-    pokemonTypes,
     currentGen,
-    changeCurrentGen,
+    setCurrentGen,
     currentType,
-    changeCurrentType,
+    setCurrentType,
     searchQuery,
-    changeSearchQuery,
-    clearFiltering,
-  } = usePokemon();
+    setSearchQuery,
+    clearFilters,
+  } = usePokemonStore();
+
+  const [pokemonGens, setPokemonGens] = useState<ItemListType[]>([]);
+  const [pokemonTypes, setPokemonTypes] = useState<ItemListType[]>([]);
+
+  // Fetch Pokémon gens & types
+  useEffect(() => {
+    fetchPokemonGens()
+      .then((data) => setPokemonGens(data))
+      .catch((e) => console.error("Failed to fetch Pokémon gens", e));
+
+    fetchPokemonTypes()
+      .then((data) => setPokemonTypes(data))
+      .catch((e) => console.error("Failed to fetch Pokémon types", e));
+  }, []);
 
   return (
     <aside className="lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 overflow-y-scroll p-4 lg:border-r border-gray-200">
@@ -19,7 +38,7 @@ const Sidebar = () => {
         type="text"
         placeholder="Search by Pokémon name"
         value={searchQuery}
-        onChange={(e) => changeSearchQuery(e.target.value)}
+        onChange={(e) => setSearchQuery(e.target.value)}
         className="w-full border py-2 rounded-full text-center shadow-md hover:shadow-lg focus:shadow-lg transition-shadow"
       />
 
@@ -29,7 +48,7 @@ const Sidebar = () => {
           <button
             key={gen.name}
             onClick={() =>
-              changeCurrentGen(currentGen === gen.name ? "" : gen.name)
+              setCurrentGen(currentGen === gen.name ? "" : gen.name)
             }
             className={`capitalize border py-2 rounded-full shadow-md hover:shadow-lg transition-shadow ${currentGen === gen.name ? "bg-black text-white" : "hover:bg-gray-100"}`}
           >
@@ -45,7 +64,7 @@ const Sidebar = () => {
           <button
             key={type.name}
             onClick={() =>
-              changeCurrentType(currentType === type.name ? "" : type.name)
+              setCurrentType(currentType === type.name ? "" : type.name)
             }
             className={`capitalize border py-2 rounded-full shadow-md hover:shadow-lg transition-shadow ${currentType === type.name ? "bg-black text-white" : "hover:bg-gray-100"}`}
           >
@@ -55,7 +74,7 @@ const Sidebar = () => {
       </div>
 
       <button
-        onClick={clearFiltering}
+        onClick={clearFilters}
         disabled={!currentGen && !currentType && !searchQuery}
         className="border w-full my-4 py-2 rounded-full shadow-md enabled:hover:shadow-lg transition-shadow bg-black text-white disabled:opacity-25 disabled:cursor-not-allowed"
       >
