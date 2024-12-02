@@ -1,7 +1,13 @@
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
-import Root from "./components/Root.tsx";
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouterProvider,
+  ScrollRestoration,
+} from "react-router";
 import PokemonGrid from "./pages/Pokemon/PokemonGrid.tsx";
 import PokemonDetails from "./pages/Pokemon/PokemonDetails.tsx";
+import Navbar from "./components/Navbar.tsx";
 
 const router = createBrowserRouter([
   {
@@ -10,7 +16,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/pokemon",
-    element: <Root />,
+    element: (
+      <>
+        <Navbar />
+        <Outlet />
+        <ScrollRestoration />
+      </>
+    ),
     children: [
       {
         path: "/pokemon",
