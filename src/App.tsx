@@ -5,7 +5,7 @@ import {
   RouterProvider,
   ScrollRestoration,
 } from "react-router";
-import PokemonGrid from "./pages/Pokemon/PokemonGrid.tsx";
+import AllPokemon from "./pages/Pokemon/AllPokemon.tsx";
 import PokemonDetails from "./pages/Pokemon/PokemonDetails.tsx";
 import Navbar from "./components/Navbar.tsx";
 
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/pokemon",
-        element: <PokemonGrid />,
+        element: <AllPokemon />,
       },
       {
         path: "/pokemon/:name",

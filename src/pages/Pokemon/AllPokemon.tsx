@@ -8,21 +8,16 @@ import {
 import Sidebar from "../../components/Sidebar.tsx";
 import ChangePageButtons from "../../components/ChangePageButtons.tsx";
 import PokemonCard from "../../components/PokemonCard.tsx";
+import ErrorMessage from "../../components/ErrorMessage.tsx";
 
 interface PokemonListType {
   id: number;
   name: string;
 }
 
-const PokemonGrid = () => {
-  const {
-    currentPage,
-    setCurrentPage,
-    clearFilters,
-    currentGen,
-    currentType,
-    searchQuery,
-  } = usePokemonStore();
+const AllPokemon = () => {
+  const { currentPage, setCurrentPage, currentGen, currentType, searchQuery } =
+    usePokemonStore();
 
   const [filteredByGen, setFilteredByGen] = useState<PokemonListType[]>([]);
   const [filteredByType, setFilteredByType] = useState<PokemonListType[]>([]);
@@ -120,25 +115,11 @@ const PokemonGrid = () => {
               ))}
             </div>
           ) : (
-            // Display an error if there are no Pokémon found
-            <div className="lg:h-screen lg:-m-28 flex flex-col gap-4 justify-center items-center text-center">
-              <h2 className="text-3xl font-bold">No Pokémon Found</h2>
-
-              <p className="text-gray-700 mb-2">
-                Try other filtering options or another search query
-              </p>
-
-              <button
-                onClick={clearFilters}
-                className="border w-full py-2 rounded-full shadow-md hover:shadow-lg transition-shadow bg-black text-white"
-              >
-                Clear Filtering
-              </button>
-            </div>
+            <ErrorMessage type="Pokémon" />
           )}
         </div>
       </section>
     </div>
   );
 };
-export default PokemonGrid;
+export default AllPokemon;

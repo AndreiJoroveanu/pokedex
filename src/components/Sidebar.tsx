@@ -42,7 +42,7 @@ const Sidebar = () => {
         className="w-full border py-2 rounded-full text-center shadow-md hover:shadow-lg focus:shadow-lg transition-shadow"
       />
 
-      <p className="text-2xl font-bold my-2">Generation Filtering:</p>
+      <h2 className="text-2xl font-bold my-2">Generation Filtering:</h2>
       <div className="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
         {pokemonGens.map((gen) => (
           <button
@@ -58,7 +58,7 @@ const Sidebar = () => {
         ))}
       </div>
 
-      <p className="text-2xl font-bold my-2">Type Filtering:</p>
+      <h2 className="text-2xl font-bold my-2">Type Filtering:</h2>
       <div className="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
         {pokemonTypes.map((type) => (
           <button

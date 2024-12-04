@@ -15,13 +15,15 @@ const ChangePageButtons = ({
 }: ChangePageButtonsProps) => {
   const getPaginationButtons = () => {
     const buttons: number[] = [];
+    let negativeIndex = 0;
     for (
       let page = currentPage - noOfSideButtons;
       page <= currentPage + noOfSideButtons;
       page++
     ) {
+      negativeIndex--;
       if (page > 0 && page <= noOfPages) buttons.push(page);
-      else buttons.push(0);
+      else buttons.push(negativeIndex);
     }
     return buttons;
   };
@@ -36,10 +38,10 @@ const ChangePageButtons = ({
         <TfiControlSkipBackward />
       </button>
 
-      {getPaginationButtons().map((page, index) =>
-        page ? (
+      {getPaginationButtons().map((page) =>
+        page > 0 ? (
           <button
-            key={index}
+            key={page}
             onClick={() => setCurrentPage(page)}
             className={`border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full shadow-md ${page === currentPage ? "bg-black text-white cursor-default" : "hover:bg-gray-100 hover:shadow-lg"} transition-shadow`}
           >
@@ -47,7 +49,7 @@ const ChangePageButtons = ({
           </button>
         ) : (
           // Empty divs so that the rest of the buttons can remain centered
-          <div key={index} className="w-8 h-8 sm:w-12 sm:h-12" />
+          <div key={page} className="w-8 h-8 sm:w-12 sm:h-12" />
         ),
       )}
 
