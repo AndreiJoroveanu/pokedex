@@ -20,7 +20,7 @@ const PokemonCard = ({ id }: { id: number }) => {
             <img
               src={pokemon.sprites.other?.home.front_default?.toString()}
               alt={pokemon.name}
-              className="object-contain"
+              className="object-contain aspect-square"
             />
 
             <div className="p-4">

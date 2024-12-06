@@ -3,11 +3,11 @@ import { Link } from "react-router";
 const Navbar = () => (
   <nav className="fixed z-10 w-full h-24 bg-white/80 backdrop-blur-md border-b border-gray-400 shadow-lg flex justify-between items-center px-2 sm:px-24">
     <Link to={"/pokemon"}>
-      <title className="flex items-end text-3xl font-bold px-4 py-2 rounded hover:bg-gray-700 hover:bg-opacity-10 transition-all">
+      <h1 className="flex items-end text-3xl font-bold px-4 py-2 rounded hover:bg-gray-700 hover:bg-opacity-10 transition-all">
         P
         <img src="/pokéball.svg" alt="p" className="w-5 h-5 mb-1" />
         kédex
-      </title>
+      </h1>
     </Link>
 
     <div className="flex sm:gap-2">

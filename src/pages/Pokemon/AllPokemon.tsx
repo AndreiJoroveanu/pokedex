@@ -109,11 +109,11 @@ const AllPokemon = () => {
             })}
 
           {pokemonList.length ? (
-            <div className="w-full mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
+            <main className="w-full mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
               {getPokemonIndexes().map((i) => (
                 <PokemonCard key={pokemonList[i].name} id={pokemonList[i].id} />
               ))}
-            </div>
+            </main>
           ) : (
             <ErrorMessage type="Pokémon" />
           )}
