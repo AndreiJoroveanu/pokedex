@@ -45,7 +45,7 @@ const AllPokemon = () => {
         await fetchAllPokemonByGen(currentGen)
           .then((data: PokemonListType[]) => {
             filteredPokemon = filteredPokemon.filter((fp) =>
-              data.some((pg) => fp.id === pg.id),
+              new Set(data.map((pg) => pg.id)).has(fp.id),
             );
           })
           .catch((e) => console.error("Failed to fetch Pokémon by gen", e));
@@ -56,7 +56,7 @@ const AllPokemon = () => {
         await fetchAllPokemonByType(currentType)
           .then((data: PokemonListType[]) => {
             filteredPokemon = filteredPokemon.filter((fp) =>
-              data.some((pt) => fp.id === pt.id),
+              new Set(data.map((pt) => pt.id)).has(fp.id),
             );
           })
           .catch((e) => console.error("Failed to fetch Pokémon by type", e));
@@ -66,7 +66,7 @@ const AllPokemon = () => {
       if (searchQuery.trim().length) {
         setPokemonList(
           filteredPokemon.filter((p) =>
-            p.name.toLowerCase().includes(searchQuery.toLowerCase()),
+            p.name.toLowerCase().includes(searchQuery.toLowerCase().trim()),
           ),
         );
       } else setPokemonList(filteredPokemon);
