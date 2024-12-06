@@ -14,13 +14,13 @@ const PokemonCard = ({ id }: { id: number }) => {
 
   return (
     <>
-      {pokemon && (
+      {pokemon ? (
         <Link to={`/pokemon/${pokemon.species.name}`} state={{ pokemon }}>
-          <article className="border border-gray-200 rounded shadow-lg hover:shadow-xl transition-shadow">
+          <article className="border border-gray-200 rounded hover:bg-gray-50 shadow-lg hover:shadow-xl transition-shadow">
             <img
               src={pokemon.sprites.other?.home.front_default?.toString()}
               alt={pokemon.name}
-              className="object-contain aspect-square"
+              className="object-contain aspect-square w-full"
             />
 
             <div className="p-4">
@@ -38,6 +38,8 @@ const PokemonCard = ({ id }: { id: number }) => {
             </div>
           </article>
         </Link>
+      ) : (
+        <article className="w-full h-full" />
       )}
     </>
   );
