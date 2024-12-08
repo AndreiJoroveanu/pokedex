@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import usePokemonStore from "../../store/usePokemonStore.ts";
 import {
   fetchAllPokemon,
@@ -22,6 +22,9 @@ const AllPokemon = () => {
   const [allPokemon, setAllPokemon] = useState<PokemonListType[]>([]);
   const [pokemonList, setPokemonList] = useState<PokemonListType[]>([]);
 
+  const [filteredByGen, setFilteredByGen] = useState<PokemonListType[]>([]);
+  const [filteredByType, setFilteredByType] = useState<PokemonListType[]>([]);
+
   const noOfPokemon = pokemonList.length;
   const pokemonPerPage = 20;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage);
@@ -33,55 +36,62 @@ const AllPokemon = () => {
       .catch((e) => console.error("Failed to fetch all Pokémon", e));
   }, []);
 
-  // Filtering
+  // Fetch Pokémon by gen
   useEffect(() => {
+    if (currentGen)
+      fetchAllPokemonByGen(currentGen)
+        .then((data: PokemonListType[]) => setFilteredByGen(data))
+        .catch((e) => console.error("Failed to fetch Pokémon by gen", e));
+    else setFilteredByGen([]);
+  }, [currentGen]);
+
+  // Fetch Pokémon by type
+  useEffect(() => {
+    if (currentType)
+      fetchAllPokemonByType(currentType)
+        .then((data: PokemonListType[]) => setFilteredByType(data))
+        .catch((e) => console.error("Failed to fetch Pokémon by type", e));
+    else setFilteredByType([]);
+  }, [currentType]);
+
+  // Filtering
+  const filteredPokemon = useMemo(() => {
     if (!allPokemon) return;
 
-    const fetchFilteredPokemon = async () => {
-      let filteredPokemon: PokemonListType[] = [...allPokemon];
+    let result: PokemonListType[] = [...allPokemon];
 
-      // If there is a gen selected
-      if (currentGen) {
-        await fetchAllPokemonByGen(currentGen)
-          .then((data: PokemonListType[]) => {
-            filteredPokemon = filteredPokemon.filter((fp) =>
-              new Set(data.map((pg) => pg.id)).has(fp.id),
-            );
-          })
-          .catch((e) => console.error("Failed to fetch Pokémon by gen", e));
-      }
+    // If there is a gen selected
+    if (filteredByGen.length)
+      result = result.filter((fp) =>
+        new Set(filteredByGen.map((pg) => pg.id)).has(fp.id),
+      );
 
-      // If there is a type selected
-      if (currentType) {
-        await fetchAllPokemonByType(currentType)
-          .then((data: PokemonListType[]) => {
-            filteredPokemon = filteredPokemon.filter((fp) =>
-              new Set(data.map((pt) => pt.id)).has(fp.id),
-            );
-          })
-          .catch((e) => console.error("Failed to fetch Pokémon by type", e));
-      }
+    // If there is a type selected
+    if (filteredByType.length)
+      result = result.filter((fp) =>
+        new Set(filteredByType.map((pt) => pt.id)).has(fp.id),
+      );
 
-      // Search query filtering
-      if (searchQuery.trim().length) {
-        setPokemonList(
-          filteredPokemon.filter((p) =>
-            p.name.toLowerCase().includes(searchQuery.toLowerCase().trim()),
-          ),
-        );
-      } else setPokemonList(filteredPokemon);
-    };
+    // Search query filtering
+    if (searchQuery.trim().length)
+      result = result.filter((p) =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase().trim()),
+      );
 
-    void fetchFilteredPokemon();
-  }, [allPokemon, currentGen, currentType, searchQuery]);
+    return result;
+  }, [allPokemon, filteredByGen, filteredByType, searchQuery]);
+
+  useEffect(() => {
+    if (filteredPokemon) setPokemonList(filteredPokemon);
+  }, [filteredPokemon]);
 
   // Get the Pokémon from the current page to display
-  const getPokemon = () =>
-    pokemonList.slice(
+  const paginatedPokemon = useMemo(() => {
+    return pokemonList.slice(
       (currentPage - 1) * pokemonPerPage,
-      // Math.min not necessary, but probably more correct
-      Math.min(currentPage * pokemonPerPage, noOfPokemon),
+      currentPage * pokemonPerPage,
     );
+  }, [currentPage, pokemonList]);
 
   return (
     <div className="relative py-24">
@@ -100,7 +110,7 @@ const AllPokemon = () => {
 
           {pokemonList.length ? (
             <main className="w-full mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
-              {getPokemon().map((pokemon) => (
+              {paginatedPokemon.map((pokemon) => (
                 <PokemonCard key={pokemon.name} id={pokemon.id} />
               ))}
             </main>
