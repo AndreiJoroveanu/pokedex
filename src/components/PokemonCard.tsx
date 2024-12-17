@@ -2,11 +2,7 @@ import { Link } from "react-router";
 import { usePokemon } from "../hooks/usePokemon.ts";
 
 const PokemonCard = ({ id }: { id: number }) => {
-  const {
-    data: pokemon,
-    // isLoading: isPokemonLoading,
-    // error: errorPokemon,
-  } = usePokemon(id);
+  const { data: pokemon /* isLoading, error */ } = usePokemon(id);
 
   return (
     <>
