@@ -1,4 +1,8 @@
-import Pokedex, { Pokemon, PokemonSpecies } from "pokedex-promise-v2";
+import Pokedex, {
+  APIResourceList,
+  Pokemon,
+  PokemonSpecies,
+} from "pokedex-promise-v2";
 import { useCallback, useEffect, useState } from "react";
 
 const api = new Pokedex({
@@ -8,6 +12,11 @@ const api = new Pokedex({
   cacheLimit: 1000 * 60 * 60 * 24 * 30, // 30 days
   timeout: 20 * 1000, // 20 seconds
 });
+
+// interface ItemListType {
+//   name: string;
+//   url: string;
+// }
 
 // const noOfPokemon = 1025;
 
@@ -24,8 +33,8 @@ const useData = <T>(fetcher: () => Promise<T>) => {
         setIsLoading(true);
         setError(null);
 
-        const data = await fetcher();
-        if (!ignore) setData(data);
+        const response = await fetcher();
+        if (!ignore) setData(response);
         setError(null);
       } catch (error) {
         console.error(error);
@@ -61,4 +70,16 @@ export const usePokemonSpecies = (identifier: string | number | undefined) => {
   );
   const { data, isLoading, error } = useData<PokemonSpecies>(fetcher);
   return { data, isLoading, error };
+};
+
+export const usePokemonGens = () => {
+  const fetcher = useCallback(() => api.getGenerationsList(), []);
+  const { data, isLoading, error } = useData<APIResourceList>(fetcher);
+  return { data: data?.results, isLoading, error };
+};
+
+export const usePokemonTypes = () => {
+  const fetcher = useCallback(() => api.getTypesList({ limit: 18 }), []);
+  const { data, isLoading, error } = useData<APIResourceList>(fetcher);
+  return { data: data?.results, isLoading, error };
 };

@@ -7,11 +7,8 @@ const PokemonDetails = () => {
   const { name } = useParams() as { name: string };
   const navigate = useNavigate();
 
-  const {
-    data: pokemonSpecies,
-    // isLoading,
-    // error,
-  } = usePokemonSpecies(name);
+  const { data: pokemonSpecies /* isLoading, error */ } =
+    usePokemonSpecies(name);
 
   return (
     <div className="p-4 py-28">
@@ -36,11 +33,7 @@ const PokemonDetails = () => {
 };
 
 const PokemonInfoFromLink = ({ name }: { name: string }) => {
-  const {
-    data: pokemon,
-    // isLoading,
-    // error,
-  } = usePokemon(name);
+  const { data: pokemon /* isLoading, error */ } = usePokemon(name);
 
   return <>{pokemon && <PokemonInfo pokemon={pokemon} />}</>;
 };

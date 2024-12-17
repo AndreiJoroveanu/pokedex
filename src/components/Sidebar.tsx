@@ -1,11 +1,5 @@
-import { useEffect, useState } from "react";
 import usePokemonStore from "../store/usePokemonStore.ts";
-import { fetchPokemonGens, fetchPokemonTypes } from "../services/apiService.ts";
-
-interface ItemListType {
-  name: string;
-  url: string;
-}
+import { usePokemonGens, usePokemonTypes } from "../hooks/usePokemon.ts";
 
 const Sidebar = () => {
   const {
@@ -18,19 +12,8 @@ const Sidebar = () => {
     clearFilters,
   } = usePokemonStore();
 
-  const [pokemonGens, setPokemonGens] = useState<ItemListType[]>([]);
-  const [pokemonTypes, setPokemonTypes] = useState<ItemListType[]>([]);
-
-  // Fetch Pokémon gens & types
-  useEffect(() => {
-    fetchPokemonGens()
-      .then((data) => setPokemonGens(data))
-      .catch((e) => console.error("Failed to fetch Pokémon gens", e));
-
-    fetchPokemonTypes()
-      .then((data) => setPokemonTypes(data))
-      .catch((e) => console.error("Failed to fetch Pokémon types", e));
-  }, []);
+  const { data: pokemonGens /* isLoading, error */ } = usePokemonGens();
+  const { data: pokemonTypes /* isLoading, error */ } = usePokemonTypes();
 
   return (
     <aside className="lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 overflow-y-scroll p-4 lg:border-r border-gray-200">
@@ -44,7 +27,7 @@ const Sidebar = () => {
 
       <h2 className="text-2xl font-bold my-2">Generation Filtering:</h2>
       <div className="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-        {pokemonGens.map((gen) => (
+        {pokemonGens?.map((gen) => (
           <button
             key={gen.name}
             onClick={() =>
@@ -60,7 +43,7 @@ const Sidebar = () => {
 
       <h2 className="text-2xl font-bold my-2">Type Filtering:</h2>
       <div className="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
-        {pokemonTypes.map((type) => (
+        {pokemonTypes?.map((type) => (
           <button
             key={type.name}
             onClick={() =>
