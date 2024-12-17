@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { Pokemon } from "pokedex-promise-v2";
-import { fetchPokemonById } from "../services/apiService.ts";
+import { usePokemon } from "../hooks/usePokemon.ts";
 
 const PokemonCard = ({ id }: { id: number }) => {
-  const [pokemon, setPokemon] = useState<Pokemon>();
-
-  useEffect(() => {
-    fetchPokemonById(id)
-      .then((data) => setPokemon(data))
-      .catch((e) => console.error("Error fetching Pokémon", e));
-  }, [id]);
+  const {
+    data: pokemon,
+    // isLoading: isPokemonLoading,
+    // error: errorPokemon,
+  } = usePokemon(id);
 
   return (
     <>

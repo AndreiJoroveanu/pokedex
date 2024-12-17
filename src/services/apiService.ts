@@ -8,16 +8,18 @@ const api = new Pokedex({
   timeout: 20 * 1000, // 20 seconds
 });
 
-export const fetchPokemonByName = async (name: string) =>
-  await api.getPokemonByName(name);
-
-export const fetchPokemonById = async (id: number) =>
-  await api.getResource(`/api/v2/pokemon/${id}`);
-
-export const fetchPokemonSpeciesByName = async (name: string) =>
-  await api.getPokemonSpeciesByName(name);
+const noOfPokemon = 1025;
 
 // Currently unused, uncomment to use
+// export const fetchPokemonByName = async (name: string) =>
+//   await api.getPokemonByName(name);
+//
+// export const fetchPokemonById = async (id: number) =>
+//   await api.getResource(`/api/v2/pokemon/${id}`);
+//
+// export const fetchPokemonSpeciesByName = async (name: string) =>
+//   await api.getPokemonSpeciesByName(name);
+//
 // export const fetchPokemonSpeciesById = async (id: number) =>
 //   await api.getResource(`/api/v2/pokemon-species/${id}`);
 
@@ -28,7 +30,7 @@ export const fetchPokemonTypes = async () =>
   (await api.getTypesList({ limit: 18 })).results;
 
 export const fetchAllPokemon = async () =>
-  (await api.getPokemonsList({ limit: 1025 })).results.map((p) => ({
+  (await api.getPokemonsList({ limit: noOfPokemon })).results.map((p) => ({
     id: Number(
       p.url.split("https://pokeapi.co/api/v2/pokemon/")[1].split("/")[0],
     ),
