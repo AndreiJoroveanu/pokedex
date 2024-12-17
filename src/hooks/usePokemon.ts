@@ -1,5 +1,5 @@
 import Pokedex, { Pokemon, PokemonSpecies } from "pokedex-promise-v2";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const api = new Pokedex({
   protocol: "https",
@@ -11,93 +11,54 @@ const api = new Pokedex({
 
 // const noOfPokemon = 1025;
 
-export const usePokemon = (identifier: string | number | undefined) => {
-  const [data, setData] = useState<Pokemon | null>(null);
+const useData = <T>(fetcher: () => Promise<T>) => {
+  const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<unknown>(null);
 
   useEffect(() => {
     let ignore = false;
 
-    const fetchPokemon = async () => {
+    const fetchData = async () => {
       try {
         setIsLoading(true);
         setError(null);
 
-        const data = await api.getResource(`/api/v2/pokemon/${identifier}`);
+        const data = await fetcher();
         if (!ignore) setData(data);
         setError(null);
       } catch (error) {
-        console.error("Error fetching Pokémon", error);
+        console.error(error);
         setError(error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    if (identifier) void fetchPokemon();
+    void fetchData();
 
     return () => {
       ignore = true;
     };
-  }, [identifier]);
+  }, [fetcher]);
 
+  return { data, isLoading, error };
+};
+
+export const usePokemon = (identifier: string | number | undefined) => {
+  const fetcher = useCallback(
+    () => api.getResource(`/api/v2/pokemon/${identifier}`),
+    [identifier],
+  );
+  const { data, isLoading, error } = useData<Pokemon>(fetcher);
   return { data, isLoading, error };
 };
 
 export const usePokemonSpecies = (identifier: string | number | undefined) => {
-  const [data, setData] = useState<PokemonSpecies | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<unknown>(null);
-
-  useEffect(() => {
-    let ignore = false;
-
-    const fetchPokemonSpecies = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-
-        const data = await api.getResource(
-          `/api/v2/pokemon-species/${identifier}`,
-        );
-        if (!ignore) setData(data);
-        setError(null);
-      } catch (error) {
-        console.error("Error fetching Pokémon Species", error);
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (identifier) void fetchPokemonSpecies();
-
-    return () => {
-      ignore = true;
-    };
-  }, [identifier]);
-
+  const fetcher = useCallback(
+    () => api.getResource(`/api/v2/pokemon-species/${identifier}`),
+    [identifier],
+  );
+  const { data, isLoading, error } = useData<PokemonSpecies>(fetcher);
   return { data, isLoading, error };
 };
-
-// export const usePokemonSpecies = (identifier: string | number | undefined) => {
-//   const [data, setData] = useState<PokemonSpecies | null>(null);
-//
-//   useEffect(() => {
-//     let ignore = false;
-//
-//     api
-//       .getResource(`/api/v2/pokemon-species/${identifier}`)
-//       .then((data: PokemonSpecies) => {
-//         if (!ignore) setData(data);
-//       })
-//       .catch((e) => console.error("Error fetching Pokémon", e));
-//
-//     return () => {
-//       ignore = true;
-//     };
-//   }, [identifier]);
-//
-//   return data;
-// };
