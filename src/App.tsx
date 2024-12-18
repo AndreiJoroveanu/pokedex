@@ -5,8 +5,8 @@ import {
   RouterProvider,
   ScrollRestoration,
 } from "react-router";
-import AllPokemon from "./pages/Pokemon/AllPokemon.tsx";
-import PokemonDetails from "./pages/Pokemon/PokemonDetails.tsx";
+import AllPokemonPage from "./pages/Pokemon/AllPokemonPage.tsx";
+import PokemonDetailsPage from "./pages/Pokemon/PokemonDetailsPage.tsx";
 import Navbar from "./components/Navbar.tsx";
 
 const router = createBrowserRouter([
@@ -26,11 +26,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/pokemon",
-        element: <AllPokemon />,
+        element: <AllPokemonPage />,
       },
       {
         path: "/pokemon/:name",
-        element: <PokemonDetails />,
+        element: <PokemonDetailsPage />,
       },
     ],
   },

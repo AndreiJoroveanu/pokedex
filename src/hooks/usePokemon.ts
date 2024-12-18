@@ -85,14 +85,32 @@ export const usePokemonTypes = () => {
   return { data: data?.results, isLoading, error };
 };
 
-export const useAllPokemon = () => {
-  const fetcher = useCallback(() => api.getPokemonsList({ limit: 1025 }), []);
+// export const useAllPokemon = () => {
+//   const fetcher = useCallback(() => api.getPokemonsList({ limit: 1025 }), []);
+//   const { data, isLoading, error } = useData<APIResourceList>(fetcher);
+//
+//   const transformedData = useMemo(() => {
+//     return data?.results.map((p) => ({
+//       id: Number(
+//         p.url.split("https://pokeapi.co/api/v2/pokemon/")[1].split("/")[0],
+//       ),
+//       name: p.name,
+//     }));
+//   }, [data]);
+//
+//   return { data: transformedData, isLoading, error };
+// };
+
+export const useAllPokemonSpecies = () => {
+  const fetcher = useCallback(() => api.getPokemonSpeciesList(), []);
   const { data, isLoading, error } = useData<APIResourceList>(fetcher);
 
   const transformedData = useMemo(() => {
     return data?.results.map((p) => ({
       id: Number(
-        p.url.split("https://pokeapi.co/api/v2/pokemon/")[1].split("/")[0],
+        p.url
+          .split("https://pokeapi.co/api/v2/pokemon-species/")[1]
+          .split("/")[0],
       ),
       name: p.name,
     }));

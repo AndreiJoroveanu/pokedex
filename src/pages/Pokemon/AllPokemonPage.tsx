@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
+import {
+  useAllPokemonSpecies,
+  useAllPokemonByGen,
+  useAllPokemonByType,
+} from "../../hooks/usePokemon.ts";
 import usePokemonStore from "../../store/usePokemonStore.ts";
 import Sidebar from "../../components/Sidebar.tsx";
 import ChangePageButtons from "../../components/ChangePageButtons.tsx";
 import ErrorMessage from "../../components/ErrorMessage.tsx";
-import {
-  useAllPokemon,
-  useAllPokemonByGen,
-  useAllPokemonByType,
-} from "../../hooks/usePokemon.ts";
 import PokemonList from "../../components/PokemonList.tsx";
 
 interface PokemonListType {
@@ -15,11 +15,11 @@ interface PokemonListType {
   name: string;
 }
 
-const AllPokemon = () => {
+const AllPokemonPage = () => {
   const { currentPage, setCurrentPage, currentGen, currentType, searchQuery } =
     usePokemonStore();
 
-  const { data: allPokemon /* isLoading, error */ } = useAllPokemon();
+  const { data: allPokemon /* isLoading, error */ } = useAllPokemonSpecies();
   const [pokemonList, setPokemonList] = useState<PokemonListType[]>([]);
 
   const { data: filteredByGen /* isLoading, error */ } =
@@ -95,4 +95,4 @@ const AllPokemon = () => {
     </div>
   );
 };
-export default AllPokemon;
+export default AllPokemonPage;
