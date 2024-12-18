@@ -24,6 +24,8 @@ const useData = <T>(fetcher: () => Promise<T>, cancel: boolean = false) => {
     let ignore = false;
 
     const fetchData = async () => {
+      if (cancel) return setData(null);
+
       try {
         setIsLoading(true);
         setError(null);
@@ -39,8 +41,7 @@ const useData = <T>(fetcher: () => Promise<T>, cancel: boolean = false) => {
       }
     };
 
-    if (cancel) setData(null);
-    else void fetchData();
+    void fetchData();
 
     return () => {
       ignore = true;

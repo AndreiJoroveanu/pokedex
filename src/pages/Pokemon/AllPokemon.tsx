@@ -2,13 +2,13 @@ import { useEffect, useMemo, useState } from "react";
 import usePokemonStore from "../../store/usePokemonStore.ts";
 import Sidebar from "../../components/Sidebar.tsx";
 import ChangePageButtons from "../../components/ChangePageButtons.tsx";
-import PokemonCard from "../../components/PokemonCard.tsx";
 import ErrorMessage from "../../components/ErrorMessage.tsx";
 import {
   useAllPokemon,
   useAllPokemonByGen,
   useAllPokemonByType,
 } from "../../hooks/usePokemon.ts";
+import PokemonList from "../../components/PokemonList.tsx";
 
 interface PokemonListType {
   id: number;
@@ -86,11 +86,7 @@ const AllPokemon = () => {
             })}
 
           {pokemonList.length ? (
-            <main className="w-full mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
-              {paginatedPokemon.map((pokemon) => (
-                <PokemonCard key={pokemon.name} id={pokemon.id} />
-              ))}
-            </main>
+            <PokemonList paginatedPokemon={paginatedPokemon} />
           ) : (
             <ErrorMessage type="Pokémon" />
           )}
