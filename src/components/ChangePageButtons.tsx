@@ -42,6 +42,7 @@ const ChangePageButtons = ({
       {getPaginationButtons().map((page) =>
         page > 0 ? (
           <Button
+            key={page}
             onClick={() => setCurrentPage(page)}
             isSelected={page === currentPage}
             className={`w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center ${page === currentPage && "cursor-default"}`}

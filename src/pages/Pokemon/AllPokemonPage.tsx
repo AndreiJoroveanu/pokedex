@@ -19,12 +19,13 @@ const AllPokemonPage = () => {
   const { currentPage, setCurrentPage, currentGen, currentType, searchQuery } =
     usePokemonStore();
 
-  const { data: allPokemon /* isLoading, error */ } = useAllPokemonSpecies();
+  const { data: allPokemon, isLoading: isLoadingP /*, errorP */ } =
+    useAllPokemonSpecies();
   const [pokemonList, setPokemonList] = useState<PokemonListType[]>([]);
 
-  const { data: filteredByGen /* isLoading, error */ } =
+  const { data: filteredByGen, isLoading: isLoadingPG /*, errorPG */ } =
     useAllPokemonByGen(currentGen);
-  const { data: filteredByType /* isLoading, error */ } =
+  const { data: filteredByType, isLoading: isLoadingPT /*, errorPT */ } =
     useAllPokemonByType(currentType);
 
   const noOfPokemon = pokemonList.length;
@@ -85,11 +86,16 @@ const AllPokemonPage = () => {
               noOfSideButtons: 3,
             })}
 
-          {pokemonList.length ? (
-            <PokemonList paginatedPokemon={paginatedPokemon} />
-          ) : (
-            <ErrorMessage type="Pokémon" />
+          {pokemonList.length &&
+            !isLoadingP &&
+            !isLoadingPG &&
+            !isLoadingPT && <PokemonList paginatedPokemon={paginatedPokemon} />}
+          {(isLoadingP || isLoadingPG || isLoadingPT) && (
+            <div className="h-screen w-full flex justify-center items-center">
+              <p className="text-2xl font-bold">Loading...</p>
+            </div>
           )}
+          {!pokemonList.length && <ErrorMessage type="Pokémon" />}
         </div>
       </section>
     </div>

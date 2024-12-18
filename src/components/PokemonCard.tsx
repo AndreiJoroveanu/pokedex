@@ -5,43 +5,45 @@ const PokemonCard = ({ id, name }: { id: number; name: string }) => {
   const { data: pokemon /* isLoading, error */ } = usePokemon(id);
 
   return (
-    <>
-      {pokemon ? (
-        <Link to={`/pokemon/${pokemon.species.name}`} state={{ pokemon }}>
-          <article className="border border-gray-200 rounded hover:bg-gray-50 shadow-lg hover:shadow-xl transition-shadow">
+    <Link to={`/pokemon/${name}`} state={{ pokemon }}>
+      <article className="border border-gray-200 rounded hover:bg-gray-50 shadow-lg hover:shadow-xl transition-shadow">
+        {pokemon ? (
+          <img
+            src={pokemon?.sprites.other?.home.front_default?.toString()}
+            alt={name}
+            className="object-contain aspect-square w-full text-transparent"
+          />
+        ) : (
+          <div className="aspect-square w-full flex justify-center items-center">
             <img
-              src={pokemon.sprites.other?.home.front_default?.toString()}
-              alt={pokemon.name}
-              className="object-contain aspect-square w-full text-transparent"
+              src="/pokéball.svg"
+              alt="Pokéball loading animation"
+              className="w-8 h-8 animate-spin"
             />
+          </div>
+        )}
 
-            <div className="p-4">
-              <h1 className="capitalize text-xl font-bold text-nowrap">
-                {pokemon.id}. {pokemon.species.name}
-              </h1>
-              <p className="text-nowrap">
-                {pokemon.types.length === 1 ? "Type: " : "Types: "}
-                {pokemon.types.map((type) => (
+        <div className="p-4">
+          <h1 className="capitalize text-xl font-bold text-nowrap">
+            {id}. {name}
+          </h1>
+          <p className="text-nowrap">
+            {pokemon ? (
+              <>
+                {pokemon?.types.length === 1 ? "Type: " : "Types: "}
+                {pokemon?.types.map((type) => (
                   <span key={type.type.name} className="capitalize">
                     {` ${type.type.name}`}
                   </span>
                 ))}
-              </p>
-            </div>
-          </article>
-        </Link>
-      ) : (
-        <article className="w-full h-full border border-gray-200 rounded hover:bg-gray-50 shadow-lg hover:shadow-xl transition-shadow">
-          <div className="aspect-square w-full" />
-          <div className="p-4">
-            <h1 className="capitalize text-xl font-bold text-nowrap">
-              {id}. {name}
-            </h1>
-            <p>Loading...</p>
-          </div>
-        </article>
-      )}
-    </>
+              </>
+            ) : (
+              "Loading..."
+            )}
+          </p>
+        </div>
+      </article>
+    </Link>
   );
 };
 export default PokemonCard;

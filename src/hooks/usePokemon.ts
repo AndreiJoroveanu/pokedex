@@ -17,7 +17,7 @@ const api = new Pokedex({
 
 const useData = <T>(fetcher: () => Promise<T>, cancel: boolean = false) => {
   const [data, setData] = useState<T | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown>(null);
 
   useEffect(() => {
