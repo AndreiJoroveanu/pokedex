@@ -1,4 +1,5 @@
 import { TfiControlSkipBackward, TfiControlSkipForward } from "react-icons/tfi";
+import Button from "./Button.tsx";
 
 interface ChangePageButtonsProps {
   currentPage: number;
@@ -30,36 +31,36 @@ const ChangePageButtons = ({
 
   return (
     <div className="flex gap-2 sm:gap-4">
-      <button
+      <Button
         onClick={() => setCurrentPage(1)}
         disabled={currentPage === 1}
-        className="border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full disabled:opacity-25 disabled:cursor-not-allowed enabled:hover:bg-gray-100 shadow-md enabled:hover:shadow-lg transition-shadow"
+        className="w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center disabled:opacity-25 disabled:cursor-not-allowed"
       >
         <TfiControlSkipBackward />
-      </button>
+      </Button>
 
       {getPaginationButtons().map((page) =>
         page > 0 ? (
-          <button
-            key={page}
+          <Button
             onClick={() => setCurrentPage(page)}
-            className={`border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full shadow-md ${page === currentPage ? "bg-black text-white cursor-default" : "hover:bg-gray-100 hover:shadow-lg"} transition-shadow`}
+            isSelected={page === currentPage}
+            className={`w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center ${page === currentPage && "cursor-default"}`}
           >
             {page}
-          </button>
+          </Button>
         ) : (
           // Empty divs so that the rest of the buttons can remain centered
           <div key={page} className="w-8 h-8 sm:w-12 sm:h-12" />
         ),
       )}
 
-      <button
+      <Button
         onClick={() => setCurrentPage(noOfPages)}
         disabled={currentPage === noOfPages}
-        className="border w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center rounded-full disabled:opacity-25 disabled:cursor-not-allowed enabled:hover:bg-gray-100 shadow-md enabled:hover:shadow-lg transition-shadow"
+        className="w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center disabled:opacity-25 disabled:cursor-not-allowed"
       >
         <TfiControlSkipForward />
-      </button>
+      </Button>
     </div>
   );
 };

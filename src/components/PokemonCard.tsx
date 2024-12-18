@@ -34,7 +34,7 @@ const PokemonCard = ({ id, name }: { id: number; name: string }) => {
         <article className="w-full h-full border border-gray-200 rounded hover:bg-gray-50 shadow-lg hover:shadow-xl transition-shadow">
           <div className="aspect-square w-full" />
           <div className="p-4">
-            <h1 className="capitalize text-xl font-bold">
+            <h1 className="capitalize text-xl font-bold text-nowrap">
               {id}. {name}
             </h1>
             <p>Loading...</p>
