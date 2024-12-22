@@ -9,7 +9,8 @@ const PokemonCard = ({ id, name }: { id: number; name: string }) => {
       <article className="border border-gray-200 rounded hover:bg-gray-50 shadow-lg hover:shadow-xl transition-shadow">
         {pokemon ? (
           <img
-            src={pokemon?.sprites.other?.home.front_default?.toString()}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
+            // src={pokemon.sprites.other.home.front_default?.toString()}
             alt={name}
             className="object-contain aspect-square w-full text-transparent"
           />

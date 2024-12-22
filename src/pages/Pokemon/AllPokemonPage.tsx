@@ -5,7 +5,6 @@ import {
   useAllPokemonByType,
 } from "../../hooks/usePokemon.ts";
 import usePokemonStore from "../../store/usePokemonStore.ts";
-import Sidebar from "../../components/Sidebar.tsx";
 import ChangePageButtons from "../../components/ChangePageButtons.tsx";
 import ErrorMessage from "../../components/ErrorMessage.tsx";
 import PokemonList from "../../components/PokemonList.tsx";
@@ -72,9 +71,7 @@ const AllPokemonPage = () => {
   }, [currentPage, pokemonList]);
 
   return (
-    <div className="relative py-24">
-      <Sidebar />
-
+    <div className="relative pt-24">
       <section className="lg:absolute right-0 w-full lg:w-4/5">
         <div className="p-4 flex flex-col items-center">
           {noOfPages > 1 &&

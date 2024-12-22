@@ -6,16 +6,16 @@ import {
   ScrollRestoration,
 } from "react-router";
 import AllPokemonPage from "./pages/Pokemon/AllPokemonPage.tsx";
+import Sidebar from "./components/Sidebar.tsx";
 import PokemonDetailsPage from "./pages/Pokemon/PokemonDetailsPage.tsx";
 import Navbar from "./components/Navbar.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Navigate to="/pokemon" />,
+    index: true,
+    element: <Navigate replace to="/pokemon" />,
   },
   {
-    path: "/pokemon",
     element: (
       <>
         <Navbar />
@@ -26,7 +26,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/pokemon",
-        element: <AllPokemonPage />,
+        element: (
+          <>
+            <Sidebar />
+            <AllPokemonPage />
+          </>
+        ),
       },
       {
         path: "/pokemon/:name",

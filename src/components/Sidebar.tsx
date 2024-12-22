@@ -17,7 +17,7 @@ const Sidebar = () => {
   const { data: pokemonTypes /* isLoading, error */ } = usePokemonTypes();
 
   return (
-    <aside className="lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 overflow-y-scroll p-4 lg:border-r border-gray-200">
+    <aside className="mt-24 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 overflow-y-scroll p-4 lg:border-r border-gray-200">
       <input
         type="text"
         placeholder="Search by Pokémon name"
