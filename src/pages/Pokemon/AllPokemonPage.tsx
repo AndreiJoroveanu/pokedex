@@ -35,32 +35,32 @@ const AllPokemonPage = () => {
   const filteredPokemon = useMemo(() => {
     if (!allPokemon) return;
 
-    let result: PokemonListType[] = [...allPokemon];
-
+    // If there is a gen and a type selected
+    if (filteredByGen?.length && filteredByType?.length)
+      return [...filteredByGen].filter((fp) =>
+        new Set(filteredByType.map((pg) => pg.id)).has(fp.id),
+      );
     // If there is a gen selected
-    if (filteredByGen?.length)
-      result = result.filter((fp) =>
-        new Set(filteredByGen.map((pg) => pg.id)).has(fp.id),
-      );
-
+    else if (filteredByGen?.length) return [...filteredByGen];
     // If there is a type selected
-    if (filteredByType?.length)
-      result = result.filter((fp) =>
-        new Set(filteredByType.map((pt) => pt.id)).has(fp.id),
-      );
+    else if (filteredByType?.length) return [...filteredByType];
+    // No filtering
+    else return [...allPokemon];
+  }, [allPokemon, filteredByGen, filteredByType]);
 
-    // Search query filtering
-    if (searchQuery.trim().length)
-      result = result.filter((p) =>
-        p.name.toLowerCase().includes(searchQuery.toLowerCase().trim()),
-      );
-
-    return result;
-  }, [allPokemon, filteredByGen, filteredByType, searchQuery]);
-
+  // Set Pokémon list
   useEffect(() => {
-    if (filteredPokemon) setPokemonList(filteredPokemon);
-  }, [filteredPokemon]);
+    if (filteredPokemon) {
+      // Search query filtering
+      setPokemonList(
+        searchQuery.trim().length
+          ? filteredPokemon.filter((p) =>
+              p.name.toLowerCase().includes(searchQuery.toLowerCase().trim()),
+            )
+          : filteredPokemon,
+      );
+    }
+  }, [filteredPokemon, searchQuery]);
 
   // Get the Pokémon from the current page to display
   const paginatedPokemon = useMemo(() => {
@@ -83,15 +83,16 @@ const AllPokemonPage = () => {
               noOfSideButtons: 3,
             })}
 
-          {pokemonList.length &&
-            !isLoadingP &&
-            !isLoadingPG &&
-            !isLoadingPT && <PokemonList paginatedPokemon={paginatedPokemon} />}
+          {pokemonList.length && !isLoadingP && !isLoadingPG && !isLoadingPT ? (
+            <PokemonList paginatedPokemon={paginatedPokemon} />
+          ) : null}
+
           {(isLoadingP || isLoadingPG || isLoadingPT) && (
             <div className="h-screen w-full flex justify-center items-center">
               <p className="text-2xl font-bold">Loading...</p>
             </div>
           )}
+
           {!pokemonList.length && <ErrorMessage type="Pokémon" />}
         </div>
       </section>

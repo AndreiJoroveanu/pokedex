@@ -129,14 +129,16 @@ export const useAllPokemonByGen = (gen: string | undefined) => {
 
   const transformedData = useMemo(() => {
     return (
-      data?.pokemon_species.map((p) => ({
-        id: Number(
-          p.url
-            .split("https://pokeapi.co/api/v2/pokemon-species/")[1]
-            .split("/")[0],
-        ),
-        name: p.name,
-      })) || []
+      data?.pokemon_species
+        .map((p) => ({
+          id: Number(
+            p.url
+              .split("https://pokeapi.co/api/v2/pokemon-species/")[1]
+              .split("/")[0],
+          ),
+          name: p.name,
+        }))
+        .filter((p) => p.id < 10000) || []
     );
   }, [data]);
 
@@ -151,14 +153,16 @@ export const useAllPokemonByType = (type: string | undefined) => {
 
   const transformedData = useMemo(() => {
     return (
-      data?.pokemon.map((p) => ({
-        id: Number(
-          p.pokemon.url
-            .split("https://pokeapi.co/api/v2/pokemon/")[1]
-            .split("/")[0],
-        ),
-        name: p.pokemon.name,
-      })) || []
+      data?.pokemon
+        .map((p) => ({
+          id: Number(
+            p.pokemon.url
+              .split("https://pokeapi.co/api/v2/pokemon/")[1]
+              .split("/")[0],
+          ),
+          name: p.pokemon.name,
+        }))
+        .filter((p) => p.id < 10000) || []
     );
   }, [data]);
 
