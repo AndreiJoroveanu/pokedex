@@ -17,15 +17,16 @@ const ChangePageButtons = ({
   const getPaginationButtons = () => {
     const buttons: number[] = [];
     let negativeIndex = 0;
+
     for (
       let page = currentPage - noOfSideButtons;
       page <= currentPage + noOfSideButtons;
       page++
     ) {
       negativeIndex--;
-      if (page > 0 && page <= noOfPages) buttons.push(page);
-      else buttons.push(negativeIndex);
+      buttons.push(page > 0 && page <= noOfPages ? page : negativeIndex);
     }
+
     return buttons;
   };
 

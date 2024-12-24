@@ -1,7 +1,11 @@
 import { usePokemon } from "../hooks/usePokemon.ts";
 import { Pokemon } from "pokedex-promise-v2";
 
-const PokemonInfo = ({ pokemon }: { pokemon: Pokemon }) => {
+interface PokemonInfoProps {
+  pokemon: Pokemon;
+}
+
+const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
   return (
     <>
       {/* Image (Pokémon HOME artwork) */}

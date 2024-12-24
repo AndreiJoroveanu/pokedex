@@ -5,18 +5,15 @@ interface PokemonListType {
   name: string;
 }
 
-const PokemonList = ({
-  paginatedPokemon,
-}: {
+interface PokemonListProps {
   paginatedPokemon: PokemonListType[];
-}) => {
-  return (
-    <main className="w-full mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
-      {paginatedPokemon.map((pokemon) => (
-        <PokemonCard key={pokemon.name} id={pokemon.id} name={pokemon.name} />
-      ))}
-    </main>
-  );
-};
+}
 
+const PokemonList = ({ paginatedPokemon }: PokemonListProps) => (
+  <main className="w-full mt-4 grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4">
+    {paginatedPokemon.map((pokemon) => (
+      <PokemonCard key={pokemon.name} id={pokemon.id} name={pokemon.name} />
+    ))}
+  </main>
+);
 export default PokemonList;

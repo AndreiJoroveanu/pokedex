@@ -36,13 +36,17 @@ const AllPokemonPage = () => {
 
     // If there is a gen and a type selected
     if (filteredByGen?.length && filteredByType?.length)
-      return [...filteredByGen].filter((fp) =>
-        new Set(filteredByType.map((pg) => pg.id)).has(fp.id),
+      return [...filteredByGen].filter((pg) =>
+        new Set(filteredByType.map((pt) => pt.id)).has(pg.id),
       );
     // If there is a gen selected
     else if (filteredByGen?.length) return [...filteredByGen];
-    // If there is a type selected
-    else if (filteredByType?.length) return [...filteredByType];
+    // If there is a type selected (still need to filter because
+    // the filteredByType doesn't return Pokémon species)
+    else if (filteredByType?.length)
+      return allPokemon.filter((ap) =>
+        new Set(filteredByType.map((pt) => pt.id)).has(ap.id),
+      );
     // No filtering
     else return [...allPokemon];
   }, [allPokemon, filteredByGen, filteredByType]);

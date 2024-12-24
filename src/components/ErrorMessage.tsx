@@ -1,6 +1,10 @@
 import usePokemonStore from "../store/usePokemonStore.ts";
 
-const ErrorMessage = ({ type }: { type: string }) => {
+interface ErrorMessageProps {
+  type: string;
+}
+
+const ErrorMessage = ({ type }: ErrorMessageProps) => {
   const { clearFilters } = usePokemonStore();
 
   return (

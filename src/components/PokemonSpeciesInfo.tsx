@@ -1,10 +1,10 @@
 import { PokemonSpecies } from "pokedex-promise-v2";
 
-const PokemonSpeciesInfo = ({
-  pokemonSpecies,
-}: {
+interface PokemonSpeciesInfoProps {
   pokemonSpecies: PokemonSpecies;
-}) => {
+}
+
+const PokemonSpeciesInfo = ({ pokemonSpecies }: PokemonSpeciesInfoProps) => {
   return (
     <>
       {/* Generation */}
@@ -16,12 +16,14 @@ const PokemonSpeciesInfo = ({
         </span>
       </p>
 
-      {/* Dex Description */}
-      <ul>
+      <p className="my-2">Dex entries:</p>
+
+      {/* All english Dex descriptions */}
+      <ul className="border-y">
         {pokemonSpecies.flavor_text_entries
           .filter((entry) => entry.language.name === "en")
           .map((entry) => (
-            <li key={entry.version.name}>
+            <li key={entry.version.name} className="border-y py-2">
               <span className="capitalize font-bold">
                 {entry.version.name.split("-").join(" ")}:
               </span>{" "}

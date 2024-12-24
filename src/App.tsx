@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import {
   createBrowserRouter,
   Navigate,
@@ -5,24 +6,38 @@ import {
   RouterProvider,
   ScrollRestoration,
 } from "react-router";
-import AllPokemonPage from "./pages/Pokemon/AllPokemonPage.tsx";
-import Sidebar from "./components/Sidebar.tsx";
-import PokemonDetailsPage from "./pages/Pokemon/PokemonDetailsPage.tsx";
 import Navbar from "./components/Navbar.tsx";
+import Loader from "./components/Loader.tsx";
+
+const AllPokemonPage = lazy(() => import("./pages/Pokemon/AllPokemonPage.tsx"));
+const Sidebar = lazy(() => import("./components/Sidebar.tsx"));
+const PokemonDetailsPage = lazy(
+  () => import("./pages/Pokemon/PokemonDetailsPage.tsx"),
+);
 
 const router = createBrowserRouter([
   {
     index: true,
     element: <Navigate replace to="/pokemon" />,
   },
+
   {
     element: (
-      <>
-        <Navbar />
-        <Outlet />
-        <ScrollRestoration />
-      </>
+      <div className="h-screen">
+        <Suspense
+          fallback={
+            <Loader size={24}>
+              <p className="text-2xl font-bold mt-4">Loading...</p>
+            </Loader>
+          }
+        >
+          <Navbar />
+          <Outlet />
+          <ScrollRestoration />
+        </Suspense>
+      </div>
     ),
+
     children: [
       {
         path: "/pokemon",
@@ -33,6 +48,7 @@ const router = createBrowserRouter([
           </>
         ),
       },
+
       {
         path: "/pokemon/:name",
         element: <PokemonDetailsPage />,
