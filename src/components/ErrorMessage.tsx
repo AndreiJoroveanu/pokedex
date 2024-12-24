@@ -8,7 +8,7 @@ const ErrorMessage = ({ type }: ErrorMessageProps) => {
   const { clearFilters } = usePokemonStore();
 
   return (
-    <div className="lg:h-screen lg:-m-28 flex flex-col gap-4 justify-center items-center text-center">
+    <div className="lg:h-screen flex flex-col gap-4 justify-center items-center text-center">
       <h2 className="text-3xl font-bold">No {type} Found</h2>
 
       <p className="text-gray-700 mb-2">

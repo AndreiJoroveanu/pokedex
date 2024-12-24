@@ -6,8 +6,9 @@ import {
 } from "../../hooks/usePokemon.ts";
 import usePokemonStore from "../../store/usePokemonStore.ts";
 import ChangePageButtons from "../../components/ChangePageButtons.tsx";
-import ErrorMessage from "../../components/ErrorMessage.tsx";
 import PokemonList from "../../components/PokemonList.tsx";
+import Loader from "../../components/Loader.tsx";
+import ErrorMessage from "../../components/ErrorMessage.tsx";
 
 interface PokemonListType {
   id: number;
@@ -27,6 +28,8 @@ const AllPokemonPage = () => {
     useAllPokemonByGen(currentGen);
   const { data: filteredByType, isLoading: isLoadingPT /*, errorPT */ } =
     useAllPokemonByType(currentType);
+
+  const isLoading = isLoadingP || isLoadingPG || isLoadingPT;
 
   const pokemonPerPage = 20;
 
@@ -72,32 +75,38 @@ const AllPokemonPage = () => {
   }, [currentPage, pokemonList]);
 
   return (
-    <div className="relative pt-24">
+    <div className="relative lg:pt-24">
       <section className="lg:absolute right-0 w-full lg:w-4/5">
         <div className="p-4 flex flex-col items-center">
-          {noOfPages > 1 &&
-            // Display buttons if there is more than one page
-            ChangePageButtons({
-              currentPage,
-              setCurrentPage,
-              noOfPages,
-              noOfSideButtons: 3,
-            })}
+          {!isLoading ? (
+            <>
+              {noOfPages > 1 &&
+                // Display buttons if there is more than one page
+                ChangePageButtons({
+                  currentPage,
+                  setCurrentPage,
+                  noOfPages,
+                  noOfSideButtons: 3,
+                })}
 
-          {paginatedPokemon?.length &&
-          !isLoadingP &&
-          !isLoadingPG &&
-          !isLoadingPT ? (
-            <PokemonList paginatedPokemon={paginatedPokemon} />
-          ) : null}
-
-          {(isLoadingP || isLoadingPG || isLoadingPT) && (
-            <div className="h-screen w-full flex justify-center items-center">
-              <p className="text-2xl font-bold">Loading...</p>
+              {paginatedPokemon?.length ? (
+                <PokemonList paginatedPokemon={paginatedPokemon} />
+              ) : null}
+            </>
+          ) : (
+            <div className="fixed top-0 lg:-z-10 h-screen flex justify-center items-center bg-white w-full">
+              <Loader size={24}>
+                <p className="text-2xl font-bold mt-4">Loading...</p>
+              </Loader>
             </div>
           )}
 
-          {!pokemonList?.length && <ErrorMessage type="Pokémon" />}
+          {!pokemonList?.length &&
+            (currentGen || currentType || searchQuery) && (
+              <div className="lg:fixed top-0 lg:h-screen">
+                <ErrorMessage type="Pokémon" />
+              </div>
+            )}
         </div>
       </section>
     </div>

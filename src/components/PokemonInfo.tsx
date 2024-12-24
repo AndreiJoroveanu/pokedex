@@ -1,5 +1,6 @@
 import { usePokemon } from "../hooks/usePokemon.ts";
 import { Pokemon } from "pokedex-promise-v2";
+import Loader from "./Loader.tsx";
 
 interface PokemonInfoProps {
   pokemon: Pokemon;
@@ -12,7 +13,7 @@ const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
       <img
         src={pokemon.sprites.other.home.front_default?.toString()}
         alt={pokemon.name}
-        className="object-contain mx-auto"
+        className="object-contain mx-auto aspect-square text-transparent"
       />
 
       {/* Name */}
@@ -51,8 +52,24 @@ const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
 };
 
 const PokemonInfoFromLink = ({ name }: { name: string }) => {
-  const { data: pokemon /* isLoading, error */ } = usePokemon(name);
+  const { data: pokemon, isLoading /*, error */ } = usePokemon(name);
 
-  return <>{pokemon && <PokemonInfo pokemon={pokemon} />}</>;
+  return (
+    <>
+      {pokemon && !isLoading ? (
+        <PokemonInfo pokemon={pokemon} />
+      ) : (
+        <>
+          <div className="w-[512px] h-[512px] mx-auto">
+            <Loader size={24}>
+              <p className="text-2xl font-bold mt-4">Loading...</p>
+            </Loader>
+          </div>
+
+          <h1 className="capitalize text-2xl font-bold">{name}</h1>
+        </>
+      )}
+    </>
+  );
 };
 export { PokemonInfo, PokemonInfoFromLink };
