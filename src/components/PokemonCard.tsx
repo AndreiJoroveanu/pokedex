@@ -12,14 +12,14 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
 
   return (
     <Link to={`/pokemon/${name}`} state={{ pokemon }}>
-      <article className="relative border border-gray-200 rounded hover:bg-gray-50 shadow-lg hover:shadow-xl transition-shadow">
+      <article className="relative rounded border border-gray-200 shadow-lg transition-shadow hover:bg-gray-50 hover:shadow-xl">
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
           alt={name}
-          className="object-contain aspect-square w-full text-transparent"
+          className="aspect-square w-full object-contain text-transparent"
         />
         {!pokemon ? (
-          <div className="absolute bg-white top-0 w-full aspect-square">
+          <div className="absolute top-0 aspect-square w-full bg-white">
             <Loader size={8} />
           </div>
         ) : (
@@ -27,7 +27,7 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
         )}
 
         <div className="p-4">
-          <h1 className="capitalize text-xl font-bold text-nowrap">
+          <h1 className="text-nowrap text-xl font-bold capitalize">
             {id}. {name}
           </h1>
           <p className="text-nowrap">

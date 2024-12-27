@@ -21,12 +21,12 @@ const PokemonDetailsPage = () => {
 
   return (
     <>
-      <Button onClick={() => navigate(-1)} className="fixed mt-28 ml-4 px-4">
+      <Button onClick={() => navigate(-1)} className="fixed ml-4 mt-28 px-4">
         Back
       </Button>
 
-      <div className="p-4 pt-24 max-w-screen-md mx-auto">
-        <div className="p-4 my-4 border-2 border-gray-200 rounded-lg">
+      <div className="mx-auto max-w-screen-md p-4 pt-24">
+        <div className="my-4 rounded-lg border-2 border-gray-200 p-4">
           {/* List of Pokémon form buttons (if there is more than one form) */}
           {pokemonSpecies &&
             pokemonSpecies.varieties.length > 1 &&
@@ -34,7 +34,7 @@ const PokemonDetailsPage = () => {
               <Button
                 key={form.pokemon.name}
                 onClick={() => setCurrentForm(index)}
-                className="capitalize mr-2 px-4"
+                className="mr-2 px-4 capitalize"
               >
                 {form.pokemon.name.split("-").join(" ")}
               </Button>
@@ -53,7 +53,7 @@ const PokemonDetailsPage = () => {
           )}
         </div>
 
-        <div className="p-4 my-4 border-2 border-gray-200 rounded-lg">
+        <div className="my-4 rounded-lg border-2 border-gray-200 p-4">
           <p className="text-3xl font-bold">Pokémon Species</p>
           {pokemonSpecies && (
             <PokemonSpeciesInfo pokemonSpecies={pokemonSpecies} />

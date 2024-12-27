@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         <Suspense
           fallback={
             <Loader size={24}>
-              <p className="text-2xl font-bold mt-4">Loading...</p>
+              <p className="mt-4 text-2xl font-bold">Loading...</p>
             </Loader>
           }
         >

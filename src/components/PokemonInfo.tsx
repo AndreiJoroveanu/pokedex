@@ -13,11 +13,11 @@ const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
       <img
         src={pokemon.sprites.other.home.front_default?.toString()}
         alt={pokemon.name}
-        className="object-contain mx-auto aspect-square text-transparent"
+        className="mx-auto aspect-square object-contain text-transparent"
       />
 
       {/* Name */}
-      <h1 className="capitalize text-2xl font-bold">{pokemon.species.name}</h1>
+      <h1 className="text-2xl font-bold capitalize">{pokemon.species.name}</h1>
 
       {/* Types */}
       <p>
@@ -60,13 +60,13 @@ const PokemonInfoFromLink = ({ name }: { name: string }) => {
         <PokemonInfo pokemon={pokemon} />
       ) : (
         <>
-          <div className="w-[512px] h-[512px] mx-auto">
+          <div className="mx-auto h-[512px] w-[512px]">
             <Loader size={24}>
-              <p className="text-2xl font-bold mt-4">Loading...</p>
+              <p className="mt-4 text-2xl font-bold">Loading...</p>
             </Loader>
           </div>
 
-          <h1 className="capitalize text-2xl font-bold">{name}</h1>
+          <h1 className="text-2xl font-bold capitalize">{name}</h1>
         </>
       )}
     </>

@@ -35,7 +35,7 @@ const ChangePageButtons = ({
       <Button
         onClick={() => setCurrentPage(1)}
         disabled={currentPage === 1}
-        className="w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center disabled:opacity-25 disabled:cursor-not-allowed"
+        className="flex h-8 w-8 items-center justify-center disabled:cursor-not-allowed disabled:opacity-25 sm:h-12 sm:w-12"
       >
         <TfiControlSkipBackward />
       </Button>
@@ -46,20 +46,20 @@ const ChangePageButtons = ({
             key={page}
             onClick={() => setCurrentPage(page)}
             isSelected={page === currentPage}
-            className={`w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center ${page === currentPage && "cursor-default"}`}
+            className={`flex h-8 w-8 items-center justify-center sm:h-12 sm:w-12 ${page === currentPage && "cursor-default"}`}
           >
             {page}
           </Button>
         ) : (
           // Empty divs so that the rest of the buttons can remain centered
-          <div key={page} className="w-8 h-8 sm:w-12 sm:h-12" />
+          <div key={page} className="h-8 w-8 sm:h-12 sm:w-12" />
         ),
       )}
 
       <Button
         onClick={() => setCurrentPage(noOfPages)}
         disabled={currentPage === noOfPages}
-        className="w-8 h-8 sm:w-12 sm:h-12 flex justify-center items-center disabled:opacity-25 disabled:cursor-not-allowed"
+        className="flex h-8 w-8 items-center justify-center disabled:cursor-not-allowed disabled:opacity-25 sm:h-12 sm:w-12"
       >
         <TfiControlSkipForward />
       </Button>

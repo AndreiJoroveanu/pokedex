@@ -24,7 +24,7 @@ const PokemonSpeciesInfo = ({ pokemonSpecies }: PokemonSpeciesInfoProps) => {
           .filter((entry) => entry.language.name === "en")
           .map((entry) => (
             <li key={entry.version.name} className="border-y py-2">
-              <span className="capitalize font-bold">
+              <span className="font-bold capitalize">
                 {entry.version.name.split("-").join(" ")}:
               </span>{" "}
               {entry.flavor_text}

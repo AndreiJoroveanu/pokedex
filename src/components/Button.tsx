@@ -23,7 +23,7 @@ const Button = ({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`border py-2 rounded-full shadow-md enabled:hover:shadow-lg transition-shadow ${selectedStyle} ${className}`}
+      className={`rounded-full border py-2 shadow-md transition-shadow enabled:hover:shadow-lg ${selectedStyle} ${className}`}
     >
       {children}
     </button>

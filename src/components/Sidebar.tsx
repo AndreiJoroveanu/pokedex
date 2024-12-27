@@ -17,17 +17,17 @@ const Sidebar = () => {
   const { data: pokemonTypes /* isLoading, error */ } = usePokemonTypes();
 
   return (
-    <aside className="mt-24 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 overflow-y-scroll p-4 lg:border-r border-gray-200">
+    <aside className="mt-24 overflow-y-scroll border-gray-200 p-4 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:border-r">
       <input
         type="text"
         placeholder="Search by Pokémon name"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="w-full border py-2 rounded-full text-center shadow-md hover:shadow-lg focus:shadow-lg transition-shadow"
+        className="w-full rounded-full border py-2 text-center shadow-md transition-shadow hover:shadow-lg focus:shadow-lg"
       />
 
-      <h2 className="text-2xl font-bold my-2">Generation Filtering:</h2>
-      <div className="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
+      <h2 className="my-2 text-2xl font-bold">Generation Filtering:</h2>
+      <div className="grid grid-cols-3 gap-2 lg:grid-cols-2 xl:grid-cols-3">
         {pokemonGens?.map((gen) => (
           <Button
             key={gen.name}
@@ -43,8 +43,8 @@ const Sidebar = () => {
         ))}
       </div>
 
-      <h2 className="text-2xl font-bold my-2">Type Filtering:</h2>
-      <div className="grid grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-2">
+      <h2 className="my-2 text-2xl font-bold">Type Filtering:</h2>
+      <div className="grid grid-cols-3 gap-2 lg:grid-cols-2 xl:grid-cols-3">
         {pokemonTypes?.map((type) => (
           <Button
             key={type.name}
@@ -63,7 +63,7 @@ const Sidebar = () => {
         onClick={clearFilters}
         disabled={!currentGen && !currentType && !searchQuery}
         isSelected={true}
-        className="w-full my-4 disabled:opacity-25 disabled:cursor-not-allowed"
+        className="my-4 w-full disabled:cursor-not-allowed disabled:opacity-25"
       >
         Clear Filtering
       </Button>

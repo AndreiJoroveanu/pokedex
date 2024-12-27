@@ -76,8 +76,8 @@ const AllPokemonPage = () => {
 
   return (
     <div className="relative lg:pt-24">
-      <section className="lg:absolute right-0 w-full lg:w-4/5">
-        <div className="p-4 flex flex-col items-center">
+      <section className="right-0 w-full lg:absolute lg:w-4/5">
+        <div className="flex flex-col items-center p-4">
           {!isLoading ? (
             <>
               {noOfPages > 1 &&
@@ -94,16 +94,16 @@ const AllPokemonPage = () => {
               ) : null}
             </>
           ) : (
-            <div className="fixed top-0 lg:-z-10 h-screen flex justify-center items-center bg-white w-full">
+            <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-white lg:-z-10">
               <Loader size={24}>
-                <p className="text-2xl font-bold mt-4">Loading...</p>
+                <p className="mt-4 text-2xl font-bold">Loading...</p>
               </Loader>
             </div>
           )}
 
           {!pokemonList?.length &&
             (currentGen || currentType || searchQuery) && (
-              <div className="lg:fixed top-0 lg:h-screen">
+              <div className="top-0 lg:fixed lg:h-screen">
                 <ErrorMessage type="Pokémon" />
               </div>
             )}
