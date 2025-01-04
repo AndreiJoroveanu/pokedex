@@ -1,16 +1,16 @@
 import { useMemo } from "react";
 
-import { useUrl } from "../../hooks/useUrl.ts";
+import { useUrl } from "../hooks/useUrl.ts";
 import {
   useAllPokemonSpecies,
   useAllPokemonByGen,
   useAllPokemonByType,
-} from "../../hooks/usePokemon.ts";
+} from "../hooks/usePokemon.ts";
 
-import ChangePageButtons from "../../components/ChangePageButtons.tsx";
-import PokemonList from "../../components/PokemonList.tsx";
-import Loader from "../../components/Loader.tsx";
-import ErrorMessage from "../../components/ErrorMessage.tsx";
+import ChangePageButtons from "../components/ChangePageButtons.tsx";
+import PokemonList from "../components/PokemonList.tsx";
+import Loader from "../components/Loader.tsx";
+import ErrorMessage from "../components/ErrorMessage.tsx";
 
 interface PokemonListType {
   id: number;
@@ -19,7 +19,7 @@ interface PokemonListType {
 
 const pokemonPerPage = 20;
 
-const AllPokemonPage = () => {
+const AllPokemon = () => {
   // URL Params
   const { getUrl } = useUrl();
 
@@ -96,9 +96,7 @@ const AllPokemonPage = () => {
             </>
           ) : (
             <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-white lg:-z-10">
-              <Loader size={24}>
-                <p className="mt-4 text-2xl font-bold">Loading...</p>
-              </Loader>
+              <Loader size={24} displaysText={true} />
             </div>
           )}
 
@@ -113,4 +111,4 @@ const AllPokemonPage = () => {
     </div>
   );
 };
-export default AllPokemonPage;
+export default AllPokemon;

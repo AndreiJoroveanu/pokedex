@@ -1,19 +1,12 @@
 import { lazy, Suspense } from "react";
-import {
-  createBrowserRouter,
-  Navigate,
-  Outlet,
-  RouterProvider,
-  ScrollRestoration,
-} from "react-router";
-import Navbar from "./components/Navbar.tsx";
-import Loader from "./components/Loader.tsx";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
-const AllPokemonPage = lazy(() => import("./pages/Pokemon/AllPokemonPage.tsx"));
+import Loader from "./components/Loader.tsx";
+import AppLayout from "./ui/AppLayout.tsx";
+
+const AllPokemonPage = lazy(() => import("./pages/AllPokemon.tsx"));
 const Sidebar = lazy(() => import("./components/Sidebar.tsx"));
-const PokemonDetailsPage = lazy(
-  () => import("./pages/Pokemon/PokemonDetailsPage.tsx"),
-);
+const PokemonDetailsPage = lazy(() => import("./pages/PokemonDetails.tsx"));
 
 const router = createBrowserRouter([
   {
@@ -23,21 +16,16 @@ const router = createBrowserRouter([
 
   {
     element: (
-      <div className="h-screen">
-        <Suspense
-          fallback={
-            <Loader size={24}>
-              <p className="mt-4 text-2xl font-bold">Loading...</p>
-            </Loader>
-          }
-        >
-          <Navbar />
-          <Outlet />
-          <ScrollRestoration />
-        </Suspense>
-      </div>
+      <Suspense
+        fallback={
+          <div className="h-screen">
+            <Loader size={24} displaysText={true} />
+          </div>
+        }
+      >
+        <AppLayout />
+      </Suspense>
     ),
-
     children: [
       {
         path: "/pokemon",

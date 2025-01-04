@@ -15,7 +15,7 @@ const api = new Pokedex({
   timeout: 20 * 1000, // 20 seconds
 });
 
-const useData = <T>(fetcher: () => Promise<T>, cancel: boolean = false) => {
+const useData = <T>(fetcher: () => Promise<T> | undefined) => {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<unknown>(null);
@@ -24,14 +24,12 @@ const useData = <T>(fetcher: () => Promise<T>, cancel: boolean = false) => {
     let ignore = false;
 
     const fetchData = async () => {
-      if (cancel) return setData(null);
-
       try {
         setIsLoading(true);
         setError(null);
 
         const response = await fetcher();
-        if (!ignore) setData(response);
+        if (!ignore && response) setData(response);
         setError(null);
       } catch (error) {
         console.error(error);
@@ -46,14 +44,14 @@ const useData = <T>(fetcher: () => Promise<T>, cancel: boolean = false) => {
     return () => {
       ignore = true;
     };
-  }, [cancel, fetcher]);
+  }, [fetcher]);
 
   return { data, isLoading, error };
 };
 
-export const usePokemon = (identifier: string | number | undefined) => {
+export const usePokemon = (identifier: string | number) => {
   const fetcher = useCallback(
-    () => api.getResource(`/api/v2/pokemon/${identifier}`),
+    () => api.getPokemonByName(identifier),
     [identifier],
   );
   const { data, isLoading, error } = useData<Pokemon>(fetcher);
@@ -61,9 +59,9 @@ export const usePokemon = (identifier: string | number | undefined) => {
   return { data, isLoading, error };
 };
 
-export const usePokemonSpecies = (identifier: string | number | undefined) => {
+export const usePokemonSpecies = (identifier: string | number) => {
   const fetcher = useCallback(
-    () => api.getResource(`/api/v2/pokemon-species/${identifier}`),
+    () => api.getPokemonSpeciesByName(identifier),
     [identifier],
   );
   const { data, isLoading, error } = useData<PokemonSpecies>(fetcher);
@@ -121,51 +119,49 @@ export const useAllPokemonSpecies = () => {
 
 export const useAllPokemonByGen = (gen: string | undefined) => {
   const fetcher = useCallback(() => {
-    return gen
-      ? api.getGenerationByName(`generation-${gen}`)
-      : Promise.reject("No gen selected");
+    if (gen) return api.getGenerationByName(`generation-${gen}`);
   }, [gen]);
-  const { data, isLoading, error } = useData<Generation>(fetcher, !gen);
+  const { data, isLoading, error } = useData<Generation>(fetcher);
 
   const transformedData = useMemo(() => {
-    return (
-      data?.pokemon_species
-        .map((p) => ({
-          id: Number(
-            p.url
-              .split("https://pokeapi.co/api/v2/pokemon-species/")[1]
-              .split("/")[0],
-          ),
-          name: p.name,
-        }))
-        .filter((p) => p.id < 10000)
-        .sort((p1, p2) => p1.id - p2.id) || []
-    );
-  }, [data]);
+    return gen
+      ? data?.pokemon_species
+          .map((p) => ({
+            id: Number(
+              p.url
+                .split("https://pokeapi.co/api/v2/pokemon-species/")[1]
+                .split("/")[0],
+            ),
+            name: p.name,
+          }))
+          .filter((p) => p.id < 10000)
+          .sort((p1, p2) => p1.id - p2.id) || []
+      : [];
+  }, [data?.pokemon_species, gen]);
 
   return { data: transformedData, isLoading, error };
 };
 
 export const useAllPokemonByType = (type: string | undefined) => {
   const fetcher = useCallback(() => {
-    return type ? api.getTypeByName(type) : Promise.reject("No type selected");
+    if (type) return api.getTypeByName(type);
   }, [type]);
-  const { data, isLoading, error } = useData<Type>(fetcher, !type);
+  const { data, isLoading, error } = useData<Type>(fetcher);
 
   const transformedData = useMemo(() => {
-    return (
-      data?.pokemon
-        .map((p) => ({
-          id: Number(
-            p.pokemon.url
-              .split("https://pokeapi.co/api/v2/pokemon/")[1]
-              .split("/")[0],
-          ),
-          name: p.pokemon.name,
-        }))
-        .filter((p) => p.id < 10000) || []
-    );
-  }, [data]);
+    return type
+      ? data?.pokemon
+          .map((p) => ({
+            id: Number(
+              p.pokemon.url
+                .split("https://pokeapi.co/api/v2/pokemon/")[1]
+                .split("/")[0],
+            ),
+            name: p.pokemon.name,
+          }))
+          .filter((p) => p.id < 10000) || []
+      : [];
+  }, [data?.pokemon, type]);
 
   return { data: transformedData, isLoading, error };
 };

@@ -52,7 +52,7 @@ const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
 };
 
 const PokemonInfoFromLink = ({ name }: { name: string }) => {
-  const { data: pokemon, isLoading /*, error */ } = usePokemon(name);
+  const { data: pokemon, isLoading } = usePokemon(name);
 
   return (
     <>
@@ -61,9 +61,7 @@ const PokemonInfoFromLink = ({ name }: { name: string }) => {
       ) : (
         <>
           <div className="mx-auto h-[512px] w-[512px]">
-            <Loader size={24}>
-              <p className="mt-4 text-2xl font-bold">Loading...</p>
-            </Loader>
+            <Loader size={24} displaysText={true} />
           </div>
 
           <h1 className="text-2xl font-bold capitalize">{name}</h1>

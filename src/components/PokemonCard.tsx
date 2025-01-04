@@ -8,17 +8,21 @@ interface PokemonCardProps {
 }
 
 const PokemonCard = ({ id, name }: PokemonCardProps) => {
-  const { data: pokemon /* isLoading, error */ } = usePokemon(id);
+  const { data: pokemon, isLoading } = usePokemon(id);
 
   return (
     <Link to={`/pokemon/${name}`} state={{ pokemon }}>
       <article className="relative rounded border border-gray-200 shadow-lg transition-shadow hover:bg-gray-50 hover:shadow-xl">
+        {/* Gets the image from a raw link instead of waiting for */}
+        {/* the Pokémon object to download because it is faster */}
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
           alt={name}
           className="aspect-square w-full object-contain text-transparent"
         />
-        {!pokemon ? (
+
+        {/* Covers Pokémon image with the loader if the data hasn't loaded */}
+        {isLoading ? (
           <div className="absolute top-0 aspect-square w-full bg-white">
             <Loader size={8} />
           </div>
@@ -31,7 +35,7 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
             {id}. {name}
           </h1>
           <p className="text-nowrap">
-            {pokemon ? (
+            {!isLoading ? (
               <>
                 {pokemon?.types.length === 1 ? "Type: " : "Types: "}
                 {pokemon?.types.map((type) => (
