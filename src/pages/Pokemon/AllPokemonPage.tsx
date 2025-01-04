@@ -1,26 +1,29 @@
 import { useMemo } from "react";
+
+import { useUrl } from "../../hooks/useUrl.ts";
 import {
   useAllPokemonSpecies,
   useAllPokemonByGen,
   useAllPokemonByType,
 } from "../../hooks/usePokemon.ts";
-import usePokemonStore from "../../store/usePokemonStore.ts";
+
 import ChangePageButtons from "../../components/ChangePageButtons.tsx";
 import PokemonList from "../../components/PokemonList.tsx";
 import Loader from "../../components/Loader.tsx";
 import ErrorMessage from "../../components/ErrorMessage.tsx";
-import { useUrl } from "../../hooks/useUrl.ts";
 
 interface PokemonListType {
   id: number;
   name: string;
 }
 
-const AllPokemonPage = () => {
-  const { currentPage, setCurrentPage } = usePokemonStore();
+const pokemonPerPage = 20;
 
+const AllPokemonPage = () => {
+  // URL Params
   const { getUrl } = useUrl();
 
+  const currentPage = Number(getUrl("page")) || 1;
   const currentGen = getUrl("generation") ?? "";
   const currentType = getUrl("type") ?? "";
   const searchQuery = getUrl("q") ?? "";
@@ -36,8 +39,6 @@ const AllPokemonPage = () => {
     useAllPokemonByType(currentType);
 
   const isLoading = isLoadingP || isLoadingPG || isLoadingPT;
-
-  const pokemonPerPage = 20;
 
   // Pokémon filtering
   const filteredPokemon = useMemo(() => {
@@ -86,14 +87,8 @@ const AllPokemonPage = () => {
         <div className="flex flex-col items-center p-4">
           {!isLoading ? (
             <>
-              {noOfPages > 1 &&
-                // Display buttons if there is more than one page
-                ChangePageButtons({
-                  currentPage,
-                  setCurrentPage,
-                  noOfPages,
-                  noOfSideButtons: 3,
-                })}
+              {/* Display buttons if there is more than one page */}
+              <ChangePageButtons noOfPages={noOfPages} noOfSideButtons={3} />
 
               {paginatedPokemon?.length ? (
                 <PokemonList paginatedPokemon={paginatedPokemon} />

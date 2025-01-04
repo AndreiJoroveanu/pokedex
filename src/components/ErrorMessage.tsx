@@ -1,11 +1,11 @@
-import usePokemonStore from "../store/usePokemonStore.ts";
+import { useNavigate } from "react-router";
 
 interface ErrorMessageProps {
   type: string;
 }
 
 const ErrorMessage = ({ type }: ErrorMessageProps) => {
-  const { clearFilters } = usePokemonStore();
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 text-center lg:h-screen">
@@ -16,7 +16,7 @@ const ErrorMessage = ({ type }: ErrorMessageProps) => {
       </p>
 
       <button
-        onClick={clearFilters}
+        onClick={() => navigate("/pokemon")}
         className="w-full rounded-full border bg-black py-2 text-white shadow-md transition-shadow hover:shadow-lg"
       >
         Clear Filtering
