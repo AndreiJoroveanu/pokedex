@@ -1,6 +1,8 @@
 import { Link } from "react-router";
-import { usePokemon } from "../hooks/usePokemon.ts";
-import Loader from "./Loader.tsx";
+
+import { usePokemon } from "../../hooks/usePokemon.ts";
+
+import Loader from "../../ui/Loader.tsx";
 
 interface PokemonCardProps {
   id: number;

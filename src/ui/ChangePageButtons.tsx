@@ -1,6 +1,8 @@
 import { TfiControlSkipBackward, TfiControlSkipForward } from "react-icons/tfi";
-import Button from "./Button.tsx";
+
 import { useUrl } from "../hooks/useUrl.ts";
+
+import Button from "./Button.tsx";
 
 interface ChangePageButtonsProps {
   noOfPages: number;

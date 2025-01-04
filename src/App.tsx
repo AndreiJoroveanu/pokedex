@@ -1,11 +1,11 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
-import Loader from "./components/Loader.tsx";
+import Loader from "./ui/Loader.tsx";
 import AppLayout from "./ui/AppLayout.tsx";
 
+const Sidebar = lazy(() => import("./ui/Sidebar.tsx"));
 const AllPokemonPage = lazy(() => import("./pages/AllPokemon.tsx"));
-const Sidebar = lazy(() => import("./components/Sidebar.tsx"));
 const PokemonDetailsPage = lazy(() => import("./pages/PokemonDetails.tsx"));
 
 const router = createBrowserRouter([

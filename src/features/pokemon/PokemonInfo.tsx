@@ -1,6 +1,7 @@
-import { usePokemon } from "../hooks/usePokemon.ts";
+import { usePokemon } from "../../hooks/usePokemon.ts";
 import { Pokemon } from "pokedex-promise-v2";
-import Loader from "./Loader.tsx";
+
+import Loader from "../../ui/Loader.tsx";
 
 interface PokemonInfoProps {
   pokemon: Pokemon;

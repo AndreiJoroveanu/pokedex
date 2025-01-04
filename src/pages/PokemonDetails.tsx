@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
 import { Pokemon } from "pokedex-promise-v2";
+
 import { usePokemonSpecies } from "../hooks/usePokemon.ts";
-import Button from "../components/Button.tsx";
+
+import Button from "../ui/Button.tsx";
 import {
   PokemonInfo,
   PokemonInfoFromLink,
-} from "../components/PokemonInfo.tsx";
-import PokemonSpeciesInfo from "../components/PokemonSpeciesInfo.tsx";
+} from "../features/pokemon/PokemonInfo.tsx";
+import PokemonSpeciesInfo from "../features/pokemon/PokemonSpeciesInfo.tsx";
 
 const PokemonDetails = () => {
   const [currentForm, setCurrentForm] = useState<number>(0);

@@ -7,10 +7,10 @@ import {
   useAllPokemonByType,
 } from "../hooks/usePokemon.ts";
 
-import ChangePageButtons from "../components/ChangePageButtons.tsx";
-import PokemonList from "../components/PokemonList.tsx";
-import Loader from "../components/Loader.tsx";
-import ErrorMessage from "../components/ErrorMessage.tsx";
+import ChangePageButtons from "../ui/ChangePageButtons.tsx";
+import PokemonList from "../features/pokemon/PokemonList.tsx";
+import Loader from "../ui/Loader.tsx";
+import ErrorMessage from "../ui/ErrorMessage.tsx";
 
 interface PokemonListType {
   id: number;
