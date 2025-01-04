@@ -9,6 +9,7 @@ import ChangePageButtons from "../../components/ChangePageButtons.tsx";
 import PokemonList from "../../components/PokemonList.tsx";
 import Loader from "../../components/Loader.tsx";
 import ErrorMessage from "../../components/ErrorMessage.tsx";
+import { useUrl } from "../../hooks/useUrl.ts";
 
 interface PokemonListType {
   id: number;
@@ -16,8 +17,13 @@ interface PokemonListType {
 }
 
 const AllPokemonPage = () => {
-  const { currentPage, setCurrentPage, currentGen, currentType, searchQuery } =
-    usePokemonStore();
+  const { currentPage, setCurrentPage } = usePokemonStore();
+
+  const { getUrl } = useUrl();
+
+  const currentGen = getUrl("generation") ?? "";
+  const currentType = getUrl("type") ?? "";
+  const searchQuery = getUrl("q") ?? "";
 
   // All Pokémon
   const { data: allPokemon, isLoading: isLoadingP /*, errorP */ } =

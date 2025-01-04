@@ -122,7 +122,7 @@ export const useAllPokemonSpecies = () => {
 export const useAllPokemonByGen = (gen: string | undefined) => {
   const fetcher = useCallback(() => {
     return gen
-      ? api.getGenerationByName(gen)
+      ? api.getGenerationByName(`generation-${gen}`)
       : Promise.reject("No gen selected");
   }, [gen]);
   const { data, isLoading, error } = useData<Generation>(fetcher, !gen);
@@ -138,7 +138,8 @@ export const useAllPokemonByGen = (gen: string | undefined) => {
           ),
           name: p.name,
         }))
-        .filter((p) => p.id < 10000) || []
+        .filter((p) => p.id < 10000)
+        .sort((p1, p2) => p1.id - p2.id) || []
     );
   }, [data]);
 
