@@ -1,11 +1,7 @@
 import { useMemo } from "react";
 
+import { useFilteredPokemon } from "../hooks/useFilteredPokemon.tsx";
 import { useUrl } from "../hooks/useUrl.ts";
-import {
-  useAllPokemonSpecies,
-  useAllPokemonByGen,
-  useAllPokemonByType,
-} from "../hooks/usePokemon.ts";
 
 import ChangePageButtons from "../ui/ChangePageButtons.tsx";
 import PokemonList from "../features/pokemon/PokemonList.tsx";
@@ -20,55 +16,11 @@ interface PokemonListType {
 const pokemonPerPage = 20;
 
 const AllPokemon = () => {
-  // URL Params
   const { getUrl } = useUrl();
+  const { pokemonList, isLoading, isFiltered } = useFilteredPokemon();
 
+  // URL Params
   const currentPage = Number(getUrl("page")) || 1;
-  const currentGen = getUrl("generation") ?? "";
-  const currentType = getUrl("type") ?? "";
-  const searchQuery = getUrl("q") ?? "";
-
-  // All Pokémon
-  const { data: allPokemon, isLoading: isLoadingP /*, errorP */ } =
-    useAllPokemonSpecies();
-
-  // Pokémon filtered by gen/type
-  const { data: filteredByGen, isLoading: isLoadingPG /*, errorPG */ } =
-    useAllPokemonByGen(currentGen);
-  const { data: filteredByType, isLoading: isLoadingPT /*, errorPT */ } =
-    useAllPokemonByType(currentType);
-
-  const isLoading = isLoadingP || isLoadingPG || isLoadingPT;
-
-  // Pokémon filtering
-  const filteredPokemon = useMemo(() => {
-    if (!allPokemon) return;
-
-    // If there is a gen and a type selected
-    if (filteredByGen?.length && filteredByType?.length)
-      return [...filteredByGen].filter((pg) =>
-        new Set(filteredByType.map((pt) => pt.id)).has(pg.id),
-      );
-    // If there is a gen selected
-    else if (filteredByGen?.length) return [...filteredByGen];
-    // If there is a type selected (still need to filter because
-    // the filteredByType doesn't return Pokémon species)
-    else if (filteredByType?.length)
-      return allPokemon.filter((ap) =>
-        new Set(filteredByType.map((pt) => pt.id)).has(ap.id),
-      );
-    // No filtering
-    else return [...allPokemon];
-  }, [allPokemon, filteredByGen, filteredByType]);
-
-  // Displayed Pokémon (after search query filtering, if needed)
-  const pokemonList = useMemo<PokemonListType[] | undefined>(() => {
-    return searchQuery.trim().length
-      ? filteredPokemon?.filter((p) =>
-          p.name.toLowerCase().includes(searchQuery.toLowerCase().trim()),
-        )
-      : filteredPokemon;
-  }, [filteredPokemon, searchQuery]);
 
   const noOfPokemon = pokemonList?.length || 0;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage);
@@ -91,7 +43,7 @@ const AllPokemon = () => {
               <ChangePageButtons noOfPages={noOfPages} noOfSideButtons={3} />
 
               {paginatedPokemon?.length ? (
-                <PokemonList paginatedPokemon={paginatedPokemon} />
+                <PokemonList pokemonList={paginatedPokemon} />
               ) : null}
             </>
           ) : (
@@ -100,12 +52,11 @@ const AllPokemon = () => {
             </div>
           )}
 
-          {!pokemonList?.length &&
-            (currentGen || currentType || searchQuery) && (
-              <div className="top-0 lg:fixed lg:h-screen">
-                <ErrorMessage type="Pokémon" />
-              </div>
-            )}
+          {!pokemonList?.length && isFiltered && (
+            <div className="top-0 lg:fixed lg:h-screen">
+              <ErrorMessage type="Pokémon" />
+            </div>
+          )}
         </div>
       </section>
     </div>
