@@ -15,7 +15,7 @@ const Sidebar = () => {
   const { getUrl } = useUrl();
 
   return (
-    <aside className="mt-24 overflow-y-scroll border-gray-200 p-4 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:border-r">
+    <aside className="p-4 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:overflow-y-scroll lg:border-r lg:border-slate-400 dark:lg:border-slate-600">
       <SidebarSearch />
 
       {pokemonGens && (

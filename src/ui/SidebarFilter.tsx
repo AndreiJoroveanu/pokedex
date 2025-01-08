@@ -14,6 +14,7 @@ const SidebarFilter = ({ name, values, renderLabel }: SidebarFilterProps) => {
   return (
     <>
       <h2 className="my-2 text-2xl font-bold capitalize">{name} Filtering:</h2>
+
       <div className="grid grid-cols-3 gap-2 lg:grid-cols-2 xl:grid-cols-3">
         {values?.map((item) => (
           <Button

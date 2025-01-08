@@ -4,7 +4,6 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 import Loader from "./ui/Loader.tsx";
 import AppLayout from "./ui/AppLayout.tsx";
 
-const Sidebar = lazy(() => import("./ui/Sidebar.tsx"));
 const AllPokemonPage = lazy(() => import("./pages/AllPokemon.tsx"));
 const PokemonDetailsPage = lazy(() => import("./pages/PokemonDetails.tsx"));
 
@@ -18,7 +17,7 @@ const router = createBrowserRouter([
     element: (
       <Suspense
         fallback={
-          <div className="h-screen">
+          <div className="h-screen bg-slate-100 dark:bg-slate-800">
             <Loader size={24} displaysText={true} />
           </div>
         }
@@ -29,12 +28,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/pokemon",
-        element: (
-          <>
-            <Sidebar />
-            <AllPokemonPage />
-          </>
-        ),
+        element: <AllPokemonPage />,
       },
 
       {

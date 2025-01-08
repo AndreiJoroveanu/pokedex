@@ -28,7 +28,7 @@ const PokemonDetails = () => {
       </Button>
 
       <div className="mx-auto max-w-screen-md p-4 pt-24">
-        <div className="my-4 rounded-lg border-2 border-gray-200 p-4">
+        <div className="my-4 rounded-lg border-2 border-slate-400/40 bg-slate-100 p-4 dark:bg-slate-800">
           {/* List of Pokémon form buttons (if there is more than one) */}
           {pokemonSpecies &&
             pokemonSpecies.varieties.length > 1 &&
@@ -56,7 +56,7 @@ const PokemonDetails = () => {
           )}
         </div>
 
-        <div className="my-4 rounded-lg border-2 border-gray-200 p-4">
+        <div className="my-4 rounded-lg border-2 border-slate-400/40 bg-slate-100 p-4 dark:bg-slate-800">
           <h2 className="text-3xl font-bold">Pokémon Species</h2>
           {pokemonSpecies && (
             <PokemonSpeciesInfo pokemonSpecies={pokemonSpecies} />

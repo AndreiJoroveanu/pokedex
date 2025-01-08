@@ -16,19 +16,19 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
 
   return (
     <Link to={`/pokemon/${name}`} state={{ pokemon }}>
-      <article className="relative rounded border border-gray-200 shadow-lg transition-shadow hover:bg-gray-50 hover:shadow-xl">
+      <article className="relative rounded border border-slate-400/40 bg-slate-100 shadow-lg transition-shadow hover:bg-slate-400/20 hover:shadow-xl dark:bg-slate-800">
         {/* Gets the image from a raw link instead of waiting for */}
         {/* the Pokémon object to download because it is faster */}
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
           alt={name}
           onLoad={() => setIsLoadingImage(false)}
-          className="aspect-square w-full object-contain text-transparent"
+          className="aspect-square w-full object-contain text-transparent dark:brightness-90"
         />
 
         {/* Covers Pokémon image with the loader if the data hasn't loaded */}
         {isLoadingImage ? (
-          <div className="absolute top-0 aspect-square w-full bg-white">
+          <div className="absolute top-0 aspect-square w-full bg-slate-100 dark:bg-slate-800">
             <Loader size={8} />
           </div>
         ) : (

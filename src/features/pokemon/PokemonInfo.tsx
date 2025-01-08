@@ -13,7 +13,7 @@ const PokemonInfo = ({ pokemon }: PokemonInfoProps) => (
     <img
       src={pokemon.sprites.other.home.front_default?.toString()}
       alt={pokemon.name}
-      className="mx-auto aspect-square object-contain text-transparent"
+      className="mx-auto aspect-square object-contain text-transparent dark:brightness-90"
     />
 
     {/* Name */}
