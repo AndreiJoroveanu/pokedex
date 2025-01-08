@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router";
 
 import { usePokemon } from "../../hooks/usePokemon.ts";
@@ -10,7 +11,8 @@ interface PokemonCardProps {
 }
 
 const PokemonCard = ({ id, name }: PokemonCardProps) => {
-  const { data: pokemon, isLoading } = usePokemon(id);
+  const { data: pokemon } = usePokemon(id);
+  const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   return (
     <Link to={`/pokemon/${name}`} state={{ pokemon }}>
@@ -20,11 +22,12 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
           alt={name}
+          onLoad={() => setIsLoadingImage(false)}
           className="aspect-square w-full object-contain text-transparent"
         />
 
         {/* Covers Pokémon image with the loader if the data hasn't loaded */}
-        {isLoading ? (
+        {isLoadingImage ? (
           <div className="absolute top-0 aspect-square w-full bg-white">
             <Loader size={8} />
           </div>
@@ -37,7 +40,7 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
             {id}. {name}
           </h1>
           <p className="text-nowrap">
-            {!isLoading ? (
+            {pokemon ? (
               <>
                 {pokemon?.types.length === 1 ? "Type: " : "Types: "}
                 {pokemon?.types.map((type) => (
