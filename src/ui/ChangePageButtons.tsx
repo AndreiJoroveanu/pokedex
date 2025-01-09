@@ -1,4 +1,7 @@
-import { TfiControlSkipBackward, TfiControlSkipForward } from "react-icons/tfi";
+import {
+  HiMiniChevronDoubleLeft,
+  HiMiniChevronDoubleRight,
+} from "react-icons/hi2";
 
 import { useUrl } from "../hooks/useUrl.ts";
 
@@ -40,9 +43,9 @@ const ChangePageButtons = ({
         <Button
           onClick={() => setCurrentPage(1)}
           disabled={currentPage === 1}
-          className="flex h-8 w-8 items-center justify-center disabled:cursor-not-allowed disabled:opacity-25 sm:h-12 sm:w-12"
+          className="flex h-8 w-8 items-center justify-center rounded-full disabled:cursor-not-allowed disabled:opacity-25 sm:h-12 sm:w-12"
         >
-          <TfiControlSkipBackward />
+          <HiMiniChevronDoubleLeft size={20} />
         </Button>
 
         {getPaginationButtons().map((page) =>
@@ -50,9 +53,9 @@ const ChangePageButtons = ({
             <Button
               key={page}
               onClick={() => setCurrentPage(page)}
-              isSelected={page === currentPage}
               disabled={page === currentPage}
-              className="flex h-8 w-8 items-center justify-center disabled:cursor-default sm:h-12 sm:w-12"
+              isSelected={page === currentPage}
+              className="flex h-8 w-8 items-center justify-center rounded-full disabled:cursor-default sm:h-12 sm:w-12"
             >
               {page}
             </Button>
@@ -65,9 +68,9 @@ const ChangePageButtons = ({
         <Button
           onClick={() => setCurrentPage(noOfPages)}
           disabled={currentPage === noOfPages}
-          className="flex h-8 w-8 items-center justify-center disabled:cursor-not-allowed disabled:opacity-25 sm:h-12 sm:w-12"
+          className="flex h-8 w-8 items-center justify-center rounded-full disabled:cursor-not-allowed disabled:opacity-25 sm:h-12 sm:w-12"
         >
-          <TfiControlSkipForward />
+          <HiMiniChevronDoubleRight size={20} />
         </Button>
       </div>
     );

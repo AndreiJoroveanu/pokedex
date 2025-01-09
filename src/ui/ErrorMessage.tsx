@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import Button from "./Button.tsx";
 
 interface ErrorMessageProps {
   type: string;
@@ -11,16 +12,17 @@ const ErrorMessage = ({ type }: ErrorMessageProps) => {
     <div className="flex flex-col items-center justify-center gap-4 text-center lg:h-screen">
       <h2 className="text-3xl font-bold">No {type} Found</h2>
 
-      <p className="mb-2 text-gray-700">
+      <p className="mb-2 font-semibold text-slate-600 dark:text-slate-400">
         Try other filtering options or another search query
       </p>
 
-      <button
+      <Button
         onClick={() => navigate("/pokemon")}
-        className="w-full rounded-full border bg-black py-2 text-white shadow-md transition-shadow hover:shadow-lg"
+        isSelected={true}
+        className="w-full"
       >
         Clear Filtering
-      </button>
+      </Button>
     </div>
   );
 };

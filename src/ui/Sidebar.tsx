@@ -37,7 +37,9 @@ const Sidebar = () => {
       <Button
         onClick={() => navigate("/pokemon")}
         disabled={!getUrl("generation") && !getUrl("type") && !getUrl("q")}
-        isSelected={true}
+        isSelected={Boolean(
+          getUrl("generation") || getUrl("type") || getUrl("q"),
+        )}
         className="my-4 w-full disabled:cursor-not-allowed disabled:opacity-25"
       >
         Clear Filtering
