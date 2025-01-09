@@ -3,7 +3,7 @@ import { useLocation, useParams } from "react-router";
 import { HiMiniArrowUturnLeft } from "react-icons/hi2";
 import { Pokemon } from "pokedex-promise-v2";
 
-import { useMoveBack } from "../hooks/useMoveBack.tsx";
+import { useMoveBack } from "../hooks/useMoveBack.ts";
 import { usePokemonSpecies } from "../hooks/usePokemon.ts";
 
 import Button from "../ui/Button.tsx";

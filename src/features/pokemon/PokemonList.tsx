@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
-import { useFilteredPokemon } from "../../hooks/useFilteredPokemon.tsx";
+import { useAllPokemonSpecies } from "../../hooks/usePokemon.ts";
+import { useFilteredPokemon } from "../../hooks/useFilteredPokemon.ts";
 import { useUrl } from "../../hooks/useUrl.ts";
 
 import ChangePageButtons from "../../ui/ChangePageButtons.tsx";
@@ -16,8 +17,11 @@ interface PokemonListType {
 const pokemonPerPage = 20;
 
 const AllPokemon = () => {
+  // All Pokémon
+  const { data: allPokemon, isLoading: isLoadingAP } = useAllPokemonSpecies();
+
   const { getUrl } = useUrl();
-  const { pokemonList, isLoading, isFiltered } = useFilteredPokemon();
+  const { pokemonList, isLoading, isFiltered } = useFilteredPokemon(allPokemon);
 
   // URL Params
   const currentPage = Number(getUrl("page")) || 1;
@@ -36,7 +40,7 @@ const AllPokemon = () => {
   return (
     <section className="right-0 w-full lg:absolute lg:w-4/5">
       <div className="flex flex-col items-center p-4">
-        {!isLoading ? (
+        {!isLoadingAP && !isLoading ? (
           <>
             {/* Display buttons if there is more than one page */}
             <ChangePageButtons noOfPages={noOfPages} noOfSideButtons={3} />

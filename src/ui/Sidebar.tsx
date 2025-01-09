@@ -40,7 +40,7 @@ const Sidebar = () => {
         isSelected={Boolean(
           getUrl("generation") || getUrl("type") || getUrl("q"),
         )}
-        className="my-4 w-full disabled:cursor-not-allowed disabled:opacity-25"
+        className="my-4 w-full enabled:py-[9.5px] disabled:cursor-not-allowed disabled:opacity-25"
       >
         Clear Filtering
       </Button>

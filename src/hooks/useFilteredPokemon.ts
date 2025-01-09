@@ -1,45 +1,40 @@
 import { useMemo } from "react";
 
 import { useUrl } from "./useUrl.ts";
-import {
-  useAllPokemonByGen,
-  useAllPokemonByType,
-  useAllPokemonSpecies,
-} from "./usePokemon.ts";
+import { useAllPokemonByGen, useAllPokemonByType } from "./usePokemon.ts";
 
 interface PokemonListType {
   id: number;
   name: string;
 }
 
-export const useFilteredPokemon = () => {
-  // URL Params
+export const useFilteredPokemon = (
+  allPokemon: PokemonListType[] | undefined,
+) => {
+  // Get the URL Params
   const { getUrl } = useUrl();
-
   const currentGen = getUrl("generation") ?? "";
   const currentType = getUrl("type") ?? "";
   const searchQuery = getUrl("q") ?? "";
 
-  // All Pokémon
-  const { data: allPokemon, isLoading: isLoadingAP } = useAllPokemonSpecies();
-
-  // Pokémon filtered by gen/type
-  const { data: filteredByGen, isLoading: isLoadingPG } =
+  // Fetch Pokémon filtered by gen/type
+  const { data: filteredByGen, isLoading: isLoadingFG } =
     useAllPokemonByGen(currentGen);
-  const { data: filteredByType, isLoading: isLoadingPT } =
+  const { data: filteredByType, isLoading: isLoadingFT } =
     useAllPokemonByType(currentType);
 
   // Pokémon filtering
   const filteredPokemon = useMemo(() => {
+    // Abort if the all Pokémon list hasn't fetched yet
     if (!allPokemon) return;
 
     // If there is a gen and a type selected
     if (filteredByGen?.length && filteredByType?.length)
-      return [...filteredByGen].filter((pg) =>
+      return filteredByGen.filter((pg) =>
         new Set(filteredByType.map((pt) => pt.id)).has(pg.id),
       );
     // If there is a gen selected
-    else if (filteredByGen?.length) return [...filteredByGen];
+    else if (filteredByGen?.length) return filteredByGen;
     // If there is a type selected (still need to filter because
     // the filteredByType doesn't return Pokémon species)
     else if (filteredByType?.length)
@@ -47,7 +42,7 @@ export const useFilteredPokemon = () => {
         new Set(filteredByType.map((pt) => pt.id)).has(ap.id),
       );
     // No filtering
-    else return [...allPokemon];
+    else return allPokemon;
   }, [allPokemon, filteredByGen, filteredByType]);
 
   // Displayed Pokémon (after search query filtering, if needed)
@@ -61,7 +56,7 @@ export const useFilteredPokemon = () => {
 
   return {
     pokemonList: searchedPokemon,
-    isLoading: isLoadingAP || isLoadingPG || isLoadingPT,
+    isLoading: isLoadingFG || isLoadingFT,
     isFiltered: Boolean(currentGen || currentType || searchQuery),
   };
 };

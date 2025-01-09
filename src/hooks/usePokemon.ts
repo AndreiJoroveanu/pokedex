@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Pokedex, {
-  APIResourceList,
   Generation,
+  NamedAPIResourceList,
   Pokemon,
   PokemonSpecies,
   Type,
@@ -71,14 +71,14 @@ export const usePokemonSpecies = (identifier: string | number) => {
 
 export const usePokemonGens = () => {
   const fetcher = useCallback(() => api.getGenerationsList(), []);
-  const { data, isLoading, error } = useData<APIResourceList>(fetcher);
+  const { data, isLoading, error } = useData<NamedAPIResourceList>(fetcher);
 
   return { data: data?.results, isLoading, error };
 };
 
 export const usePokemonTypes = () => {
   const fetcher = useCallback(() => api.getTypesList({ limit: 18 }), []);
-  const { data, isLoading, error } = useData<APIResourceList>(fetcher);
+  const { data, isLoading, error } = useData<NamedAPIResourceList>(fetcher);
 
   return { data: data?.results, isLoading, error };
 };
@@ -101,7 +101,7 @@ export const usePokemonTypes = () => {
 
 export const useAllPokemonSpecies = () => {
   const fetcher = useCallback(() => api.getPokemonSpeciesList(), []);
-  const { data, isLoading, error } = useData<APIResourceList>(fetcher);
+  const { data, isLoading, error } = useData<NamedAPIResourceList>(fetcher);
 
   const transformedData = useMemo(() => {
     return data?.results.map((p) => ({
