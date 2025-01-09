@@ -15,6 +15,7 @@ const ChangePageButtons = ({
 }: ChangePageButtonsProps) => {
   const { getUrl, setUrl } = useUrl();
   const currentPage = Number(getUrl("page")) || 1;
+
   const setCurrentPage = (page: number) => setUrl("page", page.toString());
 
   const getPaginationButtons = () => {
@@ -50,7 +51,8 @@ const ChangePageButtons = ({
               key={page}
               onClick={() => setCurrentPage(page)}
               isSelected={page === currentPage}
-              className={`flex h-8 w-8 items-center justify-center sm:h-12 sm:w-12 ${page === currentPage && "cursor-default"}`}
+              disabled={page === currentPage}
+              className="flex h-8 w-8 items-center justify-center disabled:cursor-default sm:h-12 sm:w-12"
             >
               {page}
             </Button>

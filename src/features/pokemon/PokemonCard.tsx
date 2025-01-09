@@ -39,7 +39,7 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
           <h1 className="text-nowrap text-xl font-bold capitalize">
             {id}. {name}
           </h1>
-          <p className="text-nowrap">
+          <p className="text-nowrap font-semibold text-slate-500 dark:text-slate-400">
             {pokemon ? (
               <>
                 {pokemon?.types.length === 1 ? "Type: " : "Types: "}

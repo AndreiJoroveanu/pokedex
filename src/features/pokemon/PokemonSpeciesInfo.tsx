@@ -14,7 +14,7 @@ const PokemonSpeciesInfo = ({ pokemonSpecies }: PokemonSpeciesInfoProps) => (
     <p className="my-2">Dex entries:</p>
 
     {/* All english Dex descriptions */}
-    <ul className="divide-y-2">
+    <ul className="divide-y-2 divide-slate-400/40">
       {pokemonSpecies.flavor_text_entries
         .filter((entry) => entry.language.name === "en")
         .map((entry) => (

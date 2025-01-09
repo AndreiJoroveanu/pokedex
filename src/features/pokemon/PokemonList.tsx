@@ -54,7 +54,7 @@ const AllPokemon = () => {
             ) : null}
           </>
         ) : (
-          <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-100 lg:-z-10 dark:bg-slate-800">
+          <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-50 lg:-z-10 dark:bg-slate-900">
             <Loader size={24} displaysText={true} />
           </div>
         )}
