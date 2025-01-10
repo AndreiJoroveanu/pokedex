@@ -18,6 +18,7 @@ const PokemonSpeciesInfo = ({ pokemonSpecies }: PokemonSpeciesInfoProps) => (
       {pokemonSpecies.flavor_text_entries
         .filter((entry) => entry.language.name === "en")
         .map((entry) => (
+          // TS: Currently pokedex-promise-v2 has a bug with their typing interface
           <li key={entry.version.name} className="py-2">
             <span className="font-bold capitalize">
               {`${entry.version.name.split("-").join(" ")}: `}

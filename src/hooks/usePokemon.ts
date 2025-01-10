@@ -125,7 +125,7 @@ export const useAllPokemonByGen = (gen: string | undefined) => {
 
   const transformedData = useMemo(() => {
     return gen
-      ? data?.pokemon_species
+      ? (data?.pokemon_species
           .map((p) => ({
             id: Number(
               p.url
@@ -135,7 +135,7 @@ export const useAllPokemonByGen = (gen: string | undefined) => {
             name: p.name,
           }))
           .filter((p) => p.id < 10000)
-          .sort((p1, p2) => p1.id - p2.id) || []
+          .sort((p1, p2) => p1.id - p2.id) ?? [])
       : [];
   }, [data?.pokemon_species, gen]);
 
@@ -150,7 +150,7 @@ export const useAllPokemonByType = (type: string | undefined) => {
 
   const transformedData = useMemo(() => {
     return type
-      ? data?.pokemon
+      ? (data?.pokemon
           .map((p) => ({
             id: Number(
               p.pokemon.url
@@ -159,7 +159,7 @@ export const useAllPokemonByType = (type: string | undefined) => {
             ),
             name: p.pokemon.name,
           }))
-          .filter((p) => p.id < 10000) || []
+          .filter((p) => p.id < 10000) ?? [])
       : [];
   }, [data?.pokemon, type]);
 

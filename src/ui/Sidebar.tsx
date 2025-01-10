@@ -35,10 +35,10 @@ const Sidebar = () => {
       )}
 
       <Button
-        onClick={() => navigate("/pokemon")}
+        onClick={() => void navigate("/pokemon")}
         disabled={!getUrl("generation") && !getUrl("type") && !getUrl("q")}
         isSelected={Boolean(
-          getUrl("generation") || getUrl("type") || getUrl("q"),
+          getUrl("generation") ?? getUrl("type") ?? getUrl("q"),
         )}
         className="my-4 w-full enabled:py-[9.5px] disabled:cursor-not-allowed disabled:opacity-25"
       >

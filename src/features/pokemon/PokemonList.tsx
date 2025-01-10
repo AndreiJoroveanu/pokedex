@@ -26,7 +26,7 @@ const AllPokemon = () => {
   // URL Params
   const currentPage = Number(getUrl("page")) || 1;
 
-  const noOfPokemon = pokemonList?.length || 0;
+  const noOfPokemon = pokemonList?.length ?? 0;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage);
 
   // Get the Pokémon from the current page to display

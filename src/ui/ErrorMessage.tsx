@@ -17,7 +17,7 @@ const ErrorMessage = ({ type }: ErrorMessageProps) => {
       </p>
 
       <Button
-        onClick={() => navigate("/pokemon")}
+        onClick={() => void navigate("/pokemon")}
         isSelected={true}
         className="w-full"
       >

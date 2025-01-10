@@ -16,7 +16,8 @@ import PokemonSpeciesInfo from "../features/pokemon/PokemonSpeciesInfo.tsx";
 const PokemonDetails = () => {
   const [currentForm, setCurrentForm] = useState<number>(0);
 
-  const pokemon: Pokemon = useLocation().state?.pokemon;
+  // TS: state property from useLocation() hook doesn't have a specific typee
+  const { pokemon }: { pokemon: Pokemon } = useLocation().state;
   const { name } = useParams() as { name: string };
 
   const moveBack = useMoveBack();
@@ -60,7 +61,7 @@ const PokemonDetails = () => {
             // If the user inputted the link manually, or they changed the form,
             // fetch the data from the parameter link
             <PokemonInfoFromLink
-              name={pokemonSpecies?.varieties[currentForm].pokemon.name || name}
+              name={pokemonSpecies?.varieties[currentForm].pokemon.name ?? name}
             />
           )}
         </div>

@@ -2,5 +2,5 @@ import { useNavigate } from "react-router";
 
 export const useMoveBack = () => {
   const navigate = useNavigate();
-  return () => navigate(-1);
+  return () => void navigate(-1);
 };
