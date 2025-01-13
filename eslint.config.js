@@ -23,7 +23,7 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    settings: { react: { version: "19.0" } },
+    settings: { react: { version: "detect" } },
     plugins: {
       react,
       "react-hooks": reactHooks,

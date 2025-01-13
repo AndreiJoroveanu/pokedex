@@ -1,5 +1,7 @@
-import { usePokemon } from "../../hooks/usePokemon.ts";
+import { Fragment } from "react";
 import { Pokemon } from "pokedex-promise-v2";
+
+import { usePokemon } from "../../hooks/usePokemon.ts";
 
 import Loader from "../../ui/Loader.tsx";
 
@@ -40,14 +42,32 @@ const PokemonInfo = ({ pokemon }: PokemonInfoProps) => (
     </p>
 
     {/* Stats */}
-    <p>Stats:</p>
-    <ul>
+    <h2 className="mb-1 text-lg font-semibold">Base Stats:</h2>
+
+    <div className="grid max-w-lg grid-cols-[auto_auto_1fr] gap-2 rounded-lg bg-slate-200 p-4 pb-2 shadow-lg dark:bg-slate-700">
       {pokemon.stats.map((stat) => (
-        <li key={stat.stat.name} className="capitalize">
-          {stat.stat.name.split("-").join(" ")}: {stat.base_stat}
-        </li>
+        <Fragment key={stat.stat.name}>
+          <h3 className="font-semibold capitalize">
+            {stat.stat.name.split("-").join(" ")}:
+          </h3>
+
+          <p className="text-end">{stat.base_stat}</p>
+
+          <div className="my-auto h-3/4 w-full rounded bg-green-200">
+            <div
+              style={{ width: `calc(100% * ${stat.base_stat} / 255)` }}
+              className="h-full rounded bg-green-400"
+            />
+          </div>
+        </Fragment>
       ))}
-    </ul>
+
+      <h3 className="font-semibold">
+        {`Base Stat Total: ${pokemon.stats
+          .map((stat) => stat.base_stat)
+          .reduce((acc, cur) => acc + cur, 0)}`}
+      </h3>
+    </div>
   </>
 );
 

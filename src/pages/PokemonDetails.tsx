@@ -16,7 +16,7 @@ import PokemonSpeciesInfo from "../features/pokemon/PokemonSpeciesInfo.tsx";
 const PokemonDetails = () => {
   const [currentForm, setCurrentForm] = useState<number>(0);
 
-  // TS: state property from useLocation() hook doesn't have a specific typee
+  // TS: state property from useLocation() hook doesn't have a specific type
   const { pokemon }: { pokemon: Pokemon } = useLocation().state;
   const { name } = useParams() as { name: string };
 

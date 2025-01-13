@@ -23,7 +23,7 @@ const useData = <T>(fetcher: () => Promise<T> | undefined) => {
   useEffect(() => {
     let ignore = false;
 
-    const fetchData = async () => {
+    void (async () => {
       try {
         setIsLoading(true);
         setError(null);
@@ -37,9 +37,7 @@ const useData = <T>(fetcher: () => Promise<T> | undefined) => {
       } finally {
         setIsLoading(false);
       }
-    };
-
-    void fetchData();
+    })();
 
     return () => {
       ignore = true;
