@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { useAllPokemonSpecies } from "../../hooks/usePokemon.ts";
+import { useAllPokemonSpecies } from "../../hooks/pokemon/useAllPokemon.ts";
 import { useFilteredPokemon } from "../../hooks/useFilteredPokemon.ts";
 import { useUrl } from "../../hooks/useUrl.ts";
 

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
 
-import { usePokemonGens, usePokemonTypes } from "../hooks/usePokemon.ts";
+import { usePokemonGens } from "../hooks/pokemon/usePokemonGens.ts";
+import { usePokemonTypes } from "../hooks/pokemon/usePokemonTypes.ts";
 import { useUrl } from "../hooks/useUrl.ts";
 
 import SidebarSearch from "./SidebarSearch.tsx";

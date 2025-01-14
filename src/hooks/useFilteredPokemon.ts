@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 
 import { useUrl } from "./useUrl.ts";
-import { useAllPokemonByGen, useAllPokemonByType } from "./usePokemon.ts";
+import { useAllPokemonByGen } from "./pokemon/usePokemonGens.ts";
+import { useAllPokemonByType } from "./pokemon/usePokemonTypes.ts";
 
 interface PokemonListType {
   id: number;

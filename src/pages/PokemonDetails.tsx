@@ -3,8 +3,8 @@ import { useLocation, useParams } from "react-router";
 import { HiMiniArrowUturnLeft } from "react-icons/hi2";
 import { Pokemon } from "pokedex-promise-v2";
 
+import { usePokemonSpecies } from "../hooks/pokemon/useSpecificPokemon.ts";
 import { useMoveBack } from "../hooks/useMoveBack.ts";
-import { usePokemonSpecies } from "../hooks/usePokemon.ts";
 
 import Button from "../ui/Button.tsx";
 import {
@@ -28,16 +28,16 @@ const PokemonDetails = () => {
       <Button
         onClick={moveBack}
         isSelected={true}
-        className="fixed ml-4 mt-28 flex items-center gap-2 px-4"
+        className="fixed z-10 ml-4 mt-24 flex items-center gap-2 px-4 md:mt-28"
       >
         <HiMiniArrowUturnLeft />
         Back
       </Button>
 
-      <div className="mx-auto max-w-screen-md p-4 pt-24">
-        <div className="my-4 rounded-lg border-2 border-slate-400/40 bg-slate-100 p-4 dark:bg-slate-800">
-          <div className="flex gap-2">
-            {/* List of Pokémon form buttons (if there is more than one) */}
+      <div className="pt-0 md:pt-36 lg:pt-24">
+        <div className="mx-auto my-4 max-w-screen-md border-slate-400/40 bg-slate-100 p-4 pt-40 md:rounded-lg md:border-2 md:pt-4 dark:bg-slate-800">
+          {/* List of Pokémon form buttons (if there is more than one) */}
+          <div className="flex flex-wrap gap-2">
             {pokemonSpecies &&
               pokemonSpecies.varieties.length > 1 &&
               pokemonSpecies.varieties.map((form, index) => (
@@ -46,14 +46,14 @@ const PokemonDetails = () => {
                   onClick={() => setCurrentForm(index)}
                   disabled={currentForm === index}
                   isSelected={currentForm === index}
-                  className="mb-4 capitalize enabled:px-4 disabled:px-[17.5px]"
+                  className="capitalize enabled:px-4 disabled:px-[17.5px]"
                 >
                   {form.pokemon.name.split("-").join(" ")}
                 </Button>
               ))}
           </div>
 
-          <h2 className="text-3xl font-bold">Pokémon</h2>
+          <h2 className="mt-4 text-3xl font-bold">Pokémon</h2>
           {pokemon && !currentForm ? (
             // If the user clicked a link from the app, use the data passed from parameter state
             <PokemonInfo pokemon={pokemon} />
@@ -64,10 +64,9 @@ const PokemonDetails = () => {
               name={pokemonSpecies?.varieties[currentForm].pokemon.name ?? name}
             />
           )}
-        </div>
 
-        <div className="my-4 rounded-lg border-2 border-slate-400/40 bg-slate-100 p-4 dark:bg-slate-800">
-          <h2 className="text-3xl font-bold">Pokémon Species</h2>
+          {/* Pokemon Species */}
+          <h2 className="my-4 text-3xl font-bold">Pokémon Species</h2>
           {pokemonSpecies && (
             <PokemonSpeciesInfo pokemonSpecies={pokemonSpecies} />
           )}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 
-import { usePokemon } from "../../hooks/usePokemon.ts";
+import { usePokemon } from "../../hooks/pokemon/useSpecificPokemon.ts";
 
 import Loader from "../../ui/Loader.tsx";
 
@@ -26,7 +26,7 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
           className="aspect-square w-full object-contain text-transparent dark:brightness-90"
         />
 
-        {/* Covers Pokémon image with the loader if the data hasn't loaded */}
+        {/* Covers Pokémon image with the loader if the image hasn't loaded */}
         {isLoadingImage ? (
           <div className="absolute top-0 aspect-square w-full bg-slate-100 dark:bg-slate-800">
             <Loader size={8} />
