@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import ThemeSwitcher from "./ThemeSwitcher.tsx";
 
 const Navbar = () => (
   <nav className="fixed top-0 z-10 flex h-24 w-full items-center justify-between border-b border-slate-400 bg-slate-100/80 px-2 shadow-lg backdrop-blur-md sm:px-24 dark:border-slate-600 dark:bg-slate-800/80">
@@ -14,7 +15,7 @@ const Navbar = () => (
       </h1>
     </Link>
 
-    <div className="flex sm:gap-2">
+    <div className="flex items-center sm:gap-2">
       {[
         // Add the title and the url to add a new link in the navbar
         ["Pokémon", "/pokemon"],
@@ -25,6 +26,8 @@ const Navbar = () => (
           </span>
         </Link>
       ))}
+
+      <ThemeSwitcher />
     </div>
   </nav>
 );

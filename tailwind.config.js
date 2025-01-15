@@ -5,4 +5,11 @@ export default {
     extend: {},
   },
   plugins: [],
+  darkMode: [
+    "variant",
+    [
+      "@media (prefers-color-scheme: dark) { &:is(.system *) }",
+      "&:is(.dark *)",
+    ],
+  ],
 };
