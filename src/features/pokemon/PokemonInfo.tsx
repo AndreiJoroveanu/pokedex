@@ -59,7 +59,7 @@ const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
       {/* Stats */}
       <h2 className="mb-1 text-lg font-semibold">Base Stats:</h2>
 
-      <div className="max-w-lg rounded-lg bg-slate-200 p-4 pb-2 shadow-lg dark:bg-slate-700">
+      <div className="max-w-lg rounded-lg bg-slate-200 p-4 pb-2 shadow-lg transition-colors dark:bg-slate-700">
         <div className="grid grid-cols-[auto_auto_1fr] gap-2">
           {pokemon.stats.map((stat) => (
             <Fragment key={stat.stat.name}>
@@ -69,7 +69,7 @@ const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
 
               <p className="text-end">{stat.base_stat}</p>
 
-              <div className="my-auto h-3/4 w-full rounded bg-green-200 dark:bg-green-700">
+              <div className="my-auto h-3/4 w-full rounded bg-green-200 transition-colors dark:bg-green-700">
                 <div
                   style={{ width: `calc(100% * ${stat.base_stat} / 255)` }}
                   className="h-full rounded bg-green-500/75"

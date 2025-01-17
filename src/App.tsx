@@ -3,7 +3,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
 import Loader from "./ui/Loader.tsx";
 import AppLayout from "./ui/AppLayout.tsx";
-import DarkModeProvider from "./features/context/DarkModeProvider.tsx";
+import DarkModeProvider from "./context/DarkModeProvider.tsx";
 
 const AllPokemonPage = lazy(() => import("./pages/AllPokemon.tsx"));
 const PokemonDetailsPage = lazy(() => import("./pages/PokemonDetails.tsx"));

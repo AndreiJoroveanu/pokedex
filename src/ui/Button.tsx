@@ -27,7 +27,7 @@ const Button = ({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`py-2 font-semibold shadow-md transition-shadow enabled:hover:shadow-lg ${selectedStyle} ${className}`}
+      className={`py-2 font-semibold shadow-md transition-[background-color] enabled:hover:shadow-lg ${selectedStyle} ${className}`}
     >
       {children}
     </button>

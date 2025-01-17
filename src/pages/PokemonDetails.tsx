@@ -5,6 +5,7 @@ import { Pokemon } from "pokedex-promise-v2";
 
 import { usePokemonSpecies } from "../hooks/pokemon/useSpecificPokemon.ts";
 import { useMoveBack } from "../hooks/useMoveBack.ts";
+import { capitalize } from "../utils/helpers.ts";
 
 import Button from "../ui/Button.tsx";
 import {
@@ -25,7 +26,7 @@ const PokemonDetails = () => {
 
   // Updates page title when changing page
   useEffect(() => {
-    document.title = `Pokédex - ${name[0].toUpperCase() + name.slice(1)}`;
+    document.title = `Pokédex - ${capitalize(name)}`;
     return () => void (document.title = "Pokédex");
   }, [name]);
 
@@ -41,7 +42,7 @@ const PokemonDetails = () => {
       </Button>
 
       <div className="pt-0 md:pt-36 lg:pt-24">
-        <div className="mx-auto my-4 max-w-screen-md border-slate-400/40 bg-slate-100 p-4 pt-40 md:rounded-lg md:border-2 md:pt-4 dark:bg-slate-800">
+        <div className="mx-auto my-4 max-w-screen-md border-slate-400/40 bg-slate-100 p-4 pt-40 transition-colors md:rounded-lg md:border-2 md:pt-4 dark:bg-slate-800">
           {/* List of Pokémon form buttons (if there is more than one) */}
           <div className="flex flex-wrap gap-2">
             {pokemonSpecies &&

@@ -16,7 +16,7 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
 
   return (
     <Link to={`/pokemon/${name}`} state={{ pokemon }}>
-      <article className="relative rounded border border-slate-400/40 bg-slate-100 shadow-lg transition-shadow hover:bg-slate-200/75 hover:shadow-xl dark:bg-slate-800 dark:hover:bg-slate-700/75">
+      <article className="relative rounded border border-slate-400/40 bg-slate-100 shadow-lg transition-colors hover:bg-slate-200/75 hover:shadow-xl dark:bg-slate-800 dark:hover:bg-slate-700/75">
         {/* Gets the image from a raw link instead of waiting for */}
         {/* the Pokémon object to download because it is faster */}
         <img

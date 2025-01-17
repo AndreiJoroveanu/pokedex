@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 
-import { useLocalStorageState } from "../../hooks/useLocalStorageState.ts";
+import { useLocalStorageState } from "../hooks/useLocalStorageState.ts";
 import DarkModeContext from "./DarkModeContext.tsx";
 
 const DarkModeProvider = ({ children }: { children: ReactNode }) => {
@@ -22,6 +22,7 @@ const DarkModeProvider = ({ children }: { children: ReactNode }) => {
     // Sync system theme changes if "system" is selected
     if (theme === "system") {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      setActualTheme(mediaQuery ? "dark" : "light");
 
       const handleThemeChange = (e: MediaQueryListEvent) =>
         setActualTheme(e.matches ? "dark" : "light");
