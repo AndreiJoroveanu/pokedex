@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router";
 import { HiMiniArrowUturnLeft } from "react-icons/hi2";
 import { Pokemon } from "pokedex-promise-v2";
@@ -22,6 +22,12 @@ const PokemonDetails = () => {
 
   const moveBack = useMoveBack();
   const { data: pokemonSpecies } = usePokemonSpecies(name);
+
+  // Updates page title when changing page
+  useEffect(() => {
+    document.title = `Pokédex - ${name[0].toUpperCase() + name.slice(1)}`;
+    return () => void (document.title = "Pokédex");
+  }, [name]);
 
   return (
     <>
