@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { motion } from "motion/react";
 
 import { usePokemon } from "../../hooks/pokemon/useSpecificPokemon.ts";
 
@@ -11,24 +10,13 @@ interface PokemonCardProps {
   name: string;
 }
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
 const PokemonCard = ({ id, name }: PokemonCardProps) => {
   const { data: pokemon } = usePokemon(id);
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   return (
     <Link to={`/pokemon/${name}`} state={{ pokemon }}>
-      <motion.article
-        variants={cardVariants}
-        initial="hidden"
-        whileInView="visible"
-        transition={{ delay: ((id - 1) % 5) * 0.05 }}
-        className="relative rounded border border-slate-400/40 bg-slate-100 shadow-lg transition-colors hover:bg-slate-200/75 hover:shadow-xl dark:bg-slate-800 dark:hover:bg-slate-700/75"
-      >
+      <article className="relative rounded border border-slate-400/40 bg-slate-100 shadow-lg transition-colors hover:bg-slate-200/75 hover:shadow-xl dark:bg-slate-800 dark:hover:bg-slate-700/75">
         {/* Gets the image from a raw link instead of waiting for */}
         {/* the Pokémon object to download because it is faster */}
         <img
@@ -66,7 +54,7 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
             )}
           </p>
         </div>
-      </motion.article>
+      </article>
     </Link>
   );
 };

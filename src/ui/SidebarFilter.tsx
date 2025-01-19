@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { motion } from "motion/react";
+import { spring } from "motion";
+import { HiChevronDoubleDown } from "react-icons/hi2";
+import useMeasure from "react-use-measure";
 
 import { useUrl } from "../hooks/useUrl.ts";
 
@@ -15,34 +18,29 @@ const SidebarFilter = ({ name, values, renderLabel }: SidebarFilterProps) => {
   const { getUrl, setUrl } = useUrl();
   const [isOpen, setIsOpen] = useState(false);
 
-  return (
-    <>
-      <motion.div
-        layout
-        className="my-2 bg-slate-400/30 p-[2px] shadow-md"
-        style={{ borderRadius: 12 }}
-      >
-        <motion.div
-          layout
-          className="overflow-hidden bg-slate-50 dark:bg-slate-900"
-          style={{ borderRadius: 10 }}
-        >
-          <motion.h2
-            onClick={() => setIsOpen((isOpen) => !isOpen)}
-            layout="position"
-            className="cursor-pointer border-b-2 border-b-slate-400/30 p-2 text-xl font-bold capitalize"
-          >
-            {name} Filtering
-          </motion.h2>
+  // Using a custom hook to calculate the height of the content
+  const [ref, { height }] = useMeasure();
 
+  return (
+    <div className="my-4 overflow-hidden rounded-xl border-2 border-slate-400/30 bg-slate-50 shadow transition-colors dark:bg-slate-900">
+      <div
+        onClick={() => setIsOpen((isOpen) => !isOpen)}
+        className="flex cursor-pointer items-center justify-between px-3 py-2 hover:bg-slate-400/10"
+      >
+        <h2 className="text-lg font-bold capitalize">{name} Filtering</h2>
+
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ type: spring, bounce: 0, duration: 0.5 }}
+        >
+          <HiChevronDoubleDown />
+        </motion.div>
+      </div>
+
+      <motion.div animate={{ height }} className="overflow-hidden">
+        <div ref={ref}>
           {isOpen && (
-            <motion.div
-              layout="size"
-              // animate={{ opacity: 1 }}
-              // transition={{ delay: 0.3 }}
-              // initial={{ opacity: 0 }}
-              className="m-2 grid grid-cols-3 gap-2 lg:grid-cols-2 xl:grid-cols-3"
-            >
+            <div className="grid grid-cols-3 gap-2 border-t-2 border-t-slate-400/30 p-2 lg:grid-cols-2 xl:grid-cols-3">
               {values?.map((item) => (
                 <Button
                   key={item}
@@ -53,11 +51,11 @@ const SidebarFilter = ({ name, values, renderLabel }: SidebarFilterProps) => {
                   {renderLabel(item)}
                 </Button>
               ))}
-            </motion.div>
+            </div>
           )}
-        </motion.div>
+        </div>
       </motion.div>
-    </>
+    </div>
   );
 };
 export default SidebarFilter;
