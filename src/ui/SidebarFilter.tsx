@@ -18,37 +18,44 @@ const SidebarFilter = ({ name, values, renderLabel }: SidebarFilterProps) => {
   return (
     <>
       <motion.div
-        onClick={() => setIsOpen((isOpen) => !isOpen)}
         layout
-        className="cursor-pointer overflow-hidden rounded-xl border-2 border-slate-400/30 p-2 shadow-md"
+        className="my-2 bg-slate-400/30 p-[2px] shadow-md"
+        style={{ borderRadius: 12 }}
       >
-        <motion.h2
-          layout="position"
-          className="mb-2 text-2xl font-bold capitalize"
+        <motion.div
+          layout
+          className="overflow-hidden bg-slate-50 dark:bg-slate-900"
+          style={{ borderRadius: 10 }}
         >
-          {name} Filtering:
-        </motion.h2>
-
-        {isOpen && (
-          <motion.div
+          <motion.h2
+            onClick={() => setIsOpen((isOpen) => !isOpen)}
             layout="position"
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            initial={{ opacity: 0 }}
-            className="grid grid-cols-3 gap-2 lg:grid-cols-2 xl:grid-cols-3"
+            className="cursor-pointer border-b-2 border-b-slate-400/30 p-2 text-xl font-bold capitalize"
           >
-            {values?.map((item) => (
-              <Button
-                key={item}
-                onClick={() => setUrl(name, item)}
-                isSelected={getUrl(name) === item}
-                className="capitalize"
-              >
-                {renderLabel(item)}
-              </Button>
-            ))}
-          </motion.div>
-        )}
+            {name} Filtering
+          </motion.h2>
+
+          {isOpen && (
+            <motion.div
+              layout="size"
+              // animate={{ opacity: 1 }}
+              // transition={{ delay: 0.3 }}
+              // initial={{ opacity: 0 }}
+              className="m-2 grid grid-cols-3 gap-2 lg:grid-cols-2 xl:grid-cols-3"
+            >
+              {values?.map((item) => (
+                <Button
+                  key={item}
+                  onClick={() => setUrl(name, item)}
+                  isSelected={getUrl(name) === item}
+                  className="capitalize"
+                >
+                  {renderLabel(item)}
+                </Button>
+              ))}
+            </motion.div>
+          )}
+        </motion.div>
       </motion.div>
     </>
   );
