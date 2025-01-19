@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import { LayoutGroup, motion } from "motion/react";
 
 import { usePokemonGens } from "../hooks/pokemon/usePokemonGens.ts";
 import { usePokemonTypes } from "../hooks/pokemon/usePokemonTypes.ts";
@@ -19,32 +20,32 @@ const Sidebar = () => {
     <aside className="p-4 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:overflow-y-scroll lg:border-r lg:border-slate-400 dark:lg:border-slate-600">
       <SidebarSearch />
 
-      {pokemonGens && (
+      <LayoutGroup>
         <SidebarFilter
           name="generation"
-          values={pokemonGens.map((gen) => gen.name.split("-")[1])}
+          values={pokemonGens?.map((gen) => gen.name.split("-")[1])}
           renderLabel={(item) => `Gen. ${item.toUpperCase()}`}
         />
-      )}
 
-      {pokemonTypes && (
         <SidebarFilter
           name="type"
-          values={pokemonTypes.map((type) => type.name)}
+          values={pokemonTypes?.map((type) => type.name)}
           renderLabel={(item) => item}
         />
-      )}
 
-      <Button
-        onClick={() => void navigate("/pokemon")}
-        disabled={!getUrl("generation") && !getUrl("type") && !getUrl("q")}
-        isSelected={Boolean(
-          getUrl("generation") ?? getUrl("type") ?? getUrl("q"),
-        )}
-        className="my-4 w-full enabled:py-[9.5px] disabled:cursor-not-allowed disabled:opacity-25"
-      >
-        Clear Filtering
-      </Button>
+        <motion.div layout>
+          <Button
+            onClick={() => void navigate("/pokemon")}
+            disabled={!getUrl("generation") && !getUrl("type") && !getUrl("q")}
+            isSelected={Boolean(
+              getUrl("generation") ?? getUrl("type") ?? getUrl("q"),
+            )}
+            className="my-4 w-full enabled:py-[9.5px] disabled:cursor-not-allowed disabled:opacity-25"
+          >
+            Clear Filtering
+          </Button>
+        </motion.div>
+      </LayoutGroup>
     </aside>
   );
 };
