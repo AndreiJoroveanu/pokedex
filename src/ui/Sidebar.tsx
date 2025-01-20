@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
 
-import { usePokemonGens } from "../hooks/pokemon/usePokemonGens.ts";
-import { usePokemonTypes } from "../hooks/pokemon/usePokemonTypes.ts";
 import { useUrl } from "../hooks/useUrl.ts";
+import { pokemonGens } from "../data/pokemonGens.ts";
+import { pokemonTypes } from "../data/pokemonTypes.ts";
 
 import SidebarSearch from "./SidebarSearch.tsx";
 import SidebarFilter from "./SidebarFilter.tsx";
@@ -11,8 +11,6 @@ import Button from "./Button.tsx";
 const Sidebar = () => {
   const navigate = useNavigate();
 
-  const { data: pokemonGens } = usePokemonGens();
-  const { data: pokemonTypes } = usePokemonTypes();
   const { getUrl } = useUrl();
 
   return (

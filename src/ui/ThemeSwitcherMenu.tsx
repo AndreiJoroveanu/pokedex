@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 import { spring } from "motion";
 
-import { themeOptions } from "../utils/themeOptions.tsx";
+import { themeOptions } from "../data/themeOptions.tsx";
 import { useDarkMode } from "../hooks/useDarkMode.ts";
 import { capitalize } from "../utils/helpers.ts";
 

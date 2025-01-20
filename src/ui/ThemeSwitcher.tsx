@@ -2,7 +2,7 @@ import { cloneElement, MouseEvent, useState } from "react";
 import { AnimatePresence } from "motion/react";
 
 import { useDarkMode } from "../hooks/useDarkMode.ts";
-import { themeOptions } from "../utils/themeOptions.tsx";
+import { themeOptions } from "../data/themeOptions.tsx";
 
 import ThemeSwitcherMenu from "./ThemeSwitcherMenu.tsx";
 

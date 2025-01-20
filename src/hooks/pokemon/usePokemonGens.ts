@@ -1,14 +1,15 @@
 import { useCallback, useMemo } from "react";
-import { Generation, NamedAPIResourceList } from "pokedex-promise-v2";
+import { Generation } from "pokedex-promise-v2";
 
 import { api, useData } from "./usePokemonShared.ts";
 
-export const usePokemonGens = () => {
-  const fetcher = useCallback(() => api.getGenerationsList(), []);
-  const { data, isLoading, error } = useData<NamedAPIResourceList>(fetcher);
-
-  return { data: data?.results, isLoading, error };
-};
+// Currently unused, uncomment to use
+// export const usePokemonGens = () => {
+//   const fetcher = useCallback(() => api.getGenerationsList(), []);
+//   const { data, isLoading, error } = useData<NamedAPIResourceList>(fetcher);
+//
+//   return { data: data?.results, isLoading, error };
+// };
 
 export const useAllPokemonByGen = (gen: string | undefined) => {
   const fetcher = useCallback(() => {

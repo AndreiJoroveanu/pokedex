@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { spring } from "motion";
 import { HiChevronDoubleDown } from "react-icons/hi2";
 import useMeasure from "react-use-measure";
@@ -13,6 +13,12 @@ interface SidebarFilterProps {
   values?: string[];
   renderLabel: (name: string) => string;
 }
+
+const containerVariants = {
+  height: ({ isOpen, height }: { isOpen: boolean; height: number }) => ({
+    height: isOpen ? height || "auto" : 0,
+  }),
+};
 
 const SidebarFilter = ({ name, values, renderLabel }: SidebarFilterProps) => {
   const { getUrl, setUrl } = useUrl();
@@ -37,10 +43,21 @@ const SidebarFilter = ({ name, values, renderLabel }: SidebarFilterProps) => {
         </motion.div>
       </div>
 
-      <motion.div animate={{ height }} className="overflow-hidden">
-        <div ref={ref}>
+      <motion.div
+        variants={containerVariants}
+        custom={{ isOpen, height }}
+        initial="height"
+        animate="height"
+        className="overflow-hidden"
+      >
+        <AnimatePresence>
           {isOpen && (
-            <div className="grid grid-cols-3 gap-2 border-t-2 border-t-slate-400/30 p-2 lg:grid-cols-2 xl:grid-cols-3">
+            <motion.div
+              ref={ref}
+              // This tricks Motion to still display this element while the element is closing
+              exit={{ opacity: 2 }}
+              className="grid grid-cols-3 gap-2 border-t-2 border-t-slate-400/30 p-2 lg:grid-cols-2 xl:grid-cols-3"
+            >
               {values?.map((item) => (
                 <Button
                   key={item}
@@ -51,9 +68,9 @@ const SidebarFilter = ({ name, values, renderLabel }: SidebarFilterProps) => {
                   {renderLabel(item)}
                 </Button>
               ))}
-            </div>
+            </motion.div>
           )}
-        </div>
+        </AnimatePresence>
       </motion.div>
     </div>
   );
