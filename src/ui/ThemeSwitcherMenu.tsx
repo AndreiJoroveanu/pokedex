@@ -4,11 +4,11 @@ import { motion } from "motion/react";
 import { spring } from "motion";
 
 import { themeOptions } from "../data/themeOptions.tsx";
-import { useDarkMode } from "../hooks/useDarkMode.ts";
+import useStore from "../store/useStore.ts";
 import { capitalize } from "../utils/helpers.ts";
 
 interface ThemeSwitcherMenuProps {
-  onSelect: (theme: string) => void;
+  actualTheme: "light" | "dark";
   onClose: () => void;
 }
 
@@ -39,8 +39,12 @@ const optionVariants = {
   },
 };
 
-const ThemeSwitcherMenu = ({ onSelect, onClose }: ThemeSwitcherMenuProps) => {
-  const { theme, actualTheme } = useDarkMode();
+const ThemeSwitcherMenu = ({
+  actualTheme,
+  onClose,
+}: ThemeSwitcherMenuProps) => {
+  const theme = useStore((state) => state.theme);
+  const changeTheme = useStore((state) => state.changeTheme);
 
   useEffect(() => {
     const handleClick = () => onClose();
@@ -69,7 +73,7 @@ const ThemeSwitcherMenu = ({ onSelect, onClose }: ThemeSwitcherMenuProps) => {
       {themeOptions.map(({ theme, icon }) => (
         <motion.button
           key={theme}
-          onClick={() => void onSelect(theme)}
+          onClick={() => void changeTheme(theme)}
           variants={optionVariants}
           className="flex w-full items-center gap-2 px-6 py-3 font-semibold capitalize hover:bg-slate-700 hover:bg-opacity-10 dark:hover:bg-slate-300 dark:hover:bg-opacity-10"
         >

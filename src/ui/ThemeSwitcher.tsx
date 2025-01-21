@@ -1,13 +1,13 @@
 import { cloneElement, MouseEvent, useState } from "react";
 import { AnimatePresence } from "motion/react";
 
-import { useDarkMode } from "../hooks/useDarkMode.ts";
+import useStore from "../store/useStore.ts";
 import { themeOptions } from "../data/themeOptions.tsx";
 
 import ThemeSwitcherMenu from "./ThemeSwitcherMenu.tsx";
 
 const ThemeSwitcher = () => {
-  const { actualTheme, changeTheme } = useDarkMode();
+  const actualTheme = useStore((state) => state.actualTheme);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const menuIcon = themeOptions?.find(
@@ -31,7 +31,7 @@ const ThemeSwitcher = () => {
       <AnimatePresence>
         {isOpen && (
           <ThemeSwitcherMenu
-            onSelect={changeTheme}
+            actualTheme={actualTheme}
             onClose={() => setIsOpen(false)}
           />
         )}

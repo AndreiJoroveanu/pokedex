@@ -6,7 +6,7 @@ import {
 } from "react-icons/hi2";
 
 interface themeOption {
-  theme: string;
+  theme: "light" | "dark" | "system";
   icon: ReactElement<{ size: number }, JSXElementConstructor<string>>;
 }
 

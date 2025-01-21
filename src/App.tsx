@@ -3,7 +3,6 @@ import { createBrowserRouter, Navigate, RouterProvider } from "react-router";
 
 import Loader from "./ui/Loader.tsx";
 import AppLayout from "./ui/AppLayout.tsx";
-import DarkModeProvider from "./context/DarkModeProvider.tsx";
 
 const AllPokemonPage = lazy(() => import("./pages/AllPokemon.tsx"));
 const PokemonDetailsPage = lazy(() => import("./pages/PokemonDetails.tsx"));
@@ -18,7 +17,7 @@ const router = createBrowserRouter([
     element: (
       <Suspense
         fallback={
-          <div className="h-screen bg-slate-100 dark:bg-slate-800">
+          <div className="h-screen bg-slate-100 text-slate-800 transition-colors dark:bg-slate-800 dark:text-slate-200">
             <Loader size={24} displaysText={true} />
           </div>
         }
@@ -40,9 +39,5 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App = () => (
-  <DarkModeProvider>
-    <RouterProvider router={router} />
-  </DarkModeProvider>
-);
+const App = () => <RouterProvider router={router} />;
 export default App;

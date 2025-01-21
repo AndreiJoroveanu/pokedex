@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router";
 
+import useStore from "../store/useStore.ts";
 import { useUrl } from "../hooks/useUrl.ts";
 import { pokemonGens } from "../data/pokemonGens.ts";
 import { pokemonTypes } from "../data/pokemonTypes.ts";
@@ -11,6 +12,11 @@ import Button from "./Button.tsx";
 const Sidebar = () => {
   const navigate = useNavigate();
 
+  const isGenFilterOpen = useStore((state) => state.isGenFilterOpen);
+  const toggleGenFilterOpen = useStore((state) => state.toggleGenFilterOpen);
+  const isTypeFilterOpen = useStore((state) => state.isTypeFilterOpen);
+  const toggleTypeFilterOpen = useStore((state) => state.toggleTypeFilterOpen);
+
   const { getUrl } = useUrl();
 
   return (
@@ -21,12 +27,16 @@ const Sidebar = () => {
         name="generation"
         values={pokemonGens?.map((gen) => gen.name.split("-")[1])}
         renderLabel={(item) => `Gen. ${item.toUpperCase()}`}
+        isOpen={isGenFilterOpen}
+        toggleOpen={toggleGenFilterOpen}
       />
 
       <SidebarFilter
         name="type"
         values={pokemonTypes?.map((type) => type.name)}
         renderLabel={(item) => item}
+        isOpen={isTypeFilterOpen}
+        toggleOpen={toggleTypeFilterOpen}
       />
 
       <Button

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { spring } from "motion";
 import { HiChevronDoubleDown } from "react-icons/hi2";
@@ -12,6 +11,8 @@ interface SidebarFilterProps {
   name: string;
   values?: string[];
   renderLabel: (name: string) => string;
+  isOpen: boolean;
+  toggleOpen: () => void;
 }
 
 const containerVariants = {
@@ -20,9 +21,14 @@ const containerVariants = {
   }),
 };
 
-const SidebarFilter = ({ name, values, renderLabel }: SidebarFilterProps) => {
+const SidebarFilter = ({
+  name,
+  values,
+  renderLabel,
+  isOpen,
+  toggleOpen,
+}: SidebarFilterProps) => {
   const { getUrl, setUrl } = useUrl();
-  const [isOpen, setIsOpen] = useState(false);
 
   // Using a custom hook to calculate the height of the content
   const [ref, { height }] = useMeasure();
@@ -30,12 +36,13 @@ const SidebarFilter = ({ name, values, renderLabel }: SidebarFilterProps) => {
   return (
     <div className="my-4 overflow-hidden rounded-xl border-2 border-slate-400/30 bg-slate-50 shadow transition-colors dark:bg-slate-900">
       <div
-        onClick={() => setIsOpen((isOpen) => !isOpen)}
+        onClick={toggleOpen}
         className="flex cursor-pointer items-center justify-between px-3 py-2 hover:bg-slate-400/10"
       >
         <h2 className="text-lg font-bold capitalize">{name} Filtering</h2>
 
         <motion.div
+          initial={{ rotate: isOpen ? 180 : 0 }}
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ type: spring, bounce: 0, duration: 0.5 }}
         >
