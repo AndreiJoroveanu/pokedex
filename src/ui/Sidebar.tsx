@@ -10,13 +10,12 @@ import SidebarFilter from "./SidebarFilter.tsx";
 import Button from "./Button.tsx";
 
 const Sidebar = () => {
-  const navigate = useNavigate();
-
   const isGenFilterOpen = useStore((state) => state.isGenFilterOpen);
   const toggleGenFilterOpen = useStore((state) => state.toggleGenFilterOpen);
   const isTypeFilterOpen = useStore((state) => state.isTypeFilterOpen);
   const toggleTypeFilterOpen = useStore((state) => state.toggleTypeFilterOpen);
 
+  const navigate = useNavigate();
   const { getUrl } = useUrl();
 
   return (

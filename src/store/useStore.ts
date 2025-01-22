@@ -23,12 +23,13 @@ const handleThemeChange = (e: MediaQueryListEvent) =>
   useStore.setState({ actualTheme: e.matches ? "dark" : "light" });
 
 const useStore = create<State>((set) => {
-  const theme =
-    (JSON.parse(localStorage.getItem("theme")!) as Theme) ?? "system";
+  const theme = (localStorage.getItem("theme") as Theme) ?? "system";
 
   // This will only get executed once, to set the initial theme
   document.documentElement.classList.add(theme);
 
+  // Only used for some UI display, isn't
+  // actually needed for the css theme
   const actualTheme =
     theme === "system" ? (mediaQuery.matches ? "dark" : "light") : theme;
 
@@ -42,7 +43,7 @@ const useStore = create<State>((set) => {
     actualTheme,
 
     changeTheme: (theme) => {
-      localStorage.setItem("theme", JSON.stringify(theme));
+      localStorage.setItem("theme", theme);
       set({ theme });
 
       // This would normally be done in an effect, but
@@ -50,9 +51,9 @@ const useStore = create<State>((set) => {
       document.documentElement.className = "";
       document.documentElement.classList.add(theme);
 
-      // Sync system theme changes when the "system" theme is selected
       if (theme === "system") {
         set({ actualTheme: mediaQuery.matches ? "dark" : "light" });
+        // Sync system theme changes when the "system" theme is selected
         mediaQuery.addEventListener("change", handleThemeChange);
       } else {
         set({ actualTheme: theme });

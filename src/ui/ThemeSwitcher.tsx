@@ -20,7 +20,7 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <div className="relative">
+    <>
       <button
         onClick={handleOpen}
         className="cursor-pointer rounded p-2 transition-all hover:bg-slate-700 hover:bg-opacity-10 dark:hover:bg-slate-300 dark:hover:bg-opacity-10"
@@ -36,7 +36,7 @@ const ThemeSwitcher = () => {
           />
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 export default ThemeSwitcher;

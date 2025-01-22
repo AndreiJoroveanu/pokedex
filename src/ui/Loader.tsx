@@ -7,7 +7,7 @@ const Loader = ({ size, displaysText = false }: LoaderProps) => (
   <div className="flex aspect-square h-full w-full flex-col items-center justify-center">
     <img
       src="/pokéball.svg"
-      alt="Pokéball loading animation"
+      alt="Pokéball spinning as a loading animation"
       className={`w-${size} h-${size} animate-spin`}
     />
     {displaysText && <p className="mt-4 text-2xl font-bold">Loading...</p>}

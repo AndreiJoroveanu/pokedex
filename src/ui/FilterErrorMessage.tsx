@@ -1,11 +1,8 @@
 import { useNavigate } from "react-router";
+
 import Button from "./Button.tsx";
 
-interface ErrorMessageProps {
-  type: string;
-}
-
-const ErrorMessage = ({ type }: ErrorMessageProps) => {
+const FilterErrorMessage = ({ type }: { type: string }) => {
   const navigate = useNavigate();
 
   return (
@@ -26,4 +23,4 @@ const ErrorMessage = ({ type }: ErrorMessageProps) => {
     </div>
   );
 };
-export default ErrorMessage;
+export default FilterErrorMessage;

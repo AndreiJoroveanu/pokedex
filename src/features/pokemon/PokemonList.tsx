@@ -6,7 +6,7 @@ import { useUrl } from "../../hooks/useUrl.ts";
 
 import ChangePageButtons from "../../ui/ChangePageButtons.tsx";
 import Loader from "../../ui/Loader.tsx";
-import ErrorMessage from "../../ui/ErrorMessage.tsx";
+import FilterErrorMessage from "../../ui/FilterErrorMessage.tsx";
 import PokemonCard from "./PokemonCard.tsx";
 
 interface PokemonListType {
@@ -17,17 +17,19 @@ interface PokemonListType {
 const pokemonPerPage = 20;
 
 const AllPokemon = () => {
-  // All Pokémon
+  // Fetch all Pokémon
   const { data: allPokemon, isLoading: isLoadingAP } = useAllPokemonSpecies();
 
-  const { getUrl } = useUrl();
+  // Pokémon filtering
   const { pokemonList, isLoading, isFiltered } = useFilteredPokemon(allPokemon);
 
-  // URL Params
-  const currentPage = Number(getUrl("page")) || 1;
-
+  // Calculate the no. of pages
   const noOfPokemon = pokemonList?.length ?? 0;
   const noOfPages = Math.ceil(noOfPokemon / pokemonPerPage);
+
+  // Get the current page
+  const { getUrl } = useUrl();
+  const currentPage = Number(getUrl("page")) || 1;
 
   // Get the Pokémon from the current page to display
   const paginatedPokemon = useMemo<PokemonListType[] | undefined>(() => {
@@ -38,37 +40,37 @@ const AllPokemon = () => {
   }, [currentPage, pokemonList]);
 
   return (
-    <section className="right-0 w-full lg:absolute lg:w-4/5">
-      <div className="flex flex-col items-center p-4">
-        {!isLoadingAP && !isLoading ? (
-          <>
-            {/* Display buttons if there is more than one page */}
+    <section className="flex w-full flex-col items-center p-4 lg:absolute lg:right-0 lg:w-4/5">
+      {!isLoadingAP && !isLoading ? (
+        <>
+          {/* Display buttons if there is more than one page */}
+          {noOfPages > 1 && (
             <ChangePageButtons noOfPages={noOfPages} noOfSideButtons={3} />
+          )}
 
-            {paginatedPokemon?.length ? (
-              <main className="mt-4 grid w-full grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-5">
-                {paginatedPokemon.map((pokemon) => (
-                  <PokemonCard
-                    key={pokemon.name}
-                    id={pokemon.id}
-                    name={pokemon.name}
-                  />
-                ))}
-              </main>
-            ) : null}
-          </>
-        ) : (
-          <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-50 lg:-z-10 dark:bg-slate-900">
-            <Loader size={24} displaysText={true} />
-          </div>
-        )}
+          {paginatedPokemon?.length ? (
+            <main className="mt-4 grid w-full grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-5">
+              {paginatedPokemon.map((pokemon) => (
+                <PokemonCard
+                  key={pokemon.name}
+                  id={pokemon.id}
+                  name={pokemon.name}
+                />
+              ))}
+            </main>
+          ) : null}
+        </>
+      ) : (
+        <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-50 lg:-z-10 dark:bg-slate-900">
+          <Loader size={24} displaysText={true} />
+        </div>
+      )}
 
-        {!pokemonList?.length && isFiltered && (
-          <div className="top-0 lg:fixed lg:h-screen">
-            <ErrorMessage type="Pokémon" />
-          </div>
-        )}
-      </div>
+      {!pokemonList?.length && isFiltered && (
+        <div className="top-0 lg:fixed lg:h-screen">
+          <FilterErrorMessage type="Pokémon" />
+        </div>
+      )}
     </section>
   );
 };

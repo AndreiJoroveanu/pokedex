@@ -29,12 +29,10 @@ const SidebarFilter = ({
   toggleOpen,
 }: SidebarFilterProps) => {
   const { getUrl, setUrl } = useUrl();
-
-  // Using a custom hook to calculate the height of the content
-  const [ref, { height }] = useMeasure();
+  const [measureRef, { height }] = useMeasure();
 
   return (
-    <div className="my-4 overflow-hidden rounded-xl border-2 border-slate-400/30 bg-slate-50 shadow transition-colors dark:bg-slate-900">
+    <div className="my-4 rounded-xl border-2 border-slate-400/30 bg-slate-50 shadow transition-colors dark:bg-slate-900">
       <div
         onClick={toggleOpen}
         className="flex cursor-pointer items-center justify-between px-3 py-2 hover:bg-slate-400/10"
@@ -60,8 +58,9 @@ const SidebarFilter = ({
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              ref={ref}
-              // This tricks Motion to still display this element while the element is closing
+              ref={measureRef}
+              // This tricks Motion to still display this
+              // element while the container is closing
               exit={{ opacity: 2 }}
               className="grid grid-cols-3 gap-2 border-t-2 border-t-slate-400/30 p-2 lg:grid-cols-2 xl:grid-cols-3"
             >

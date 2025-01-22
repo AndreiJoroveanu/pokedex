@@ -14,11 +14,13 @@ interface ThemeSwitcherMenuProps {
 
 const menuVariants = {
   hidden: {
-    y: -50,
+    x: "var(--x-from-container, 0px)", // sm-
+    y: "var(--y-from-container, 0px)", // sm+
     opacity: 0,
     transition: { type: spring, bounce: 0, duration: 0.3 },
   },
   visible: {
+    x: 0,
     y: 0,
     opacity: 1,
     transition: {
@@ -31,9 +33,14 @@ const menuVariants = {
 };
 
 const optionVariants = {
-  hidden: { opacity: 0, y: -20 },
+  hidden: {
+    x: "var(--x-from-item, 0px)", // sm-
+    y: "var(--y-from-item, 0px)", // sm+
+    opacity: 0,
+  },
   visible: {
     opacity: 1,
+    x: 0,
     y: 0,
     transition: { type: spring, bounce: 0.5, duration: 0.3 },
   },
@@ -59,7 +66,7 @@ const ThemeSwitcherMenu = ({
       initial="hidden"
       animate="visible"
       exit="hidden"
-      className="fixed right-0 top-24 rounded-b-lg border-x border-b border-slate-400 bg-slate-100/80 py-2 shadow-lg backdrop-blur-md sm:right-24 dark:border-slate-600 dark:bg-slate-800/80"
+      className="fixed right-0 top-24 border-l border-slate-400 bg-slate-100/80 py-2 shadow-lg backdrop-blur-md max-sm:bottom-0 max-sm:[--x-from-container:50px] max-sm:[--x-from-item:20px] sm:right-24 sm:rounded-b-lg sm:border-b sm:border-r sm:[--y-from-container:-50px] sm:[--y-from-item:-20px] dark:border-slate-600 dark:bg-slate-800/80"
     >
       <motion.div variants={optionVariants} className="mx-6 my-2 space-y-1">
         <h2 className="mr-6 text-lg font-semibold">Select an App Theme</h2>
