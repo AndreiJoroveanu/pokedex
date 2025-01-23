@@ -41,14 +41,14 @@ const PokemonDetails = () => {
       <Button
         onClick={moveBack}
         isSelected={true}
-        className="fixed z-10 ml-4 mt-24 flex items-center gap-2 px-4 md:mt-28"
+        className="fixed z-10 mt-24 ml-4 flex items-center gap-2 px-4 md:mt-28"
       >
         <HiMiniArrowUturnLeft />
         Back
       </Button>
 
       <div className="pt-0 md:pt-36 lg:pt-24">
-        <div className="mx-auto my-4 max-w-screen-md bg-slate-100 p-4 pt-40 transition-colors md:rounded-lg md:border-2 md:border-slate-400/40 md:pt-4 dark:bg-slate-800">
+        <div className="mx-auto my-4 max-w-3xl bg-slate-100 p-4 pt-40 transition-colors md:rounded-lg md:border-2 md:border-slate-400/40 md:pt-4 dark:bg-slate-800">
           {/* List of Pokémon form buttons (if there is more than one) */}
           <div className="flex flex-wrap gap-2">
             {pokemonSpecies &&

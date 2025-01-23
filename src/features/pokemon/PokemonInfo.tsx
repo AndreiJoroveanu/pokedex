@@ -70,10 +70,10 @@ const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
               <p className="text-end">{stat.base_stat}</p>
 
               {/* Stat bar */}
-              <div className="my-auto h-3/4 w-full rounded bg-green-200 transition-colors dark:bg-green-700">
+              <div className="my-auto h-3/4 w-full rounded-sm bg-green-200 transition-colors dark:bg-green-700">
                 <div
                   style={{ width: `calc(100% * ${stat.base_stat} / 255)` }}
-                  className="h-full rounded bg-green-500/75"
+                  className="h-full rounded-sm bg-green-500/75"
                 />
               </div>
             </Fragment>

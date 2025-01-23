@@ -66,7 +66,7 @@ const ThemeSwitcherMenu = ({
       initial="hidden"
       animate="visible"
       exit="hidden"
-      className="fixed right-0 top-24 border-l border-slate-400 bg-slate-100/80 py-2 shadow-lg backdrop-blur-md max-sm:bottom-0 max-sm:[--x-from-container:50px] max-sm:[--x-from-item:20px] sm:right-24 sm:rounded-b-lg sm:border-b sm:border-r sm:[--y-from-container:-50px] sm:[--y-from-item:-20px] dark:border-slate-600 dark:bg-slate-800/80"
+      className="fixed top-24 right-0 border-l border-slate-400 bg-slate-100/80 py-2 shadow-lg backdrop-blur-md max-sm:bottom-0 max-sm:[--x-from-container:50px] max-sm:[--x-from-item:20px] sm:right-24 sm:rounded-b-lg sm:border-r sm:border-b sm:[--y-from-container:-50px] sm:[--y-from-item:-20px] dark:border-slate-600 dark:bg-slate-800/80"
     >
       <motion.div variants={optionVariants} className="mx-6 my-2 space-y-1">
         <h2 className="mr-6 text-lg font-semibold">Select an App Theme</h2>
@@ -82,7 +82,7 @@ const ThemeSwitcherMenu = ({
           key={theme}
           onClick={() => void changeTheme(theme)}
           variants={optionVariants}
-          className="flex w-full items-center gap-2 px-6 py-3 font-semibold capitalize hover:bg-slate-700 hover:bg-opacity-10 dark:hover:bg-slate-300 dark:hover:bg-opacity-10"
+          className="flex w-full cursor-pointer items-center gap-2 px-6 py-3 font-semibold capitalize hover:bg-slate-700/10 dark:hover:bg-slate-300/10"
         >
           {cloneElement(icon, { size: 20 })} {theme}
         </motion.button>

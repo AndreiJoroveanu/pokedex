@@ -23,7 +23,7 @@ const ThemeSwitcher = () => {
     <>
       <button
         onClick={handleOpen}
-        className="cursor-pointer rounded p-2 transition-all hover:bg-slate-700 hover:bg-opacity-10 dark:hover:bg-slate-300 dark:hover:bg-opacity-10"
+        className="cursor-pointer rounded-sm p-2 transition-all hover:bg-slate-700/10 dark:hover:bg-slate-300/10"
       >
         {menuIcon && cloneElement(menuIcon, { size: 24 })}
       </button>
