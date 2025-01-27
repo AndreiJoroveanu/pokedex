@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 
-import useStore from "../store/useStore.ts";
+import useAppStore from "../store/useAppStore.ts";
 import { useUrl } from "../hooks/useUrl.ts";
 import { pokemonGens } from "../data/pokemonGens.ts";
 import { pokemonTypes } from "../data/pokemonTypes.ts";
@@ -10,10 +10,12 @@ import SidebarFilter from "./SidebarFilter.tsx";
 import Button from "./Button.tsx";
 
 const Sidebar = () => {
-  const isGenFilterOpen = useStore((state) => state.isGenFilterOpen);
-  const toggleGenFilterOpen = useStore((state) => state.toggleGenFilterOpen);
-  const isTypeFilterOpen = useStore((state) => state.isTypeFilterOpen);
-  const toggleTypeFilterOpen = useStore((state) => state.toggleTypeFilterOpen);
+  const isGenFilterOpen = useAppStore((state) => state.isGenFilterOpen);
+  const toggleGenFilterOpen = useAppStore((state) => state.toggleGenFilterOpen);
+  const isTypeFilterOpen = useAppStore((state) => state.isTypeFilterOpen);
+  const toggleTypeFilterOpen = useAppStore(
+    (state) => state.toggleTypeFilterOpen,
+  );
 
   const navigate = useNavigate();
   const { getUrl } = useUrl();

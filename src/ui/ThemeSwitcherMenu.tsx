@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { spring } from "motion";
 
 import { themeOptions } from "../data/themeOptions.tsx";
-import useStore from "../store/useStore.ts";
+import useAppStore from "../store/useAppStore.ts";
 import { capitalize } from "../utils/helpers.ts";
 
 interface ThemeSwitcherMenuProps {
@@ -50,8 +50,8 @@ const ThemeSwitcherMenu = ({
   actualTheme,
   onClose,
 }: ThemeSwitcherMenuProps) => {
-  const theme = useStore((state) => state.theme);
-  const changeTheme = useStore((state) => state.changeTheme);
+  const theme = useAppStore((state) => state.theme);
+  const changeTheme = useAppStore((state) => state.changeTheme);
 
   useEffect(() => {
     const handleClick = () => onClose();

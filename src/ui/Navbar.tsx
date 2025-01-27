@@ -21,7 +21,7 @@ const Navbar = () => (
         ["Pokémon", "/pokemon"],
       ].map(([title, url]) => (
         <Link key={title} to={url}>
-          <p className="inline rounded-sm px-4 py-2 font-semibold transition-all hover:border-b-4 hover:border-slate-700 hover:bg-slate-700/10 dark:border-slate-300 dark:hover:bg-slate-300/10">
+          <p className="inline rounded-sm px-4 py-2 font-semibold transition-all hover:border-b-4 hover:border-slate-700 hover:bg-slate-700/10 dark:hover:border-slate-300 dark:hover:bg-slate-300/10">
             {title}
           </p>
         </Link>

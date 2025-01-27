@@ -1,13 +1,13 @@
 import { cloneElement, MouseEvent, useState } from "react";
 import { AnimatePresence } from "motion/react";
 
-import useStore from "../store/useStore.ts";
+import useAppStore from "../store/useAppStore.ts";
 import { themeOptions } from "../data/themeOptions.tsx";
 
 import ThemeSwitcherMenu from "./ThemeSwitcherMenu.tsx";
 
 const ThemeSwitcher = () => {
-  const actualTheme = useStore((state) => state.actualTheme);
+  const actualTheme = useAppStore((state) => state.actualTheme);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const menuIcon = themeOptions?.find(

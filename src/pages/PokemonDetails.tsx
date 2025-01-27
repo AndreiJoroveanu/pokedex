@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation, useParams } from "react-router";
 import { HiMiniArrowUturnLeft } from "react-icons/hi2";
 import { Pokemon } from "pokedex-promise-v2";
@@ -29,14 +29,11 @@ const PokemonDetails = () => {
   const { data: pokemonSpecies } = usePokemonSpecies(name);
   const moveBack = useMoveBack();
 
-  // Updates page title when changing page
-  useEffect(() => {
-    document.title = `Pokédex - ${capitalize(name)}`;
-    return () => void (document.title = "Pokédex");
-  }, [name]);
-
   return (
     <>
+      {/* In React 19, you can now render the <title> tag in JSX */}
+      <title>{`Pokédex - ${capitalize(name)}`}</title>
+
       {/* Back button */}
       <Button
         onClick={moveBack}
