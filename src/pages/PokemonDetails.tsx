@@ -20,7 +20,7 @@ const PokemonDetails = () => {
   // Pokémon passed as a state through React Router to avoid fetching it again
   // TS: state property from useLocation() hook doesn't have a specific type
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { pokemon }: { pokemon: Pokemon } = useLocation().state;
+  const { pokemon }: { pokemon: Pokemon } = useLocation().state ?? [];
 
   // URL Parameter
   const { name } = useParams() as { name: string };
