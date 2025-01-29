@@ -7,7 +7,7 @@ import { useUrl } from "../hooks/useUrl.ts";
 
 import Button from "./Button.tsx";
 
-interface SidebarFilterProps {
+interface FilterProps {
   name: string;
   values?: string[];
   renderLabel: (name: string) => string;
@@ -27,7 +27,7 @@ const SidebarFilter = ({
   renderLabel,
   isOpen,
   toggleOpen,
-}: SidebarFilterProps) => {
+}: FilterProps) => {
   const { getUrl, setUrl } = useUrl();
   const [measureRef, { height }] = useMeasure();
 
@@ -59,8 +59,7 @@ const SidebarFilter = ({
           {isOpen && (
             <motion.div
               ref={measureRef}
-              // This tricks Motion to still display this
-              // element while the container is closing
+              // This tricks Motion to still display this element while the container is closing
               exit={{ opacity: 2 }}
               className="grid grid-cols-3 gap-2 border-t-2 border-t-slate-400/30 p-2 lg:grid-cols-2 xl:grid-cols-3"
             >

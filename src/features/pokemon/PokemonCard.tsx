@@ -5,12 +5,12 @@ import { usePokemon } from "../../hooks/pokemon/useSpecificPokemon.ts";
 
 import Loader from "../../ui/Loader.tsx";
 
-interface PokemonCardProps {
+interface CardProps {
   id: number;
   name: string;
 }
 
-const PokemonCard = ({ id, name }: PokemonCardProps) => {
+const PokemonCard = ({ id, name }: CardProps) => {
   const { data: pokemon } = usePokemon(id);
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
@@ -36,10 +36,10 @@ const PokemonCard = ({ id, name }: PokemonCardProps) => {
         )}
 
         <div className="p-4">
-          <h1 className="text-nowrap text-xl font-bold capitalize">
+          <h1 className="text-xl font-bold text-nowrap capitalize">
             {id}. {name}
           </h1>
-          <p className="text-nowrap font-semibold text-slate-500 dark:text-slate-400">
+          <p className="font-semibold text-nowrap text-slate-500 dark:text-slate-400">
             {pokemon ? (
               <>
                 {pokemon?.types.length === 1 ? "Type: " : "Types: "}

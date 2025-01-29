@@ -1,10 +1,10 @@
 import { PokemonSpecies } from "pokedex-promise-v2";
 
-interface PokemonSpeciesInfoProps {
+interface InfoProps {
   pokemonSpecies: PokemonSpecies;
 }
 
-const PokemonSpeciesInfo = ({ pokemonSpecies }: PokemonSpeciesInfoProps) => (
+const PokemonSpeciesInfo = ({ pokemonSpecies }: InfoProps) => (
   <>
     {/* Generation */}
     <p>

@@ -1,13 +1,15 @@
-import { cloneElement, useEffect } from "react";
+import { cloneElement } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 import { spring } from "motion";
 
-import { themeOptions } from "../data/themeOptions.tsx";
 import useAppStore from "../store/useAppStore.ts";
+import { themeOptions } from "../data/themeOptions.tsx";
+import { Theme } from "../utils/themeUtils.ts";
+import { useOutsideClick } from "../hooks/useOutsideClick.ts";
 import { capitalize } from "../utils/helpers.ts";
 
-interface ThemeSwitcherMenuProps {
+interface MenuProps {
   actualTheme: "light" | "dark";
   onClose: () => void;
 }
@@ -46,19 +48,17 @@ const optionVariants = {
   },
 };
 
-const ThemeSwitcherMenu = ({
-  actualTheme,
-  onClose,
-}: ThemeSwitcherMenuProps) => {
+const ThemeSwitcherMenu = ({ actualTheme, onClose }: MenuProps) => {
   const theme = useAppStore((state) => state.theme);
   const changeTheme = useAppStore((state) => state.changeTheme);
 
-  useEffect(() => {
-    const handleClick = () => onClose();
+  // A custom hook to detect clicks outside the menu
+  const ref = useOutsideClick(onClose);
 
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, [onClose]);
+  const handleClick = (theme: Theme) => {
+    changeTheme(theme);
+    onClose();
+  };
 
   return createPortal(
     <motion.div
@@ -66,6 +66,7 @@ const ThemeSwitcherMenu = ({
       initial="hidden"
       animate="visible"
       exit="hidden"
+      ref={ref}
       className="fixed top-24 right-0 border-l border-slate-400 bg-slate-100/80 py-2 shadow-lg backdrop-blur-md max-sm:bottom-0 max-sm:[--x-from-container:50px] max-sm:[--x-from-item:20px] sm:right-24 sm:rounded-b-lg sm:border-r sm:border-b sm:[--y-from-container:-50px] sm:[--y-from-item:-20px] dark:border-slate-600 dark:bg-slate-800/80"
     >
       <motion.div variants={optionVariants} className="mx-6 my-2 space-y-1">
@@ -80,7 +81,7 @@ const ThemeSwitcherMenu = ({
       {themeOptions.map(({ theme, icon }) => (
         <motion.button
           key={theme}
-          onClick={() => void changeTheme(theme)}
+          onClick={() => handleClick(theme)}
           variants={optionVariants}
           className="flex w-full cursor-pointer items-center gap-2 px-6 py-3 font-semibold capitalize hover:bg-slate-700/10 dark:hover:bg-slate-300/10"
         >

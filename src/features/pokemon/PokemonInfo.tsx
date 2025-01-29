@@ -5,11 +5,11 @@ import { usePokemon } from "../../hooks/pokemon/useSpecificPokemon.ts";
 
 import Loader from "../../ui/Loader.tsx";
 
-interface PokemonInfoProps {
+interface InfoProps {
   pokemon: Pokemon;
 }
 
-const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
+const PokemonInfo = ({ pokemon }: InfoProps) => {
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   return (

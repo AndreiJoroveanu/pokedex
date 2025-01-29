@@ -17,8 +17,7 @@ import PokemonSpeciesInfo from "../features/pokemon/PokemonSpeciesInfo.tsx";
 const PokemonDetails = () => {
   const [currentForm, setCurrentForm] = useState<number>(0);
 
-  // Pokémon passed as a state through React
-  // Router to avoid fetching it again
+  // Pokémon passed as a state through React Router to avoid fetching it again
   // TS: state property from useLocation() hook doesn't have a specific type
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { pokemon }: { pokemon: Pokemon } = useLocation().state;
