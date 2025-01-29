@@ -41,7 +41,7 @@ const Sidebar = () => {
       />
 
       <Button
-        onClick={() => void navigate("/pokemon")}
+        onClick={() => void navigate("/pokedex/pokemon")}
         disabled={!getUrl("generation") && !getUrl("type") && !getUrl("q")}
         isSelected={Boolean(
           getUrl("generation") ?? getUrl("type") ?? getUrl("q"),

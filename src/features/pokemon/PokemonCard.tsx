@@ -15,7 +15,7 @@ const PokemonCard = ({ id, name }: CardProps) => {
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   return (
-    <Link to={`/pokemon/${name}`} state={{ pokemon }}>
+    <Link to={`/pokedex/pokemon/${name}`} state={{ pokemon }}>
       <article className="relative rounded-sm border border-slate-400/40 bg-slate-100 shadow-lg transition-colors hover:bg-slate-200/75 hover:shadow-xl dark:bg-slate-800 dark:hover:bg-slate-700/75">
         {/* Gets the image from a raw link instead of waiting for */}
         {/* the Pokémon object to download because it is faster */}
@@ -36,10 +36,11 @@ const PokemonCard = ({ id, name }: CardProps) => {
         )}
 
         <div className="p-4">
-          <h1 className="text-xl font-bold text-nowrap capitalize">
+          <h1 className="text-lg font-bold text-nowrap capitalize md:text-xl">
             {id}. {name}
           </h1>
-          <p className="font-semibold text-nowrap text-slate-500 dark:text-slate-400">
+
+          <p className="text-sm font-semibold text-nowrap text-slate-500 md:text-base dark:text-slate-400">
             {pokemon ? (
               <>
                 {pokemon?.types.length === 1 ? "Type: " : "Types: "}

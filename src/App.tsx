@@ -9,8 +9,8 @@ const PokemonDetailsPage = lazy(() => import("./pages/PokemonDetails.tsx"));
 
 const router = createBrowserRouter([
   {
-    index: true,
-    element: <Navigate replace to="/pokemon" />,
+    path: "/pokedex",
+    element: <Navigate replace to="/pokedex/pokemon" />,
   },
 
   {
@@ -27,12 +27,12 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/pokemon",
+        path: "/pokedex/pokemon",
         element: <AllPokemonPage />,
       },
 
       {
-        path: "/pokemon/:name",
+        path: "/pokedex/pokemon/:name",
         element: <PokemonDetailsPage />,
       },
     ],

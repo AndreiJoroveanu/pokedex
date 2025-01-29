@@ -17,7 +17,7 @@ const Link = ({ children, to }: LinkProps) => (
 );
 
 const Footer = () => (
-  <footer className="mt-4 text-sm text-gray-500 transition-colors dark:text-gray-400">
+  <footer className="mt-4 text-center text-sm text-gray-500 transition-colors dark:text-gray-400">
     Made by{" "}
     <Link to="https://github.com/AndreiJoroveanu">Andrei Joroveanu</Link> (
     <Link to="https://github.com/AndreiJoroveanu/pokedex">Github repo</Link>
