@@ -57,7 +57,7 @@ const PokemonInfo = ({ pokemon }: InfoProps) => {
       {/* Stats */}
       <h2 className="mb-1 text-lg font-semibold">Base Stats:</h2>
 
-      <div className="max-w-lg rounded-lg bg-slate-200 p-4 pb-2 shadow-lg transition-colors dark:bg-slate-700">
+      <div className="mb-4 max-w-lg rounded-lg bg-slate-200 p-4 pb-2 shadow-lg transition-colors dark:bg-slate-700">
         <div className="grid grid-cols-[auto_auto_1fr] gap-2">
           {pokemon.stats.map((stat) => (
             <Fragment key={stat.stat.name}>
