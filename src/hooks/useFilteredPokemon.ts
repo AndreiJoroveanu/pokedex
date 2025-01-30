@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import { useUrl } from "./useUrl.ts";
 import { useAllPokemonByGen } from "./pokemon/usePokemonGens.ts";
 import { useAllPokemonByType } from "./pokemon/usePokemonTypes.ts";
+import { useStarredPokemon } from "./useStarredPokemon.ts";
 
 interface PokemonListType {
   id: number;
@@ -16,6 +17,7 @@ export const useFilteredPokemon = (
   const { getUrl } = useUrl();
   const currentGen = getUrl("generation") ?? "";
   const currentType = getUrl("type") ?? "";
+  const onlyStarred = Boolean(getUrl("onlyStarred"));
   const searchQuery = getUrl("q") ?? "";
 
   // Fetch Pokémon filtered by gen/type
@@ -23,6 +25,9 @@ export const useFilteredPokemon = (
     useAllPokemonByGen(currentGen);
   const { data: filteredByType, isLoading: isLoadingFT } =
     useAllPokemonByType(currentType);
+
+  // Get starred Pokémon
+  const { starredPokemon } = useStarredPokemon();
 
   // Pokémon filtering
   const filteredPokemon = useMemo(() => {
@@ -46,18 +51,29 @@ export const useFilteredPokemon = (
     else return allPokemon;
   }, [allPokemon, filteredByGen, filteredByType]);
 
+  // Starred Pokémon (if needed)
+  const filteredStarredPokemon = useMemo<PokemonListType[] | undefined>(() => {
+    if (!filteredPokemon) return;
+    return onlyStarred
+      ? filteredPokemon?.filter((p) => starredPokemon.includes(p.name))
+      : filteredPokemon;
+  }, [filteredPokemon, onlyStarred, starredPokemon]);
+
   // Displayed Pokémon (after search query filtering, if needed)
   const searchedPokemon = useMemo<PokemonListType[] | undefined>(() => {
+    if (!filteredStarredPokemon) return;
     return searchQuery.trim().length
-      ? filteredPokemon?.filter((p) =>
-          p.name.toLowerCase().includes(searchQuery.toLowerCase().trim()),
+      ? filteredStarredPokemon?.filter((p) =>
+          p.name.includes(searchQuery.toLowerCase().trim()),
         )
-      : filteredPokemon;
-  }, [filteredPokemon, searchQuery]);
+      : filteredStarredPokemon;
+  }, [filteredStarredPokemon, searchQuery]);
 
   return {
     pokemonList: searchedPokemon,
     isLoading: isLoadingFG || isLoadingFT,
-    isFiltered: Boolean(currentGen || currentType || searchQuery),
+    isFiltered: Boolean(
+      currentGen || currentType || onlyStarred || searchQuery,
+    ),
   };
 };

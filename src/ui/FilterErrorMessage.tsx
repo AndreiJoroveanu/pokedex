@@ -15,7 +15,7 @@ const FilterErrorMessage = ({ type }: { type: string }) => {
 
       <Button
         onClick={() => void navigate("/pokedex/pokemon")}
-        isSelected={true}
+        style="indigo"
         className="w-full"
       >
         Clear Filtering

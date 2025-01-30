@@ -4,6 +4,7 @@ import useAppStore from "../store/useAppStore.ts";
 import { useUrl } from "../hooks/useUrl.ts";
 import { pokemonGens } from "../data/pokemonGens.ts";
 import { pokemonTypes } from "../data/pokemonTypes.ts";
+import { useStarredPokemon } from "../hooks/useStarredPokemon.ts";
 
 import SidebarSearch from "./SidebarSearch.tsx";
 import SidebarFilter from "./SidebarFilter.tsx";
@@ -18,7 +19,13 @@ const Sidebar = () => {
   );
 
   const navigate = useNavigate();
-  const { getUrl } = useUrl();
+  const { getUrl, setUrl } = useUrl();
+  const isClearButtonDisabled =
+    !getUrl("generation") &&
+    !getUrl("type") &&
+    !getUrl("onlyStarred") &&
+    !getUrl("q");
+  const { length } = useStarredPokemon();
 
   return (
     <aside className="p-4 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:overflow-y-scroll lg:border-r lg:border-slate-400 dark:lg:border-slate-600">
@@ -41,11 +48,17 @@ const Sidebar = () => {
       />
 
       <Button
+        onClick={() => setUrl("onlyStarred", "true")}
+        style={getUrl("onlyStarred") ? "gold" : "normal"}
+        className={`mb-4 w-full ${getUrl("onlyStarred") && "py-[9.5px]"}`}
+      >
+        Show{getUrl("onlyStarred") ? `ing ${length}` : " only"} starred Pokémon
+      </Button>
+
+      <Button
         onClick={() => void navigate("/pokedex/pokemon")}
-        disabled={!getUrl("generation") && !getUrl("type") && !getUrl("q")}
-        isSelected={Boolean(
-          getUrl("generation") ?? getUrl("type") ?? getUrl("q"),
-        )}
+        disabled={isClearButtonDisabled}
+        style={!isClearButtonDisabled ? "indigo" : "normal"}
         className="mb-4 w-full enabled:py-[9.5px] disabled:cursor-not-allowed disabled:opacity-25"
       >
         Clear Filtering

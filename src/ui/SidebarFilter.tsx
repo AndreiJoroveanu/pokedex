@@ -67,7 +67,7 @@ const SidebarFilter = ({
                 <Button
                   key={item}
                   onClick={() => setUrl(name, item)}
-                  isSelected={getUrl(name) === item}
+                  style={getUrl(name) === item ? "indigo" : "normal"}
                   className="capitalize"
                 >
                   {renderLabel(item)}

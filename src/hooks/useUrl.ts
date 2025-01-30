@@ -16,7 +16,7 @@ export const useUrl = () => {
 
     // Order URL params
     const orderedParams = new URLSearchParams();
-    const paramsOrder = ["page", "generation", "type", "q"];
+    const paramsOrder = ["page", "generation", "type", "onlyStarred", "q"];
 
     paramsOrder.map((name) => {
       const value = searchParams.get(name);

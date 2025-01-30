@@ -10,7 +10,8 @@ const Loader = ({ size, displaysText = false }: LoaderProps) => (
     <img
       src={pokeballLogo}
       alt="Pokéball spinning as a loading animation"
-      className={`w-${size} h-${size} animate-spin`}
+      style={{ width: `${size * 4}px`, height: `${size * 4}px` }}
+      className="animate-spin"
     />
     {displaysText && <p className="mt-4 text-2xl font-bold">Loading...</p>}
   </div>

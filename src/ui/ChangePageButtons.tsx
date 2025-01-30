@@ -55,7 +55,7 @@ const ChangePageButtons = ({ noOfPages, noOfSideButtons }: ButtonProps) => {
             key={page}
             onClick={() => setCurrentPage(page)}
             disabled={page === currentPage}
-            isSelected={page === currentPage}
+            style={page === currentPage ? "indigo" : "normal"}
             className="flex h-8 w-8 items-center justify-center rounded-full disabled:cursor-default sm:h-12 sm:w-12"
           >
             {page}

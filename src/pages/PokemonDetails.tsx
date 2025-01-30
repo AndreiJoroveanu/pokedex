@@ -8,6 +8,7 @@ import { useMoveBack } from "../hooks/useMoveBack.ts";
 import { capitalize } from "../utils/helpers.ts";
 
 import Button from "../ui/Button.tsx";
+import StarPokemonButton from "../features/pokemon/StarPokemonButton.tsx";
 import {
   PokemonInfo,
   PokemonInfoFromLink,
@@ -36,12 +37,14 @@ const PokemonDetails = () => {
       {/* Back button */}
       <Button
         onClick={moveBack}
-        isSelected={true}
-        className="fixed z-10 mt-24 ml-4 flex items-center gap-2 px-4 md:mt-28"
+        style="indigo"
+        className="fixed top-28 left-4 z-10 flex items-center gap-2 px-4"
       >
         <HiMiniArrowUturnLeft />
         Back
       </Button>
+
+      <StarPokemonButton />
 
       <div className="pt-0 md:pt-36 lg:pt-24">
         <div className="mx-auto my-4 max-w-3xl bg-slate-100 p-4 pt-40 transition-colors md:rounded-lg md:border-2 md:border-slate-400/40 md:pt-4 dark:bg-slate-800">
@@ -54,7 +57,7 @@ const PokemonDetails = () => {
                   key={form.pokemon.name}
                   onClick={() => setCurrentForm(index)}
                   disabled={currentForm === index}
-                  isSelected={currentForm === index}
+                  style={currentForm === index ? "indigo" : "normal"}
                   className="capitalize enabled:px-4 disabled:px-[17.5px]"
                 >
                   {form.pokemon.name.split("-").join(" ")}
