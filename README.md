@@ -2,12 +2,14 @@
 A simple and modern Pokédex web application
 
 ### 🚀 Live Demo
-Check out the live version here: [Pokédex App]() (TBA)
+Check out the live version here: [Pokédex App](https://andreijoroveanu.github.io/pokedex)
 
 ### 📸 Screenshots
 Here’s what the app looks like:
 
-![App Screenshot]() (TBA)
+![Screenshot 2025-01-30 132254](https://github.com/user-attachments/assets/4041ec0b-dea4-4138-b6a6-1f763d35f087)
+
+![Screenshot 2025-01-30 132547](https://github.com/user-attachments/assets/251e99cb-3db9-4c8a-8c49-3db3c480afb3)
 
 ### 🛠 Built With
 
