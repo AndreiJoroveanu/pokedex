@@ -28,7 +28,7 @@ const Sidebar = () => {
   const { length } = useStarredPokemon();
 
   return (
-    <aside className="p-4 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:overflow-y-scroll lg:border-r lg:border-slate-400 dark:lg:border-slate-600">
+    <aside className="p-4 max-lg:pb-0 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:overflow-y-scroll lg:border-r lg:border-slate-400 dark:lg:border-slate-600">
       <SidebarSearch />
 
       <SidebarFilter
@@ -59,7 +59,7 @@ const Sidebar = () => {
         onClick={() => void navigate("/pokedex/pokemon")}
         disabled={isClearButtonDisabled}
         style={!isClearButtonDisabled ? "indigo" : "normal"}
-        className="mb-4 w-full enabled:py-[9.5px] disabled:cursor-not-allowed disabled:opacity-25"
+        className="w-full enabled:py-[9.5px] disabled:cursor-not-allowed disabled:opacity-25 lg:mb-4"
       >
         Clear Filtering
       </Button>

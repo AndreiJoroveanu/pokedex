@@ -20,7 +20,7 @@ const SidebarSearch = () => {
       placeholder="Search by Pokémon name"
       value={search}
       onChange={(e) => handleChange(e.target.value)}
-      className="w-full rounded-xl border border-slate-400/70 bg-slate-100 py-2 text-center shadow-md transition-colors hover:bg-slate-200/75 hover:shadow-lg focus:shadow-lg dark:bg-slate-800 dark:hover:bg-slate-700/75"
+      className="w-full rounded-xl border border-slate-400/70 bg-slate-100 py-2 text-center shadow-md transition-colors hover:bg-slate-200/75 hover:shadow-lg focus:shadow-lg dark:bg-slate-800 dark:shadow-none dark:hover:bg-slate-700/75 dark:hover:shadow-none dark:focus:shadow-none"
     />
   );
 };

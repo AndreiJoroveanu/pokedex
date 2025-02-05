@@ -38,7 +38,7 @@ const PokemonDetails = () => {
       <Button
         onClick={moveBack}
         style="indigo"
-        className="fixed top-28 left-4 z-10 flex items-center gap-2 px-4"
+        className="fixed top-22 left-4 z-10 flex items-center gap-2 px-4 sm:top-28"
       >
         <HiMiniArrowUturnLeft />
         Back

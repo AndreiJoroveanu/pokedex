@@ -14,7 +14,7 @@ const StarPokemonButton = () => {
     <Button
       onClick={() => toggleStarredPokemon(name)}
       style="gold"
-      className="fixed top-28 right-4 z-10 flex items-center gap-2 px-4"
+      className="fixed top-22 right-4 z-10 flex items-center gap-2 px-4 sm:top-28"
     >
       <HiOutlineStar />
       {starredPokemon.includes(name) ? "Starred" : "Star"}

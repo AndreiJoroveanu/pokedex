@@ -42,7 +42,7 @@ const AllPokemon = () => {
   }, [currentPage, pokemonList]);
 
   return (
-    <div className="relative pt-24">
+    <div className="relative pt-18 sm:pt-24">
       <Sidebar />
 
       <section className="flex w-full flex-col items-center p-4 lg:absolute lg:right-0 lg:w-4/5">

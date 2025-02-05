@@ -32,7 +32,7 @@ const SidebarFilter = ({
   const [measureRef, { height }] = useMeasure();
 
   return (
-    <div className="my-4 overflow-hidden rounded-xl border-2 border-slate-400/30 bg-slate-50 shadow-sm transition-colors dark:bg-slate-900">
+    <div className="my-4 overflow-hidden rounded-xl border-2 border-slate-400/30 bg-slate-50 shadow-sm transition-colors dark:bg-slate-900 dark:shadow-none">
       <div
         onClick={toggleOpen}
         className="flex cursor-pointer items-center justify-between px-3 py-2 hover:bg-slate-400/10"

@@ -67,7 +67,7 @@ const ThemeSwitcherMenu = ({ actualTheme, onClose }: MenuProps) => {
       animate="visible"
       exit="hidden"
       ref={ref}
-      className="fixed top-24 right-0 z-20 border-l border-slate-400 bg-slate-100/80 py-2 shadow-lg backdrop-blur-md max-sm:bottom-0 max-sm:[--x-from-container:50px] max-sm:[--x-from-item:20px] sm:right-24 sm:rounded-b-lg sm:border-r sm:border-b sm:[--y-from-container:-50px] sm:[--y-from-item:-20px] dark:border-slate-600 dark:bg-slate-800/80"
+      className="fixed top-18 right-0 z-20 border-l border-slate-400 bg-slate-100/80 py-2 backdrop-blur-md max-sm:bottom-0 max-sm:[--x-from-container:50px] max-sm:[--x-from-item:20px] sm:top-24 sm:right-24 sm:rounded-b-lg sm:border-r sm:border-b sm:shadow-lg sm:[--y-from-container:-50px] sm:[--y-from-item:-20px] dark:border-slate-600 dark:bg-slate-800/80 dark:shadow-none"
     >
       <motion.div variants={optionVariants} className="mx-6 my-2 space-y-1">
         <h2 className="mr-6 text-lg font-semibold">Select an App Theme</h2>
