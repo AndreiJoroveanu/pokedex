@@ -1,4 +1,4 @@
-import { cloneElement } from "react";
+import { cloneElement, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 import { spring } from "motion";
@@ -54,6 +54,12 @@ const ThemeSwitcherMenu = ({ actualTheme, onClose }: MenuProps) => {
 
   // A custom hook to detect clicks outside the menu
   const ref = useOutsideClick(onClose);
+
+  // Close the menu when the user is scrolling
+  useEffect(() => {
+    window.addEventListener("scroll", onClose);
+    return () => window.removeEventListener("scroll", onClose);
+  }, [onClose]);
 
   const handleClick = (theme: Theme) => {
     changeTheme(theme);

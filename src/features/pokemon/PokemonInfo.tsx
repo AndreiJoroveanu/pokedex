@@ -1,9 +1,10 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { Pokemon } from "pokedex-promise-v2";
 
 import { usePokemon } from "../../hooks/pokemon/useSpecificPokemon.ts";
 
 import Loader from "../../ui/Loader.tsx";
+import PokemonStats from "./PokemonStats.tsx";
 
 interface InfoProps {
   pokemon: Pokemon;
@@ -55,37 +56,7 @@ const PokemonInfo = ({ pokemon }: InfoProps) => {
       </p>
 
       {/* Stats */}
-      <h2 className="mb-1 text-lg font-semibold">Base Stats:</h2>
-
-      <div className="mb-4 max-w-lg rounded-lg bg-slate-200 p-4 pb-2 shadow-lg transition-colors dark:bg-slate-700 dark:shadow-none">
-        <div className="grid grid-cols-[auto_auto_1fr] gap-2">
-          {pokemon.stats.map((stat) => (
-            <Fragment key={stat.stat.name}>
-              {/* Stat name */}
-              <h3 className="font-semibold capitalize">
-                {stat.stat.name.split("-").join(" ")}:
-              </h3>
-
-              {/* Stat number */}
-              <p className="text-end">{stat.base_stat}</p>
-
-              {/* Stat bar */}
-              <div className="my-auto h-3/4 w-full rounded-sm bg-green-200 transition-colors dark:bg-green-700">
-                <div
-                  style={{ width: `calc(100% * ${stat.base_stat} / 255)` }}
-                  className="h-full rounded-sm bg-green-500/75"
-                />
-              </div>
-            </Fragment>
-          ))}
-        </div>
-
-        <h3 className="pt-2 font-semibold">
-          {`Base Stat Total: ${pokemon.stats
-            .map((stat) => stat.base_stat)
-            .reduce((acc, cur) => acc + cur, 0)}`}
-        </h3>
-      </div>
+      <PokemonStats pokemonStats={pokemon.stats} />
     </>
   );
 };
