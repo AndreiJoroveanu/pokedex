@@ -3,8 +3,8 @@ import { useState } from "react";
 import Loader from "../../../ui/Loader.tsx";
 
 interface ImageProps {
-  src: string | null;
-  alt: string;
+  src: string | undefined;
+  alt: string | undefined;
 }
 
 const PokemonImage = ({ src, alt }: ImageProps) => {
@@ -14,7 +14,7 @@ const PokemonImage = ({ src, alt }: ImageProps) => {
     <div className="relative">
       {/* Image (Pokémon HOME artwork) */}
       <img
-        src={src?.toString()}
+        src={src}
         alt={alt}
         onLoad={() => setIsLoadingImage(false)}
         className="mx-auto aspect-square h-128 object-contain text-transparent dark:brightness-90"

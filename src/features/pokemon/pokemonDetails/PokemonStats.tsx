@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { StatElement } from "pokedex-promise-v2";
 
-import useAppStore from "../../store/useAppStore.ts";
-import stats from "../../data/stats.ts";
+import useAppStore from "../../../store/useAppStore.ts";
+import stats from "../../../data/stats.ts";
 
 interface StatsProps {
   pokemonStats: StatElement[] | undefined;
@@ -53,9 +53,11 @@ const PokemonStats = ({ pokemonStats }: StatsProps) => {
         </div>
 
         <h3 className="pt-2 font-semibold">
-          {`Base Stat Total: ${pokemonStats
-            ?.map((stat) => stat.base_stat)
-            .reduce((acc, cur) => acc + cur, 0)}`}
+          {`Base Stat Total: ${
+            pokemonStats
+              ?.map((stat) => stat.base_stat)
+              .reduce((acc, cur) => acc + cur, 0) ?? 0
+          }`}
         </h3>
       </div>
     </>

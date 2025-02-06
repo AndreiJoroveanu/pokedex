@@ -37,9 +37,7 @@ export const useData = <T>(fetcher: () => Promise<T> | undefined) => {
       }
     })();
 
-    return () => {
-      ignore = true;
-    };
+    return () => void (ignore = true);
   }, [fetcher]);
 
   return { data, isLoading, error };
