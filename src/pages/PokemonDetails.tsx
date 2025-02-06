@@ -11,7 +11,8 @@ import {
   PokemonInfo,
   PokemonInfoFromLink,
 } from "../features/pokemon/PokemonInfo.tsx";
-import PokemonSpeciesInfo from "../features/pokemon/PokemonSpeciesInfo.tsx";
+import FlavorTextEntries from "../features/pokemon/pokemonDetails/FlavorTextEntries.tsx";
+import PokemonGenerationDisplay from "../features/pokemon/pokemonDetails/PokemonGenerationDisplay.tsx";
 
 const PokemonDetails = () => {
   const [currentForm, setCurrentForm] = useState<number>(0);
@@ -46,6 +47,7 @@ const PokemonDetails = () => {
             )}
           </div>
 
+          {/* ------ Pokémon ------ */}
           {pokemon && !currentForm ? (
             // If the user clicked a link from the app, use the data passed from passed state
             <PokemonInfo pokemon={pokemon} />
@@ -57,10 +59,14 @@ const PokemonDetails = () => {
             />
           )}
 
-          {/* Pokemon Species */}
-          {pokemonSpecies && (
-            <PokemonSpeciesInfo pokemonSpecies={pokemonSpecies} />
-          )}
+          {/* --- Pokémon Species --- */}
+          <PokemonGenerationDisplay
+            generation={pokemonSpecies?.generation.name}
+          />
+
+          <FlavorTextEntries
+            textEntries={pokemonSpecies?.flavor_text_entries}
+          />
         </div>
       </div>
     </>

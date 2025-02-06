@@ -10,7 +10,7 @@ const PokemonAbilitiesDisplayText = ({
   className,
 }: AbilitiesProps) => (
   <p className={`capitalize ${className ?? ""}`.trim()}>
-    {abilities ? (
+    {abilities?.length ? (
       <>
         {abilities.length === 1 ? "Ability: " : "Abilities: "}
         {abilities

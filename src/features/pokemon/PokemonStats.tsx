@@ -4,7 +4,11 @@ import { StatElement } from "pokedex-promise-v2";
 import useAppStore from "../../store/useAppStore.ts";
 import stats from "../../data/stats.ts";
 
-const PokemonStats = ({ pokemonStats }: { pokemonStats: StatElement[] }) => {
+interface StatsProps {
+  pokemonStats: StatElement[] | undefined;
+}
+
+const PokemonStats = ({ pokemonStats }: StatsProps) => {
   const { actualTheme } = useAppStore();
 
   const backgroundColor = (index: number) =>
@@ -21,15 +25,15 @@ const PokemonStats = ({ pokemonStats }: { pokemonStats: StatElement[] }) => {
 
       <div className="mb-4 max-w-lg rounded-lg bg-slate-200 p-4 pb-2 shadow-lg transition-colors dark:bg-slate-700 dark:shadow-none">
         <div className="grid grid-cols-[auto_auto_1fr] gap-2">
-          {pokemonStats.map((stat, index) => (
-            <Fragment key={stat.stat.name}>
+          {stats?.map((stat, index) => (
+            <Fragment key={stat.label}>
               {/* Stat name */}
-              <h3 className="font-semibold capitalize">
-                {stats[index].label}:
-              </h3>
+              <h3 className="font-semibold capitalize">{stat.label}:</h3>
 
               {/* Stat number */}
-              <p className="text-end">{stat.base_stat}</p>
+              <p className="w-8 text-end">
+                {pokemonStats?.[index]?.base_stat ?? 0}
+              </p>
 
               {/* Stat bar */}
               <div
@@ -38,7 +42,7 @@ const PokemonStats = ({ pokemonStats }: { pokemonStats: StatElement[] }) => {
               >
                 <div
                   style={{
-                    width: `calc(100% * ${stat.base_stat} / 255)`,
+                    width: `calc(100% * ${pokemonStats?.[index]?.base_stat ?? 0} / 255)`,
                     backgroundColor: color(index),
                   }}
                   className="h-full rounded-sm"
@@ -50,7 +54,7 @@ const PokemonStats = ({ pokemonStats }: { pokemonStats: StatElement[] }) => {
 
         <h3 className="pt-2 font-semibold">
           {`Base Stat Total: ${pokemonStats
-            .map((stat) => stat.base_stat)
+            ?.map((stat) => stat.base_stat)
             .reduce((acc, cur) => acc + cur, 0)}`}
         </h3>
       </div>

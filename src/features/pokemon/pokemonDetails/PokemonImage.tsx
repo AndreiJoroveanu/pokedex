@@ -17,7 +17,7 @@ const PokemonImage = ({ src, alt }: ImageProps) => {
         src={src?.toString()}
         alt={alt}
         onLoad={() => setIsLoadingImage(false)}
-        className="mx-auto aspect-square object-contain text-transparent dark:brightness-90"
+        className="mx-auto aspect-square h-128 object-contain text-transparent dark:brightness-90"
       />
 
       {/* Covers Pokémon image with the loader if the image hasn't loaded */}

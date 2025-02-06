@@ -18,7 +18,7 @@ const TopButtons = () => {
       <Button
         onClick={moveBack}
         style="indigo"
-        className="fixed top-22 left-4 z-50 flex items-center gap-2 px-4 sm:top-28"
+        className="fixed top-22 left-4 z-20 flex items-center gap-2 px-4 sm:top-28"
       >
         <ArrowUturnLeftIcon className="size-4" />
         Back
@@ -27,7 +27,7 @@ const TopButtons = () => {
       <Button
         onClick={() => toggleStarredPokemon(name)}
         style="gold"
-        className="fixed top-22 right-4 z-50 flex items-center gap-2 px-4 sm:top-28"
+        className="fixed top-22 right-4 z-20 flex items-center gap-2 px-4 sm:top-28"
       >
         <StarIcon className="size-4" />
         {starredPokemon.includes(name) ? "Starred" : "Star"}

@@ -7,7 +7,7 @@ interface TypesProps {
 
 const PokemonTypesDisplayText = ({ types, className }: TypesProps) => (
   <p className={`capitalize ${className ?? ""}`.trim()}>
-    {types ? (
+    {types?.length ? (
       <>
         {types.length === 1 ? "Type: " : "Types: "}
         {types.map((type) => type.type.name).join(", ")}
