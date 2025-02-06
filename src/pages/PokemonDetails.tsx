@@ -47,7 +47,7 @@ const PokemonDetails = () => {
       <StarPokemonButton />
 
       <div className="pt-0 md:pt-36 lg:pt-24">
-        <div className="mx-auto my-4 max-w-3xl bg-slate-100 p-4 transition-colors max-md:pt-40 max-sm:pt-32 md:rounded-lg md:border-2 md:border-slate-400/40 dark:bg-slate-800">
+        <div className="mx-auto max-w-3xl bg-slate-100 p-4 transition-colors max-md:pt-44 max-sm:pt-36 md:my-4 md:rounded-lg md:border-2 md:border-slate-400/40 dark:bg-slate-800">
           {/* List of Pokémon form buttons (if there is more than one) */}
           <div className="flex flex-wrap gap-2">
             {pokemonSpecies &&

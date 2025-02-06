@@ -45,7 +45,7 @@ const AllPokemon = () => {
     <div className="relative pt-18 sm:pt-24">
       <Sidebar />
 
-      <section className="flex w-full flex-col items-center p-4 lg:absolute lg:right-0 lg:w-4/5">
+      <section className="flex w-full flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5">
         {!isLoadingAP && !isLoading ? (
           <>
             {/* Display buttons if there is more than one page */}
@@ -55,7 +55,7 @@ const AllPokemon = () => {
 
             {paginatedPokemon?.length ? (
               <>
-                <main className="mt-4 grid w-full grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-5">
+                <main className="mt-4 grid w-full grid-cols-2 gap-2 sm:gap-4 md:grid-cols-4 xl:grid-cols-5">
                   {paginatedPokemon.map((pokemon) => (
                     <PokemonCard
                       key={pokemon.name}

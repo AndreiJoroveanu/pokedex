@@ -11,7 +11,7 @@ const Navbar = () => (
         <img
           src={pokeballLogo}
           alt={`Pokéball icon to replace the "o" letter in the logo`}
-          className="mb-1 h-5 w-5 dark:grayscale"
+          className="mb-1.5 h-5 w-5 text-transparent dark:rotate-180 dark:opacity-80 dark:grayscale dark:invert"
         />
         kédex
       </h1>
