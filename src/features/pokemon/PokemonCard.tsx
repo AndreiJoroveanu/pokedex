@@ -4,6 +4,7 @@ import { Link } from "react-router";
 import { usePokemon } from "../../hooks/pokemon/useSpecificPokemon.ts";
 
 import Loader from "../../ui/Loader.tsx";
+import PokemonTypesDisplayText from "./PokemonTypesDisplayText.tsx";
 
 interface CardProps {
   id: number;
@@ -40,20 +41,10 @@ const PokemonCard = ({ id, name }: CardProps) => {
             {id}. {name}
           </h1>
 
-          <p className="text-sm font-semibold text-nowrap text-slate-500 md:text-base dark:text-slate-400">
-            {pokemon ? (
-              <>
-                {pokemon?.types.length === 1 ? "Type: " : "Types: "}
-                {pokemon?.types.map((type) => (
-                  <span key={type.type.name} className="capitalize">
-                    {` ${type.type.name}`}
-                  </span>
-                ))}
-              </>
-            ) : (
-              "Loading..."
-            )}
-          </p>
+          <PokemonTypesDisplayText
+            types={pokemon?.types}
+            className="text-sm font-semibold text-nowrap text-slate-500 md:text-base dark:text-slate-400"
+          />
         </div>
       </article>
     </Link>

@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useLocation, useParams } from "react-router";
-import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
 import { Pokemon } from "pokedex-promise-v2";
 
 import { usePokemonSpecies } from "../hooks/pokemon/useSpecificPokemon.ts";
-import { useMoveBack } from "../hooks/useMoveBack.ts";
 import { capitalize } from "../utils/helpers.ts";
 
-import Button from "../ui/Button.tsx";
-import StarPokemonButton from "../features/pokemon/StarPokemonButton.tsx";
+import TopButtons from "../features/pokemon/pokemonDetails/TopButtons.tsx";
+import PokemonFormButtons from "../features/pokemon/pokemonDetails/PokemonFormButtons.tsx";
 import {
   PokemonInfo,
   PokemonInfoFromLink,
@@ -27,42 +25,25 @@ const PokemonDetails = () => {
   const { name } = useParams() as { name: string };
 
   const { data: pokemonSpecies } = usePokemonSpecies(name);
-  const moveBack = useMoveBack();
 
   return (
     <>
       {/* In React 19, you can now render the <title> tag in JSX */}
       <title>{`Pokédex - ${capitalize(name)}`}</title>
 
-      {/* Back button */}
-      <Button
-        onClick={moveBack}
-        style="indigo"
-        className="fixed top-22 left-4 z-10 flex items-center gap-2 px-4 sm:top-28"
-      >
-        <ArrowUturnLeftIcon className="size-4" />
-        Back
-      </Button>
-
-      <StarPokemonButton />
+      <TopButtons />
 
       <div className="pt-0 md:pt-36 lg:pt-24">
         <div className="mx-auto max-w-3xl bg-slate-100 p-4 transition-colors max-md:pt-44 max-sm:pt-36 md:my-4 md:rounded-lg md:border-2 md:border-slate-400/40 dark:bg-slate-800">
           {/* List of Pokémon form buttons (if there is more than one) */}
           <div className="flex flex-wrap gap-2">
-            {pokemonSpecies &&
-              pokemonSpecies.varieties.length > 1 &&
-              pokemonSpecies.varieties.map((form, index) => (
-                <Button
-                  key={form.pokemon.name}
-                  onClick={() => setCurrentForm(index)}
-                  disabled={currentForm === index}
-                  style={currentForm === index ? "indigo" : "normal"}
-                  className="capitalize enabled:px-4 disabled:px-[17.5px]"
-                >
-                  {form.pokemon.name.split("-").join(" ")}
-                </Button>
-              ))}
+            {pokemonSpecies && pokemonSpecies.varieties.length > 1 && (
+              <PokemonFormButtons
+                pokemonSpecies={pokemonSpecies.varieties}
+                currentForm={currentForm}
+                setCurrentForm={setCurrentForm}
+              />
+            )}
           </div>
 
           {pokemon && !currentForm ? (

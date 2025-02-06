@@ -1,65 +1,34 @@
-import { useState } from "react";
 import { Pokemon } from "pokedex-promise-v2";
 
 import { usePokemon } from "../../hooks/pokemon/useSpecificPokemon.ts";
 
-import Loader from "../../ui/Loader.tsx";
+import PokemonImage from "./pokemonDetails/PokemonImage.tsx";
+import PokemonTypesDisplayText from "./PokemonTypesDisplayText.tsx";
+import PokemonAbilitiesDisplayText from "./pokemonDetails/PokemonAbilitiesDisplayText.tsx";
 import PokemonStats from "./PokemonStats.tsx";
+import Loader from "../../ui/Loader.tsx";
 
 interface InfoProps {
   pokemon: Pokemon;
 }
 
-const PokemonInfo = ({ pokemon }: InfoProps) => {
-  const [isLoadingImage, setIsLoadingImage] = useState(true);
+const PokemonInfo = ({ pokemon }: InfoProps) => (
+  <>
+    <PokemonImage
+      src={pokemon.sprites.other.home.front_default}
+      alt={pokemon.name}
+    />
 
-  return (
-    <>
-      <div className="relative">
-        {/* Image (Pokémon HOME artwork) */}
-        <img
-          src={pokemon.sprites.other.home.front_default?.toString()}
-          alt={pokemon.name}
-          onLoad={() => setIsLoadingImage(false)}
-          className="mx-auto aspect-square object-contain text-transparent dark:brightness-90"
-        />
+    {/* Name */}
+    <h1 className="text-2xl font-bold capitalize">{pokemon.species.name}</h1>
 
-        {/* Covers Pokémon image with the loader if the image hasn't loaded */}
-        {isLoadingImage && (
-          <div className="absolute top-0 aspect-square max-h-[512px] w-full bg-slate-100 dark:bg-slate-800">
-            <Loader size={24} displaysText={true} />
-          </div>
-        )}
-      </div>
+    <PokemonTypesDisplayText types={pokemon.types} />
 
-      {/* Name */}
-      <h1 className="text-2xl font-bold capitalize">{pokemon.species.name}</h1>
+    <PokemonAbilitiesDisplayText abilities={pokemon.abilities} />
 
-      {/* Types */}
-      <p>
-        {pokemon.types.length === 1 ? "Type: " : "Types: "}
-        {pokemon.types.map((type) => (
-          <span key={type.type.name} className="capitalize">
-            {` ${type.type.name}`}
-          </span>
-        ))}
-      </p>
-
-      {/* Abilities */}
-      <p>
-        {pokemon.abilities.length === 1 ? "Ability: " : "Abilities: "}
-        {pokemon.abilities.map((ability) => (
-          <span key={ability.ability.name} className="capitalize">
-            {` ${ability.ability.name}`}
-          </span>
-        ))}
-      </p>
-
-      {/* Stats */}
-      <PokemonStats pokemonStats={pokemon.stats} />
-    </>
-  );
-};
+    <PokemonStats pokemonStats={pokemon.stats} />
+  </>
+);
 
 const PokemonInfoFromLink = ({ name }: { name: string }) => {
   const { data: pokemon, isLoading } = usePokemon(name);
