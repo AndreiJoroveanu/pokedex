@@ -28,7 +28,7 @@ const PokemonCard = ({ id, name }: CardProps) => {
 
         {/* Covers Pokémon image with the loader if the image hasn't loaded */}
         {isLoadingImage ? (
-          <div className="absolute top-0 aspect-square w-full bg-slate-100 dark:bg-slate-800">
+          <div className="absolute top-0 aspect-square w-full rounded-sm bg-slate-100 dark:bg-slate-800">
             <Loader size={8} />
           </div>
         ) : (

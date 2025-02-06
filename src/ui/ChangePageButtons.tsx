@@ -42,13 +42,13 @@ const ChangePageButtons = ({ noOfPages, noOfSideButtons }: ButtonProps) => {
       <Button
         onClick={() => setCurrentPage(1)}
         disabled={currentPage === 1}
-        className="flex h-8 w-8 items-center justify-center rounded-full disabled:cursor-not-allowed disabled:opacity-25 sm:h-12 sm:w-12"
+        className="xs:size-12 flex size-8 items-center justify-center rounded-full disabled:cursor-not-allowed disabled:opacity-25"
       >
         <ChevronDoubleLeftIcon className="size-4" />
       </Button>
 
       {/* Page buttons */}
-      {getPaginationButtons().map((page) =>
+      {getPaginationButtons().map((page, index) =>
         // If the page exists (has a positive number)
         page > 0 ? (
           <Button
@@ -56,13 +56,16 @@ const ChangePageButtons = ({ noOfPages, noOfSideButtons }: ButtonProps) => {
             onClick={() => setCurrentPage(page)}
             disabled={page === currentPage}
             style={page === currentPage ? "indigo" : "normal"}
-            className="flex h-8 w-8 items-center justify-center rounded-full disabled:cursor-default sm:h-12 sm:w-12"
+            className={`xs:size-12 ${index === 0 || index === noOfSideButtons * 2 ? "max-sm:hidden" : ""} flex size-8 items-center justify-center rounded-full disabled:cursor-default`}
           >
             {page}
           </Button>
         ) : (
           // Empty divs so the rest of the buttons can stay in place
-          <div key={page} className="h-8 w-8 sm:h-12 sm:w-12" />
+          <div
+            key={page}
+            className={`xs:size-12 ${index === 0 || index === noOfSideButtons * 2 ? "max-sm:hidden" : ""} size-8`}
+          />
         ),
       )}
 
@@ -70,7 +73,7 @@ const ChangePageButtons = ({ noOfPages, noOfSideButtons }: ButtonProps) => {
       <Button
         onClick={() => setCurrentPage(noOfPages)}
         disabled={currentPage === noOfPages}
-        className="flex h-8 w-8 items-center justify-center rounded-full disabled:cursor-not-allowed disabled:opacity-25 sm:h-12 sm:w-12"
+        className="xs:size-12 flex size-8 items-center justify-center rounded-full disabled:cursor-not-allowed disabled:opacity-25"
       >
         <ChevronDoubleRightIcon className="size-4" />
       </Button>
