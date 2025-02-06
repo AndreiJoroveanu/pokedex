@@ -1,4 +1,4 @@
-import { cloneElement, useEffect } from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 import { spring } from "motion";
@@ -84,14 +84,14 @@ const ThemeSwitcherMenu = ({ actualTheme, onClose }: MenuProps) => {
         </p>
       </motion.div>
 
-      {themeOptions.map(({ theme, icon }) => (
+      {themeOptions.map(({ theme, icon: Icon }) => (
         <motion.button
           key={theme}
           onClick={() => handleClick(theme)}
           variants={optionVariants}
           className="flex w-full cursor-pointer items-center gap-2 px-6 py-3 font-semibold capitalize hover:bg-slate-700/10 dark:hover:bg-slate-300/10"
         >
-          {cloneElement(icon, { size: 20 })} {theme}
+          <Icon className="size-5" /> {theme}
         </motion.button>
       ))}
     </motion.div>,

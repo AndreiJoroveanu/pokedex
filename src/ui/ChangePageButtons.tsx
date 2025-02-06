@@ -1,7 +1,7 @@
 import {
-  HiMiniChevronDoubleLeft,
-  HiMiniChevronDoubleRight,
-} from "react-icons/hi2";
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+} from "@heroicons/react/24/outline";
 
 import { useUrl } from "../hooks/useUrl.ts";
 
@@ -44,7 +44,7 @@ const ChangePageButtons = ({ noOfPages, noOfSideButtons }: ButtonProps) => {
         disabled={currentPage === 1}
         className="flex h-8 w-8 items-center justify-center rounded-full disabled:cursor-not-allowed disabled:opacity-25 sm:h-12 sm:w-12"
       >
-        <HiMiniChevronDoubleLeft size={20} />
+        <ChevronDoubleLeftIcon className="size-4" />
       </Button>
 
       {/* Page buttons */}
@@ -72,7 +72,7 @@ const ChangePageButtons = ({ noOfPages, noOfSideButtons }: ButtonProps) => {
         disabled={currentPage === noOfPages}
         className="flex h-8 w-8 items-center justify-center rounded-full disabled:cursor-not-allowed disabled:opacity-25 sm:h-12 sm:w-12"
       >
-        <HiMiniChevronDoubleRight size={20} />
+        <ChevronDoubleRightIcon className="size-4" />
       </Button>
     </div>
   );

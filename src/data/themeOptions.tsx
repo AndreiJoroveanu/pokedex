@@ -1,17 +1,13 @@
-import { JSXElementConstructor, ReactElement } from "react";
-import {
-  HiOutlineCog6Tooth,
-  HiOutlineMoon,
-  HiOutlineSun,
-} from "react-icons/hi2";
+import { ElementType } from "react";
+import { Cog6ToothIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
 interface themeOption {
   theme: "light" | "dark" | "system";
-  icon: ReactElement<{ size: number }, JSXElementConstructor<string>>;
+  icon: ElementType;
 }
 
 export const themeOptions: themeOption[] = [
-  { theme: "light", icon: <HiOutlineSun key="light-icon" /> },
-  { theme: "dark", icon: <HiOutlineMoon key="dark-icon" /> },
-  { theme: "system", icon: <HiOutlineCog6Tooth key="system-icon" /> },
+  { theme: "light", icon: SunIcon },
+  { theme: "dark", icon: MoonIcon },
+  { theme: "system", icon: Cog6ToothIcon },
 ];

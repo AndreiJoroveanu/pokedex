@@ -1,4 +1,4 @@
-import { cloneElement, MouseEvent, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { AnimatePresence } from "motion/react";
 
 import useAppStore from "../store/useAppStore.ts";
@@ -10,7 +10,7 @@ const ThemeSwitcher = () => {
   const actualTheme = useAppStore((state) => state.actualTheme);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const menuIcon = themeOptions?.find(
+  const MenuIcon = themeOptions.find(
     (item) => item.theme === actualTheme,
   )?.icon;
 
@@ -25,7 +25,7 @@ const ThemeSwitcher = () => {
         onClick={handleOpen}
         className="cursor-pointer rounded-sm p-2 transition-all hover:bg-slate-700/10 dark:hover:bg-slate-300/10"
       >
-        {menuIcon && cloneElement(menuIcon, { size: 24 })}
+        {MenuIcon && <MenuIcon className="size-6" />}
       </button>
 
       <AnimatePresence>

@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { spring } from "motion";
-import { HiChevronDoubleDown } from "react-icons/hi2";
 import useMeasure from "react-use-measure";
+import { ChevronDoubleDownIcon } from "@heroicons/react/24/outline";
 
 import { useUrl } from "../hooks/useUrl.ts";
 
@@ -44,7 +44,7 @@ const SidebarFilter = ({
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ type: spring, bounce: 0, duration: 0.5 }}
         >
-          <HiChevronDoubleDown />
+          <ChevronDoubleDownIcon className="size-4" />
         </motion.div>
       </div>
 

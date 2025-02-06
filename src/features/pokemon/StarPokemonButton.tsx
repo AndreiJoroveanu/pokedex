@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { HiOutlineStar } from "react-icons/hi2";
+import { StarIcon } from "@heroicons/react/24/outline";
 
 import { useStarredPokemon } from "../../hooks/useStarredPokemon.ts";
 
@@ -16,7 +16,7 @@ const StarPokemonButton = () => {
       style="gold"
       className="fixed top-22 right-4 z-10 flex items-center gap-2 px-4 sm:top-28"
     >
-      <HiOutlineStar />
+      <StarIcon className="size-4" />
       {starredPokemon.includes(name) ? "Starred" : "Star"}
     </Button>
   );

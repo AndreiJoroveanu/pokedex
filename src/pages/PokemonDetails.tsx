@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation, useParams } from "react-router";
-import { HiMiniArrowUturnLeft } from "react-icons/hi2";
+import { ArrowUturnLeftIcon } from "@heroicons/react/24/outline";
 import { Pokemon } from "pokedex-promise-v2";
 
 import { usePokemonSpecies } from "../hooks/pokemon/useSpecificPokemon.ts";
@@ -40,14 +40,14 @@ const PokemonDetails = () => {
         style="indigo"
         className="fixed top-22 left-4 z-10 flex items-center gap-2 px-4 sm:top-28"
       >
-        <HiMiniArrowUturnLeft />
+        <ArrowUturnLeftIcon className="size-4" />
         Back
       </Button>
 
       <StarPokemonButton />
 
       <div className="pt-0 md:pt-36 lg:pt-24">
-        <div className="mx-auto my-4 max-w-3xl bg-slate-100 p-4 pt-40 transition-colors md:rounded-lg md:border-2 md:border-slate-400/40 md:pt-4 dark:bg-slate-800">
+        <div className="mx-auto my-4 max-w-3xl bg-slate-100 p-4 transition-colors max-md:pt-40 max-sm:pt-32 md:rounded-lg md:border-2 md:border-slate-400/40 dark:bg-slate-800">
           {/* List of Pokémon form buttons (if there is more than one) */}
           <div className="flex flex-wrap gap-2">
             {pokemonSpecies &&
