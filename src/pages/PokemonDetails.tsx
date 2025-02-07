@@ -28,31 +28,30 @@ const PokemonDetails = () => {
   const { initialPokemon }: { initialPokemon: Pokemon } =
     useLocation().state ?? [];
 
-  const [pokemon, setPokemon] = useState<Pokemon | null>(initialPokemon);
+  const [pokemon, setPokemon] = useState<Pokemon | undefined>(initialPokemon);
 
   // Fetch the Pokémon data if the form changes
   useEffect(() => {
     let ignore = false;
 
     void (async () => {
-      try {
-        if (currentForm === 0 && initialPokemon) {
-          setPokemon(initialPokemon);
-          return;
-        }
+      if (currentForm === 0 && initialPokemon) {
+        setPokemon(initialPokemon);
+        return;
+      }
 
-        const response = await api.getPokemonByName(
-          pokemonSpecies?.varieties[currentForm].pokemon.name ?? name,
-        );
-        if (!ignore && response) setPokemon(response);
+      try {
+        setPokemon(undefined);
+        const name = pokemonSpecies?.varieties[currentForm].pokemon.name;
+        if (!ignore && name) setPokemon(await api.getPokemonByName(name));
       } catch (error) {
         if (error instanceof Error) console.error(error.message);
-        setPokemon(null);
+        setPokemon(undefined);
       }
     })();
 
     return () => void (ignore = true);
-  }, [currentForm, initialPokemon, name, pokemonSpecies?.varieties]);
+  }, [currentForm, initialPokemon, pokemonSpecies?.varieties]);
 
   return (
     <>
@@ -75,7 +74,7 @@ const PokemonDetails = () => {
           )}
 
           <PokemonImage
-            key={pokemon?.name}
+            key={currentForm}
             src={pokemon?.sprites.other.home.front_default?.toString()}
             alt={pokemon?.name}
           />

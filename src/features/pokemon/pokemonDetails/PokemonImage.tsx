@@ -17,12 +17,12 @@ const PokemonImage = ({ src, alt }: ImageProps) => {
         src={src}
         alt={alt}
         onLoad={() => setIsLoadingImage(false)}
-        className="mx-auto aspect-square h-128 object-contain text-transparent dark:brightness-90"
+        className="mx-auto aspect-square max-h-128 w-full object-contain text-transparent dark:brightness-90"
       />
 
       {/* Covers Pokémon image with the loader if the image hasn't loaded */}
       {isLoadingImage && (
-        <div className="absolute top-0 aspect-square max-h-[512px] w-full bg-slate-100 dark:bg-slate-800">
+        <div className="absolute top-0 aspect-square max-h-128 w-full bg-slate-100 dark:bg-slate-800">
           <Loader size={24} displaysText={true} />
         </div>
       )}
