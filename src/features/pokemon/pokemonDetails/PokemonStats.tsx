@@ -42,7 +42,7 @@ const PokemonStats = ({ pokemonStats }: StatsProps) => {
               >
                 <div
                   style={{
-                    width: `calc(100% * ${pokemonStats?.[index]?.base_stat ?? 0} / 255)`,
+                    width: `${((pokemonStats?.[index]?.base_stat ?? 0) / 255) * 100}%`,
                     backgroundColor: color(index),
                   }}
                   className="h-full rounded-sm"

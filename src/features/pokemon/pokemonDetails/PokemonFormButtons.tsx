@@ -20,7 +20,7 @@ const PokemonFormButtons = ({
         onClick={() => setCurrentForm(index)}
         disabled={currentForm === index}
         style={currentForm === index ? "indigo" : "normal"}
-        className="z-10 border-2 px-4 capitalize disabled:cursor-not-allowed disabled:border-transparent disabled:bg-origin-border"
+        className="z-10 border-2 px-4 capitalize disabled:cursor-default disabled:border-transparent disabled:bg-origin-border"
       >
         {form.pokemon.name.split("-").join(" ")}
       </Button>

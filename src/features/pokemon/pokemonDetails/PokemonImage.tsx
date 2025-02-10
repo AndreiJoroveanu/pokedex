@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Loader from "../../../ui/Loader.tsx";
 
@@ -10,9 +10,12 @@ interface ImageProps {
 const PokemonImage = ({ src, alt }: ImageProps) => {
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
+  // This is required for Firefox, even though we set a key prop to the component call
+  useEffect(() => setIsLoadingImage(true), [src]);
+
   return (
     <div className="relative">
-      {/* Image (Pokémon HOME artwork) */}
+      {/* Pokémon HOME artwork */}
       <img
         src={src}
         alt={alt}
@@ -20,7 +23,7 @@ const PokemonImage = ({ src, alt }: ImageProps) => {
         className="mx-auto aspect-square max-h-128 w-full object-contain text-transparent dark:brightness-90"
       />
 
-      {/* Covers Pokémon image with the loader if the image hasn't loaded */}
+      {/* Covers the image with a loader if the image hasn't loaded */}
       {isLoadingImage && (
         <div className="absolute top-0 aspect-square max-h-128 w-full bg-slate-100 dark:bg-slate-800">
           <Loader size={24} displaysText={true} />
