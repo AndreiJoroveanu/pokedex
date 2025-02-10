@@ -1,5 +1,7 @@
 import { NamedAPIResource } from "pokedex-promise-v2";
 
+import CollapsingPanel from "../../../ui/CollapsingPanel.tsx";
+
 interface EntriesProps {
   // Currently pokedex-promise-v2 has a typing bug, so a manual type is used instead
   // (Usually the correct type is FlavorText[])
@@ -13,16 +15,14 @@ interface EntriesProps {
 }
 
 const FlavorTextEntries = ({ textEntries }: EntriesProps) => (
-  <>
-    <p className="my-2">Dex entries:</p>
-
+  <CollapsingPanel label="Dex Entries" className="px-2">
     {/* All english Dex descriptions */}
     {textEntries?.length ? (
       <ul className="divide-y-2 divide-slate-400/40">
         {textEntries
           .filter((entry) => entry.language.name === "en")
           .map((entry) => (
-            <li key={entry.version?.name} className="py-2">
+            <li key={entry.version?.name} className="p-2">
               <span className="font-bold capitalize">
                 {`${entry.version?.name.split("-").join(" ")}: `}
               </span>
@@ -34,6 +34,6 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => (
     ) : (
       <p>Loading...</p>
     )}
-  </>
+  </CollapsingPanel>
 );
 export default FlavorTextEntries;

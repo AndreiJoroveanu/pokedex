@@ -42,8 +42,12 @@ const PokemonDetails = () => {
 
       try {
         setPokemon(undefined);
-        const name = pokemonSpecies?.varieties[currentForm].pokemon.name;
-        if (!ignore && name) setPokemon(await api.getPokemonByName(name));
+        const pokemonName =
+          currentForm === 0
+            ? name
+            : pokemonSpecies?.varieties[currentForm].pokemon.name;
+        if (!ignore && pokemonName)
+          setPokemon(await api.getPokemonByName(pokemonName));
       } catch (error) {
         if (error instanceof Error) console.error(error.message);
         setPokemon(undefined);
@@ -51,7 +55,7 @@ const PokemonDetails = () => {
     })();
 
     return () => void (ignore = true);
-  }, [currentForm, initialPokemon, pokemonSpecies?.varieties]);
+  }, [currentForm, initialPokemon, name, pokemonSpecies?.varieties]);
 
   return (
     <>
@@ -75,7 +79,7 @@ const PokemonDetails = () => {
 
           <PokemonImage
             key={currentForm}
-            src={pokemon?.sprites.other.home.front_default?.toString()}
+            src={pokemon?.sprites.other.home.front_default}
             alt={pokemon?.name}
           />
 
