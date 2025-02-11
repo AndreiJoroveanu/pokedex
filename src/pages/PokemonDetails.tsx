@@ -65,10 +65,10 @@ const PokemonDetails = () => {
       <TopButtons />
 
       <div className="pt-0 md:pt-36 lg:pt-24">
-        <div className="mx-auto max-w-3xl bg-slate-100 p-4 transition-colors max-md:pt-44 max-sm:pt-36 md:my-4 md:rounded-lg md:border-2 md:border-slate-400/40 dark:bg-slate-800">
+        <div className="mx-auto max-w-3xl bg-slate-100 p-4 transition-colors max-md:pt-42 max-sm:pt-36 md:my-4 md:rounded-lg md:border-2 md:border-slate-400/40 dark:bg-slate-800">
           {/* List of Pokémon form buttons (if there is more than one) */}
           {pokemonSpecies && pokemonSpecies.varieties.length > 1 && (
-            <div className="flex flex-wrap gap-2">
+            <div className="-mx-4 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:px-4">
               <PokemonFormButtons
                 pokemonSpecies={pokemonSpecies.varieties}
                 currentForm={currentForm}
@@ -79,12 +79,17 @@ const PokemonDetails = () => {
 
           <PokemonImage
             key={currentForm}
-            src={pokemon?.sprites.other.home.front_default}
+            src={
+              pokemon?.sprites.other.home.front_default ??
+              pokemon?.sprites.other["official-artwork"].front_default
+            }
             alt={pokemon?.name}
           />
 
           {/* Name */}
-          <h1 className="text-2xl font-bold capitalize">{name}</h1>
+          <h1 className="text-2xl font-bold capitalize">
+            {currentForm ? pokemon?.name.split("-").join(" ") : name}
+          </h1>
 
           <PokemonTypesDisplayText types={pokemon?.types} />
 
