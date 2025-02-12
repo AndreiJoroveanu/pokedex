@@ -3,6 +3,7 @@ import { useLocation, useParams } from "react-router";
 import { Pokemon } from "pokedex-promise-v2";
 
 import { usePokemonSpecies } from "../hooks/pokemon/useSpecificPokemon.ts";
+import { usePokemonEvolutionChain } from "../hooks/pokemon/usePokemonEvolutionChain.ts";
 import { api } from "../hooks/pokemon/usePokemonShared.ts";
 import { capitalize } from "../utils/helpers.ts";
 
@@ -13,6 +14,7 @@ import ToggleShinyButton from "../features/pokemon/pokemonDetails/ToggleShinyBut
 import PokemonCategory from "../features/pokemon/pokemonDetails/PokemonCategory.tsx";
 import PokemonTypesDisplayText from "../features/pokemon/PokemonTypesDisplayText.tsx";
 import PokemonAbilitiesDisplayText from "../features/pokemon/pokemonDetails/PokemonAbilitiesDisplayText.tsx";
+import PokemonEvolutionChain from "../features/pokemon/pokemonDetails/PokemonEvolutionChain.tsx";
 import PokemonStats from "../features/pokemon/pokemonDetails/PokemonStats.tsx";
 import PokemonGenerationDisplay from "../features/pokemon/pokemonDetails/PokemonGenerationDisplay.tsx";
 import FlavorTextEntries from "../features/pokemon/pokemonDetails/FlavorTextEntries.tsx";
@@ -25,6 +27,11 @@ const PokemonDetails = () => {
   // Pokémon Species using the URL Parameter
   const { name } = useParams() as { name: string };
   const { data: pokemonSpecies } = usePokemonSpecies(name);
+
+  // Evolution chain
+  const { data: evolutionChain } = usePokemonEvolutionChain(
+    pokemonSpecies?.evolution_chain.url,
+  );
 
   // Pokémon passed as a state through React Router to avoid fetching it again
   // TS: state property from useLocation() hook doesn't have a specific type
@@ -121,6 +128,11 @@ const PokemonDetails = () => {
           <PokemonTypesDisplayText types={pokemon?.types} />
 
           <PokemonAbilitiesDisplayText abilities={pokemon?.abilities} />
+
+          <PokemonEvolutionChain
+            chain={evolutionChain?.chain}
+            pokemonName={pokemonSpecies?.name}
+          />
 
           <PokemonStats pokemonStats={pokemon?.stats} />
 

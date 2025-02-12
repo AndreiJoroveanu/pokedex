@@ -1,29 +1,21 @@
-import { ReactNode } from "react";
-
-interface LinkProps {
-  children: ReactNode;
-  to: string;
-}
-
-const Link = ({ children, to }: LinkProps) => (
+const link = (to: string, label: string) => (
   <a
     href={to}
     target="_blank"
     rel="noreferrer"
-    className="transition-all hover:border-b hover:text-gray-600 dark:hover:text-gray-300"
+    className="underline underline-offset-4 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
   >
-    {children}
+    {label}
   </a>
 );
 
 const Footer = ({ className }: { className?: string }) => (
   <footer
-    className={`mt-4 text-center text-sm text-gray-500 transition-colors dark:text-gray-400 ${className}`}
+    className={`mt-4 text-center text-sm text-gray-600 transition-colors dark:text-gray-400 ${className}`}
   >
-    Made by{" "}
-    <Link to="https://github.com/AndreiJoroveanu">Andrei Joroveanu</Link> (
-    <Link to="https://github.com/AndreiJoroveanu/pokedex">Github repo</Link>
-    ). Data from <Link to="https://pokeapi.co">PokéAPI</Link>.
+    Made by {link("https://github.com/AndreiJoroveanu", "Andrei Joroveanu")} (
+    {link("https://github.com/AndreiJoroveanu/pokedex", "Github repo")}
+    ). Data from {link("https://pokeapi.co", "PokéAPI")}.
   </footer>
 );
 export default Footer;
