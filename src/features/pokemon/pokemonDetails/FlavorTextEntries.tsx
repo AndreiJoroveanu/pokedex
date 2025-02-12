@@ -16,20 +16,17 @@ interface EntriesProps {
 
 const FlavorTextEntries = ({ textEntries }: EntriesProps) => (
   <CollapsingPanel label="Dex Entries" className="px-2">
-    {/* All english Dex descriptions */}
     {textEntries?.length ? (
       <ul className="divide-y-2 divide-slate-400/40">
-        {textEntries
-          .filter((entry) => entry.language.name === "en")
-          .map((entry) => (
-            <li key={entry.version?.name} className="p-2">
-              <span className="font-bold capitalize">
-                {`${entry.version?.name.split("-").join(" ")}: `}
-              </span>
+        {textEntries.map((entry) => (
+          <li key={entry.version?.name} className="p-2">
+            <span className="font-bold capitalize">
+              {`${entry.version?.name.split("-").join(" ")}: `}
+            </span>
 
-              {entry.flavor_text}
-            </li>
-          ))}
+            {entry.flavor_text}
+          </li>
+        ))}
       </ul>
     ) : (
       <p>Loading...</p>

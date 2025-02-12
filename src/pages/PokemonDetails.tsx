@@ -10,11 +10,13 @@ import TopButtons from "../features/pokemon/pokemonDetails/TopButtons.tsx";
 import PokemonFormButtons from "../features/pokemon/pokemonDetails/PokemonFormButtons.tsx";
 import PokemonImage from "../features/pokemon/pokemonDetails/PokemonImage.tsx";
 import ToggleShinyButton from "../features/pokemon/pokemonDetails/ToggleShinyButton.tsx";
+import PokemonCategory from "../features/pokemon/pokemonDetails/PokemonCategory.tsx";
 import PokemonTypesDisplayText from "../features/pokemon/PokemonTypesDisplayText.tsx";
 import PokemonAbilitiesDisplayText from "../features/pokemon/pokemonDetails/PokemonAbilitiesDisplayText.tsx";
 import PokemonStats from "../features/pokemon/pokemonDetails/PokemonStats.tsx";
 import PokemonGenerationDisplay from "../features/pokemon/pokemonDetails/PokemonGenerationDisplay.tsx";
 import FlavorTextEntries from "../features/pokemon/pokemonDetails/FlavorTextEntries.tsx";
+import Footer from "../ui/Footer.tsx";
 
 const PokemonDetails = () => {
   const [currentForm, setCurrentForm] = useState<number>(0);
@@ -43,7 +45,6 @@ const PokemonDetails = () => {
       }
 
       try {
-        setPokemon(undefined);
         const pokemonName =
           currentForm === 0
             ? name
@@ -74,7 +75,10 @@ const PokemonDetails = () => {
               <PokemonFormButtons
                 pokemonSpecies={pokemonSpecies.varieties}
                 currentForm={currentForm}
-                setCurrentForm={setCurrentForm}
+                onClick={(index) => {
+                  setPokemon(undefined);
+                  setCurrentForm(index);
+                }}
               />
             </div>
           )}
@@ -94,8 +98,8 @@ const PokemonDetails = () => {
             alt={pokemon?.name}
           />
 
-          {/* Name */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-end justify-between">
+            {/* Name */}
             <h1 className="text-2xl font-bold capitalize">
               {currentForm
                 ? (pokemon?.name.split("-").join(" ") ?? name)
@@ -108,6 +112,12 @@ const PokemonDetails = () => {
             />
           </div>
 
+          <PokemonCategory
+            category={pokemonSpecies?.genera.find(
+              (genus) => genus.language.name === "en",
+            )}
+          />
+
           <PokemonTypesDisplayText types={pokemon?.types} />
 
           <PokemonAbilitiesDisplayText abilities={pokemon?.abilities} />
@@ -118,10 +128,17 @@ const PokemonDetails = () => {
             generation={pokemonSpecies?.generation.name}
           />
 
+          {/* All english Dex descriptions */}
           <FlavorTextEntries
-            textEntries={pokemonSpecies?.flavor_text_entries}
+            textEntries={pokemonSpecies?.flavor_text_entries.filter(
+              (entry) => entry.language.name === "en",
+            )}
           />
+
+          <Footer className="md:hidden" />
         </div>
+
+        <Footer className="mb-4 max-md:hidden" />
       </div>
     </>
   );
