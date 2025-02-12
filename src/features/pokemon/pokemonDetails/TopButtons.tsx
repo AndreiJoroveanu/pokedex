@@ -1,5 +1,9 @@
 import { useParams } from "react-router";
-import { ArrowUturnLeftIcon, StarIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowUturnLeftIcon,
+  StarIcon as StarIconOutline,
+} from "@heroicons/react/24/outline";
+import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
 import { useMoveBack } from "../../../hooks/useMoveBack.ts";
 import { useStarredPokemon } from "../../../hooks/useStarredPokemon.ts";
@@ -20,8 +24,7 @@ const TopButtons = () => {
         style="indigo"
         className="fixed top-22 left-2 z-20 flex items-center gap-2 px-4 sm:top-28 sm:left-4"
       >
-        <ArrowUturnLeftIcon className="size-4" />
-        Back
+        <ArrowUturnLeftIcon className="size-4" /> Back
       </Button>
 
       <Button
@@ -29,8 +32,15 @@ const TopButtons = () => {
         style="gold"
         className="fixed top-22 right-2 z-20 flex items-center gap-2 px-4 sm:top-28 sm:right-4"
       >
-        <StarIcon className="size-4" />
-        {starredPokemon.includes(name) ? "Starred" : "Star"}
+        {starredPokemon.includes(name) ? (
+          <>
+            <StarIconSolid className="size-4" /> Starred
+          </>
+        ) : (
+          <>
+            <StarIconOutline className="size-4" /> Star
+          </>
+        )}
       </Button>
     </>
   );

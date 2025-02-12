@@ -19,12 +19,14 @@ const Sidebar = () => {
   );
 
   const navigate = useNavigate();
+
   const { getUrl, setUrl } = useUrl();
   const isClearButtonDisabled =
     !getUrl("generation") &&
     !getUrl("type") &&
     !getUrl("onlyStarred") &&
     !getUrl("q");
+
   const { length } = useStarredPokemon();
 
   return (
@@ -50,7 +52,7 @@ const Sidebar = () => {
       <Button
         onClick={() => setUrl("onlyStarred", "true")}
         style={getUrl("onlyStarred") ? "gold" : "normal"}
-        className={`mb-4 w-full ${getUrl("onlyStarred") && "py-[9.5px]"}`}
+        className="mb-4 w-full"
       >
         Show{getUrl("onlyStarred") ? `ing ${length}` : " only"} starred Pokémon
       </Button>
@@ -59,7 +61,7 @@ const Sidebar = () => {
         onClick={() => void navigate("/pokedex/pokemon")}
         disabled={isClearButtonDisabled}
         style={!isClearButtonDisabled ? "indigo" : "normal"}
-        className="w-full enabled:py-[9.5px] disabled:cursor-not-allowed disabled:opacity-25 lg:mb-4"
+        className="w-full disabled:cursor-not-allowed disabled:opacity-25 lg:mb-4"
       >
         Clear Filtering
       </Button>

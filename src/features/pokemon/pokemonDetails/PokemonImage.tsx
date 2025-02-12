@@ -12,7 +12,6 @@ const PokemonImage = ({ src, alt }: ImageProps) => {
 
   return (
     <div className="relative">
-      {/* Pokémon HOME artwork */}
       <img
         src={src ?? undefined}
         alt={alt}
@@ -20,6 +19,7 @@ const PokemonImage = ({ src, alt }: ImageProps) => {
         className="mx-auto aspect-square max-h-128 w-full object-contain text-transparent dark:brightness-90"
       />
 
+      {/* Display a message if the selected Form doesn't have an image (the src is null) */}
       {src === null && (
         <div className="absolute top-0 flex aspect-square max-h-128 w-full flex-col items-center justify-center gap-4">
           <h2 className="text-center text-2xl font-bold sm:text-3xl">

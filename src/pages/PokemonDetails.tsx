@@ -9,6 +9,7 @@ import { capitalize } from "../utils/helpers.ts";
 import TopButtons from "../features/pokemon/pokemonDetails/TopButtons.tsx";
 import PokemonFormButtons from "../features/pokemon/pokemonDetails/PokemonFormButtons.tsx";
 import PokemonImage from "../features/pokemon/pokemonDetails/PokemonImage.tsx";
+import ToggleShinyButton from "../features/pokemon/pokemonDetails/ToggleShinyButton.tsx";
 import PokemonTypesDisplayText from "../features/pokemon/PokemonTypesDisplayText.tsx";
 import PokemonAbilitiesDisplayText from "../features/pokemon/pokemonDetails/PokemonAbilitiesDisplayText.tsx";
 import PokemonStats from "../features/pokemon/pokemonDetails/PokemonStats.tsx";
@@ -17,6 +18,7 @@ import FlavorTextEntries from "../features/pokemon/pokemonDetails/FlavorTextEntr
 
 const PokemonDetails = () => {
   const [currentForm, setCurrentForm] = useState<number>(0);
+  const [displayShiny, setDisplayShiny] = useState<boolean>(false);
 
   // Pokémon Species using the URL Parameter
   const { name } = useParams() as { name: string };
@@ -78,18 +80,33 @@ const PokemonDetails = () => {
           )}
 
           <PokemonImage
-            key={currentForm}
+            key={`${currentForm}${displayShiny ? "-shiny" : ""}`}
             src={
-              pokemon?.sprites.other.home.front_default ??
-              pokemon?.sprites.other["official-artwork"].front_default
+              pokemon?.sprites.other.home[
+                // Depending on the displayShiny state, display a different image
+                displayShiny ? "front_shiny" : "front_default"
+              ] ??
+              // The default image is from Pokémon HOME, with the official artwork as a fallback
+              pokemon?.sprites.other["official-artwork"][
+                displayShiny ? "front_shiny" : "front_default"
+              ]
             }
             alt={pokemon?.name}
           />
 
           {/* Name */}
-          <h1 className="text-2xl font-bold capitalize">
-            {currentForm ? pokemon?.name.split("-").join(" ") : name}
-          </h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-bold capitalize">
+              {currentForm
+                ? (pokemon?.name.split("-").join(" ") ?? name)
+                : name}
+            </h1>
+
+            <ToggleShinyButton
+              displayShiny={displayShiny}
+              setDisplayShiny={setDisplayShiny}
+            />
+          </div>
 
           <PokemonTypesDisplayText types={pokemon?.types} />
 
