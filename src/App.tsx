@@ -18,8 +18,8 @@ const PokemonDetailsPageWrapper = ({
 }: {
   component: LazyExoticComponent<ComponentType>;
 }) => {
-  const { name } = useParams();
-  return <Component key={name} />;
+  const { id } = useParams();
+  return <Component key={id} />;
 };
 
 const router = createBrowserRouter([
@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/pokedex/pokemon/:name",
+        path: "/pokedex/pokemon/:id",
         element: <PokemonDetailsPageWrapper component={PokemonDetailsPage} />,
       },
     ],

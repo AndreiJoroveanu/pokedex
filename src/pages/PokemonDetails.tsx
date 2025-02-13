@@ -25,8 +25,8 @@ const PokemonDetails = () => {
   const [displayShiny, setDisplayShiny] = useState<boolean>(false);
 
   // Pokémon Species using the URL Parameter
-  const { name } = useParams() as { name: string };
-  const { data: pokemonSpecies } = usePokemonSpecies(name);
+  const { id } = useParams() as { id: string };
+  const { data: pokemonSpecies } = usePokemonSpecies(id);
 
   // Evolution chain
   const { data: evolutionChain } = usePokemonEvolutionChain(
@@ -52,12 +52,15 @@ const PokemonDetails = () => {
       }
 
       try {
-        const pokemonName =
+        const pokemonId =
           currentForm === 0
-            ? name
-            : pokemonSpecies?.varieties[currentForm].pokemon.name;
-        if (!ignore && pokemonName)
-          setPokemon(await api.getPokemonByName(pokemonName));
+            ? id
+            : pokemonSpecies?.varieties[currentForm].pokemon.url
+                .split("https://pokeapi.co/api/v2/pokemon/")[1]
+                .split("/")[0];
+
+        if (!ignore && pokemonId)
+          setPokemon(await api.getPokemonByName(pokemonId));
       } catch (error) {
         if (error instanceof Error) console.error(error.message);
         setPokemon(undefined);
@@ -65,12 +68,12 @@ const PokemonDetails = () => {
     })();
 
     return () => void (ignore = true);
-  }, [currentForm, initialPokemon, name, pokemonSpecies?.varieties]);
+  }, [currentForm, id, initialPokemon, pokemonSpecies?.varieties]);
 
   return (
     <>
       {/* In React 19, you can now render the <title> tag in JSX */}
-      <title>{`Pokédex - ${capitalize(name)}`}</title>
+      <title>{`Pokédex - ${capitalize(pokemon?.name ?? "Loading")}`}</title>
 
       <TopButtons />
 
@@ -108,9 +111,7 @@ const PokemonDetails = () => {
           <div className="flex items-end justify-between">
             {/* Name */}
             <h1 className="text-2xl font-bold capitalize">
-              {currentForm
-                ? (pokemon?.name.split("-").join(" ") ?? name)
-                : name}
+              {pokemon?.name.split("-").join(" ") ?? "Loading..."}
             </h1>
 
             <ToggleShinyButton

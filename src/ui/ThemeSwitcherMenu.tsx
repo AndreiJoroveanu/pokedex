@@ -7,7 +7,6 @@ import useAppStore from "../store/useAppStore.ts";
 import { themeOptions } from "../data/themeOptions.tsx";
 import { Theme } from "../utils/themeUtils.ts";
 import { useOutsideClick } from "../hooks/useOutsideClick.ts";
-import { capitalize } from "../utils/helpers.ts";
 
 interface MenuProps {
   actualTheme: "light" | "dark";
@@ -78,9 +77,9 @@ const ThemeSwitcherMenu = ({ actualTheme, onClose }: MenuProps) => {
       <motion.div variants={optionVariants} className="mx-6 my-2 space-y-1">
         <h2 className="mr-6 text-lg font-semibold">Select an App Theme</h2>
 
-        <p className="text-sm text-slate-600 dark:text-slate-400">
-          Current theme: {capitalize(theme)}
-          {theme === "system" && ` (${capitalize(actualTheme)})`}
+        <p className="text-sm text-slate-600 capitalize dark:text-slate-400">
+          Current Theme: {theme}
+          {theme === "system" && ` (${actualTheme})`}
         </p>
       </motion.div>
 

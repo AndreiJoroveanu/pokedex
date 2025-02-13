@@ -1,2 +1,5 @@
 export const capitalize = (string: string) =>
-  string[0].toUpperCase() + string.slice(1);
+  string
+    .split("-")
+    .map((word) => word[0].toUpperCase() + word.slice(1))
+    .join(" ");

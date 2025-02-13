@@ -12,7 +12,7 @@ interface ChainProps {
 // Reusable link to the respective Pokémon page
 const pokemonLink = (pokemon: { name: string; id: number }) => (
   <Link
-    to={`/pokedex/pokemon/${pokemon.name}`}
+    to={`/pokedex/pokemon/${pokemon.id}`}
     className="capitalize underline underline-offset-4 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
   >
     {pokemon.name}
