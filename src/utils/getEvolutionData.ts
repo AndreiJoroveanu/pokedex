@@ -1,8 +1,11 @@
-import { Chain } from "pokedex-promise-v2";
+import { Chain, EvolutionDetail } from "pokedex-promise-v2";
+
+import formatEvolutionMethod from "./formatEvolutionMethod.ts";
 
 interface PokemonListType {
   id: number;
   name: string;
+  evolutionMethod: string;
 }
 
 interface ReturnTypes {
@@ -11,13 +14,15 @@ interface ReturnTypes {
 }
 
 // Extract the Pokémon name and the ID from the URL
-const extractData = (node: Chain) => ({
+const extractData = (node: Chain, evolutionDetails: EvolutionDetail[]) => ({
   name: node.species.name,
   id: Number(
     node.species.url
       .split("https://pokeapi.co/api/v2/pokemon-species/")[1]
       .split("/")[0],
   ),
+  // A string detailing how another Pokémon evolves/evolved into this Pokémon
+  evolutionMethod: formatEvolutionMethod(evolutionDetails),
 });
 
 const getEvolutionData = (chain: Chain, pokemonName: string): ReturnTypes => {
@@ -29,11 +34,16 @@ const getEvolutionData = (chain: Chain, pokemonName: string): ReturnTypes => {
     // If the current Pokémon is found in the evolution line
     if (node.species.name === pokemonName) {
       previous = parent; // Store its previous evolution
-      next = node.evolves_to.map((pokemon) => extractData(pokemon)); // Store its next evolutions
+      // Store its next evolutions
+      next = node.evolves_to.map((pokemon) =>
+        extractData(pokemon, pokemon.evolution_details),
+      );
       return;
     }
     // Continue searching in the evolution tree for each possible next evolution
-    node.evolves_to.forEach((child) => traverse(child, extractData(node)));
+    node.evolves_to.forEach((child) =>
+      traverse(child, extractData(node, child.evolution_details)),
+    );
   };
 
   // Start the recursive traversal from the root of the evolution chain

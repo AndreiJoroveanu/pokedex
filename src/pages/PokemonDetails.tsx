@@ -14,8 +14,8 @@ import ToggleShinyButton from "../features/pokemon/pokemonDetails/ToggleShinyBut
 import PokemonCategory from "../features/pokemon/pokemonDetails/PokemonCategory.tsx";
 import PokemonTypesDisplayText from "../features/pokemon/PokemonTypesDisplayText.tsx";
 import PokemonAbilitiesDisplayText from "../features/pokemon/pokemonDetails/PokemonAbilitiesDisplayText.tsx";
-import PokemonEvolutionChain from "../features/pokemon/pokemonDetails/PokemonEvolutionChain.tsx";
 import PokemonStats from "../features/pokemon/pokemonDetails/PokemonStats.tsx";
+import PokemonEvolutionChain from "../features/pokemon/pokemonDetails/PokemonEvolutionChain.tsx";
 import PokemonGenerationDisplay from "../features/pokemon/pokemonDetails/PokemonGenerationDisplay.tsx";
 import FlavorTextEntries from "../features/pokemon/pokemonDetails/FlavorTextEntries.tsx";
 import Footer from "../ui/Footer.tsx";
@@ -130,12 +130,12 @@ const PokemonDetails = () => {
 
           <PokemonAbilitiesDisplayText abilities={pokemon?.abilities} />
 
+          <PokemonStats pokemonStats={pokemon?.stats} />
+
           <PokemonEvolutionChain
             chain={evolutionChain?.chain}
             pokemonName={pokemonSpecies?.name}
           />
-
-          <PokemonStats pokemonStats={pokemon?.stats} />
 
           <PokemonGenerationDisplay
             generation={pokemonSpecies?.generation.name}

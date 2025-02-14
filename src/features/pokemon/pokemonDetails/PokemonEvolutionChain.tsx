@@ -9,26 +9,38 @@ interface ChainProps {
   pokemonName: string | undefined;
 }
 
-// Reusable link to the respective Pokémon page
-const pokemonLink = (pokemon: { name: string; id: number }) => (
-  <Link
-    to={`/pokedex/pokemon/${pokemon.id}`}
-    className="capitalize underline underline-offset-4 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
-  >
-    {pokemon.name}
-  </Link>
+interface PokemonListType {
+  name: string;
+  id: number;
+  evolutionMethod: string;
+}
+
+// Link to the respective Pokémon page and the evolution description
+const pokemonEvolutionText = (pokemon: PokemonListType) => (
+  <>
+    <Link
+      to={`/pokedex/pokemon/${pokemon.id}`}
+      className="capitalize underline underline-offset-4 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+    >
+      {pokemon.name}
+    </Link>
+    {pokemon.evolutionMethod
+      ? ` ${pokemon.evolutionMethod}`
+      : " (no data available)"}
+  </>
 );
 
 // Format the list of evolutions
-const formatEvolutions = (pokemonList: { name: string; id: number }[]) => {
+const formatEvolutions = (pokemonList: PokemonListType[]) => {
   // If this Pokémon has one evolution branch after it
-  if (pokemonList.length === 1) return pokemonLink(pokemonList[0]);
+  if (pokemonList.length === 1) return pokemonEvolutionText(pokemonList[0]);
 
   // If this Pokémon has two evolution branches after it
   if (pokemonList.length === 2)
     return (
       <>
-        {pokemonLink(pokemonList[0])} or {pokemonLink(pokemonList[1])}
+        {pokemonEvolutionText(pokemonList[0])}, or{" "}
+        {pokemonEvolutionText(pokemonList[1])}
       </>
     );
 
@@ -36,9 +48,11 @@ const formatEvolutions = (pokemonList: { name: string; id: number }[]) => {
   return (
     <>
       {pokemonList.slice(0, pokemonList.length - 1).map((pokemon) => (
-        <Fragment key={pokemon.name}>{pokemonLink(pokemon)}, </Fragment>
+        <Fragment key={pokemon.name}>
+          {pokemonEvolutionText(pokemon)},{" "}
+        </Fragment>
       ))}
-      {" or "} {pokemonLink(pokemonList[pokemonList.length - 1])}
+      {" or "} {pokemonEvolutionText(pokemonList[pokemonList.length - 1])}
     </>
   );
 };
@@ -59,13 +73,13 @@ const PokemonEvolutionChain = ({ chain, pokemonName }: ChainProps) => {
 
   // If this Pokémon is fully evolved
   if (!next.length)
-    return <p>This Pokémon evolves from {pokemonLink(previous)}.</p>;
+    return <p>This Pokémon evolves from {pokemonEvolutionText(previous)}.</p>;
 
   // If this Pokémon is a middle evolution
   return (
     <p>
-      This Pokémon evolves from {pokemonLink(previous)}, and evolves into{" "}
-      {formatEvolutions(next)}.
+      This Pokémon evolves from {pokemonEvolutionText(previous)}, and evolves
+      into {formatEvolutions(next)}.
     </p>
   );
 };
