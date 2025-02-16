@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, memo } from "react";
 import { Link } from "react-router";
 import { Chain } from "pokedex-promise-v2";
 
@@ -57,7 +57,7 @@ const formatEvolutions = (pokemonList: PokemonListType[]) => {
   );
 };
 
-const PokemonEvolutionChain = ({ chain, pokemonName }: ChainProps) => {
+const PokemonEvolutionChain = memo(({ chain, pokemonName }: ChainProps) => {
   // If the data hasn't arrived yet
   if (!chain || !pokemonName) return <p>Loading...</p>;
 
@@ -82,5 +82,6 @@ const PokemonEvolutionChain = ({ chain, pokemonName }: ChainProps) => {
       into {formatEvolutions(next)}.
     </p>
   );
-};
+});
+PokemonEvolutionChain.displayName = "PokemonEvolutionChain";
 export default PokemonEvolutionChain;

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useParams } from "react-router";
 import {
   ArrowUturnLeftIcon,
@@ -10,7 +11,7 @@ import { useStarredPokemon } from "../../../hooks/useStarredPokemon.ts";
 
 import Button from "../../../ui/Button.tsx";
 
-const TopButtons = () => {
+const TopButtons = memo(() => {
   const moveBack = useMoveBack();
 
   const { name } = useParams() as { name: string };
@@ -44,5 +45,6 @@ const TopButtons = () => {
       </Button>
     </>
   );
-};
+});
+TopButtons.displayName = "TopButtons";
 export default TopButtons;

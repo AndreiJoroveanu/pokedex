@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { PokemonType } from "pokedex-promise-v2";
 
 interface TypesProps {
@@ -5,7 +6,7 @@ interface TypesProps {
   className?: string;
 }
 
-const PokemonTypesDisplayText = ({ types, className }: TypesProps) => (
+const PokemonTypesDisplayText = memo(({ types, className }: TypesProps) => (
   <p className={`capitalize ${className ?? ""}`.trim()}>
     {types?.length ? (
       <>
@@ -16,5 +17,6 @@ const PokemonTypesDisplayText = ({ types, className }: TypesProps) => (
       "Loading..."
     )}
   </p>
-);
+));
+PokemonTypesDisplayText.displayName = "PokemonTypesDisplayText";
 export default PokemonTypesDisplayText;

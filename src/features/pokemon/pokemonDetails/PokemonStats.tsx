@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, memo } from "react";
 import { StatElement } from "pokedex-promise-v2";
 
 import useAppStore from "../../../store/useAppStore.ts";
@@ -8,7 +8,7 @@ interface StatsProps {
   pokemonStats: StatElement[] | undefined;
 }
 
-const PokemonStats = ({ pokemonStats }: StatsProps) => {
+const PokemonStats = memo(({ pokemonStats }: StatsProps) => {
   const { actualTheme } = useAppStore();
 
   const backgroundColor = (index: number) =>
@@ -62,5 +62,6 @@ const PokemonStats = ({ pokemonStats }: StatsProps) => {
       </div>
     </>
   );
-};
+});
+PokemonStats.displayName = "PokemonStats";
 export default PokemonStats;

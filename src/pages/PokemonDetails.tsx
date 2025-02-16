@@ -17,6 +17,8 @@ import PokemonAbilitiesDisplayText from "../features/pokemon/pokemonDetails/Poke
 import PokemonStats from "../features/pokemon/pokemonDetails/PokemonStats.tsx";
 import PokemonEvolutionChain from "../features/pokemon/pokemonDetails/PokemonEvolutionChain.tsx";
 import PokemonGenerationDisplay from "../features/pokemon/pokemonDetails/PokemonGenerationDisplay.tsx";
+import CollapsingPanel from "../ui/CollapsingPanel.tsx";
+import PokemonMovesList from "../features/pokemon/pokemonDetails/PokemonMovesList.tsx";
 import FlavorTextEntries from "../features/pokemon/pokemonDetails/FlavorTextEntries.tsx";
 import Footer from "../ui/Footer.tsx";
 
@@ -141,12 +143,18 @@ const PokemonDetails = () => {
             generation={pokemonSpecies?.generation.name}
           />
 
-          {/* All english Dex descriptions */}
-          <FlavorTextEntries
-            textEntries={pokemonSpecies?.flavor_text_entries.filter(
-              (entry) => entry.language.name === "en",
-            )}
-          />
+          <CollapsingPanel label="Level-Up Moves" className="p-2 sm:p-4">
+            <PokemonMovesList moves={pokemon?.moves} />
+          </CollapsingPanel>
+
+          <CollapsingPanel label="Dex Entries" className="px-2">
+            {/* All english Dex descriptions */}
+            <FlavorTextEntries
+              textEntries={pokemonSpecies?.flavor_text_entries.filter(
+                (entry) => entry.language.name === "en",
+              )}
+            />
+          </CollapsingPanel>
 
           <Footer className="md:hidden" />
         </div>

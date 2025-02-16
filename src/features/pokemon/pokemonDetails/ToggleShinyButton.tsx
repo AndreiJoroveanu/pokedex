@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, memo, SetStateAction } from "react";
 import { SparklesIcon as SparklesIconSolid } from "@heroicons/react/24/solid";
 import { SparklesIcon as SparklesIconOutline } from "@heroicons/react/24/outline";
 
@@ -9,18 +9,21 @@ interface ButtonProps {
   setDisplayShiny: Dispatch<SetStateAction<boolean>>;
 }
 
-const ToggleShinyButton = ({ displayShiny, setDisplayShiny }: ButtonProps) => (
-  <Button
-    onClick={() => setDisplayShiny((prev: boolean) => !prev)}
-    style={displayShiny ? "gold" : "normal"}
-    className="flex items-center gap-2 px-4"
-  >
-    {displayShiny ? (
-      <SparklesIconSolid className="size-4" />
-    ) : (
-      <SparklesIconOutline className="size-4" />
-    )}
-    Shiny Art
-  </Button>
+const ToggleShinyButton = memo(
+  ({ displayShiny, setDisplayShiny }: ButtonProps) => (
+    <Button
+      onClick={() => setDisplayShiny((prev: boolean) => !prev)}
+      style={displayShiny ? "gold" : "normal"}
+      className="flex items-center gap-2 px-4"
+    >
+      {displayShiny ? (
+        <SparklesIconSolid className="size-4" />
+      ) : (
+        <SparklesIconOutline className="size-4" />
+      )}
+      Shiny Art
+    </Button>
+  ),
 );
+ToggleShinyButton.displayName = "ToggleShinyButton";
 export default ToggleShinyButton;
