@@ -18,7 +18,7 @@ import PokemonStats from "../features/pokemon/pokemonDetails/PokemonStats.tsx";
 import PokemonEvolutionChain from "../features/pokemon/pokemonDetails/PokemonEvolutionChain.tsx";
 import PokemonGenerationDisplay from "../features/pokemon/pokemonDetails/PokemonGenerationDisplay.tsx";
 import CollapsingPanel from "../ui/CollapsingPanel.tsx";
-import PokemonMovesList from "../features/pokemon/pokemonDetails/PokemonMovesList.tsx";
+import PokemonMoves from "../features/pokemon/pokemonDetails/PokemonMoves.tsx";
 import FlavorTextEntries from "../features/pokemon/pokemonDetails/FlavorTextEntries.tsx";
 import Footer from "../ui/Footer.tsx";
 
@@ -143,8 +143,8 @@ const PokemonDetails = () => {
             generation={pokemonSpecies?.generation.name}
           />
 
-          <CollapsingPanel label="Level-Up Moves" className="p-2 sm:p-4">
-            <PokemonMovesList moves={pokemon?.moves} />
+          <CollapsingPanel label="Learnset" className="p-2 sm:p-4">
+            <PokemonMoves moves={pokemon?.moves} />
           </CollapsingPanel>
 
           <CollapsingPanel label="Dex Entries" className="px-2">
