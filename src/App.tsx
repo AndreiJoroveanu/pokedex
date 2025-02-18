@@ -1,4 +1,4 @@
-import { ComponentType, lazy, LazyExoticComponent } from "react";
+import { ElementType, lazy, Suspense } from "react";
 import {
   createBrowserRouter,
   Navigate,
@@ -6,6 +6,7 @@ import {
   useParams,
 } from "react-router";
 
+import Loader from "@/ui/Loader.tsx";
 import AppLayout from "@/ui/AppLayout.tsx";
 
 const AllPokemonPage = lazy(() => import("@/pages/AllPokemon.tsx"));
@@ -13,14 +14,23 @@ const PokemonDetailsPage = lazy(() => import("@/pages/PokemonDetails.tsx"));
 
 // This is needed to reset the key when the user clicks on
 // a different Pokémon link from the Pokémon details page
-const PokemonDetailsPageWrapper = ({
-  component: Component,
-}: {
-  component: LazyExoticComponent<ComponentType>;
-}) => {
+const PokemonDetailsPageWrapper = () => {
   const { id } = useParams();
-  return <Component key={id} />;
+  return <PokemonDetailsPage key={id} />;
 };
+
+// Suspense wrapper with a loading fallback
+const withSuspense = (Component: ElementType) => (
+  <Suspense
+    fallback={
+      <div className="h-screen bg-slate-100 transition-colors dark:bg-slate-800">
+        <Loader size={24} displaysText={true} />
+      </div>
+    }
+  >
+    <Component />
+  </Suspense>
+);
 
 const router = createBrowserRouter([
   {
@@ -33,12 +43,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/pokedex/pokemon",
-        element: <AllPokemonPage />,
+        element: withSuspense(AllPokemonPage),
       },
 
       {
         path: "/pokedex/pokemon/:id",
-        element: <PokemonDetailsPageWrapper component={PokemonDetailsPage} />,
+        element: withSuspense(PokemonDetailsPageWrapper),
       },
     ],
   },

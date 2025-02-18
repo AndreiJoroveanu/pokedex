@@ -28,6 +28,7 @@ const TopButtons = memo(() => {
         <ArrowUturnLeftIcon className="size-4" /> Back
       </Button>
 
+      {/* Star (Favorite) button */}
       <Button
         onClick={() => toggleStarredPokemonIds(Number(id))}
         style="gold"

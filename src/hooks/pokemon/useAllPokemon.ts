@@ -25,6 +25,7 @@ export const useAllPokemonSpecies = () => {
 
   const transformedData = useMemo(() => {
     return data?.results.map((p) => ({
+      // Extract the Pokémon Species ID from the URL
       id: Number(getIdFromUrl(p.url)),
       name: p.name,
     }));

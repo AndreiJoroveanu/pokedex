@@ -53,20 +53,20 @@ export const useFilteredPokemon = (
 
   // Starred Pokémon (if needed)
   const filteredStarredPokemon = useMemo<PokemonListType[] | undefined>(() => {
-    if (!filteredPokemon) return;
-    return onlyStarred
-      ? filteredPokemon?.filter((p) => starredPokemonIds.includes(p.id))
-      : filteredPokemon;
+    if (filteredPokemon)
+      return onlyStarred
+        ? filteredPokemon?.filter((p) => starredPokemonIds.includes(p.id))
+        : filteredPokemon;
   }, [filteredPokemon, onlyStarred, starredPokemonIds]);
 
   // Displayed Pokémon (after search query filtering, if needed)
   const searchedPokemon = useMemo<PokemonListType[] | undefined>(() => {
-    if (!filteredStarredPokemon) return;
-    return searchQuery.trim().length
-      ? filteredStarredPokemon?.filter((p) =>
-          p.name.includes(searchQuery.toLowerCase().trim()),
-        )
-      : filteredStarredPokemon;
+    if (filteredStarredPokemon)
+      return searchQuery.trim().length
+        ? filteredStarredPokemon?.filter((p) =>
+            p.name.includes(searchQuery.toLowerCase().trim()),
+          )
+        : filteredStarredPokemon;
   }, [filteredStarredPokemon, searchQuery]);
 
   return {

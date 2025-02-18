@@ -1,9 +1,4 @@
-interface Stats {
-  label: string;
-  color: string;
-}
-
-export const stats: Stats[] = [
+export const stats: { label: string; color: string }[] = [
   {
     label: "HP",
     color: "#9ae363",

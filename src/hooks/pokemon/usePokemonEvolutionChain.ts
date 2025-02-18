@@ -1,12 +1,9 @@
 import { useCallback } from "react";
 import { EvolutionChain } from "pokedex-promise-v2";
 
-import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
 import { api, useData } from "./usePokemonShared.ts";
 
-export const usePokemonEvolutionChain = (url: string | undefined) => {
-  const id = Number(getIdFromUrl(url));
-
+export const usePokemonEvolutionChain = (id: number | undefined) => {
   const fetcher = useCallback(() => {
     if (id) return api.getEvolutionChainById(id);
   }, [id]);

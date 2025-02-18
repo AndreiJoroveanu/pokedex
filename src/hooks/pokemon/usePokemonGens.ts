@@ -22,10 +22,11 @@ export const useAllPokemonByGen = (gen: string | undefined) => {
     return gen
       ? (data?.pokemon_species
           .map((p) => ({
+            // Extract the Pokémon Species ID from the URL
             id: Number(getIdFromUrl(p.url)),
             name: p.name,
           }))
-          .filter((p) => p.id < 10000)
+          // Sort all Pokémon by ID
           .sort((p1, p2) => p1.id - p2.id) ?? [])
       : [];
   }, [data?.pokemon_species, gen]);

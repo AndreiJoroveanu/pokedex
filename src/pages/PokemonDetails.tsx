@@ -33,7 +33,7 @@ const PokemonDetails = () => {
 
   // Evolution chain
   const { data: evolutionChain } = usePokemonEvolutionChain(
-    pokemonSpecies?.evolution_chain.url,
+    Number(getIdFromUrl(pokemonSpecies?.evolution_chain.url)),
   );
 
   // Pokémon passed as a state through React Router to avoid fetching it again
