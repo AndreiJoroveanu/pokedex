@@ -6,10 +6,10 @@ import {
 } from "@heroicons/react/24/outline";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 
-import { useMoveBack } from "../../../hooks/useMoveBack.ts";
-import { useStarredPokemon } from "../../../hooks/useStarredPokemon.ts";
+import { useMoveBack } from "@/hooks/useMoveBack.ts";
+import { useStarredPokemon } from "@/hooks/useStarredPokemon.ts";
 
-import Button from "../../../ui/Button.tsx";
+import Button from "@/ui/Button.tsx";
 
 const TopButtons = memo(() => {
   const moveBack = useMoveBack();

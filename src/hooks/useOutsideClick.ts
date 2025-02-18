@@ -4,9 +4,6 @@ export const useOutsideClick = (handler: () => void) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // const handleClick = (e: MouseEvent) => {
-    //   if (ref.current && !ref.current.contains(e.target as Node)) handler();
-    // };
     const handleClick = (e: MouseEvent) =>
       ref.current && !ref.current.contains(e.target as Node) && handler();
 

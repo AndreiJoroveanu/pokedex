@@ -2,26 +2,26 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router";
 import { Pokemon } from "pokedex-promise-v2";
 
-import { usePokemonSpecies } from "../hooks/pokemon/useSpecificPokemon.ts";
-import { usePokemonEvolutionChain } from "../hooks/pokemon/usePokemonEvolutionChain.ts";
-import { getIdFromUrl } from "../utils/getIdFromUrl.ts";
-import { api } from "../hooks/pokemon/usePokemonShared.ts";
-import { capitalize } from "../utils/helpers.ts";
+import { usePokemonSpecies } from "@/hooks/pokemon/useSpecificPokemon.ts";
+import { usePokemonEvolutionChain } from "@/hooks/pokemon/usePokemonEvolutionChain.ts";
+import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
+import { api } from "@/hooks/pokemon/usePokemonShared.ts";
+import { capitalize } from "@/utils/helpers.ts";
 
-import TopButtons from "../features/pokemon/pokemonDetails/TopButtons.tsx";
-import PokemonFormButtons from "../features/pokemon/pokemonDetails/PokemonFormButtons.tsx";
-import PokemonImage from "../features/pokemon/pokemonDetails/PokemonImage.tsx";
-import ToggleShinyButton from "../features/pokemon/pokemonDetails/ToggleShinyButton.tsx";
-import PokemonCategory from "../features/pokemon/pokemonDetails/PokemonCategory.tsx";
-import PokemonTypesDisplayText from "../features/pokemon/PokemonTypesDisplayText.tsx";
-import PokemonAbilitiesDisplayText from "../features/pokemon/pokemonDetails/PokemonAbilitiesDisplayText.tsx";
-import PokemonStats from "../features/pokemon/pokemonDetails/PokemonStats.tsx";
-import PokemonEvolutionChain from "../features/pokemon/pokemonDetails/PokemonEvolutionChain.tsx";
-import PokemonGenerationDisplay from "../features/pokemon/pokemonDetails/PokemonGenerationDisplay.tsx";
-import CollapsingPanel from "../ui/CollapsingPanel.tsx";
-import PokemonMoves from "../features/pokemon/pokemonDetails/PokemonMoves.tsx";
-import FlavorTextEntries from "../features/pokemon/pokemonDetails/FlavorTextEntries.tsx";
-import Footer from "../ui/Footer.tsx";
+import TopButtons from "@/features/pokemon/pokemonDetails/TopButtons.tsx";
+import PokemonFormButtons from "@/features/pokemon/pokemonDetails/PokemonFormButtons.tsx";
+import PokemonImage from "@/features/pokemon/pokemonDetails/PokemonImage.tsx";
+import ToggleShinyButton from "@/features/pokemon/pokemonDetails/ToggleShinyButton.tsx";
+import PokemonCategory from "@/features/pokemon/pokemonDetails/PokemonCategory.tsx";
+import PokemonTypesDisplayText from "@/features/pokemon/PokemonTypesDisplayText.tsx";
+import PokemonAbilitiesDisplayText from "@/features/pokemon/pokemonDetails/PokemonAbilitiesDisplayText.tsx";
+import PokemonStats from "@/features/pokemon/pokemonDetails/PokemonStats.tsx";
+import PokemonEvolutionChain from "@/features/pokemon/pokemonDetails/PokemonEvolutionChain.tsx";
+import PokemonGenerationDisplay from "@/features/pokemon/pokemonDetails/PokemonGenerationDisplay.tsx";
+import CollapsingPanel from "@/ui/CollapsingPanel.tsx";
+import PokemonMoves from "@/features/pokemon/pokemonDetails/PokemonMoves.tsx";
+import FlavorTextEntries from "@/features/pokemon/pokemonDetails/FlavorTextEntries.tsx";
+import Footer from "@/ui/Footer.tsx";
 
 const PokemonDetails = () => {
   const [currentForm, setCurrentForm] = useState<number>(0);
@@ -86,7 +86,7 @@ const PokemonDetails = () => {
               <PokemonFormButtons
                 pokemonSpecies={pokemonSpecies.varieties}
                 currentForm={currentForm}
-                onClick={(index) => {
+                handleClick={(index) => {
                   setPokemon(undefined);
                   setCurrentForm(index);
                 }}

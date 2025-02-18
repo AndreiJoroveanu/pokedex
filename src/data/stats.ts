@@ -1,53 +1,31 @@
 interface Stats {
   label: string;
-  backgroundColorLight: string;
-  backgroundColorDark: string;
-  colorLight: string;
-  colorDark: string;
+  color: string;
 }
 
-const stats: Stats[] = [
+export const stats: Stats[] = [
   {
     label: "HP",
-    backgroundColorLight: "#d7f7b9",
-    backgroundColorDark: "#4e6c30",
-    colorLight: "#94d45c",
-    colorDark: "#8ec45a",
+    color: "#9ae363",
   },
   {
     label: "Attack",
-    backgroundColorLight: "#fcf0b1",
-    backgroundColorDark: "#726530",
-    colorLight: "#ddc460",
-    colorDark: "#d6c15e",
+    color: "#f5de69",
   },
   {
     label: "Defense",
-    backgroundColorLight: "#facbae",
-    backgroundColorDark: "#72482f",
-    colorLight: "#d88c5c",
-    colorDark: "#d6885a",
+    color: "#f09a65",
   },
   {
     label: "Sp. Atk",
-    backgroundColorLight: "#a8ecfc",
-    backgroundColorDark: "#30687a",
-    colorLight: "#5fc4dc",
-    colorDark: "#5bbedc",
+    color: "#66d8f6",
   },
   {
     label: "Sp. Def",
-    backgroundColorLight: "#c7cff7",
-    backgroundColorDark: "#3f4970",
-    colorLight: "#7d8ccd",
-    colorDark: "#798bcc",
+    color: "#899eea",
   },
   {
     label: "Speed",
-    backgroundColorLight: "#f6b2e3",
-    backgroundColorDark: "#69325d",
-    colorLight: "#cc60b5",
-    colorDark: "#c55fb1",
+    color: "#e46cca",
   },
 ];
-export default stats;

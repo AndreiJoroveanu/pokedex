@@ -1,21 +1,21 @@
 import { memo } from "react";
 import { Variety } from "pokedex-promise-v2";
 
-import Button from "../../../ui/Button.tsx";
+import Button from "@/ui/Button.tsx";
 
 interface FormButtonProps {
   pokemonSpecies: Variety[];
   currentForm: number;
-  onClick: (index: number) => void;
+  handleClick: (index: number) => void;
 }
 
 const PokemonFormButtons = memo(
-  ({ pokemonSpecies, currentForm, onClick }: FormButtonProps) => (
+  ({ pokemonSpecies, currentForm, handleClick }: FormButtonProps) => (
     <>
       {pokemonSpecies.map((form, index) => (
         <Button
           key={form.pokemon.name}
-          onClick={() => onClick(index)}
+          onClick={() => handleClick(index)}
           disabled={currentForm === index}
           style={currentForm === index ? "indigo" : "normal"}
           className="z-10 px-4 text-nowrap capitalize disabled:cursor-default"

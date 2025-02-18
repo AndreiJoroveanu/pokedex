@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router";
 
-import useAppStore from "../store/useAppStore.ts";
-import { useUrlParams } from "../hooks/useUrlParams.ts";
-import { pokemonGens } from "../data/pokemonGens.ts";
-import { pokemonTypes } from "../data/pokemonTypes.ts";
-import { useStarredPokemon } from "../hooks/useStarredPokemon.ts";
+import useAppStore from "@/store/useAppStore.ts";
+import { useUrlParams } from "@/hooks/useUrlParams.ts";
+import { pokemonGens } from "@/data/pokemonGens.ts";
+import { pokemonTypes } from "@/data/pokemonTypes.ts";
+import { useStarredPokemon } from "@/hooks/useStarredPokemon.ts";
 
 import SidebarSearch from "./SidebarSearch.tsx";
 import SidebarFilter from "./SidebarFilter.tsx";

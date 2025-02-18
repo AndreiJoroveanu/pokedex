@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router";
 
-import { usePokemon } from "../../hooks/pokemon/useSpecificPokemon.ts";
+import { usePokemon } from "@/hooks/pokemon/useSpecificPokemon.ts";
 
-import Loader from "../../ui/Loader.tsx";
+import Loader from "@/ui/Loader.tsx";
 import PokemonTypesDisplayText from "./PokemonTypesDisplayText.tsx";
 
 interface CardProps {

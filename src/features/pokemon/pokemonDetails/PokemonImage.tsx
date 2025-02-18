@@ -1,6 +1,6 @@
 import { memo, useState } from "react";
 
-import Loader from "../../../ui/Loader.tsx";
+import Loader from "@/ui/Loader.tsx";
 
 interface ImageProps {
   src: string | null | undefined;
@@ -14,7 +14,7 @@ const PokemonImage = memo(({ src, alt }: ImageProps) => {
     <div className="relative">
       <img
         src={src ?? undefined}
-        alt={alt}
+        alt={alt ?? ""}
         onLoad={() => setIsLoadingImage(false)}
         className="mx-auto aspect-square max-h-128 w-full object-contain text-transparent dark:brightness-90"
       />

@@ -1,4 +1,4 @@
-import useAppStore from "../store/useAppStore.ts";
+import useAppStore from "@/store/useAppStore.ts";
 
 export type Theme = "light" | "dark" | "system";
 

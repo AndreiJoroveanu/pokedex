@@ -20,10 +20,9 @@ const FlavorTextEntries = memo(({ textEntries }: EntriesProps) => (
         {textEntries.map((entry) => (
           <li key={entry.version?.name} className="p-1 sm:p-2">
             <span className="font-bold capitalize">
-              {`${entry.version?.name.split("-").join(" ")}: `}
+              {entry.version?.name.split("-").join(" ")}
             </span>
-
-            {entry.flavor_text}
+            : {entry.flavor_text}
           </li>
         ))}
       </ul>

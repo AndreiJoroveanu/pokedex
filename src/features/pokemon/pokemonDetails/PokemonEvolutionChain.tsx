@@ -2,7 +2,7 @@ import { Fragment, memo } from "react";
 import { Link } from "react-router";
 import { Chain } from "pokedex-promise-v2";
 
-import getEvolutionData from "../../../utils/getEvolutionData.ts";
+import getEvolutionData from "@/utils/getEvolutionData.ts";
 
 interface ChainProps {
   chain: Chain | undefined;
@@ -24,9 +24,7 @@ const pokemonEvolutionText = (pokemon: PokemonListType) => (
     >
       {pokemon.name}
     </Link>
-    {pokemon.evolutionMethod
-      ? ` ${pokemon.evolutionMethod}`
-      : " (no data available)"}
+    {` ${pokemon.evolutionMethod ?? "(no data available)"}`}
   </>
 );
 

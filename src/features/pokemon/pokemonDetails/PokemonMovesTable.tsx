@@ -10,8 +10,8 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
     <h3 className="mb-1 text-2xl font-bold capitalize max-sm:pl-2">{label}</h3>
 
     <div className="-mx-2 overflow-x-scroll px-2 pb-2">
-      <table className="w-full text-nowrap">
-        {/* Table displaying the learnset from the selected version group */}
+      {/* Table displaying the learnset from the selected version group */}
+      <table className="min-w-full text-nowrap">
         <thead className="border-b border-slate-500">
           <tr>
             {label === "Level-Up Moves" && (
@@ -33,7 +33,7 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
               key={`${level}-${name}`}
               name={name}
               level={level}
-              isLevel={label === "Level-Up Moves"}
+              displayLevel={label === "Level-Up Moves"}
             />
           ))}
         </tbody>

@@ -6,10 +6,10 @@ import {
   useParams,
 } from "react-router";
 
-import AppLayout from "./ui/AppLayout.tsx";
+import AppLayout from "@/ui/AppLayout.tsx";
 
-const AllPokemonPage = lazy(() => import("./pages/AllPokemon.tsx"));
-const PokemonDetailsPage = lazy(() => import("./pages/PokemonDetails.tsx"));
+const AllPokemonPage = lazy(() => import("@/pages/AllPokemon.tsx"));
+const PokemonDetailsPage = lazy(() => import("@/pages/PokemonDetails.tsx"));
 
 // This is needed to reset the key when the user clicks on
 // a different Pokémon link from the Pokémon details page

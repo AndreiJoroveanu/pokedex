@@ -3,7 +3,7 @@ import {
   ChevronDoubleRightIcon,
 } from "@heroicons/react/24/outline";
 
-import { useUrlParams } from "../hooks/useUrlParams.ts";
+import { useUrlParams } from "@/hooks/useUrlParams.ts";
 
 import Button from "./Button.tsx";
 

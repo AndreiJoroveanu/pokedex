@@ -1,10 +1,10 @@
 import { memo, useState } from "react";
 import { MoveElement } from "pokedex-promise-v2";
 
-import filterLearnsetData from "../../../utils/filterLearnsetData.ts";
-import { versionGroups } from "../../../data/versionGroups.ts";
+import filterLearnsetData from "@/utils/filterLearnsetData.ts";
+import { versionGroups } from "@/data/versionGroups.ts";
 
-import Button from "../../../ui/Button.tsx";
+import Button from "@/ui/Button.tsx";
 import PokemonMovesTable from "./PokemonMovesTable.tsx";
 
 interface MovesProps {
@@ -28,20 +28,22 @@ const PokemonMoves = memo(({ moves }: MovesProps) => {
 
   return (
     <>
-      <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:-mx-4 sm:px-4">
-        {/* Buttons to select the game from which to display the data */}
-        {availableVersionGroups.map((versionGroup, index) => (
-          <Button
-            key={versionGroup}
-            onClick={() => setCurrentVersionIndex(index)}
-            disabled={currentVersionIndex === index}
-            style={currentVersionIndex === index ? "indigo" : "normal"}
-            className="px-4 text-nowrap capitalize disabled:cursor-default"
-          >
-            {versionGroup.split("-").join(" ")}
-          </Button>
-        ))}
-      </div>
+      {availableVersionGroups.length > 1 && (
+        <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:-mx-4 sm:px-4">
+          {/* Buttons to select the game from which to display the data */}
+          {availableVersionGroups.map((versionGroup, index) => (
+            <Button
+              key={versionGroup}
+              onClick={() => setCurrentVersionIndex(index)}
+              disabled={currentVersionIndex === index}
+              style={currentVersionIndex === index ? "indigo" : "normal"}
+              className="px-4 text-nowrap capitalize disabled:cursor-default"
+            >
+              {versionGroup.split("-").join(" ")}
+            </Button>
+          ))}
+        </div>
+      )}
 
       {/* Render move categories if they have moves */}
       {Object.values(learnset)
@@ -56,5 +58,5 @@ const PokemonMoves = memo(({ moves }: MovesProps) => {
     </>
   );
 });
-PokemonMoves.displayName = "PokemonMovesList";
+PokemonMoves.displayName = "PokemonMoves";
 export default PokemonMoves;

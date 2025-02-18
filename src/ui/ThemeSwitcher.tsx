@@ -2,8 +2,8 @@ import { MouseEvent, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 
-import useAppStore from "../store/useAppStore.ts";
-import { themeOptions } from "../data/themeOptions.tsx";
+import useAppStore from "@/store/useAppStore.ts";
+import { themeOptions } from "@/data/themeOptions.tsx";
 
 import ThemeSwitcherMenu from "./ThemeSwitcherMenu.tsx";
 

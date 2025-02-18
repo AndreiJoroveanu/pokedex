@@ -2,7 +2,7 @@ import { Dispatch, memo, SetStateAction } from "react";
 import { SparklesIcon as SparklesIconSolid } from "@heroicons/react/24/solid";
 import { SparklesIcon as SparklesIconOutline } from "@heroicons/react/24/outline";
 
-import Button from "../../../ui/Button.tsx";
+import Button from "@/ui/Button.tsx";
 
 interface ButtonProps {
   displayShiny: boolean;

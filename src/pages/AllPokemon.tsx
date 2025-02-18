@@ -1,15 +1,15 @@
 import { useMemo } from "react";
 
-import { useAllPokemonSpecies } from "../hooks/pokemon/useAllPokemon.ts";
-import { useFilteredPokemon } from "../hooks/useFilteredPokemon.ts";
-import { useUrlParams } from "../hooks/useUrlParams.ts";
+import { useAllPokemonSpecies } from "@/hooks/pokemon/useAllPokemon.ts";
+import { useFilteredPokemon } from "@/hooks/useFilteredPokemon.ts";
+import { useUrlParams } from "@/hooks/useUrlParams.ts";
 
-import Sidebar from "../ui/Sidebar.tsx";
-import ChangePageButtons from "../ui/ChangePageButtons.tsx";
-import Loader from "../ui/Loader.tsx";
-import FilterErrorMessage from "../ui/FilterErrorMessage.tsx";
-import PokemonCard from "../features/pokemon/PokemonCard.tsx";
-import Footer from "../ui/Footer.tsx";
+import Sidebar from "@/ui/Sidebar.tsx";
+import ChangePageButtons from "@/ui/ChangePageButtons.tsx";
+import Loader from "@/ui/Loader.tsx";
+import FilterErrorMessage from "@/ui/FilterErrorMessage.tsx";
+import PokemonCard from "@/features/pokemon/PokemonCard.tsx";
+import Footer from "@/ui/Footer.tsx";
 
 interface PokemonListType {
   id: number;

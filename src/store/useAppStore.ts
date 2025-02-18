@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { changeTheme, initialTheme, Theme } from "../utils/themeUtils.ts";
+import { changeTheme, initialTheme, Theme } from "@/utils/themeUtils.ts";
 
 // Typescript stuff
 interface State {

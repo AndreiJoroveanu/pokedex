@@ -3,10 +3,10 @@ import { createPortal } from "react-dom";
 import { motion } from "motion/react";
 import { spring } from "motion";
 
-import useAppStore from "../store/useAppStore.ts";
-import { themeOptions } from "../data/themeOptions.tsx";
-import { Theme } from "../utils/themeUtils.ts";
-import { useOutsideClick } from "../hooks/useOutsideClick.ts";
+import useAppStore from "@/store/useAppStore.ts";
+import { themeOptions } from "@/data/themeOptions.tsx";
+import { Theme } from "@/utils/themeUtils.ts";
+import { useOutsideClick } from "@/hooks/useOutsideClick.ts";
 
 interface MenuProps {
   actualTheme: "light" | "dark";

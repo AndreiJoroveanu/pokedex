@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useUrlParams } from "../hooks/useUrlParams.ts";
+import { useUrlParams } from "@/hooks/useUrlParams.ts";
 
 const SidebarSearch = () => {
   const [search, setSearch] = useState("");
