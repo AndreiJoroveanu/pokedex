@@ -35,16 +35,14 @@ const Sidebar = () => {
 
       <SidebarFilter
         name="generation"
-        values={pokemonGens?.map((gen) => gen.name.split("-")[1])}
-        renderLabel={(item) => `Gen. ${item.toUpperCase()}`}
+        values={pokemonGens}
         isOpen={isGenFilterOpen}
         toggleOpen={toggleGenFilterOpen}
       />
 
       <SidebarFilter
         name="type"
-        values={pokemonTypes?.map((type) => type.name)}
-        renderLabel={(item) => item}
+        values={pokemonTypes}
         isOpen={isTypeFilterOpen}
         toggleOpen={toggleTypeFilterOpen}
       />

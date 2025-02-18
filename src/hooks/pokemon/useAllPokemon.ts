@@ -2,6 +2,7 @@ import { useCallback, useMemo } from "react";
 import { NamedAPIResourceList } from "pokedex-promise-v2";
 
 import { api, useData } from "./usePokemonShared.ts";
+import { getIdFromUrl } from "../../utils/getIdFromUrl.ts";
 
 // Currently unused, uncomment to use
 // export const useAllPokemon = () => {
@@ -10,9 +11,7 @@ import { api, useData } from "./usePokemonShared.ts";
 //
 //   const transformedData = useMemo(() => {
 //     return data?.results.map((p) => ({
-//       id: Number(
-//         p.url.split("https://pokeapi.co/api/v2/pokemon/")[1].split("/")[0],
-//       ),
+//       id: Number(getIdFromUrl(p.url)),
 //       name: p.name,
 //     }));
 //   }, [data]);
@@ -26,11 +25,7 @@ export const useAllPokemonSpecies = () => {
 
   const transformedData = useMemo(() => {
     return data?.results.map((p) => ({
-      id: Number(
-        p.url
-          .split("https://pokeapi.co/api/v2/pokemon-species/")[1]
-          .split("/")[0],
-      ),
+      id: Number(getIdFromUrl(p.url)),
       name: p.name,
     }));
   }, [data]);

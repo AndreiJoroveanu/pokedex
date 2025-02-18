@@ -1,5 +1,6 @@
 import { Chain, EvolutionDetail } from "pokedex-promise-v2";
 
+import { getIdFromUrl } from "./getIdFromUrl.ts";
 import formatEvolutionMethod from "./formatEvolutionMethod.ts";
 
 interface PokemonListType {
@@ -16,11 +17,7 @@ interface ReturnTypes {
 // Extract the Pokémon name and the ID from the URL
 const extractData = (node: Chain, evolutionDetails: EvolutionDetail[]) => ({
   name: node.species.name,
-  id: Number(
-    node.species.url
-      .split("https://pokeapi.co/api/v2/pokemon-species/")[1]
-      .split("/")[0],
-  ),
+  id: Number(getIdFromUrl(node.species.url)),
   // A string detailing how another Pokémon evolves/evolved into this Pokémon
   evolutionMethod: formatEvolutionMethod(evolutionDetails),
 });

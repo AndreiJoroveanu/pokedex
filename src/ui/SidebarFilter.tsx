@@ -5,19 +5,12 @@ import Button from "./Button.tsx";
 
 interface FilterProps {
   name: string;
-  values?: string[];
-  renderLabel: (name: string) => string;
+  values?: { value: string; label: string }[];
   isOpen: boolean;
   toggleOpen: () => void;
 }
 
-const SidebarFilter = ({
-  name,
-  values,
-  renderLabel,
-  isOpen,
-  toggleOpen,
-}: FilterProps) => {
+const SidebarFilter = ({ name, values, isOpen, toggleOpen }: FilterProps) => {
   const { getUrl, setUrl } = useUrl();
 
   return (
@@ -27,14 +20,14 @@ const SidebarFilter = ({
       toggleOpen={toggleOpen}
       className="grid grid-cols-3 gap-2 p-2 lg:grid-cols-2 xl:grid-cols-3"
     >
-      {values?.map((item) => (
+      {values?.map(({ value, label }) => (
         <Button
-          key={item}
-          onClick={() => setUrl(name, item)}
-          style={getUrl(name) === item ? "indigo" : "normal"}
+          key={value}
+          onClick={() => setUrl(name, value)}
+          style={getUrl(name) === value ? "indigo" : "normal"}
           className="capitalize"
         >
-          {renderLabel(item)}
+          {label}
         </Button>
       ))}
     </CollapsingPanel>

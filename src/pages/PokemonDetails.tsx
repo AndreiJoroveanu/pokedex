@@ -4,6 +4,7 @@ import { Pokemon } from "pokedex-promise-v2";
 
 import { usePokemonSpecies } from "../hooks/pokemon/useSpecificPokemon.ts";
 import { usePokemonEvolutionChain } from "../hooks/pokemon/usePokemonEvolutionChain.ts";
+import { getIdFromUrl } from "../utils/getIdFromUrl.ts";
 import { api } from "../hooks/pokemon/usePokemonShared.ts";
 import { capitalize } from "../utils/helpers.ts";
 
@@ -57,9 +58,7 @@ const PokemonDetails = () => {
         const pokemonId =
           currentForm === 0
             ? id
-            : pokemonSpecies?.varieties[currentForm].pokemon.url
-                .split("https://pokeapi.co/api/v2/pokemon/")[1]
-                .split("/")[0];
+            : getIdFromUrl(pokemonSpecies?.varieties[currentForm].pokemon.url);
 
         if (!ignore && pokemonId)
           setPokemon(await api.getPokemonByName(pokemonId));

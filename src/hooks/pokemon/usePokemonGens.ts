@@ -2,6 +2,7 @@ import { useCallback, useMemo } from "react";
 import { Generation } from "pokedex-promise-v2";
 
 import { api, useData } from "./usePokemonShared.ts";
+import { getIdFromUrl } from "../../utils/getIdFromUrl.ts";
 
 // Currently unused, uncomment to use
 // export const usePokemonGens = () => {
@@ -21,11 +22,7 @@ export const useAllPokemonByGen = (gen: string | undefined) => {
     return gen
       ? (data?.pokemon_species
           .map((p) => ({
-            id: Number(
-              p.url
-                .split("https://pokeapi.co/api/v2/pokemon-species/")[1]
-                .split("/")[0],
-            ),
+            id: Number(getIdFromUrl(p.url)),
             name: p.name,
           }))
           .filter((p) => p.id < 10000)
