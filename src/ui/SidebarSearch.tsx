@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
-import { useUrl } from "../hooks/useUrl.ts";
+import { useUrlParams } from "../hooks/useUrlParams.ts";
 
 const SidebarSearch = () => {
   const [search, setSearch] = useState("");
-  const { getUrl, setUrl } = useUrl();
+  const { getUrlParam, setUrlParam } = useUrlParams();
 
   // This syncs the search field value when returning from another page
-  useEffect(() => setSearch(getUrl("q") ?? ""), [getUrl]);
+  useEffect(() => setSearch(getUrlParam("q") ?? ""), [getUrlParam]);
 
   const handleChange = (input: string) => {
     setSearch(input);
-    setUrl("q", input);
+    setUrlParam("q", input);
   };
 
   return (

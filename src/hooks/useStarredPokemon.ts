@@ -1,19 +1,18 @@
 import { useLocalStorageState } from "./useLocalStorageState.ts";
 
 export const useStarredPokemon = () => {
-  const [starredPokemon, setStarredPokemon] = useLocalStorageState<string[]>(
-    [],
-    "starredPokemon",
-  );
+  const [starredPokemonIds, setStarredPokemonIds] = useLocalStorageState<
+    number[]
+  >([], "starredPokemonIds");
 
-  const toggleStarredPokemon = (pokemon: string) =>
-    setStarredPokemon((prevPokemon) =>
-      starredPokemon.includes(pokemon)
-        ? prevPokemon.filter((p) => p !== pokemon)
-        : [...prevPokemon, pokemon],
+  const toggleStarredPokemonIds = (pokemonId: number) =>
+    setStarredPokemonIds((prevPokemon) =>
+      starredPokemonIds.includes(pokemonId)
+        ? prevPokemon.filter((p) => p !== pokemonId)
+        : [...prevPokemon, pokemonId],
     );
 
-  const length = starredPokemon.length;
+  const length = starredPokemonIds.length;
 
-  return { starredPokemon, toggleStarredPokemon, length };
+  return { starredPokemonIds, toggleStarredPokemonIds, length };
 };

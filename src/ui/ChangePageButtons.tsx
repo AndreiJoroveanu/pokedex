@@ -3,7 +3,7 @@ import {
   ChevronDoubleRightIcon,
 } from "@heroicons/react/24/outline";
 
-import { useUrl } from "../hooks/useUrl.ts";
+import { useUrlParams } from "../hooks/useUrlParams.ts";
 
 import Button from "./Button.tsx";
 
@@ -13,10 +13,10 @@ interface ButtonProps {
 }
 
 const ChangePageButtons = ({ noOfPages, noOfSideButtons }: ButtonProps) => {
-  const { getUrl, setUrl } = useUrl();
-  const currentPage = Number(getUrl("page")) || 1;
+  const { getUrlParam, setUrlParam } = useUrlParams();
+  const currentPage = Number(getUrlParam("page")) || 1;
 
-  const setCurrentPage = (page: number) => setUrl("page", page.toString());
+  const setCurrentPage = (page: number) => setUrlParam("page", page.toString());
 
   const getPaginationButtons = () => {
     const buttons: number[] = [];

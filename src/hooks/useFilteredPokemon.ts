@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { useUrl } from "./useUrl.ts";
+import { useUrlParams } from "./useUrlParams.ts";
 import { useAllPokemonByGen } from "./pokemon/usePokemonGens.ts";
 import { useAllPokemonByType } from "./pokemon/usePokemonTypes.ts";
 import { useStarredPokemon } from "./useStarredPokemon.ts";
@@ -14,11 +14,11 @@ export const useFilteredPokemon = (
   allPokemon: PokemonListType[] | undefined,
 ) => {
   // Get the URL Params
-  const { getUrl } = useUrl();
-  const currentGen = getUrl("generation") ?? "";
-  const currentType = getUrl("type") ?? "";
-  const onlyStarred = Boolean(getUrl("onlyStarred"));
-  const searchQuery = getUrl("q") ?? "";
+  const { getUrlParam } = useUrlParams();
+  const currentGen = getUrlParam("generation") ?? "";
+  const currentType = getUrlParam("type") ?? "";
+  const onlyStarred = Boolean(getUrlParam("onlyStarred"));
+  const searchQuery = getUrlParam("q") ?? "";
 
   // Fetch Pokémon filtered by gen/type
   const { data: filteredByGen, isLoading: isLoadingFG } =
@@ -27,7 +27,7 @@ export const useFilteredPokemon = (
     useAllPokemonByType(currentType);
 
   // Get starred Pokémon
-  const { starredPokemon } = useStarredPokemon();
+  const { starredPokemonIds } = useStarredPokemon();
 
   // Pokémon filtering
   const filteredPokemon = useMemo(() => {
@@ -55,9 +55,9 @@ export const useFilteredPokemon = (
   const filteredStarredPokemon = useMemo<PokemonListType[] | undefined>(() => {
     if (!filteredPokemon) return;
     return onlyStarred
-      ? filteredPokemon?.filter((p) => starredPokemon.includes(p.name))
+      ? filteredPokemon?.filter((p) => starredPokemonIds.includes(p.id))
       : filteredPokemon;
-  }, [filteredPokemon, onlyStarred, starredPokemon]);
+  }, [filteredPokemon, onlyStarred, starredPokemonIds]);
 
   // Displayed Pokémon (after search query filtering, if needed)
   const searchedPokemon = useMemo<PokemonListType[] | undefined>(() => {

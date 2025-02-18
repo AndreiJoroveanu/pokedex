@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 
 import useAppStore from "../store/useAppStore.ts";
-import { useUrl } from "../hooks/useUrl.ts";
+import { useUrlParams } from "../hooks/useUrlParams.ts";
 import { pokemonGens } from "../data/pokemonGens.ts";
 import { pokemonTypes } from "../data/pokemonTypes.ts";
 import { useStarredPokemon } from "../hooks/useStarredPokemon.ts";
@@ -20,12 +20,12 @@ const Sidebar = () => {
 
   const navigate = useNavigate();
 
-  const { getUrl, setUrl } = useUrl();
+  const { getUrlParam, setUrlParam } = useUrlParams();
   const isClearButtonDisabled =
-    !getUrl("generation") &&
-    !getUrl("type") &&
-    !getUrl("onlyStarred") &&
-    !getUrl("q");
+    !getUrlParam("generation") &&
+    !getUrlParam("type") &&
+    !getUrlParam("onlyStarred") &&
+    !getUrlParam("q");
 
   const { length } = useStarredPokemon();
 
@@ -48,11 +48,12 @@ const Sidebar = () => {
       />
 
       <Button
-        onClick={() => setUrl("onlyStarred", "true")}
-        style={getUrl("onlyStarred") ? "gold" : "normal"}
+        onClick={() => setUrlParam("onlyStarred", "true")}
+        style={getUrlParam("onlyStarred") ? "gold" : "normal"}
         className="mb-4 w-full"
       >
-        Show{getUrl("onlyStarred") ? `ing ${length}` : " only"} starred Pokémon
+        Show{getUrlParam("onlyStarred") ? `ing ${length}` : " only"} starred
+        Pokémon
       </Button>
 
       <Button

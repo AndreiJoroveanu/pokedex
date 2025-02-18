@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { useAllPokemonSpecies } from "../hooks/pokemon/useAllPokemon.ts";
 import { useFilteredPokemon } from "../hooks/useFilteredPokemon.ts";
-import { useUrl } from "../hooks/useUrl.ts";
+import { useUrlParams } from "../hooks/useUrlParams.ts";
 
 import Sidebar from "../ui/Sidebar.tsx";
 import ChangePageButtons from "../ui/ChangePageButtons.tsx";
@@ -30,8 +30,8 @@ const AllPokemon = () => {
   const noOfPages = Math.ceil(noOfPokemon / POKEMON_PER_PAGE);
 
   // Get the current page
-  const { getUrl } = useUrl();
-  const currentPage = Number(getUrl("page")) || 1;
+  const { getUrlParam } = useUrlParams();
+  const currentPage = Number(getUrlParam("page")) || 1;
 
   // Get the Pokémon from the current page to display
   const paginatedPokemon = useMemo<PokemonListType[] | undefined>(() => {

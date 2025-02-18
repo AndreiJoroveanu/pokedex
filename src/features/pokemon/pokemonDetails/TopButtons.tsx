@@ -14,8 +14,8 @@ import Button from "../../../ui/Button.tsx";
 const TopButtons = memo(() => {
   const moveBack = useMoveBack();
 
-  const { name } = useParams() as { name: string };
-  const { starredPokemon, toggleStarredPokemon } = useStarredPokemon();
+  const { id } = useParams() as { id: string };
+  const { starredPokemonIds, toggleStarredPokemonIds } = useStarredPokemon();
 
   return (
     <>
@@ -29,11 +29,11 @@ const TopButtons = memo(() => {
       </Button>
 
       <Button
-        onClick={() => toggleStarredPokemon(name)}
+        onClick={() => toggleStarredPokemonIds(Number(id))}
         style="gold"
         className="fixed top-22 right-2 z-20 flex items-center gap-2 px-4 sm:top-28 sm:right-4"
       >
-        {starredPokemon.includes(name) ? (
+        {starredPokemonIds.includes(Number(id)) ? (
           <>
             <StarIconSolid className="size-4" /> Starred
           </>

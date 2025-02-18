@@ -1,13 +1,13 @@
 import { useSearchParams } from "react-router";
 
-export const useUrl = () => {
+export const useUrlParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const getUrl = (name: string) => searchParams.get(name);
+  const getUrlParam = (name: string) => searchParams.get(name);
 
-  const setUrl = (name: string, value: string) => {
+  const setUrlParam = (name: string, value: string) => {
     // Resets URL param if the user clicks an active category or clears the search input
-    if (getUrl(name) === value || value === "") searchParams.delete(name);
+    if (getUrlParam(name) === value || value === "") searchParams.delete(name);
     else searchParams.set(name, value);
 
     // Reset page if it exists and another URL param is changed
@@ -26,5 +26,5 @@ export const useUrl = () => {
     setSearchParams(orderedParams);
   };
 
-  return { getUrl, setUrl };
+  return { getUrlParam, setUrlParam };
 };
