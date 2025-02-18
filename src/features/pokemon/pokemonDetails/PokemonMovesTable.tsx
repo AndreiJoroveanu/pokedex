@@ -1,3 +1,5 @@
+import PokemonMoveTableRow from "./PokemonMoveTableRow.tsx";
+
 interface MovesProps {
   moves: { name: string; level: number }[];
   label: string;
@@ -5,31 +7,38 @@ interface MovesProps {
 
 const PokemonMovesTable = ({ moves, label }: MovesProps) => (
   <>
-    <h3 className="mt-2 mb-1 text-2xl font-bold capitalize">{label}</h3>
+    <h3 className="mb-1 text-2xl font-bold capitalize max-sm:pl-2">{label}</h3>
 
-    <table>
-      {/* Table displaying the learnset from the selected version group */}
-      <thead className="border-b border-slate-500">
-        <tr>
-          {label === "Level-Up Moves" && (
-            <th className="pr-4 pb-1 text-start">Level</th>
-          )}
-          <th className="pr-4 pb-1 text-start">Move</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {moves.map(({ name, level }) => (
-          <tr key={name}>
+    <div className="-mx-2 overflow-x-scroll px-2 pb-2">
+      <table className="w-full text-nowrap">
+        {/* Table displaying the learnset from the selected version group */}
+        <thead className="border-b border-slate-500">
+          <tr>
             {label === "Level-Up Moves" && (
-              <td className="pr-4">{level || "Evo."}</td>
+              <th className="min-w-14 pb-1 text-start">Level</th>
             )}
+            <th className="min-w-36 pb-1 text-start">Move</th>
 
-            <td className="pr-4 capitalize">{name.split("-").join(" ")}</td>
+            <th className="min-w-18 pb-1 text-start">Type</th>
+            <th className="min-w-22 pb-1 text-start">Category</th>
+            <th className="min-w-16 pb-1 text-start">Power</th>
+            <th className="min-w-22 pb-1 text-start">Accuracy</th>
+            <th className="min-w-6 pb-1 text-start">PP</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+
+        <tbody>
+          {moves.map(({ name, level }) => (
+            <PokemonMoveTableRow
+              key={`${level}-${name}`}
+              name={name}
+              level={level}
+              isLevel={label === "Level-Up Moves"}
+            />
+          ))}
+        </tbody>
+      </table>
+    </div>
   </>
 );
 export default PokemonMovesTable;

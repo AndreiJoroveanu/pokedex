@@ -80,10 +80,10 @@ const PokemonDetails = () => {
       <TopButtons />
 
       <div className="pt-0 md:pt-36 lg:pt-24">
-        <div className="mx-auto max-w-3xl bg-slate-100 p-4 transition-colors max-md:pt-42 max-sm:pt-36 md:my-4 md:rounded-lg md:border-2 md:border-slate-400/40 dark:bg-slate-800">
+        <div className="mx-auto max-w-3xl bg-slate-100 p-2 transition-colors max-md:pt-42 max-sm:pt-36 sm:p-4 md:my-4 md:rounded-lg md:border-2 md:border-slate-400/40 dark:bg-slate-800">
           {/* List of Pokémon form buttons (if there is more than one) */}
           {pokemonSpecies && pokemonSpecies.varieties.length > 1 && (
-            <div className="-mx-4 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:px-4">
+            <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:-mx-4 sm:px-4">
               <PokemonFormButtons
                 pokemonSpecies={pokemonSpecies.varieties}
                 currentForm={currentForm}
