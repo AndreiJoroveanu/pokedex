@@ -13,7 +13,7 @@ import PokemonFormButtons from "@/features/pokemon/pokemonDetails/PokemonFormBut
 import PokemonImage from "@/features/pokemon/pokemonDetails/PokemonImage.tsx";
 import ToggleShinyButton from "@/features/pokemon/pokemonDetails/ToggleShinyButton.tsx";
 import PokemonCategory from "@/features/pokemon/pokemonDetails/PokemonCategory.tsx";
-import PokemonTypesDisplayText from "@/features/pokemon/PokemonTypesDisplayText.tsx";
+import PokemonTypesDisplay from "@/features/pokemon/PokemonTypesDisplay.tsx";
 import PokemonAbilitiesDisplayText from "@/features/pokemon/pokemonDetails/PokemonAbilitiesDisplayText.tsx";
 import PokemonStats from "@/features/pokemon/pokemonDetails/PokemonStats.tsx";
 import PokemonEvolutionChain from "@/features/pokemon/pokemonDetails/PokemonEvolutionChain.tsx";
@@ -127,7 +127,7 @@ const PokemonDetails = () => {
             )}
           />
 
-          <PokemonTypesDisplayText types={pokemon?.types} />
+          <PokemonTypesDisplay types={pokemon?.types} />
 
           <PokemonAbilitiesDisplayText abilities={pokemon?.abilities} />
 

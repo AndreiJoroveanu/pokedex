@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { usePokemon } from "@/hooks/pokemon/useSpecificPokemon.ts";
 
 import Loader from "@/ui/Loader.tsx";
-import PokemonTypesDisplayText from "./PokemonTypesDisplayText.tsx";
+import PokemonTypesDisplay from "./PokemonTypesDisplay.tsx";
 
 interface CardProps {
   id: number;
@@ -36,14 +36,14 @@ const PokemonCard = ({ id, name }: CardProps) => {
           ""
         )}
 
-        <div className="px-3 py-2 md:p-4">
-          <h1 className="text-base font-bold text-nowrap capitalize sm:text-lg md:text-xl">
+        <div className="p-2 md:p-4">
+          <h1 className="text-base font-bold text-nowrap capitalize max-md:px-1 sm:text-lg md:text-xl">
             {id}. {name}
           </h1>
 
-          <PokemonTypesDisplayText
+          <PokemonTypesDisplay
             types={pokemon?.types}
-            className="text-sm font-semibold text-nowrap text-slate-500 md:text-base dark:text-slate-400"
+            className="-mx-6 flex max-md:scale-75 max-md:gap-1 md:-mx-1"
           />
         </div>
       </article>
