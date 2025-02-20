@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Link } from "react-router";
 
 import { usePokemon } from "@/hooks/pokemon/useSpecificPokemon.ts";
@@ -11,7 +11,7 @@ interface CardProps {
   name: string;
 }
 
-const PokemonCard = ({ id, name }: CardProps) => {
+const PokemonCard = memo(({ id, name }: CardProps) => {
   const { data: pokemon } = usePokemon(id);
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
@@ -49,5 +49,6 @@ const PokemonCard = ({ id, name }: CardProps) => {
       </article>
     </Link>
   );
-};
+});
+PokemonCard.displayName = "PokemonCard";
 export default PokemonCard;
