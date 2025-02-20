@@ -24,7 +24,7 @@ const PokemonCard = ({ id, name }: CardProps) => {
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
           alt={name}
           onLoad={() => setIsLoadingImage(false)}
-          className="aspect-square w-full object-contain text-transparent dark:brightness-90"
+          className="aspect-square w-full object-contain text-transparent"
         />
 
         {/* Covers Pokémon image with the loader if the image hasn't loaded */}
@@ -37,13 +37,13 @@ const PokemonCard = ({ id, name }: CardProps) => {
         )}
 
         <div className="p-2 md:p-4">
-          <h1 className="text-base font-bold text-nowrap capitalize max-md:px-1 sm:text-lg md:text-xl">
-            {id}. {name}
+          <h1 className="mb-1 text-xl font-bold text-nowrap capitalize max-md:px-1">
+            {name}
           </h1>
 
           <PokemonTypesDisplay
             types={pokemon?.types}
-            className="-mx-6 flex max-md:scale-75 max-md:gap-1 md:-mx-1"
+            className="-mx-6 max-md:scale-75 max-md:gap-1 md:-mx-1"
           />
         </div>
       </article>

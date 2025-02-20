@@ -16,7 +16,7 @@ const PokemonImage = memo(({ src, alt }: ImageProps) => {
         src={src ?? undefined}
         alt={alt ?? ""}
         onLoad={() => setIsLoadingImage(false)}
-        className="mx-auto aspect-square max-h-128 w-full object-contain text-transparent dark:brightness-90"
+        className="mx-auto aspect-square max-h-128 w-full object-contain text-transparent"
       />
 
       {/* Display a message if the selected Form doesn't have an image (the src is null) */}
