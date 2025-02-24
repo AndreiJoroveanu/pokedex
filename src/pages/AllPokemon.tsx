@@ -5,6 +5,7 @@ import { useFilteredPokemon } from "@/hooks/useFilteredPokemon.ts";
 import { useScrollRestoration } from "@/hooks/useScrollRestoration.ts";
 
 import Sidebar from "@/ui/Sidebar.tsx";
+import ScrollToTopButton from "@/ui/ScrollToTopButton.tsx";
 import PokemonCard from "@/features/pokemon/PokemonCard.tsx";
 import Footer from "@/ui/Footer.tsx";
 import Loader from "@/ui/Loader.tsx";
@@ -19,6 +20,8 @@ const AllPokemon = () => {
   return (
     <div className="relative pt-18 sm:pt-24">
       <Sidebar />
+
+      <ScrollToTopButton />
 
       <section className="flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5">
         {!isLoadingAP && !isLoading ? (

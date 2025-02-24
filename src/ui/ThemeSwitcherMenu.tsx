@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "motion/react";
-import { spring } from "motion";
 
 import useAppStore from "@/store/useAppStore.ts";
 import { themeOptions } from "@/data/themeOptions.tsx";
@@ -18,7 +17,7 @@ const menuVariants = {
     x: "var(--x-from-container, 0px)", // sm-
     y: "var(--y-from-container, 0px)", // sm+
     opacity: 0,
-    transition: { type: spring, bounce: 0, duration: 0.3 },
+    transition: { type: "spring", bounce: 0, duration: 0.3 },
   },
   visible: {
     x: 0,
@@ -26,7 +25,7 @@ const menuVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      type: spring,
+      type: "spring",
       bounce: 0,
       duration: 0.3,
     },
@@ -43,7 +42,7 @@ const optionVariants = {
     opacity: 1,
     x: 0,
     y: 0,
-    transition: { type: spring, bounce: 0.5, duration: 0.3 },
+    transition: { type: "spring", bounce: 0.5, duration: 0.3 },
   },
 };
 
