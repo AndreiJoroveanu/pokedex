@@ -2,6 +2,7 @@ import { VirtuosoGrid } from "react-virtuoso";
 
 import { useAllPokemonSpecies } from "@/hooks/pokemon/useAllPokemon.ts";
 import { useFilteredPokemon } from "@/hooks/useFilteredPokemon.ts";
+import { useScrollRestoration } from "@/hooks/useScrollRestoration.ts";
 
 import Sidebar from "@/ui/Sidebar.tsx";
 import PokemonCard from "@/features/pokemon/PokemonCard.tsx";
@@ -12,6 +13,8 @@ import FilterErrorMessage from "@/ui/FilterErrorMessage.tsx";
 const AllPokemon = () => {
   const { data: allPokemon, isLoading: isLoadingAP } = useAllPokemonSpecies();
   const { pokemonList, isLoading, isFiltered } = useFilteredPokemon(allPokemon);
+
+  useScrollRestoration();
 
   return (
     <div className="relative pt-18 sm:pt-24">

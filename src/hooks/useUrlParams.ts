@@ -1,7 +1,10 @@
 import { useSearchParams } from "react-router";
 
+import { useScrollRestoration } from "@/hooks/useScrollRestoration.ts";
+
 export const useUrlParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const resetScroll = useScrollRestoration();
 
   const getUrlParam = (name: string) => searchParams.get(name);
 
@@ -10,13 +13,12 @@ export const useUrlParams = () => {
     if (getUrlParam(name) === value || value === "") searchParams.delete(name);
     else searchParams.set(name, value);
 
-    // Reset page if it exists and another URL param is changed
-    if (name !== "page" && searchParams.get("page"))
-      searchParams.delete("page");
+    // Reset sessionStorage value for useScrollRestoration hook
+    resetScroll();
 
     // Order URL params
     const orderedParams = new URLSearchParams();
-    const paramsOrder = ["page", "generation", "type", "onlyStarred", "q"];
+    const paramsOrder = ["generation", "type", "onlyStarred", "q"];
 
     paramsOrder.map((name) => {
       const value = searchParams.get(name);
@@ -26,5 +28,10 @@ export const useUrlParams = () => {
     setSearchParams(orderedParams);
   };
 
-  return { getUrlParam, setUrlParam };
+  const resetUrlParams = () => {
+    resetScroll();
+    setSearchParams();
+  };
+
+  return { getUrlParam, setUrlParam, resetUrlParams };
 };

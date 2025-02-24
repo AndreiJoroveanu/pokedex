@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router";
-
 import useAppStore from "@/store/useAppStore.ts";
 import { useUrlParams } from "@/hooks/useUrlParams.ts";
 import { pokemonGens } from "@/data/pokemonGens.ts";
@@ -18,9 +16,7 @@ const Sidebar = () => {
     (state) => state.toggleTypeFilterOpen,
   );
 
-  const navigate = useNavigate();
-
-  const { getUrlParam, setUrlParam } = useUrlParams();
+  const { getUrlParam, setUrlParam, resetUrlParams } = useUrlParams();
   const isClearButtonDisabled =
     !getUrlParam("generation") &&
     !getUrlParam("type") &&
@@ -57,7 +53,7 @@ const Sidebar = () => {
       </Button>
 
       <Button
-        onClick={() => void navigate("/pokedex/pokemon")}
+        onClick={resetUrlParams}
         disabled={isClearButtonDisabled}
         style={!isClearButtonDisabled ? "indigo" : "normal"}
         className="w-full disabled:cursor-not-allowed disabled:opacity-25 lg:mb-4"

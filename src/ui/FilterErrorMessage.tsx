@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router";
+import { useUrlParams } from "@/hooks/useUrlParams.ts";
 
 import Button from "./Button.tsx";
 
 const FilterErrorMessage = ({ type }: { type: string }) => {
-  const navigate = useNavigate();
+  const { resetUrlParams } = useUrlParams();
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 py-8 text-center lg:h-screen">
@@ -14,7 +14,7 @@ const FilterErrorMessage = ({ type }: { type: string }) => {
       </p>
 
       <Button
-        onClick={() => void navigate("/pokedex/pokemon")}
+        onClick={resetUrlParams}
         style="indigo"
         className="w-full max-lg:hidden"
       >
