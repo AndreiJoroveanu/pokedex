@@ -38,7 +38,10 @@ const Sidebar = () => {
 
       <SidebarFilter
         name="type"
-        values={pokemonTypes}
+        values={Object.entries(pokemonTypes).map(([value, { label }]) => ({
+          value,
+          label,
+        }))}
         isOpen={isTypeFilterOpen}
         toggleOpen={toggleTypeFilterOpen}
       />
