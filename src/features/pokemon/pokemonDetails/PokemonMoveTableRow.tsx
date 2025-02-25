@@ -2,6 +2,7 @@ import { memo } from "react";
 
 import { usePokemonMove } from "@/hooks/pokemon/usePokemonMove.ts";
 import TypeDisplay from "@/ui/TypeDisplay.tsx";
+import MoveCategoryDisplay from "@/ui/MoveCategoryDisplay.tsx";
 
 interface RowProps {
   name: string;
@@ -23,13 +24,17 @@ const PokemonMoveTableRow = memo(
         <td className="min-w-36 capitalize">{name.split("-").join(" ")}</td>
 
         {/* Move type */}
-        <td className="min-w-26 pr-2 capitalize">
-          {moveData ? <TypeDisplay type={moveData?.type.name} /> : "Loading"}
+        <td className="w-26 pr-2 capitalize">
+          {moveData ? <TypeDisplay type={moveData.type.name} /> : "Loading"}
         </td>
 
         {/* Move category (physical, special, status) */}
-        <td className="min-w-22 capitalize">
-          {moveData?.damage_class.name ?? "-"}
+        <td className="w-26 pr-2 capitalize">
+          {moveData ? (
+            <MoveCategoryDisplay category={moveData.damage_class.name} />
+          ) : (
+            "Loading"
+          )}
         </td>
 
         {/* Move power, if applicable */}
