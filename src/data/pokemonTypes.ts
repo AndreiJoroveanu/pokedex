@@ -1,42 +1,27 @@
-import normal from "/typeIcons/normal.svg";
-import fighting from "/typeIcons/fighting.svg";
-import flying from "/typeIcons/flying.svg";
-import poison from "/typeIcons/poison.svg";
-import ground from "/typeIcons/ground.svg";
-import rock from "/typeIcons/rock.svg";
-import bug from "/typeIcons/bug.svg";
-import ghost from "/typeIcons/ghost.svg";
-import steel from "/typeIcons/steel.svg";
-import fire from "/typeIcons/fire.svg";
-import water from "/typeIcons/water.svg";
-import grass from "/typeIcons/grass.svg";
-import electric from "/typeIcons/electric.svg";
-import psychic from "/typeIcons/psychic.svg";
-import ice from "/typeIcons/ice.svg";
-import dragon from "/typeIcons/dragon.svg";
-import dark from "/typeIcons/dark.svg";
-import fairy from "/typeIcons/fairy.svg";
-
 export const pokemonTypes: Record<
   string,
-  { label: string; color: string; icon: string }
+  { label: string; color: string; sprite: { x: number; y: number } }
 > = {
-  normal: { label: "Normal", color: "#828282", icon: normal },
-  fighting: { label: "Fighting", color: "#e49021", icon: fighting },
-  flying: { label: "Flying", color: "#74aad0", icon: flying },
-  poison: { label: "Poison", color: "#9354cb", icon: poison },
-  ground: { label: "Ground", color: "#a4733c", icon: ground },
-  rock: { label: "Rock", color: "#a9a481", icon: rock },
-  bug: { label: "Bug", color: "#9f9f28", icon: bug },
-  ghost: { label: "Ghost", color: "#6f4570", icon: ghost },
-  steel: { label: "Steel", color: "#74b0cb", icon: steel },
-  fire: { label: "Fire", color: "#e4613e", icon: fire },
-  water: { label: "Water", color: "#3099e1", icon: water },
-  grass: { label: "Grass", color: "#439837", icon: grass },
-  electric: { label: "Electric", color: "#dfbc28", icon: electric },
-  psychic: { label: "Psychic", color: "#e96c8c", icon: psychic },
-  ice: { label: "Ice", color: "#47c8c8", icon: ice },
-  dragon: { label: "Dragon", color: "#576fbc", icon: dragon },
-  dark: { label: "Dark", color: "#4f4747", icon: dark },
-  fairy: { label: "Fairy", color: "#e18ce1", icon: fairy },
+  normal: { label: "Normal", color: "#9fa19f", sprite: { x: 0, y: 0 } },
+  fighting: { label: "Fighting", color: "#ff8101", sprite: { x: -64, y: 0 } },
+  flying: { label: "Flying", color: "#81b9ef", sprite: { x: -128, y: 0 } },
+  poison: { label: "Poison", color: "#9141cb", sprite: { x: -192, y: 0 } },
+  ground: { label: "Ground", color: "#915121", sprite: { x: -256, y: 0 } },
+  rock: { label: "Rock", color: "#afa981", sprite: { x: -320, y: 0 } },
+  bug: { label: "Bug", color: "#91a119", sprite: { x: -384, y: 0 } },
+  ghost: { label: "Ghost", color: "#704170", sprite: { x: -448, y: 0 } },
+  steel: { label: "Steel", color: "#60a1b8", sprite: { x: -512, y: 0 } },
+  fire: { label: "Fire", color: "#e62829", sprite: { x: 0, y: -64 } },
+  water: { label: "Water", color: "#2980ef", sprite: { x: -64, y: -64 } },
+  grass: { label: "Grass", color: "#3fa129", sprite: { x: -128, y: -64 } },
+  electric: {
+    label: "Electric",
+    color: "#fac000",
+    sprite: { x: -192, y: -64 },
+  },
+  psychic: { label: "Psychic", color: "#ef4179", sprite: { x: -256, y: -64 } },
+  ice: { label: "Ice", color: "#3fd8ff", sprite: { x: -320, y: -64 } },
+  dragon: { label: "Dragon", color: "#5060e1", sprite: { x: -384, y: -64 } },
+  dark: { label: "Dark", color: "#50413f", sprite: { x: -448, y: -64 } },
+  fairy: { label: "Fairy", color: "#ef70ef", sprite: { x: -512, y: -64 } },
 };

@@ -24,16 +24,16 @@ const PokemonMoveTableRow = memo(
         <td className="min-w-36 capitalize">{name.split("-").join(" ")}</td>
 
         {/* Move type */}
-        <td className="w-26 pr-2 capitalize">
-          {moveData ? <TypeDisplay type={moveData.type.name} /> : "Loading"}
+        <td className="w-28 capitalize">
+          {moveData ? <TypeDisplay type={moveData.type.name} /> : "Loading..."}
         </td>
 
         {/* Move category (physical, special, status) */}
-        <td className="w-26 pr-2 capitalize">
+        <td className="w-28 capitalize">
           {moveData ? (
             <MoveCategoryDisplay category={moveData.damage_class.name} />
           ) : (
-            "Loading"
+            "Loading..."
           )}
         </td>
 

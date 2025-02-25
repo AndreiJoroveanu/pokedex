@@ -1,12 +1,8 @@
-import physical from "/moveCategoryIcons/physical.png";
-import special from "/moveCategoryIcons/special.png";
-import status from "/moveCategoryIcons/status.png";
-
 export const moveCategories: Record<
   string,
-  { label: string; color: string; icon: string }
+  { label: string; color: string; sprite: { x: number } }
 > = {
-  physical: { label: "Physical", color: "#eb5628", icon: physical },
-  special: { label: "Special", color: "#375ab2", icon: special },
-  status: { label: "Status", color: "#828282", icon: status },
+  physical: { label: "Physical", color: "#eb5628", sprite: { x: 0 } },
+  special: { label: "Special", color: "#375ab2", sprite: { x: -50 } },
+  status: { label: "Status", color: "#828282", sprite: { x: -100 } },
 };
