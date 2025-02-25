@@ -25,3 +25,11 @@
 @theme {
   --breakpoint-xs: 25rem; /* 400px */
 }
+
+@utility small-types {
+  @apply -mx-6 scale-75 gap-1;
+}
+
+@utility normal-types {
+  @apply -mx-3 scale-90 gap-2;
+}

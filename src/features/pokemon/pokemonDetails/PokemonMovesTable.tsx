@@ -19,7 +19,7 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
             )}
             <th className="min-w-36 pb-1 text-start">Move</th>
 
-            <th className="min-w-18 pb-1 text-start">Type</th>
+            <th className="min-w-26 pr-2 pb-1 text-start">Type</th>
             <th className="min-w-22 pb-1 text-start">Category</th>
             <th className="min-w-16 pb-1 text-start">Power</th>
             <th className="min-w-22 pb-1 text-start">Accuracy</th>
@@ -28,11 +28,12 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
         </thead>
 
         <tbody>
-          {moves.map(({ name, level }) => (
+          {moves.map(({ name, level }, index) => (
             <PokemonMoveTableRow
               key={`${level}-${name}`}
               name={name}
               level={level}
+              index={index}
               displayLevel={label === "Level-Up Moves"}
             />
           ))}

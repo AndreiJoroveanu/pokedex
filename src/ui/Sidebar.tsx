@@ -26,7 +26,7 @@ const Sidebar = () => {
   const { length } = useStarredPokemon();
 
   return (
-    <aside className="p-4 max-lg:pb-0 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:overflow-y-scroll lg:border-r lg:border-slate-400 dark:lg:border-slate-600">
+    <aside className="p-4 max-lg:pb-0 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:min-w-62 lg:overflow-y-scroll lg:border-r lg:border-slate-400 dark:lg:border-slate-600">
       <SidebarSearch />
 
       <SidebarFilter

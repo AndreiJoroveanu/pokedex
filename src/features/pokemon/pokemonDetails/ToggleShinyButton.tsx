@@ -14,7 +14,7 @@ const ToggleShinyButton = memo(
     <Button
       onClick={() => setDisplayShiny((prev: boolean) => !prev)}
       style={displayShiny ? "gold" : "normal"}
-      className="flex items-center gap-2 px-4"
+      className="flex items-center gap-2 px-4 text-nowrap"
     >
       {displayShiny ? (
         <SparklesIconSolid className="size-4" />

@@ -127,7 +127,9 @@ const PokemonDetails = () => {
             )}
           />
 
-          <PokemonTypesDisplay types={pokemon?.types} />
+          <div className="my-1">
+            <PokemonTypesDisplay types={pokemon?.types} />
+          </div>
 
           <PokemonAbilitiesDisplayText abilities={pokemon?.abilities} />
 
