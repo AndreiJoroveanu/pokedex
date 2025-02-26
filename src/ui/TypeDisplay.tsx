@@ -9,14 +9,14 @@ const TypeDisplay = ({ type }: { type: string }) => (
   >
     {/* CSS image sprite icon */}
     <div
-      className="-ml-3 inline-block size-16 scale-40"
+      className="-ml-1 inline-block aspect-square size-10 scale-40"
       style={{
         backgroundImage: `url(${types})`,
-        backgroundPosition: `${pokemonTypes[type].sprite.x - 2}px ${pokemonTypes[type].sprite.y}px`,
+        backgroundPosition: `${pokemonTypes[type].sprite.x}px ${pokemonTypes[type].sprite.y}px`,
       }}
     />
 
-    <div className="-ml-5.5 flex w-full justify-center">
+    <div className="-ml-4 flex w-full justify-center">
       <p className="scale-x-90 font-semibold text-white">
         {type.toUpperCase()}
       </p>

@@ -8,7 +8,7 @@ const AppLayout = () => {
   return (
     <div
       id="app-layout"
-      className="text-slate-800 transition-colors dark:text-slate-200"
+      className="font-medium text-slate-800 transition-colors dark:text-slate-200"
     >
       {/* App background */}
       <div className="fixed inset-0 -z-50 h-screen bg-slate-50 transition-colors dark:bg-slate-900" />
