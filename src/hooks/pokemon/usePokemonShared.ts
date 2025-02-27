@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import Pokedex from "pokedex-promise-v2";
 
 export const api = new Pokedex({
@@ -26,11 +27,26 @@ export const useData = <T>(fetcher: () => Promise<T> | undefined) => {
         if (!ignore && response) setData(response);
         setError(null);
       } catch (error) {
-        if (error instanceof Error) {
-          console.error(error.message);
-          setError(error.message);
-        }
+        let errorMessage = "An unknown error occurred.";
 
+        if (axios.isAxiosError(error)) {
+          switch (error.response?.status) {
+            case 404:
+              errorMessage =
+                "The requested resource was not found. Please check the URL or try again.";
+              break;
+            case 500:
+              errorMessage = "Internal server error. Try again later.";
+              break;
+            case 503:
+              errorMessage = "Service unavailable. Check back later.";
+              break;
+            default:
+              errorMessage = error.message;
+          }
+        } else if (error instanceof Error) errorMessage = error.message;
+
+        setError(errorMessage ?? "An unknown error occurred.");
         setData(null);
       } finally {
         setIsLoading(false);

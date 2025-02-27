@@ -5,7 +5,9 @@ import {
   RouterProvider,
   useParams,
 } from "react-router";
+import { ErrorBoundary } from "react-error-boundary";
 
+import ErrorMessage from "@/ui/ErrorMessage.tsx";
 import Loader from "@/ui/Loader.tsx";
 import AppLayout from "@/ui/AppLayout.tsx";
 
@@ -19,17 +21,23 @@ const PokemonDetailsPageWrapper = () => {
   return <PokemonDetailsPage key={id} />;
 };
 
-// Suspense wrapper with a loading fallback
-const withSuspense = (Component: ElementType) => (
-  <Suspense
-    fallback={
-      <div className="h-screen bg-slate-100 transition-colors dark:bg-slate-800">
-        <Loader size={24} displaysText={true} />
-      </div>
-    }
+// Wrapper for Suspense and ErrorBoundary
+const wrapper = (Component: ElementType) => (
+  <ErrorBoundary
+    FallbackComponent={({ error }: { error: Error }) => (
+      <ErrorMessage errors={[error.message]} />
+    )}
   >
-    <Component />
-  </Suspense>
+    <Suspense
+      fallback={
+        <div className="h-screen bg-slate-100 transition-colors dark:bg-slate-800">
+          <Loader size={24} displaysText={true} />
+        </div>
+      }
+    >
+      <Component />
+    </Suspense>
+  </ErrorBoundary>
 );
 
 const router = createBrowserRouter([
@@ -43,12 +51,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/pokedex/pokemon",
-        element: withSuspense(AllPokemonPage),
+        element: wrapper(AllPokemonPage),
       },
 
       {
         path: "/pokedex/pokemon/:id",
-        element: withSuspense(PokemonDetailsPageWrapper),
+        element: wrapper(PokemonDetailsPageWrapper),
       },
     ],
   },

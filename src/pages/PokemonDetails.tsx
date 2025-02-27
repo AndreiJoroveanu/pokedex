@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router";
+import axios from "axios";
 import { Pokemon } from "pokedex-promise-v2";
 
 import { usePokemonSpecies } from "@/hooks/pokemon/useSpecificPokemon.ts";
@@ -8,6 +9,7 @@ import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
 import { api } from "@/hooks/pokemon/usePokemonShared.ts";
 import { capitalize } from "@/utils/helpers.ts";
 
+import ErrorMessage from "@/ui/ErrorMessage.tsx";
 import TopButtons from "@/features/pokemon/pokemonDetails/TopButtons.tsx";
 import PokemonFormButtons from "@/features/pokemon/pokemonDetails/PokemonFormButtons.tsx";
 import PokemonImage from "@/features/pokemon/pokemonDetails/PokemonImage.tsx";
@@ -29,10 +31,10 @@ const PokemonDetails = () => {
 
   // Pokémon Species using the URL Parameter
   const { id } = useParams() as { id: string };
-  const { data: pokemonSpecies } = usePokemonSpecies(id);
+  const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(id);
 
   // Evolution chain
-  const { data: evolutionChain } = usePokemonEvolutionChain(
+  const { data: evolutionChain, error: errorPC } = usePokemonEvolutionChain(
     Number(getIdFromUrl(pokemonSpecies?.evolution_chain.url)),
   );
 
@@ -43,6 +45,7 @@ const PokemonDetails = () => {
     useLocation().state ?? [];
 
   const [pokemon, setPokemon] = useState<Pokemon | undefined>(initialPokemon);
+  const [errorP, setErrorP] = useState<string | null>(null);
 
   // Fetch the Pokémon data if the form changes
   useEffect(() => {
@@ -63,13 +66,41 @@ const PokemonDetails = () => {
         if (!ignore && pokemonId)
           setPokemon(await api.getPokemonByName(pokemonId));
       } catch (error) {
-        if (error instanceof Error) console.error(error.message);
+        let errorMessage = "An unknown error occurred.";
+
+        if (axios.isAxiosError(error)) {
+          switch (error.response?.status) {
+            case 404:
+              errorMessage =
+                "The requested resource was not found. Please check the URL or try again.";
+              break;
+            case 500:
+              errorMessage = "Internal server error. Try again later.";
+              break;
+            case 503:
+              errorMessage = "Service unavailable. Check back later.";
+              break;
+            default:
+              errorMessage = error.message;
+          }
+        } else if (error instanceof Error) errorMessage = error.message;
+
+        setErrorP(errorMessage ?? "An unknown error occurred.");
         setPokemon(undefined);
       }
     })();
 
     return () => void (ignore = true);
   }, [currentForm, id, initialPokemon, pokemonSpecies?.varieties]);
+
+  if (errorPS || errorPC || errorP)
+    return (
+      <ErrorMessage
+        errors={[errorPS, errorPC, errorP].filter((e): e is string =>
+          Boolean(e),
+        )}
+      />
+    );
 
   return (
     <>
