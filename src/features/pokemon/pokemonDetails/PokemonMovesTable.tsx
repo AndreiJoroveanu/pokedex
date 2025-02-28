@@ -19,8 +19,8 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
             )}
             <th className="min-w-36 pb-1 text-start">Move</th>
 
-            <th className="min-w-28 pb-1 text-start">Type</th>
-            <th className="min-w-28 pb-1 text-start">Category</th>
+            <th className="w-26 min-w-26 pb-1 text-start">Type</th>
+            <th className="w-28 min-w-28 pb-1 text-start">Category</th>
             <th className="min-w-16 pb-1 text-start">Power</th>
             <th className="min-w-22 pb-1 text-start">Accuracy</th>
             <th className="min-w-6 pb-1 text-start">PP</th>

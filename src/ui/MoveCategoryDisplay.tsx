@@ -1,11 +1,16 @@
 import { moveCategories } from "@/data/moveCategories.ts";
 import categories from "/move-categories.png";
 
-const MoveCategoryDisplay = ({ category }: { category: string }) => (
+interface DisplayProps {
+  category: string;
+  className?: string;
+}
+
+const MoveCategoryDisplay = ({ category, className }: DisplayProps) => (
   <div
     key={category}
     style={{ background: moveCategories[category]?.color }}
-    className="flex h-6 w-26 items-center rounded-full saturate-150 dark:saturate-125"
+    className={`flex h-6 w-26 items-center rounded-full saturate-150 dark:saturate-125 ${className}`.trim()}
   >
     {/* CSS image sprite icon */}
     <div

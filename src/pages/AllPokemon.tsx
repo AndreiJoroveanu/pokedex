@@ -36,7 +36,7 @@ const AllPokemon = () => {
                 />
               )}
               useWindowScroll
-              increaseViewportBy={200}
+              increaseViewportBy={{ top: 1000, bottom: 1000 }}
               components={{ Footer: () => <Footer className="pb-4" /> }}
               className="w-full"
               listClassName="grid grid-cols-2 gap-2 sm:gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"

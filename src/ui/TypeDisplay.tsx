@@ -1,11 +1,16 @@
 import { pokemonTypes } from "@/data/pokemonTypes.ts";
 import types from "/types.png";
 
-const TypeDisplay = ({ type }: { type: string }) => (
+interface DisplayProps {
+  type: string;
+  className?: string;
+}
+
+const TypeDisplay = ({ type, className = "" }: DisplayProps) => (
   <div
     key={type}
     style={{ background: pokemonTypes[type]?.color }}
-    className="flex h-6 w-26 min-w-24 items-center overflow-hidden rounded-full"
+    className={`flex h-6 w-26 min-w-24 items-center overflow-hidden rounded-full ${className}`.trim()}
   >
     {/* CSS image sprite icon */}
     <div
