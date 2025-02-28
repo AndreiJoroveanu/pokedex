@@ -20,6 +20,7 @@ import PokemonAbilitiesDisplayText from "@/features/pokemon/pokemonDetails/Pokem
 import PokemonStats from "@/features/pokemon/pokemonDetails/PokemonStats.tsx";
 import PokemonEvolutionChain from "@/features/pokemon/pokemonDetails/PokemonEvolutionChain.tsx";
 import PokemonGenerationDisplay from "@/features/pokemon/pokemonDetails/PokemonGenerationDisplay.tsx";
+import PokemonTypeEffectiveness from "@/features/pokemon/pokemonDetails/PokemonTypeEffectiveness.tsx";
 import CollapsingPanel from "@/ui/CollapsingPanel.tsx";
 import PokemonMoves from "@/features/pokemon/pokemonDetails/PokemonMoves.tsx";
 import FlavorTextEntries from "@/features/pokemon/pokemonDetails/FlavorTextEntries.tsx";
@@ -93,6 +94,26 @@ const PokemonDetails = () => {
     return () => void (ignore = true);
   }, [currentForm, id, initialPokemon, pokemonSpecies?.varieties]);
 
+  // Play the Pokémon's cry when the page first loads, or when the form is changed
+  useEffect(() => {
+    const cry = new Audio(pokemon?.cries.latest);
+    cry.volume = 0.1;
+
+    void (async () => {
+      try {
+        await cry.play();
+      } catch {
+        // No need to do anything
+      }
+    })();
+
+    return () => {
+      cry.pause();
+      cry.currentTime = 0;
+    };
+  }, [pokemon?.cries.latest]);
+
+  // Display an error message if there is an error whole fetching data
   if (errorPS || errorPC || errorP)
     return (
       <ErrorMessage
@@ -173,6 +194,10 @@ const PokemonDetails = () => {
 
           <PokemonGenerationDisplay
             generation={pokemonSpecies?.generation.name}
+          />
+
+          <PokemonTypeEffectiveness
+            types={pokemon?.types.map((type) => type.type.name)}
           />
 
           <CollapsingPanel label="Learnset" className="p-2 sm:p-4">

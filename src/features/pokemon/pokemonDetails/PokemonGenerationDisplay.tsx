@@ -5,7 +5,7 @@ interface GenerationProps {
 }
 
 const PokemonGenerationDisplay = memo(({ generation }: GenerationProps) => (
-  <p className="mt-2">
+  <p className="my-2">
     {generation
       ? `This Pokémon originates from Generation ${generation.split("-")[1].toUpperCase()}`
       : "Loading..."}
