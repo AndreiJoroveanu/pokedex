@@ -17,7 +17,7 @@ const PokemonCard = memo(({ id, name }: CardProps) => {
 
   return (
     <Link to={`/pokedex/pokemon/${id}`} state={{ initialPokemon: pokemon }}>
-      <article className="relative rounded-sm border border-slate-400/40 bg-slate-100 shadow-lg transition-colors hover:bg-slate-200/75 hover:shadow-xl dark:bg-slate-800 dark:shadow-none dark:hover:bg-slate-700/75 dark:hover:shadow-none">
+      <article className="@container/card relative rounded-sm border border-slate-400/40 bg-slate-100 shadow-lg transition-colors hover:bg-slate-200/75 hover:shadow-xl dark:bg-slate-800 dark:shadow-none dark:hover:bg-slate-700/75 dark:hover:shadow-none">
         {/* Gets the image from a raw link instead of waiting for */}
         {/* the Pokémon object to download because it is faster */}
         <img
@@ -43,7 +43,7 @@ const PokemonCard = memo(({ id, name }: CardProps) => {
 
           <PokemonTypesDisplay
             types={pokemon?.types}
-            className="max-[410px]:small-types min-[410px]:max-lg:normal-types min-lg:max-[1144px]:small-types min-[1144px]:max-xl:normal-types min-xl:max-[1366px]:small-types min-[1366px]:normal-types"
+            className="-mx-6 scale-75 gap-1 @[200px]/card:-mx-3 @[200px]/card:scale-90 @[200px]/card:gap-2"
           />
         </div>
       </article>

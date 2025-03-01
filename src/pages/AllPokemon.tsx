@@ -23,7 +23,7 @@ const AllPokemon = () => {
 
       <ScrollToTopButton />
 
-      <section className="flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)]">
+      <section className="@container/grid flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)]">
         {!isLoadingAP && !isLoading ? (
           pokemonList?.length ? (
             <VirtuosoGrid
@@ -39,7 +39,7 @@ const AllPokemon = () => {
               increaseViewportBy={{ top: 1000, bottom: 1000 }}
               components={{ Footer: () => <Footer className="pb-4" /> }}
               className="w-full"
-              listClassName="grid grid-cols-2 gap-2 sm:gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+              listClassName="grid grid-cols-2 gap-2 @[500px]/grid:gap-4 @[600px]/grid:grid-cols-3 @[800px]/grid:grid-cols-4 @[1000px]/grid:grid-cols-5 @[1200px]/grid:grid-cols-6"
             />
           ) : null
         ) : (

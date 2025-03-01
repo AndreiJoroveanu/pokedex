@@ -28,12 +28,11 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
         </thead>
 
         <tbody>
-          {moves.map(({ name, level }, index) => (
+          {moves.map(({ name, level }) => (
             <PokemonMoveTableRow
               key={`${level}-${name}`}
               name={name}
               level={level}
-              index={index}
               displayLevel={label === "Level-Up Moves"}
             />
           ))}
