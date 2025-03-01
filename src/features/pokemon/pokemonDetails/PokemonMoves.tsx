@@ -16,6 +16,14 @@ const PokemonMoves = memo(({ moves }: MovesProps) => {
 
   if (!moves) return <p>Loading...</p>;
 
+  if (!moves?.length)
+    return (
+      <p>
+        There seems to be no data regarding this Pokémon&apos;s Form. Please try
+        another Form.
+      </p>
+    );
+
   // All version groups that this Pokémon is in
   const availableVersionGroups = Object.entries(versionGroups).filter(
     ([group]) =>
