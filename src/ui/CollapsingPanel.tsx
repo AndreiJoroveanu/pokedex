@@ -37,7 +37,7 @@ const CollapsingPanel = ({
     <div className="my-4 overflow-hidden rounded-xl border-2 border-slate-400/30 bg-slate-50 shadow-sm transition-colors dark:bg-slate-900 dark:shadow-none">
       <div
         onClick={handleClick}
-        className="flex cursor-pointer items-center justify-between px-3 py-2 hover:bg-slate-400/10"
+        className="group relative flex cursor-pointer px-3 py-2 hover:bg-slate-400/10"
       >
         <h2 className="text-lg font-bold capitalize">{label}</h2>
 
@@ -45,6 +45,7 @@ const CollapsingPanel = ({
           initial={{ rotate: isOpen ? 180 : 0 }}
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ type: spring, bounce: 0, duration: 0.5 }}
+          className="absolute right-2 rounded-full border-2 border-transparent p-1 transition-colors group-hover:border-slate-400/30"
         >
           <ChevronDoubleDownIcon className="size-4" />
         </motion.div>
@@ -63,7 +64,7 @@ const CollapsingPanel = ({
               ref={measureRef}
               // This tricks Motion to still display this element while the container is closing
               exit={{ opacity: 2 }}
-              className={`border-t-2 border-t-slate-400/30 ${className}`}
+              className={`border-t-2 border-t-slate-400/30 ${className}`.trim()}
             >
               {children}
             </motion.div>
