@@ -8,18 +8,16 @@ interface TypesProps {
   className?: string;
 }
 
-const PokemonTypesDisplay = memo(({ types, className = "" }: TypesProps) => (
-  <>
-    {types?.length ? (
-      <div className={`flex gap-2 ${className}`.trim()}>
-        {types.map(({ type }) => (
-          <TypeDisplay key={type.name} type={type.name} />
-        ))}
-      </div>
-    ) : (
-      "Loading..."
-    )}
-  </>
-));
+const PokemonTypesDisplay = memo(({ types, className = "" }: TypesProps) =>
+  types?.length ? (
+    <div className={`flex gap-2 ${className}`.trim()}>
+      {types.map(({ type }) => (
+        <TypeDisplay key={type.name} type={type.name} />
+      ))}
+    </div>
+  ) : (
+    <p>Loading...</p>
+  ),
+);
 PokemonTypesDisplay.displayName = "PokemonTypesDisplay";
 export default PokemonTypesDisplay;

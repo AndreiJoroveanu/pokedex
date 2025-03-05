@@ -7,11 +7,10 @@ import Loader from "@/ui/Loader.tsx";
 import PokemonTypesDisplay from "./PokemonTypesDisplay.tsx";
 
 interface CardProps {
-  id: number;
-  name: string;
+  pokemon: { id: number; name: string };
 }
 
-const PokemonCard = memo(({ id, name }: CardProps) => {
+const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
   const { data: pokemon } = usePokemon(id);
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 

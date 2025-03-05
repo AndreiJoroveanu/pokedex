@@ -13,6 +13,8 @@ import AppLayout from "@/ui/AppLayout.tsx";
 
 const AllPokemonPage = lazy(() => import("@/pages/AllPokemon.tsx"));
 const PokemonDetailsPage = lazy(() => import("@/pages/PokemonDetails.tsx"));
+const AllMovesPage = lazy(() => import("@/pages/AllMoves.tsx"));
+const MoveDetailsPage = lazy(() => import("@/pages/MoveDetails.tsx"));
 
 // This is needed to reset the key when the user clicks on
 // a different Pokémon link from the Pokémon details page
@@ -53,10 +55,17 @@ const router = createBrowserRouter([
         path: "/pokedex/pokemon",
         element: wrapper(AllPokemonPage),
       },
-
       {
         path: "/pokedex/pokemon/:id",
         element: wrapper(PokemonDetailsPageWrapper),
+      },
+      {
+        path: "/pokedex/moves",
+        element: wrapper(AllMovesPage),
+      },
+      {
+        path: "/pokedex/move/:id",
+        element: wrapper(MoveDetailsPage),
       },
     ],
   },

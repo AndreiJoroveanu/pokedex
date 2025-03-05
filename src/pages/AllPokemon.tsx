@@ -31,8 +31,7 @@ const AllPokemon = () => {
               itemContent={(index) => (
                 <PokemonCard
                   key={pokemonList[index].name}
-                  id={pokemonList[index].id}
-                  name={pokemonList[index].name}
+                  pokemon={pokemonList[index]}
                 />
               )}
               useWindowScroll

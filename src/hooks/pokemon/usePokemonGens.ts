@@ -33,3 +33,22 @@ export const useAllPokemonByGen = (gen: string | undefined) => {
 
   return { data: transformedData, isLoading, error };
 };
+
+export const useAllMovesByGen = (gen: string | undefined) => {
+  const fetcher = useCallback(() => {
+    if (gen) return api.getGenerationByName(`generation-${gen}`);
+  }, [gen]);
+  const { data, isLoading, error } = useData<Generation>(fetcher);
+
+  const transformedData = useMemo(() => {
+    return gen
+      ? (data?.moves.map((m) => ({
+          // Extract the move ID from the URL
+          id: Number(getIdFromUrl(m.url)),
+          name: m.name,
+        })) ?? [])
+      : [];
+  }, [data?.moves, gen]);
+
+  return { data: transformedData, isLoading, error };
+};

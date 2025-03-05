@@ -35,7 +35,7 @@ const PokemonDetails = () => {
   const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(id);
 
   // Evolution chain
-  const { data: evolutionChain, error: errorPC } = usePokemonEvolutionChain(
+  const { data: evolutionChain, error: errorEC } = usePokemonEvolutionChain(
     Number(getIdFromUrl(pokemonSpecies?.evolution_chain.url)),
   );
 
@@ -43,7 +43,7 @@ const PokemonDetails = () => {
   // TS: state property from useLocation() hook doesn't have a specific type
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { initialPokemon }: { initialPokemon: Pokemon } =
-    useLocation().state ?? [];
+    useLocation().state ?? {};
 
   const [pokemon, setPokemon] = useState<Pokemon | undefined>(initialPokemon);
   const [errorP, setErrorP] = useState<string | null>(null);
@@ -114,10 +114,10 @@ const PokemonDetails = () => {
   }, [pokemon?.cries.latest]);
 
   // Display an error message if there is an error whole fetching data
-  if (errorPS || errorPC || errorP)
+  if (errorPS || errorEC || errorP)
     return (
       <ErrorMessage
-        errors={[errorPS, errorPC, errorP].filter((e): e is string =>
+        errors={[errorPS, errorEC, errorP].filter((e): e is string =>
           Boolean(e),
         )}
       />
