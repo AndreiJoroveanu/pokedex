@@ -4,7 +4,7 @@ import { useAllPokemonSpecies } from "@/hooks/pokemon/useAllPokemon.ts";
 import { useFilteredPokemon } from "@/hooks/useFilteredPokemon.ts";
 import { useScrollRestoration } from "@/hooks/useScrollRestoration.ts";
 
-import Sidebar from "@/ui/Sidebar.tsx";
+import Sidebar from "@/ui/sidebar/Sidebar.tsx";
 import ScrollToTopButton from "@/ui/ScrollToTopButton.tsx";
 import PokemonCard from "@/features/pokemon/PokemonCard.tsx";
 import Footer from "@/ui/Footer.tsx";
@@ -19,7 +19,13 @@ const AllPokemon = () => {
 
   return (
     <div className="relative pt-18 sm:pt-24">
-      <Sidebar />
+      <Sidebar>
+        <Sidebar.Search itemType="Pokémon" />
+        <Sidebar.GenerationFilter />
+        <Sidebar.TypeFilter />
+        <Sidebar.OnlyStarredToggle />
+        <Sidebar.ClearFilter />
+      </Sidebar>
 
       <ScrollToTopButton />
 
@@ -49,7 +55,7 @@ const AllPokemon = () => {
 
         {!pokemonList?.length && isFiltered && (
           <div className="top-0 lg:fixed lg:h-screen">
-            <FilterErrorMessage type="Pokémon" />
+            <FilterErrorMessage itemType="Pokémon" />
           </div>
         )}
       </section>

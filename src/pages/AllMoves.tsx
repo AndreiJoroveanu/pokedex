@@ -1,8 +1,9 @@
 import { VirtuosoGrid } from "react-virtuoso";
 
 import { useAllMoves } from "@/hooks/pokemon/usePokemonMove.ts";
+import { useScrollRestoration } from "@/hooks/useScrollRestoration.ts";
 
-import Sidebar from "@/ui/Sidebar.tsx";
+import Sidebar from "@/ui/sidebar/Sidebar.tsx";
 import ScrollToTopButton from "@/ui/ScrollToTopButton.tsx";
 import MoveCard from "@/features/moves/MoveCard.tsx";
 import Footer from "@/ui/Footer.tsx";
@@ -10,9 +11,16 @@ import Footer from "@/ui/Footer.tsx";
 const AllMoves = () => {
   const { data: allMoves } = useAllMoves();
 
+  useScrollRestoration();
+
   return (
     <div className="relative pt-18 sm:pt-24">
-      <Sidebar />
+      <Sidebar>
+        <Sidebar.Search itemType="move" />
+        <Sidebar.GenerationFilter />
+        <Sidebar.TypeFilter />
+        <Sidebar.ClearFilter />
+      </Sidebar>
 
       <ScrollToTopButton />
 

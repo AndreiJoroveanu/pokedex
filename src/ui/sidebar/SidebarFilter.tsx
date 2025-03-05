@@ -1,7 +1,7 @@
-import { useUrlParams } from "../hooks/useUrlParams.ts";
+import { useUrlParams } from "@/hooks/useUrlParams.ts";
 
-import CollapsingPanel from "./CollapsingPanel.tsx";
-import Button from "./Button.tsx";
+import CollapsingPanel from "@/ui/CollapsingPanel.tsx";
+import Button from "@/ui/Button.tsx";
 
 interface FilterProps {
   name: string;

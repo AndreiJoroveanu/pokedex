@@ -2,12 +2,12 @@ import { useUrlParams } from "@/hooks/useUrlParams.ts";
 
 import Button from "./Button.tsx";
 
-const FilterErrorMessage = ({ type }: { type: string }) => {
+const FilterErrorMessage = ({ itemType }: { itemType: string }) => {
   const { resetUrlParams } = useUrlParams();
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 py-8 text-center lg:h-screen">
-      <h2 className="text-3xl font-bold">No {type} Found</h2>
+      <h2 className="text-3xl font-bold">No {itemType} Found</h2>
 
       <p className="mb-2 font-semibold text-slate-600 dark:text-slate-400">
         Try other filtering options or another search query
