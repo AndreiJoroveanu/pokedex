@@ -1,10 +1,9 @@
 import { useSearchParams } from "react-router";
 
-import { useScrollRestoration } from "@/hooks/useScrollRestoration.ts";
+import { resetScroll } from "@/hooks/useScrollRestoration.ts";
 
 export const useUrlParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const resetScroll = useScrollRestoration();
 
   const getUrlParam = (name: string) => searchParams.get(name);
 

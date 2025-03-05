@@ -72,12 +72,17 @@ const MoveDetails = () => {
       <BackButton />
 
       <div className="pt-0 md:pt-36 lg:pt-24">
-        <div className="mx-auto max-w-3xl bg-slate-100 p-2 transition-colors max-md:pt-42 max-sm:pt-36 sm:p-4 md:my-4 md:rounded-lg md:border-2 md:border-slate-400/40 dark:bg-slate-800">
+        <div className="mx-auto max-w-3xl bg-slate-100 p-2 pt-36 transition-colors sm:p-4 sm:pt-42 md:my-4 md:rounded-lg md:border-2 md:border-slate-400/40 md:pt-4 dark:bg-slate-800">
+          {/* To remove when the page is more complete */}
+          <h3 className="mb-4 text-center text-xl font-semibold">
+            This page is currently under construction
+          </h3>
+
           <div className="flex gap-2">
             <MoveDiscImage type={move?.type.name} />
 
             <div>
-              <h1 className="text-2xl font-bold capitalize">
+              <h1 className="mb-2 text-2xl font-bold capitalize">
                 {move?.name.split("-").join(" ") ?? "Loading..."}
               </h1>
 

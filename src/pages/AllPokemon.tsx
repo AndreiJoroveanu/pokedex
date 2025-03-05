@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import { useAllPokemonSpecies } from "@/hooks/pokemon/useAllPokemon.ts";
@@ -15,7 +16,8 @@ const AllPokemon = () => {
   const { data: allPokemon, isLoading: isLoadingAP } = useAllPokemonSpecies();
   const { pokemonList, isLoading, isFiltered } = useFilteredPokemon(allPokemon);
 
-  useScrollRestoration();
+  const [gridLoaded, setGridLoaded] = useState<boolean>(false);
+  useScrollRestoration(gridLoaded);
 
   return (
     <div className="relative pt-18 sm:pt-24">
@@ -43,12 +45,20 @@ const AllPokemon = () => {
               useWindowScroll
               increaseViewportBy={{ top: 1000, bottom: 1000 }}
               components={{ Footer: () => <Footer className="pb-4" /> }}
+              readyStateChanged={(ready) => setGridLoaded(ready)}
               className="w-full"
-              listClassName="grid grid-cols-2 gap-2 @[500px]/grid:gap-4 @[600px]/grid:grid-cols-3 @[800px]/grid:grid-cols-4 @[1000px]/grid:grid-cols-5 @[1200px]/grid:grid-cols-6"
+              listClassName="grid z-0 grid-cols-2 gap-2 @[500px]/grid:gap-4 @[600px]/grid:grid-cols-3 @[800px]/grid:grid-cols-4 @[1000px]/grid:grid-cols-5 @[1200px]/grid:grid-cols-6"
             />
           ) : null
         ) : (
-          <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-50 lg:-z-10 dark:bg-slate-900">
+          <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-50 dark:bg-slate-900">
+            <Loader size={24} displaysText={true} />
+          </div>
+        )}
+
+        {/* Cover the React Virtuoso grid while it is rendering */}
+        {!gridLoaded && (
+          <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-50 dark:bg-slate-900">
             <Loader size={24} displaysText={true} />
           </div>
         )}

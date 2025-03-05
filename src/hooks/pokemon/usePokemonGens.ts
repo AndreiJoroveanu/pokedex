@@ -42,11 +42,14 @@ export const useAllMovesByGen = (gen: string | undefined) => {
 
   const transformedData = useMemo(() => {
     return gen
-      ? (data?.moves.map((m) => ({
-          // Extract the move ID from the URL
-          id: Number(getIdFromUrl(m.url)),
-          name: m.name,
-        })) ?? [])
+      ? (data?.moves
+          .map((m) => ({
+            // Extract the move ID from the URL
+            id: Number(getIdFromUrl(m.url)),
+            name: m.name,
+          }))
+          // Filtering as to not show "Shadow" moves, which have IDs over 10000
+          .filter((m) => m.id < 10000) ?? [])
       : [];
   }, [data?.moves, gen]);
 
