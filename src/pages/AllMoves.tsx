@@ -31,29 +31,23 @@ const AllMoves = () => {
       <ScrollToTopButton />
 
       <section className="@container/grid flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)]">
-        {!isLoadingAM && !isLoading ? (
-          moveList?.length ? (
-            <VirtuosoGrid
-              totalCount={moveList.length}
-              itemContent={(index) => (
-                <MoveCard key={moveList[index].name} move={moveList[index]} />
-              )}
-              useWindowScroll
-              increaseViewportBy={{ top: 1000, bottom: 1000 }}
-              components={{ Footer: () => <Footer className="pb-4" /> }}
-              readyStateChanged={(ready) => setGridLoaded(ready)}
-              className="w-full"
-              listClassName="grid grid-cols-1 gap-2 @[600px]/grid:gap-4 @[600px]/grid:grid-cols-2 @[800px]/grid:grid-cols-3 @[1000px]/grid:grid-cols-4 @[1200px]/grid:grid-cols-5"
-            />
-          ) : null
-        ) : (
-          <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-50 dark:bg-slate-900">
-            <Loader size={24} displaysText={true} />
-          </div>
-        )}
+        {!isLoadingAM && !isLoading && moveList?.length ? (
+          <VirtuosoGrid
+            totalCount={moveList.length}
+            itemContent={(index) => (
+              <MoveCard key={moveList[index].name} move={moveList[index]} />
+            )}
+            useWindowScroll
+            increaseViewportBy={{ top: 1000, bottom: 1000 }}
+            components={{ Footer: () => <Footer className="pb-4" /> }}
+            readyStateChanged={(ready) => setGridLoaded(ready)}
+            className="w-full"
+            listClassName="grid grid-cols-1 gap-2 @min-[600px]/grid:gap-4 @min-[600px]/grid:grid-cols-2 @min-[800px]/grid:grid-cols-3 @min-[1000px]/grid:grid-cols-4 @min-[1200px]/grid:grid-cols-5"
+          />
+        ) : null}
 
-        {/* Cover the React Virtuoso grid while it is rendering */}
-        {!gridLoaded && (
+        {/* Cover with a loading screen while the data is fetching or the React Virtuoso grid is rendering */}
+        {(isLoadingAM || isLoading || !gridLoaded) && (
           <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-50 dark:bg-slate-900">
             <Loader size={24} displaysText={true} />
           </div>

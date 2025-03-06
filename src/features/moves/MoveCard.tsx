@@ -35,13 +35,13 @@ const MoveCard = memo(({ move: { id, name } }: CardProps) => {
           )}
 
           <div className="w-[calc(100%-76px)]">
-            <h1 className="my-1 overflow-scroll px-1 text-lg font-bold text-nowrap capitalize max-md:px-0">
+            <h1 className="my-1 overflow-scroll px-1 text-lg font-bold text-nowrap capitalize">
               {name.split("-").join(" ")}
             </h1>
 
             <MoveInfoDisplay
               move={move}
-              className="-mx-6 -my-1 scale-75 @[275px]/card:-mx-2 @[275px]/card:scale-90 @[300px]/card:m-1 @[300px]/card:scale-100"
+              className="-mx-6 -my-1 scale-75 @min-[275px]/card:-mx-2 @min-[275px]/card:scale-90 @min-[300px]/card:m-1 @min-[300px]/card:scale-100"
             />
           </div>
         </div>

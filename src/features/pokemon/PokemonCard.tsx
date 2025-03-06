@@ -42,7 +42,7 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
 
           <PokemonTypesDisplay
             types={pokemon?.types}
-            className="-mx-6 scale-75 gap-1 @[200px]/card:-mx-3 @[200px]/card:scale-90 @[200px]/card:gap-2"
+            className="-mx-6 scale-75 gap-1 @min-[180px]/card:-mx-7 @min-[200px]/card:-mx-3 @min-[200px]/card:scale-90 @min-[200px]/card:gap-2 @min-[235px]/card:mx-0 @min-[235px]/card:scale-100"
           />
         </div>
       </article>
