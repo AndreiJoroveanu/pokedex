@@ -13,6 +13,7 @@ import MoveInfoDisplay from "@/features/moves/MoveInfoDisplay.tsx";
 import Footer from "@/ui/Footer.tsx";
 
 const MoveDetails = () => {
+  // Fetching data
   // Move ID using the URL Parameter
   const { id } = useParams() as { id: string };
 

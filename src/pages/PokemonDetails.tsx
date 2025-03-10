@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router";
 import axios from "axios";
+import { useShallow } from "zustand/react/shallow";
 import { Pokemon } from "pokedex-promise-v2";
 
+import useAppStore from "@/store/useAppStore.ts";
 import { usePokemonSpecies } from "@/hooks/pokemon/useSpecificPokemon.ts";
 import { usePokemonEvolutionChain } from "@/hooks/pokemon/usePokemonEvolutionChain.ts";
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
@@ -27,9 +29,25 @@ import FlavorTextEntries from "@/features/pokemon/pokemonDetails/FlavorTextEntri
 import Footer from "@/ui/Footer.tsx";
 
 const PokemonDetails = () => {
+  // State specific to this page
   const [currentForm, setCurrentForm] = useState<number>(0);
   const [displayShiny, setDisplayShiny] = useState<boolean>(false);
 
+  const [
+    isLearnsetPanelOpen,
+    toggleLearnsetPanelOpen,
+    isDexEntriesPanelOpen,
+    toggleDexEntriesPanelOpen,
+  ] = useAppStore(
+    useShallow((state) => [
+      state.isLearnsetPanelOpen,
+      state.toggleLearnsetPanelOpen,
+      state.isDexEntriesPanelOpen,
+      state.toggleDexEntriesPanelOpen,
+    ]),
+  );
+
+  // Fetching data
   // Pokémon Species using the URL Parameter
   const { id } = useParams() as { id: string };
   const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(id);
@@ -200,11 +218,21 @@ const PokemonDetails = () => {
             types={pokemon?.types.map((type) => type.type.name)}
           />
 
-          <CollapsingPanel label="Learnset" className="p-2 sm:p-4">
+          <CollapsingPanel
+            label="Learnset"
+            initialIsOpen={isLearnsetPanelOpen}
+            toggleOpen={toggleLearnsetPanelOpen}
+            className="p-2 sm:p-4"
+          >
             <PokemonMoves moves={pokemon?.moves} />
           </CollapsingPanel>
 
-          <CollapsingPanel label="Dex Entries" className="px-2">
+          <CollapsingPanel
+            label="Dex Entries"
+            initialIsOpen={isDexEntriesPanelOpen}
+            toggleOpen={toggleDexEntriesPanelOpen}
+            className="px-2"
+          >
             {/* All english Dex descriptions */}
             <FlavorTextEntries
               textEntries={pokemonSpecies?.flavor_text_entries.filter(

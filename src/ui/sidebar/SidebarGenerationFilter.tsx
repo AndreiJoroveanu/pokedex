@@ -1,18 +1,21 @@
+import { useShallow } from "zustand/react/shallow";
+
 import useAppStore from "@/store/useAppStore.ts";
 import { pokemonGens } from "@/data/pokemonGens.ts";
 
 import SidebarFilter from "@/ui/sidebar/SidebarFilter.tsx";
 
 const SidebarGenerationFilter = () => {
-  const isGenFilterOpen = useAppStore((state) => state.isGenFilterOpen);
-  const toggleGenFilterOpen = useAppStore((state) => state.toggleGenFilterOpen);
+  const [isGenPanelOpen, toggleGenPanelOpen] = useAppStore(
+    useShallow((state) => [state.isGenPanelOpen, state.toggleGenPanelOpen]),
+  );
 
   return (
     <SidebarFilter
       name="generation"
       values={pokemonGens}
-      isOpen={isGenFilterOpen}
-      toggleOpen={toggleGenFilterOpen}
+      isOpen={isGenPanelOpen}
+      toggleOpen={toggleGenPanelOpen}
     />
   );
 };

@@ -2,18 +2,28 @@ import { create } from "zustand";
 
 import { changeTheme, initialTheme, Theme } from "@/utils/themeUtils.ts";
 
-// Typescript stuff
+// Typescript interface
 interface State {
   theme: Theme;
   actualTheme: "light" | "dark";
 
   changeTheme: (newTheme: Theme) => void;
 
-  isGenFilterOpen: boolean;
-  toggleGenFilterOpen: () => void;
+  isGenPanelOpen: boolean;
+  toggleGenPanelOpen: () => void;
 
-  isTypeFilterOpen: boolean;
-  toggleTypeFilterOpen: () => void;
+  isTypePanelOpen: boolean;
+  toggleTypePanelOpen: () => void;
+
+  resetSidebarPanels: () => void;
+
+  isLearnsetPanelOpen: boolean;
+  toggleLearnsetPanelOpen: () => void;
+
+  isDexEntriesPanelOpen: boolean;
+  toggleDexEntriesPanelOpen: () => void;
+
+  resetPokemonDetailsPanels: () => void;
 }
 
 // Actual Zustand Store
@@ -32,12 +42,28 @@ const useAppStore = create<State>((set) => ({
     set({ actualTheme: changeTheme(newTheme) });
   },
 
-  isGenFilterOpen: false,
-  toggleGenFilterOpen: () =>
-    set((state) => ({ isGenFilterOpen: !state.isGenFilterOpen })),
+  // Used for the Collapsing Panels from the Sidebar in the All Pokémon/Moves pages
+  isGenPanelOpen: false,
+  toggleGenPanelOpen: () =>
+    set((state) => ({ isGenPanelOpen: !state.isGenPanelOpen })),
 
-  isTypeFilterOpen: false,
-  toggleTypeFilterOpen: () =>
-    set((state) => ({ isTypeFilterOpen: !state.isTypeFilterOpen })),
+  isTypePanelOpen: false,
+  toggleTypePanelOpen: () =>
+    set((state) => ({ isTypePanelOpen: !state.isTypePanelOpen })),
+
+  resetSidebarPanels: () =>
+    set({ isGenPanelOpen: false, isTypePanelOpen: false }),
+
+  // Used for the Collapsing Panels from the Pokémon details page
+  isLearnsetPanelOpen: false,
+  toggleLearnsetPanelOpen: () =>
+    set((state) => ({ isLearnsetPanelOpen: !state.isLearnsetPanelOpen })),
+
+  isDexEntriesPanelOpen: false,
+  toggleDexEntriesPanelOpen: () =>
+    set((state) => ({ isDexEntriesPanelOpen: !state.isDexEntriesPanelOpen })),
+
+  resetPokemonDetailsPanels: () =>
+    set({ isLearnsetPanelOpen: false, isDexEntriesPanelOpen: false }),
 }));
 export default useAppStore;

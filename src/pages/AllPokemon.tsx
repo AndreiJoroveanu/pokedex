@@ -3,6 +3,7 @@ import { VirtuosoGrid } from "react-virtuoso";
 
 import { useAllPokemonSpecies } from "@/hooks/pokemon/useAllPokemon.ts";
 import { useFilteredPokemon } from "@/hooks/useFilteredPokemon.ts";
+import useAppStore from "@/store/useAppStore.ts";
 import { useScrollRestoration } from "@/hooks/useScrollRestoration.ts";
 
 import Sidebar from "@/ui/sidebar/Sidebar.tsx";
@@ -13,9 +14,14 @@ import Loader from "@/ui/Loader.tsx";
 import FilterErrorMessage from "@/ui/FilterErrorMessage.tsx";
 
 const AllPokemon = () => {
+  // Fetching data
   const { data: allPokemon, isLoading: isLoadingAP } = useAllPokemonSpecies();
   const { pokemonList, isLoading, isFiltered } = useFilteredPokemon(allPokemon);
 
+  // Reset the Collapsable Panels' states in the Pokémon Details page
+  useAppStore((state) => state.resetPokemonDetailsPanels)();
+
+  // Restore the scroll position when the grid loads
   const [gridLoaded, setGridLoaded] = useState<boolean>(false);
   useScrollRestoration(gridLoaded);
 
