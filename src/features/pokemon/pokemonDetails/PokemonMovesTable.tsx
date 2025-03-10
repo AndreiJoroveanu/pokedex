@@ -1,7 +1,7 @@
 import PokemonMoveTableRow from "./PokemonMoveTableRow.tsx";
 
 interface MovesProps {
-  moves: { name: string; level: number }[];
+  moves: { id: number; name: string; level: number }[];
   label: string;
 }
 
@@ -28,11 +28,10 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
         </thead>
 
         <tbody>
-          {moves.map(({ name, level }) => (
+          {moves.map((move) => (
             <PokemonMoveTableRow
-              key={`${level}-${name}`}
-              name={name}
-              level={level}
+              key={`${move.level}-${move.name}`}
+              move={move}
               displayLevel={label === "Level-Up Moves"}
             />
           ))}
