@@ -20,7 +20,8 @@ const pokemonEvolutionText = (pokemon: PokemonListType) => (
   <>
     <Link
       to={`/pokedex/pokemon/${pokemon.id}`}
-      className="capitalize underline underline-offset-4 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+      draggable="false"
+      className="capitalize underline underline-offset-4 transition-colors hover:text-blue-600 focus:text-blue-600 dark:hover:text-blue-400 dark:focus:text-blue-400"
     >
       {pokemon.name}
     </Link>

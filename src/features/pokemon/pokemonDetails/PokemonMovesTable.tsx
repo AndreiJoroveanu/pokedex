@@ -14,6 +14,8 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
       <table className="min-w-full text-nowrap">
         <thead className="border-b border-slate-500">
           <tr>
+            {/* Empty th because the first element is an invisible Link */}
+            <th />
             {label === "Level-Up Moves" && (
               <th className="min-w-14 pb-1 text-start">Level</th>
             )}
