@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router";
-import axios from "axios";
+import { useParams } from "react-router";
 import { useShallow } from "zustand/react/shallow";
-import { Pokemon } from "pokedex-promise-v2";
 
 import useAppStore from "@/store/useAppStore.ts";
-import { usePokemonSpecies } from "@/hooks/pokemon/useSpecificPokemon.ts";
-import { usePokemonEvolutionChain } from "@/hooks/pokemon/usePokemonEvolutionChain.ts";
+import {
+  useEvolutionChain,
+  usePokemon,
+  usePokemonSpecies,
+} from "@/hooks/usePokeApi.ts";
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
-import { api } from "@/hooks/pokemon/usePokemonShared.ts";
-import { capitalize } from "@/utils/helpers.ts";
+import { capitalize } from "@/utils/capitalize.ts";
 
 import ErrorMessage from "@/ui/ErrorMessage.tsx";
 import TopButtons from "@/features/pokemon/pokemonDetails/TopButtons.tsx";
@@ -50,67 +50,21 @@ const PokemonDetails = () => {
   // Fetching data
   // Pokémon Species using the URL Parameter
   const { id } = useParams() as { id: string };
-  const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(id);
-
-  // Evolution chain
-  const { data: evolutionChain, error: errorEC } = usePokemonEvolutionChain(
-    Number(getIdFromUrl(pokemonSpecies?.evolution_chain.url)),
+  const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(
+    Number(id),
   );
 
-  // Pokémon passed as a state through React Router to avoid fetching it again
-  // TS: state property from useLocation() hook doesn't have a specific type
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { initialPokemon }: { initialPokemon: Pokemon } =
-    useLocation().state ?? {};
+  // Pokémon based on the selected Form
+  const { data: pokemon, error: errorP } = usePokemon(
+    currentForm === 0
+      ? Number(id)
+      : getIdFromUrl(pokemonSpecies?.varieties[currentForm].pokemon.url),
+  );
 
-  const [pokemon, setPokemon] = useState<Pokemon | undefined>(initialPokemon);
-  const [errorP, setErrorP] = useState<string | null>(null);
-
-  // Fetch the Pokémon data if the form changes
-  useEffect(() => {
-    let ignore = false;
-
-    void (async () => {
-      if (currentForm === 0 && initialPokemon) {
-        setPokemon(initialPokemon);
-        return;
-      }
-
-      try {
-        const pokemonId =
-          currentForm === 0
-            ? id
-            : getIdFromUrl(pokemonSpecies?.varieties[currentForm].pokemon.url);
-
-        if (!ignore && pokemonId)
-          setPokemon(await api.getPokemonByName(pokemonId));
-      } catch (error) {
-        let errorMessage = "An unknown error occurred.";
-
-        if (axios.isAxiosError(error)) {
-          switch (error.response?.status) {
-            case 404:
-              errorMessage =
-                "The requested resource was not found. Please check the URL or try again.";
-              break;
-            case 500:
-              errorMessage = "Internal server error. Try again later.";
-              break;
-            case 503:
-              errorMessage = "Service unavailable. Check back later.";
-              break;
-            default:
-              errorMessage = error.message;
-          }
-        } else if (error instanceof Error) errorMessage = error.message;
-
-        setErrorP(errorMessage ?? "An unknown error occurred.");
-        setPokemon(undefined);
-      }
-    })();
-
-    return () => void (ignore = true);
-  }, [currentForm, id, initialPokemon, pokemonSpecies?.varieties]);
+  // Pokémon Evolution chain
+  const { data: evolutionChain, error: errorEC } = useEvolutionChain(
+    getIdFromUrl(pokemonSpecies?.evolution_chain.url),
+  );
 
   // Play the Pokémon's cry when the page first loads, or when the form is changed
   useEffect(() => {
@@ -135,9 +89,9 @@ const PokemonDetails = () => {
   if (errorPS || errorEC || errorP)
     return (
       <ErrorMessage
-        errors={[errorPS, errorEC, errorP].filter((e): e is string =>
-          Boolean(e),
-        )}
+        errors={[errorPS, errorEC, errorP]
+          .filter((e): e is Error => Boolean(e))
+          .map((e) => e.message)}
       />
     );
 
@@ -157,7 +111,7 @@ const PokemonDetails = () => {
                 pokemonSpecies={pokemonSpecies.varieties}
                 currentForm={currentForm}
                 handleClick={(index) => {
-                  setPokemon(undefined);
+                  // setPokemon(undefined);
                   setCurrentForm(index);
                 }}
               />

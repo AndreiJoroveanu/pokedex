@@ -64,7 +64,7 @@ const router = createBrowserRouter([
         element: wrapper(AllMovesPage),
       },
       {
-        path: "/pokedex/move/:id",
+        path: "/pokedex/moves/:id",
         element: wrapper(MoveDetailsPage),
       },
     ],

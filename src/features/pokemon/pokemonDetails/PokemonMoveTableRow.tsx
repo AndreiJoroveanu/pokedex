@@ -1,7 +1,8 @@
 import { memo } from "react";
 import { Link } from "react-router";
 
-import { usePokemonMove } from "@/hooks/pokemon/usePokemonMove.ts";
+import { useMove } from "@/hooks/usePokeApi.ts";
+
 import TypeDisplay from "@/ui/TypeDisplay.tsx";
 import MoveCategoryDisplay from "@/ui/MoveCategoryDisplay.tsx";
 
@@ -12,14 +13,14 @@ interface RowProps {
 
 const PokemonMoveTableRow = memo(
   ({ move: { id, name, level }, displayLevel }: RowProps) => {
-    const { data: moveData } = usePokemonMove(name);
+    const { data: moveData } = useMove(id);
 
     return (
       <tr className="group pointer-coarse:h-12 relative h-8 even:bg-slate-400/15 hover:bg-blue-400/20 has-focus:bg-blue-400/20">
         {/* Invisible Link (has to be the first for the peer class to work) */}
         <td aria-hidden="true" className="peer">
           <Link
-            to={`/pokedex/move/${id}`}
+            to={`/pokedex/moves/${id}`}
             state={{ initialMove: moveData }}
             draggable="false"
             className="absolute inset-0"

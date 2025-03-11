@@ -41,5 +41,5 @@ export const useScrollRestoration = (isLoaded: boolean) => {
   }, [restoreScroll, updateScroll]);
 };
 
-// Function to reset scroll position (used when the filters change)
+// Function to reset scroll position
 export const resetScroll = () => sessionStorage.setItem(SCROLL_KEY, "0");

@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-router";
 
-import { usePokemonMove } from "@/hooks/pokemon/usePokemonMove.ts";
+import { useMove } from "@/hooks/usePokeApi.ts";
 import tmDiscsImage from "/tm-discs.png";
 import { tmDiscs } from "@/data/tmDiscs.ts";
 
@@ -13,10 +13,10 @@ interface CardProps {
 }
 
 const MoveCard = memo(({ move: { id, name } }: CardProps) => {
-  const { data: move } = usePokemonMove(id);
+  const { data: move } = useMove(id);
 
   return (
-    <Link to={`/pokedex/move/${id}`} state={{ initialMove: move }}>
+    <Link to={`/pokedex/moves/${id}`}>
       <article className="@container/card relative rounded-sm border border-slate-400/40 bg-slate-100 shadow-lg transition-colors hover:bg-slate-200/75 hover:shadow-xl dark:bg-slate-800 dark:shadow-none dark:hover:bg-slate-700/75 dark:hover:shadow-none">
         <div className="flex">
           {move ? (

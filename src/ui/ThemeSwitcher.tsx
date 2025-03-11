@@ -5,7 +5,7 @@ import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import useAppStore from "@/store/useAppStore.ts";
 import { themeOptions } from "@/data/themeOptions.tsx";
 
-import ThemeSwitcherMenu from "./ThemeSwitcherMenu.tsx";
+import ThemeSwitcherMenu from "@/ui/ThemeSwitcherMenu.tsx";
 
 const ThemeSwitcher = () => {
   const actualTheme = useAppStore((state) => state.actualTheme);

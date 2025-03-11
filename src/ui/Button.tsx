@@ -22,18 +22,13 @@ const Button = ({
   style = "normal",
   className = "",
   children,
-}: ButtonProps) => {
-  // This allows component callers to override a default rounded value
-  if (!className?.includes("rounded-")) className += " rounded-xl";
-
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`cursor-pointer border-2 bg-slate-100 py-2 font-semibold shadow-md transition-[background-color_brightness] enabled:hover:shadow-lg dark:bg-slate-800 dark:shadow-none ${buttonStyles[style]} ${className}`}
-    >
-      {children}
-    </button>
-  );
-};
+}: ButtonProps) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    className={`cursor-pointer border-2 bg-slate-100 py-2 font-semibold shadow-md transition-[background-color_brightness] enabled:hover:shadow-lg dark:bg-slate-800 dark:shadow-none ${buttonStyles[style]} ${className} ${!className?.includes("rounded-") ? "rounded-xl" : ""}`}
+  >
+    {children}
+  </button>
+);
 export default Button;

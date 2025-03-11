@@ -1,6 +1,6 @@
 import { EvolutionDetail } from "pokedex-promise-v2";
 
-import { capitalize } from "./helpers.ts";
+import { capitalize } from "@/utils/capitalize.ts";
 
 const formatEvolutionMethod = (details: EvolutionDetail[]) => {
   if (!details.length) return "";

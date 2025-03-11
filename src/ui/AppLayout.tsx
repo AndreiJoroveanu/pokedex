@@ -1,6 +1,6 @@
 import { Outlet, ScrollRestoration, useLocation } from "react-router";
 
-import Navbar from "./Navbar.tsx";
+import Navbar from "@/ui/Navbar.tsx";
 
 const AppLayout = () => {
   const location = useLocation();

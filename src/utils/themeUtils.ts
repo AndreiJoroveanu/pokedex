@@ -6,11 +6,11 @@ export type Theme = "light" | "dark" | "system";
 export const initialTheme =
   (localStorage.getItem("theme") as Theme) ?? "system";
 
+// Media query to check if the system is set to dark mode
+const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
 // Returns the value used for actualTheme, and sets the HTML class
 export const changeTheme = (theme: Theme) => {
-  // Media query to check if the system is set to dark mode
-  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
   // Determine the next theme for display
   const actualTheme =
     theme === "system" ? (mediaQuery.matches ? "dark" : "light") : theme;
@@ -19,9 +19,9 @@ export const changeTheme = (theme: Theme) => {
   document.documentElement.className = actualTheme;
 
   // Add/remove the event listener to listen for system theme changes
+  mediaQuery.removeEventListener("change", handleSystemThemeChange);
   if (theme === "system")
     mediaQuery.addEventListener("change", handleSystemThemeChange);
-  else mediaQuery.removeEventListener("change", handleSystemThemeChange);
 
   return actualTheme;
 };

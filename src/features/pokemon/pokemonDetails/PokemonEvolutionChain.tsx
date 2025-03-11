@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { Chain } from "pokedex-promise-v2";
 
 import getEvolutionData from "@/utils/getEvolutionData.ts";
+import useAppStore from "@/store/useAppStore.ts";
 
 interface ChainProps {
   chain: Chain | undefined;
@@ -16,30 +17,36 @@ interface PokemonListType {
 }
 
 // Link to the respective Pokémon page and the evolution description
-const pokemonEvolutionText = (pokemon: PokemonListType) => (
-  <>
-    <Link
-      to={`/pokedex/pokemon/${pokemon.id}`}
-      draggable="false"
-      className="capitalize underline underline-offset-4 transition-colors hover:text-blue-600 focus:text-blue-600 dark:hover:text-blue-400 dark:focus:text-blue-400"
-    >
-      {pokemon.name}
-    </Link>
-    {` ${pokemon.evolutionMethod ?? "(no data available)"}`}
-  </>
-);
+const PokemonEvolutionText = ({ pokemon }: { pokemon: PokemonListType }) => {
+  const resetPanels = useAppStore((state) => state.resetPokemonDetailsPanels);
+
+  return (
+    <>
+      <Link
+        to={`/pokedex/pokemon/${pokemon.id}`}
+        onClick={resetPanels}
+        draggable="false"
+        className="capitalize underline underline-offset-4 transition-colors hover:text-blue-600 focus:text-blue-600 dark:hover:text-blue-400 dark:focus:text-blue-400"
+      >
+        {pokemon.name}
+      </Link>
+      {` ${pokemon.evolutionMethod || "(no data available)"}`}
+    </>
+  );
+};
 
 // Format the list of evolutions
 const formatEvolutions = (pokemonList: PokemonListType[]) => {
   // If this Pokémon has one evolution branch after it
-  if (pokemonList.length === 1) return pokemonEvolutionText(pokemonList[0]);
+  if (pokemonList.length === 1)
+    return <PokemonEvolutionText pokemon={pokemonList[0]} />;
 
   // If this Pokémon has two evolution branches after it
   if (pokemonList.length === 2)
     return (
       <>
-        {pokemonEvolutionText(pokemonList[0])}, or{" "}
-        {pokemonEvolutionText(pokemonList[1])}
+        <PokemonEvolutionText pokemon={pokemonList[0]} />, or{" "}
+        <PokemonEvolutionText pokemon={pokemonList[1]} />
       </>
     );
 
@@ -48,10 +55,11 @@ const formatEvolutions = (pokemonList: PokemonListType[]) => {
     <>
       {pokemonList.slice(0, pokemonList.length - 1).map((pokemon) => (
         <Fragment key={pokemon.name}>
-          {pokemonEvolutionText(pokemon)},{" "}
+          <PokemonEvolutionText pokemon={pokemon} />,{" "}
         </Fragment>
       ))}
-      {" or "} {pokemonEvolutionText(pokemonList[pokemonList.length - 1])}
+      {" or "}
+      <PokemonEvolutionText pokemon={pokemonList[pokemonList.length - 1]} />
     </>
   );
 };
@@ -72,13 +80,17 @@ const PokemonEvolutionChain = memo(({ chain, pokemonName }: ChainProps) => {
 
   // If this Pokémon is fully evolved
   if (!next.length)
-    return <p>This Pokémon evolves from {pokemonEvolutionText(previous)}.</p>;
+    return (
+      <p>
+        This Pokémon evolves from <PokemonEvolutionText pokemon={previous} />.
+      </p>
+    );
 
   // If this Pokémon is a middle evolution
   return (
     <p>
-      This Pokémon evolves from {pokemonEvolutionText(previous)}, and evolves
-      into {formatEvolutions(next)}.
+      This Pokémon evolves from <PokemonEvolutionText pokemon={previous} />, and
+      evolves into {formatEvolutions(next)}.
     </p>
   );
 });

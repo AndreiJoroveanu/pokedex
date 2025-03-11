@@ -1,4 +1,4 @@
-import PokemonMoveTableRow from "./PokemonMoveTableRow.tsx";
+import PokemonMoveTableRow from "@/features/pokemon/pokemonDetails/PokemonMoveTableRow.tsx";
 
 interface MovesProps {
   moves: { id: number; name: string; level: number }[];

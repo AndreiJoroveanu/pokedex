@@ -1,10 +1,7 @@
-import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router";
-import axios from "axios";
-import { Move } from "pokedex-promise-v2";
+import { useParams } from "react-router";
 
-import { api } from "@/hooks/pokemon/usePokemonShared.ts";
-import { capitalize } from "@/utils/helpers.ts";
+import { useMove } from "@/hooks/usePokeApi.ts";
+import { capitalize } from "@/utils/capitalize.ts";
 
 import ErrorMessage from "@/ui/ErrorMessage.tsx";
 import BackButton from "@/ui/BackButton.tsx";
@@ -16,54 +13,10 @@ const MoveDetails = () => {
   // Fetching data
   // Move ID using the URL Parameter
   const { id } = useParams() as { id: string };
-
-  // Move passed as a state through React Router to avoid fetching it again
-  // TS: state property from useLocation() hook doesn't have a specific type
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { initialMove }: { initialMove: Move } = useLocation().state ?? {};
-
-  const [move, setMove] = useState<Move | undefined>(initialMove);
-  const [errorM, setErrorM] = useState<string | null>(null);
-
-  // Fetch the move if there isn't one initially
-  useEffect(() => {
-    let ignore = false;
-
-    void (async () => {
-      if (initialMove) return;
-
-      try {
-        if (!ignore && id) setMove(await api.getMoveByName(id));
-      } catch (error) {
-        let errorMessage = "An unknown error occurred.";
-
-        if (axios.isAxiosError(error)) {
-          switch (error.response?.status) {
-            case 404:
-              errorMessage =
-                "The requested resource was not found. Please check the URL or try again.";
-              break;
-            case 500:
-              errorMessage = "Internal server error. Try again later.";
-              break;
-            case 503:
-              errorMessage = "Service unavailable. Check back later.";
-              break;
-            default:
-              errorMessage = error.message;
-          }
-        } else if (error instanceof Error) errorMessage = error.message;
-
-        setErrorM(errorMessage ?? "An unknown error occurred.");
-        setMove(undefined);
-      }
-    })();
-
-    return () => void (ignore = true);
-  }, [id, initialMove]);
+  const { data: move, error: errorM } = useMove(Number(id));
 
   // Display an error message if there is an error whole fetching data
-  if (errorM) return <ErrorMessage errors={[errorM]} />;
+  if (errorM) return <ErrorMessage errors={[errorM.message]} />;
 
   return (
     <>
@@ -87,7 +40,7 @@ const MoveDetails = () => {
                 {move?.name.split("-").join(" ") ?? "Loading..."}
               </h1>
 
-              <MoveInfoDisplay move={move ?? null} />
+              <MoveInfoDisplay move={move} />
             </div>
           </div>
 

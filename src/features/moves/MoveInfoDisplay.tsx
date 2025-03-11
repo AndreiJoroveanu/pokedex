@@ -1,9 +1,10 @@
-import TypeDisplay from "@/ui/TypeDisplay.tsx";
-import MoveCategoryDisplay from "@/ui/MoveCategoryDisplay.tsx";
 import { Move } from "pokedex-promise-v2";
 
+import TypeDisplay from "@/ui/TypeDisplay.tsx";
+import MoveCategoryDisplay from "@/ui/MoveCategoryDisplay.tsx";
+
 interface InfoProps {
-  move: Move | null;
+  move: Move | undefined;
   className?: string;
 }
 

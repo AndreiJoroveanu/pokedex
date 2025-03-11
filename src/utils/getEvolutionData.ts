@@ -1,7 +1,7 @@
 import { Chain, EvolutionDetail } from "pokedex-promise-v2";
 
-import { getIdFromUrl } from "./getIdFromUrl.ts";
-import formatEvolutionMethod from "./formatEvolutionMethod.ts";
+import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
+import formatEvolutionMethod from "@/utils/formatEvolutionMethod.ts";
 
 interface PokemonListType {
   id: number;

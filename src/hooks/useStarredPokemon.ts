@@ -1,4 +1,4 @@
-import { useLocalStorageState } from "./useLocalStorageState.ts";
+import { useLocalStorageState } from "@/hooks/useLocalStorageState.ts";
 
 export const useStarredPokemon = () => {
   const [starredPokemonIds, setStarredPokemonIds] = useLocalStorageState<

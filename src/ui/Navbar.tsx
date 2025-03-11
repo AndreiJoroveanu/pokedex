@@ -1,9 +1,10 @@
 import { Link, NavLink } from "react-router";
-import ThemeSwitcher from "./ThemeSwitcher.tsx";
 
-import { resetScroll } from "@/hooks/useScrollRestoration.ts";
 import useAppStore from "@/store/useAppStore.ts";
+import { resetScroll } from "@/hooks/useScrollRestoration.ts";
 import pokeballLogo from "/pokéball.svg";
+
+import ThemeSwitcher from "@/ui/ThemeSwitcher.tsx";
 
 const Navbar = () => {
   const resetSidebarPanels = useAppStore((state) => state.resetSidebarPanels);

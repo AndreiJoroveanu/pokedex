@@ -1,6 +1,6 @@
 import { useUrlParams } from "@/hooks/useUrlParams.ts";
 
-import Button from "./Button.tsx";
+import Button from "@/ui/Button.tsx";
 
 const FilterErrorMessage = ({ itemType }: { itemType: string }) => {
   const { resetUrlParams } = useUrlParams();

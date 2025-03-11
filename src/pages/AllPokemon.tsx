@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 
-import { useAllPokemonSpecies } from "@/hooks/pokemon/useAllPokemon.ts";
+import { useAllPokemonSpecies } from "@/hooks/usePokeApi.ts";
 import { useFilteredPokemon } from "@/hooks/useFilteredPokemon.ts";
 import useAppStore from "@/store/useAppStore.ts";
 import { useScrollRestoration } from "@/hooks/useScrollRestoration.ts";

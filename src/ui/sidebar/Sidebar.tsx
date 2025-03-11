@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import SidebarSearch from "./SidebarSearch.tsx";
+import SidebarSearch from "@/ui/sidebar/SidebarSearch.tsx";
 import SidebarGenerationFilter from "@/ui/sidebar/SidebarGenerationFilter.tsx";
 import SidebarTypeFilter from "@/ui/sidebar/SidebarTypeFilter.tsx";
 import SidebarOnlyStarredToggle from "@/ui/sidebar/SidebarOnlyStarredToggle.tsx";

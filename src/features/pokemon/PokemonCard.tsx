@@ -1,10 +1,10 @@
 import { memo, useState } from "react";
 import { Link } from "react-router";
 
-import { usePokemon } from "@/hooks/pokemon/useSpecificPokemon.ts";
+import { usePokemon } from "@/hooks/usePokeApi.ts";
 
 import Loader from "@/ui/Loader.tsx";
-import PokemonTypesDisplay from "./PokemonTypesDisplay.tsx";
+import PokemonTypesDisplay from "@/features/pokemon/PokemonTypesDisplay.tsx";
 
 interface CardProps {
   pokemon: { id: number; name: string };
@@ -15,7 +15,7 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   return (
-    <Link to={`/pokedex/pokemon/${id}`} state={{ initialPokemon: pokemon }}>
+    <Link to={`/pokedex/pokemon/${id}`}>
       <article className="@container/card relative rounded-sm border border-slate-400/40 bg-slate-100 shadow-lg transition-colors hover:bg-slate-200/75 hover:shadow-xl dark:bg-slate-800 dark:shadow-none dark:hover:bg-slate-700/75 dark:hover:shadow-none">
         {/* Gets the image from a raw link instead of waiting for */}
         {/* the Pokémon object to download because it is faster */}
@@ -31,9 +31,7 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
           <div className="absolute top-0 aspect-square w-full rounded-sm bg-slate-100 dark:bg-slate-800">
             <Loader size={8} />
           </div>
-        ) : (
-          ""
-        )}
+        ) : null}
 
         <div className="p-2 md:p-4">
           <h1 className="mb-1 text-xl font-bold text-nowrap capitalize max-md:px-1">

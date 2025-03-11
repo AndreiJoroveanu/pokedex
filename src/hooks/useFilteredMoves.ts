@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 
-import { useUrlParams } from "./useUrlParams.ts";
-import { useAllMovesByGen } from "./pokemon/usePokemonGens.ts";
-import { useAllMovesByType } from "./pokemon/usePokemonTypes.ts";
+import { useUrlParams } from "@/hooks/useUrlParams.ts";
+import { useAllMovesByGen, useAllMovesByType } from "@/hooks/usePokeApi.ts";
 
 interface MovesListType {
   id: number;

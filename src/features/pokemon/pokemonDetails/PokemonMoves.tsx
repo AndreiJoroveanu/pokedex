@@ -5,7 +5,7 @@ import filterLearnsetData from "@/utils/filterLearnsetData.ts";
 import { versionGroups } from "@/data/versionGroups.ts";
 
 import Button from "@/ui/Button.tsx";
-import PokemonMovesTable from "./PokemonMovesTable.tsx";
+import PokemonMovesTable from "@/features/pokemon/pokemonDetails/PokemonMovesTable.tsx";
 
 interface MovesProps {
   moves: MoveElement[] | undefined;
