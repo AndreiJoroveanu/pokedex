@@ -15,7 +15,7 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
         <thead className="border-b border-slate-500">
           <tr>
             {/* Empty th because the first element is an invisible Link */}
-            <th />
+            <th className="w-2 min-w-2" />
             {label === "Level-Up Moves" && (
               <th className="min-w-14 pb-1 text-start">Level</th>
             )}
@@ -26,6 +26,8 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
             <th className="min-w-16 pb-1 text-start">Power</th>
             <th className="min-w-22 pb-1 text-start">Accuracy</th>
             <th className="min-w-6 pb-1 text-start">PP</th>
+            {/* Empty th for the arrow at the end */}
+            <th className="w-6" />
           </tr>
         </thead>
 

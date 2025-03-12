@@ -1,5 +1,6 @@
 import { memo } from "react";
 import { Link } from "react-router";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 import { useMove } from "@/hooks/usePokeApi.ts";
 
@@ -64,6 +65,11 @@ const PokemonMoveTableRow = memo(
 
         {/* Move PP (Power Points) */}
         <td className="min-w-6">{moveData?.pp ?? "-"}</td>
+
+        {/* Arrow indicating that the row is clickable */}
+        <td className="pointer-events-none scale-75 rounded-lg group-hover:bg-blue-500/25 group-hover:text-blue-500 peer-focus-within:bg-blue-500/25 peer-focus-within:text-blue-500">
+          <ChevronRightIcon className="pointer-coarse:size-12 pointer-coarse:scale-75 size-8" />
+        </td>
       </tr>
     );
   },

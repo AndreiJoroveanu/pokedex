@@ -33,6 +33,10 @@ const formatEvolutionMethod = (details: EvolutionDetail[]) => {
     if (detail.item) conditions.push(`when exposed to a ${capitalize(detail.item.name)}`);
     if (detail.held_item) conditions.push(`while holding a ${capitalize(detail.held_item.name)}`);
 
+    // Gender-based evolutions
+    if (detail.gender === 1) conditions.push("while being female");
+    else if (detail.gender === 2) conditions.push("while being male");
+
     // Stat-based evolutions
     if (detail.min_happiness) conditions.push(`with high happiness`);
     if (detail.min_affection) conditions.push(`with high affection`);

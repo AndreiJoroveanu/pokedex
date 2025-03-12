@@ -24,7 +24,7 @@ export const useAllItemsParams = () => {
       if (value) orderedParams.set(name, value);
     });
 
-    setSearchParams(orderedParams);
+    setSearchParams(orderedParams, { replace: true });
   };
 
   const resetUrlParams = () => {
