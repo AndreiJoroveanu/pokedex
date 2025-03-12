@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useShallow } from "zustand/react/shallow";
 import { motion } from "motion/react";
 
 import useAppStore from "@/store/useAppStore.ts";
@@ -47,8 +48,9 @@ const optionVariants = {
 };
 
 const ThemeSwitcherMenu = ({ actualTheme, onClose }: MenuProps) => {
-  const theme = useAppStore((state) => state.theme);
-  const changeTheme = useAppStore((state) => state.changeTheme);
+  const [theme, changeTheme] = useAppStore(
+    useShallow((state) => [state.theme, state.changeTheme]),
+  );
 
   // A custom hook to detect clicks outside the menu
   const ref = useOutsideClick(onClose);

@@ -1,7 +1,7 @@
-import { useUrlParams } from "@/hooks/useUrlParams.ts";
+import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
 
 const SidebarSearch = ({ itemType }: { itemType: string }) => {
-  const { getUrlParam, setUrlParam } = useUrlParams();
+  const { getUrlParam, setUrlParam } = useAllItemsParams();
 
   return (
     <input

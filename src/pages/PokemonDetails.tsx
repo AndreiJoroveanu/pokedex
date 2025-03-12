@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router";
 import { useShallow } from "zustand/react/shallow";
 
 import useAppStore from "@/store/useAppStore.ts";
+import { usePokemonDetailsParams } from "@/hooks/useUrlParams.ts";
 import {
   useEvolutionChain,
   usePokemon,
@@ -30,8 +31,10 @@ import Footer from "@/ui/Footer.tsx";
 
 const PokemonDetails = () => {
   // State specific to this page
-  const [currentForm, setCurrentForm] = useState<number>(0);
-  const [displayShiny, setDisplayShiny] = useState<boolean>(false);
+  const { getUrlParam, setUrlParam } = usePokemonDetailsParams();
+  // Indexing from 1 instead of 0 since this value can be seen by the user
+  const currentFormIndex = Number(getUrlParam("form") ?? 1) - 1;
+  const displayShiny = Boolean(getUrlParam("displayShiny"));
 
   const [
     isLearnsetPanelOpen,
@@ -56,9 +59,9 @@ const PokemonDetails = () => {
 
   // Pokémon based on the selected Form
   const { data: pokemon, error: errorP } = usePokemon(
-    currentForm === 0
+    currentFormIndex === 0
       ? Number(id)
-      : getIdFromUrl(pokemonSpecies?.varieties[currentForm].pokemon.url),
+      : getIdFromUrl(pokemonSpecies?.varieties[currentFormIndex].pokemon.url),
   );
 
   // Pokémon Evolution chain
@@ -109,17 +112,14 @@ const PokemonDetails = () => {
             <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:-mx-4 sm:px-4">
               <PokemonFormButtons
                 pokemonSpecies={pokemonSpecies.varieties}
-                currentForm={currentForm}
-                handleClick={(index) => {
-                  // setPokemon(undefined);
-                  setCurrentForm(index);
-                }}
+                currentForm={currentFormIndex}
+                handleClick={(index) => setUrlParam("form", String(index + 1))}
               />
             </div>
           )}
 
           <PokemonImage
-            key={`${currentForm}${displayShiny ? "-shiny" : ""}`}
+            key={`${currentFormIndex}${displayShiny ? "-shiny" : ""}`}
             src={
               pokemon?.sprites.other.home[
                 // Depending on the displayShiny state, display a different image
@@ -141,7 +141,7 @@ const PokemonDetails = () => {
 
             <ToggleShinyButton
               displayShiny={displayShiny}
-              setDisplayShiny={setDisplayShiny}
+              setDisplayShiny={() => setUrlParam("displayShiny", "true")}
             />
           </div>
 

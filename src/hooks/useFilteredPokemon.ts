@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { useUrlParams } from "@/hooks/useUrlParams.ts";
+import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
 import { useAllPokemonByGen, useAllPokemonByType } from "@/hooks/usePokeApi.ts";
 import { useStarredPokemon } from "@/hooks/useStarredPokemon.ts";
 
@@ -13,7 +13,7 @@ export const useFilteredPokemon = (
   allPokemon: PokemonListType[] | undefined,
 ) => {
   // Get the URL Params
-  const { getUrlParam } = useUrlParams();
+  const { getUrlParam } = useAllItemsParams();
   const currentGen = getUrlParam("generation") ?? "";
   const currentType = getUrlParam("type") ?? "";
   const onlyStarred = Boolean(getUrlParam("onlyStarred"));

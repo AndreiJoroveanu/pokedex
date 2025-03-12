@@ -1,18 +1,21 @@
-import { useUrlParams } from "@/hooks/useUrlParams.ts";
+import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
+import { useStarredPokemon } from "@/hooks/useStarredPokemon.ts";
 
 import Button from "@/ui/Button.tsx";
 
 const SidebarOnlyStarredToggle = () => {
-  const { getUrlParam, setUrlParam } = useUrlParams();
+  const { getUrlParam, setUrlParam } = useAllItemsParams();
+  const isButtonSelected = getUrlParam("onlyStarred");
+
+  const { length } = useStarredPokemon();
 
   return (
     <Button
       onClick={() => setUrlParam("onlyStarred", "true")}
-      style={getUrlParam("onlyStarred") ? "gold" : "normal"}
+      style={isButtonSelected ? "gold" : "normal"}
       className="mb-4 w-full"
     >
-      Show{getUrlParam("onlyStarred") ? `ing ${length}` : " only"} starred
-      Pokémon
+      Show{isButtonSelected ? `ing ${length}` : " only"} starred Pokémon
     </Button>
   );
 };

@@ -1,6 +1,7 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 import { MoveElement } from "pokedex-promise-v2";
 
+import { usePokemonDetailsParams } from "@/hooks/useUrlParams.ts";
 import filterLearnsetData from "@/utils/filterLearnsetData.ts";
 import { versionGroups } from "@/data/versionGroups.ts";
 
@@ -12,7 +13,9 @@ interface MovesProps {
 }
 
 const PokemonMoves = memo(({ moves }: MovesProps) => {
-  const [currentVersionIndex, setCurrentVersionIndex] = useState(0);
+  const { getUrlParam, setUrlParam } = usePokemonDetailsParams();
+  // Indexing from 1 instead of 0 since this value can be seen by the user
+  const currentVersionIndex = Number(getUrlParam("versionGroup") ?? 1) - 1;
 
   if (!moves) return <p>Loading...</p>;
 
@@ -45,7 +48,7 @@ const PokemonMoves = memo(({ moves }: MovesProps) => {
           {availableVersionGroups.map(([group, { label }], index) => (
             <Button
               key={group}
-              onClick={() => setCurrentVersionIndex(index)}
+              onClick={() => setUrlParam("versionGroup", String(index + 1))}
               disabled={currentVersionIndex === index}
               style={currentVersionIndex === index ? "indigo" : "normal"}
               className="px-4 text-nowrap capitalize disabled:cursor-default"

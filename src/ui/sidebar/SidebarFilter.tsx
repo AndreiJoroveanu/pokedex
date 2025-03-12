@@ -1,4 +1,4 @@
-import { useUrlParams } from "@/hooks/useUrlParams.ts";
+import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
 
 import CollapsingPanel from "@/ui/CollapsingPanel.tsx";
 import Button from "@/ui/Button.tsx";
@@ -11,7 +11,7 @@ interface FilterProps {
 }
 
 const SidebarFilter = ({ name, values, isOpen, toggleOpen }: FilterProps) => {
-  const { getUrlParam, setUrlParam } = useUrlParams();
+  const { getUrlParam, setUrlParam } = useAllItemsParams();
 
   return (
     <CollapsingPanel

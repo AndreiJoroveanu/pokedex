@@ -1,9 +1,9 @@
-import { useUrlParams } from "@/hooks/useUrlParams.ts";
+import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
 
 import Button from "@/ui/Button.tsx";
 
 const FilterErrorMessage = ({ itemType }: { itemType: string }) => {
-  const { resetUrlParams } = useUrlParams();
+  const { resetUrlParams } = useAllItemsParams();
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 py-8 text-center lg:h-screen">

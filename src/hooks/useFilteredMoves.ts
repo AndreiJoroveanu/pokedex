@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { useUrlParams } from "@/hooks/useUrlParams.ts";
+import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
 import { useAllMovesByGen, useAllMovesByType } from "@/hooks/usePokeApi.ts";
 
 interface MovesListType {
@@ -10,7 +10,7 @@ interface MovesListType {
 
 export const useFilteredMoves = (allMoves: MovesListType[] | undefined) => {
   // Get the URL Params
-  const { getUrlParam } = useUrlParams();
+  const { getUrlParam } = useAllItemsParams();
   const currentGen = getUrlParam("generation") ?? "";
   const currentType = getUrlParam("type") ?? "";
   const searchQuery = getUrlParam("q") ?? "";

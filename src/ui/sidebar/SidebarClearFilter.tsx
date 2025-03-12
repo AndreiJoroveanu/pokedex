@@ -1,9 +1,9 @@
-import { useUrlParams } from "@/hooks/useUrlParams.ts";
+import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
 
 import Button from "@/ui/Button.tsx";
 
 const SidebarClearFilter = () => {
-  const { getUrlParam, resetUrlParams } = useUrlParams();
+  const { getUrlParam, resetUrlParams } = useAllItemsParams();
   const isClearButtonDisabled =
     !getUrlParam("generation") &&
     !getUrlParam("type") &&
