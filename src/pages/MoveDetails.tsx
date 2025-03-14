@@ -25,7 +25,7 @@ const MoveDetails = () => {
 
       <BackButton />
 
-      <div className="mx-auto max-w-3xl pt-36 pb-6 sm:pt-42 lg:pt-28">
+      <div className="mx-auto max-w-3xl px-2 pt-36 pb-6 sm:px-4 sm:pt-42 md:px-0 lg:pt-28">
         {/* To remove when the page is more complete */}
         <h3 className="mb-4 text-center text-xl font-semibold">
           This page is currently under construction

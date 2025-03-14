@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import { useAllPokemonSpecies } from "@/hooks/usePokeApi.ts";
@@ -19,7 +19,10 @@ const AllPokemon = () => {
   const { pokemonList, isLoading, isFiltered } = useFilteredPokemon(allPokemon);
 
   // Reset the Collapsable Panels' states in the Pokémon Details page
-  useAppStore((state) => state.resetPokemonDetailsPanels)();
+  const resetPokemonDetailsPanels = useAppStore(
+    (state) => state.resetPokemonDetailsPanels,
+  );
+  useEffect(() => resetPokemonDetailsPanels(), [resetPokemonDetailsPanels]);
 
   // Restore the scroll position when the grid loads
   const [gridLoaded, setGridLoaded] = useState<boolean>(false);
