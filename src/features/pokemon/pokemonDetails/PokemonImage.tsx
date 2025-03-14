@@ -34,7 +34,7 @@ const PokemonImage = memo(({ src, alt }: ImageProps) => {
 
       {/* Covers the image with a loader if the image hasn't loaded */}
       {(isLoadingImage || src === undefined) && src !== null && (
-        <div className="absolute top-0 aspect-square max-h-128 w-full bg-slate-100 dark:bg-slate-800">
+        <div className="absolute top-0 aspect-square max-h-128 w-full bg-slate-100 dark:bg-slate-900">
           <Loader size={24} displaysText={true} />
         </div>
       )}

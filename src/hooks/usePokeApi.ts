@@ -1,8 +1,15 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import Pokedex from "pokedex-promise-v2";
 
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
+
+declare module "@tanstack/react-query" {
+  interface Register {
+    defaultError: AxiosError;
+  }
+}
 
 // pokedex-promise-v2 configuration
 export const pokeapi = new Pokedex({

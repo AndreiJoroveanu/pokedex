@@ -14,7 +14,10 @@ const PokemonAbilitiesDisplayText = memo(
       {abilities?.length ? (
         <>
           {/* Conditionally change the label depending on if there are multiple abilities */}
-          {abilities.length === 1 ? "Ability: " : "Abilities: "}
+          <span className="font-bold text-slate-700 dark:text-slate-300">
+            {abilities.length === 1 ? "Ability: " : "Abilities: "}
+          </span>
+
           {abilities.map(({ ability, is_hidden }, index) => (
             <Fragment key={ability.name}>
               {is_hidden ? (

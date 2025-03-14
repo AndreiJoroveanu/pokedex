@@ -37,7 +37,7 @@ const AllPokemon = () => {
 
       <ScrollToTopButton />
 
-      <section className="@container/grid flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)]">
+      <section className="@container/grid flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)] lg:pl-0">
         {!isLoadingAP && !isLoading && pokemonList?.length ? (
           <VirtuosoGrid
             totalCount={pokemonList.length}
@@ -58,7 +58,7 @@ const AllPokemon = () => {
 
         {/* Cover with a loading screen while the data is fetching or the React Virtuoso grid is rendering */}
         {(isLoadingAP || isLoading || !gridLoaded) && (
-          <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-50 dark:bg-slate-900">
+          <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-100 dark:bg-slate-900">
             <Loader size={24} displaysText={true} />
           </div>
         )}

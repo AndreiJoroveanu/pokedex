@@ -32,7 +32,7 @@ const wrapper = (Component: ElementType) => (
   >
     <Suspense
       fallback={
-        <div className="h-screen bg-slate-100 transition-colors dark:bg-slate-800">
+        <div className="h-screen bg-slate-100 transition-colors dark:bg-slate-900">
           <Loader size={24} displaysText={true} />
         </div>
       }

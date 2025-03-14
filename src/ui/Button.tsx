@@ -10,10 +10,10 @@ interface ButtonProps {
 
 const buttonStyles = {
   normal:
-    "border-slate-400/30 enabled:hover:bg-slate-200 dark:enabled:hover:bg-slate-700",
+    "bg-slate-300 dark:bg-slate-700 enabled:hover:brightness-95 dark:enabled:hover:brightness-115",
   indigo:
-    "border-transparent bg-linear-to-br from-[#8BC6EC] to-[#9599E2] bg-origin-border text-slate-700 enabled:hover:brightness-115",
-  gold: "border-transparent bg-linear-to-tr from-[#FBAB7E] to-[#F7CE68] bg-origin-border text-slate-700 enabled:hover:brightness-115",
+    "bg-linear-to-br from-[#8BC6EC] to-[#9599E2] bg-origin-border text-slate-700 enabled:hover:brightness-115",
+  gold: "bg-linear-to-tr from-[#FBAB7E] to-[#F7CE68] bg-origin-border text-slate-700 enabled:hover:brightness-115",
 };
 
 const Button = ({
@@ -26,7 +26,7 @@ const Button = ({
   <button
     onClick={onClick}
     disabled={disabled}
-    className={`cursor-pointer border-2 bg-slate-100 py-2 font-semibold shadow-md transition-[background-color_brightness] enabled:hover:shadow-lg dark:bg-slate-800 dark:shadow-none ${buttonStyles[style]} ${className} ${!className?.includes("rounded-") ? "rounded-xl" : ""}`}
+    className={`cursor-pointer py-2 font-semibold shadow-md transition-[background-color_shadow] enabled:hover:shadow-lg dark:shadow-none ${buttonStyles[style]} ${className} ${!className?.includes("rounded-") ? "rounded-xl" : ""}`.trim()}
   >
     {children}
   </button>

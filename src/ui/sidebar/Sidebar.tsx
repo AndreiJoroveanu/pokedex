@@ -7,7 +7,7 @@ import SidebarOnlyStarredToggle from "@/ui/sidebar/SidebarOnlyStarredToggle.tsx"
 import SidebarClearFilter from "@/ui/sidebar/SidebarClearFilter.tsx";
 
 const Sidebar = ({ children }: { children: ReactNode }) => (
-  <aside className="z-10 p-4 max-lg:pb-0 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:min-w-62 lg:overflow-y-scroll lg:border-r lg:border-slate-400 dark:lg:border-slate-600">
+  <aside className="z-10 p-4 max-lg:pb-0 lg:fixed lg:h-[calc(100vh-96px)] lg:w-1/5 lg:min-w-62 lg:overflow-y-scroll">
     {children}
   </aside>
 );

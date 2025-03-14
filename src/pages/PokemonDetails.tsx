@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
 import { useShallow } from "zustand/react/shallow";
+import { AxiosError } from "axios";
 
 import useAppStore from "@/store/useAppStore.ts";
 import { usePokemonDetailsParams } from "@/hooks/useUrlParams.ts";
@@ -93,7 +94,7 @@ const PokemonDetails = () => {
     return (
       <ErrorMessage
         errors={[errorPS, errorEC, errorP]
-          .filter((e): e is Error => Boolean(e))
+          .filter((e) => e instanceof AxiosError)
           .map((e) => e.message)}
       />
     );
@@ -105,100 +106,96 @@ const PokemonDetails = () => {
 
       <TopButtons />
 
-      <div className="pt-0 md:pt-36 lg:pt-24">
-        <div className="mx-auto max-w-3xl bg-slate-100 p-2 pt-36 transition-colors sm:p-4 sm:pt-42 md:my-4 md:rounded-lg md:border-2 md:border-slate-400/40 md:pt-4 dark:bg-slate-800">
-          {/* List of Pokémon form buttons (if there is more than one) */}
-          {pokemonSpecies && pokemonSpecies.varieties.length > 1 && (
-            <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:-mx-4 sm:px-4">
-              <PokemonFormButtons
-                pokemonSpecies={pokemonSpecies.varieties}
-                currentForm={currentFormIndex}
-                handleClick={(index) => setUrlParam("form", String(index + 1))}
-              />
-            </div>
-          )}
-
-          <PokemonImage
-            key={`${currentFormIndex}${displayShiny ? "-shiny" : ""}`}
-            src={
-              pokemon?.sprites.other.home[
-                // Depending on the displayShiny state, display a different image
-                displayShiny ? "front_shiny" : "front_default"
-              ] ??
-              // The default image is from Pokémon HOME, with the official artwork as a fallback
-              pokemon?.sprites.other["official-artwork"][
-                displayShiny ? "front_shiny" : "front_default"
-              ]
-            }
-            alt={pokemon?.name}
-          />
-
-          <div className="flex items-end justify-between">
-            {/* Name */}
-            <h1 className="text-2xl font-bold capitalize">
-              {pokemon?.name.split("-").join(" ") ?? "Loading..."}
-            </h1>
-
-            <ToggleShinyButton
-              displayShiny={displayShiny}
-              setDisplayShiny={() => setUrlParam("displayShiny", "true")}
+      <div className="mx-auto max-w-3xl pt-36 pb-6 sm:pt-42 lg:pt-28">
+        {/* List of Pokémon form buttons (if there is more than one) */}
+        {pokemonSpecies && pokemonSpecies.varieties.length > 1 && (
+          <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:-mx-4 sm:px-4">
+            <PokemonFormButtons
+              pokemonSpecies={pokemonSpecies.varieties}
+              currentForm={currentFormIndex}
+              handleClick={(index) => setUrlParam("form", String(index + 1))}
             />
           </div>
+        )}
 
-          <PokemonCategory
-            category={pokemonSpecies?.genera.find(
-              (genus) => genus.language.name === "en",
-            )}
+        <PokemonImage
+          key={`${currentFormIndex}${displayShiny ? "-shiny" : ""}`}
+          src={
+            pokemon?.sprites.other.home[
+              // Depending on the displayShiny state, display a different image
+              displayShiny ? "front_shiny" : "front_default"
+            ] ??
+            // The default image is from Pokémon HOME, with the official artwork as a fallback
+            pokemon?.sprites.other["official-artwork"][
+              displayShiny ? "front_shiny" : "front_default"
+            ]
+          }
+          alt={pokemon?.name}
+        />
+
+        <div className="flex items-end justify-between">
+          {/* Name */}
+          <h1 className="text-2xl font-bold capitalize">
+            {pokemon?.name.split("-").join(" ") ?? "Loading..."}
+          </h1>
+
+          <ToggleShinyButton
+            displayShiny={displayShiny}
+            setDisplayShiny={() => setUrlParam("displayShiny", "true")}
           />
-
-          <div className="my-1">
-            <PokemonTypesDisplay types={pokemon?.types} />
-          </div>
-
-          <PokemonAbilitiesDisplayText abilities={pokemon?.abilities} />
-
-          <PokemonStats pokemonStats={pokemon?.stats} />
-
-          <PokemonEvolutionChain
-            chain={evolutionChain?.chain}
-            pokemonName={pokemonSpecies?.name}
-          />
-
-          <PokemonGenerationDisplay
-            generation={pokemonSpecies?.generation.name}
-          />
-
-          <PokemonTypeEffectiveness
-            types={pokemon?.types.map((type) => type.type.name)}
-          />
-
-          <CollapsingPanel
-            label="Learnset"
-            initialIsOpen={isLearnsetPanelOpen}
-            toggleOpen={toggleLearnsetPanelOpen}
-            className="p-2 sm:p-4"
-          >
-            <PokemonMoves moves={pokemon?.moves} />
-          </CollapsingPanel>
-
-          <CollapsingPanel
-            label="Dex Entries"
-            initialIsOpen={isDexEntriesPanelOpen}
-            toggleOpen={toggleDexEntriesPanelOpen}
-            className="px-2"
-          >
-            {/* All english Dex descriptions */}
-            <FlavorTextEntries
-              textEntries={pokemonSpecies?.flavor_text_entries.filter(
-                (entry) => entry.language.name === "en",
-              )}
-            />
-          </CollapsingPanel>
-
-          <Footer className="md:hidden" />
         </div>
 
-        <Footer className="mb-4 max-md:hidden" />
+        <PokemonCategory
+          category={pokemonSpecies?.genera.find(
+            (genus) => genus.language.name === "en",
+          )}
+        />
+
+        <div className="my-1">
+          <PokemonTypesDisplay types={pokemon?.types} />
+        </div>
+
+        <PokemonAbilitiesDisplayText abilities={pokemon?.abilities} />
+
+        <PokemonStats pokemonStats={pokemon?.stats} />
+
+        <PokemonEvolutionChain
+          chain={evolutionChain?.chain}
+          pokemonName={pokemonSpecies?.name}
+        />
+
+        <PokemonGenerationDisplay
+          generation={pokemonSpecies?.generation.name}
+        />
+
+        <PokemonTypeEffectiveness
+          types={pokemon?.types.map((type) => type.type.name)}
+        />
+
+        <CollapsingPanel
+          label="Learnset"
+          initialIsOpen={isLearnsetPanelOpen}
+          toggleOpen={toggleLearnsetPanelOpen}
+          className="p-2 sm:p-4"
+        >
+          <PokemonMoves moves={pokemon?.moves} />
+        </CollapsingPanel>
+
+        <CollapsingPanel
+          label="Dex Entries"
+          initialIsOpen={isDexEntriesPanelOpen}
+          toggleOpen={toggleDexEntriesPanelOpen}
+          className="px-2"
+        >
+          {/* All english Dex descriptions */}
+          <FlavorTextEntries
+            textEntries={pokemonSpecies?.flavor_text_entries.filter(
+              (entry) => entry.language.name === "en",
+            )}
+          />
+        </CollapsingPanel>
+
+        <Footer />
       </div>
     </>
   );

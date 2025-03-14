@@ -17,7 +17,7 @@ const MoveCard = memo(({ move: { id, name } }: CardProps) => {
 
   return (
     <Link to={`/pokedex/moves/${id}`}>
-      <article className="@container/card relative rounded-sm border border-slate-400/40 bg-slate-100 shadow-lg transition-colors hover:bg-slate-200/75 hover:shadow-xl dark:bg-slate-800 dark:shadow-none dark:hover:bg-slate-700/75 dark:hover:shadow-none">
+      <article className="@container/card relative rounded-xl bg-slate-200 shadow-lg transition-[background-color_shadow] hover:bg-slate-300 hover:shadow-xl dark:bg-slate-800 dark:shadow-none dark:hover:bg-slate-700 dark:hover:shadow-none">
         <div className="flex">
           {move ? (
             <div
