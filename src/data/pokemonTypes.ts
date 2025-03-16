@@ -3,7 +3,7 @@ export const pokemonTypes: Record<
   { label: string; color: string; sprite: { x: number; y: number } }
 > = {
   normal: { label: "Normal", color: "#9fa19f", sprite: { x: 0, y: 0 } },
-  fighting: { label: "Fighting", color: "#ff8101", sprite: { x: -40, y: 0 } },
+  fighting: { label: "Fighting", color: "#ff8000", sprite: { x: -40, y: 0 } },
   flying: { label: "Flying", color: "#81b9ef", sprite: { x: 0, y: -40 } },
   poison: { label: "Poison", color: "#9141cb", sprite: { x: -40, y: -40 } },
   ground: { label: "Ground", color: "#915121", sprite: { x: -80, y: 0 } },

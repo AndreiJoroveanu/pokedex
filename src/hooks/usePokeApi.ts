@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import Pokedex from "pokedex-promise-v2";
 
+import { pokeApi } from "@/lib/pokeApi";
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
 
 declare module "@tanstack/react-query" {
@@ -11,20 +11,11 @@ declare module "@tanstack/react-query" {
   }
 }
 
-// pokedex-promise-v2 configuration
-export const pokeapi = new Pokedex({
-  protocol: "https",
-  hostName: "pokeapi.co",
-  versionPath: "/api/v2/",
-  cacheLimit: 1000 * 60 * 60 * 24 * 30, // 30 days
-  timeout: 20 * 1000, // 20 seconds
-});
-
 // ---------- Individual Item Hooks ----------
 // Specific Pokémon
 export const usePokemon = (id: number | undefined) => {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => pokeapi.getPokemonByName(id!),
+    queryFn: () => pokeApi.getPokemonByName(id!),
     queryKey: ["pokemon", id],
     enabled: Boolean(id),
   });
@@ -35,7 +26,7 @@ export const usePokemon = (id: number | undefined) => {
 // Specific Pokémon Species
 export const usePokemonSpecies = (id: number | undefined) => {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => pokeapi.getPokemonSpeciesByName(id!),
+    queryFn: () => pokeApi.getPokemonSpeciesByName(id!),
     queryKey: ["pokemonSpecies", id],
     enabled: Boolean(id),
   });
@@ -46,7 +37,7 @@ export const usePokemonSpecies = (id: number | undefined) => {
 // Specific Move
 export const useMove = (id: number | undefined) => {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => pokeapi.getMoveByName(id!),
+    queryFn: () => pokeApi.getMoveByName(id!),
     queryKey: ["move", id],
     enabled: Boolean(id),
   });
@@ -57,7 +48,7 @@ export const useMove = (id: number | undefined) => {
 // Specific Pokémon evolution chain
 export const useEvolutionChain = (id: number | undefined) => {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => pokeapi.getEvolutionChainById(id!),
+    queryFn: () => pokeApi.getEvolutionChainById(id!),
     queryKey: ["evolutionChain", id],
     enabled: Boolean(id),
   });
@@ -69,7 +60,7 @@ export const useEvolutionChain = (id: number | undefined) => {
 // All Pokémon Species
 export const useAllPokemonSpecies = () => {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => pokeapi.getPokemonSpeciesList(),
+    queryFn: () => pokeApi.getPokemonSpeciesList(),
     queryKey: ["allPokemonSpecies"],
   });
 
@@ -87,7 +78,7 @@ export const useAllPokemonSpecies = () => {
 // All Moves
 export const useAllMoves = () => {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => pokeapi.getMovesList(),
+    queryFn: () => pokeApi.getMovesList(),
     queryKey: ["allMoves"],
   });
 
@@ -111,7 +102,7 @@ export const useAllMoves = () => {
 // All Pokémon from a specific Generation
 export const useAllPokemonByGen = (gen: string | undefined) => {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => pokeapi.getGenerationByName(`generation-${gen}`),
+    queryFn: () => pokeApi.getGenerationByName(`generation-${gen}`),
     queryKey: ["generation", gen],
     enabled: Boolean(gen),
   });
@@ -135,7 +126,7 @@ export const useAllPokemonByGen = (gen: string | undefined) => {
 // All Pokémon from a specific Type
 export const useAllPokemonByType = (type: string | undefined) => {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => pokeapi.getTypeByName(type!),
+    queryFn: () => pokeApi.getTypeByName(type!),
     queryKey: ["type", type],
     enabled: Boolean(type),
   });
@@ -159,7 +150,7 @@ export const useAllPokemonByType = (type: string | undefined) => {
 // All moves from a specific Generation
 export const useAllMovesByGen = (gen: string | undefined) => {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => pokeapi.getGenerationByName(`generation-${gen}`),
+    queryFn: () => pokeApi.getGenerationByName(`generation-${gen}`),
     queryKey: ["generation", gen],
     enabled: Boolean(gen),
   });
@@ -183,7 +174,7 @@ export const useAllMovesByGen = (gen: string | undefined) => {
 // All moves from a specific Type
 export const useAllMovesByType = (type: string | undefined) => {
   const { data, isLoading, error } = useQuery({
-    queryFn: () => pokeapi.getTypeByName(type!),
+    queryFn: () => pokeApi.getTypeByName(type!),
     queryKey: ["type", type],
     enabled: Boolean(type),
   });
