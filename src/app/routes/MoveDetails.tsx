@@ -7,6 +7,8 @@ import ErrorMessage from "@/components/error/ErrorMessage.tsx";
 import BackButton from "@/components/button/BackButton.tsx";
 import MoveDiscImage from "@/features/moves/components/moveDetails/MoveDiscImage.tsx";
 import MoveInfoDisplay from "@/features/moves/components/MoveInfoDisplay.tsx";
+import MoveStats from "@/features/moves/components/moveDetails/MoveStats.tsx";
+import MoveEffect from "@/features/moves/components/moveDetails/MoveEffect.tsx";
 import Footer from "@/components/Footer.tsx";
 
 const MoveDetails = () => {
@@ -31,17 +33,21 @@ const MoveDetails = () => {
           This page is currently under construction
         </h3>
 
-        <div className="flex gap-2">
+        <div className="mb-4 flex gap-2">
           <MoveDiscImage type={move?.type.name} />
 
-          <div>
-            <h1 className="mb-2 text-2xl font-bold capitalize">
-              {move?.name.split("-").join(" ") ?? "Loading..."}
+          <div className="max-w-[calc(100vw-148px)]">
+            <h1 className="overflow-scroll pb-1 text-2xl font-bold text-nowrap">
+              {capitalize(move?.name ?? "Loading...")}
             </h1>
 
             <MoveInfoDisplay move={move} />
+
+            <MoveStats move={move} />
           </div>
         </div>
+
+        <MoveEffect effect={move?.effect_entries} />
 
         <Footer />
       </div>

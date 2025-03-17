@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Move } from "pokedex-promise-v2";
 
 import TypeDisplay from "@/components/TypeDisplay.tsx";
@@ -8,7 +9,7 @@ interface InfoProps {
   className?: string;
 }
 
-const MoveInfoDisplay = ({ move, className = "" }: InfoProps) =>
+const MoveInfoDisplay = memo(({ move, className = "" }: InfoProps) =>
   move ? (
     <div className={`flex ${className}`.trim()}>
       <TypeDisplay type={move.type.name} className="rounded-r-none" />
@@ -20,5 +21,7 @@ const MoveInfoDisplay = ({ move, className = "" }: InfoProps) =>
     </div>
   ) : (
     <p>Loading...</p>
-  );
+  ),
+);
+MoveInfoDisplay.displayName = "MoveInfoDisplay";
 export default MoveInfoDisplay;
