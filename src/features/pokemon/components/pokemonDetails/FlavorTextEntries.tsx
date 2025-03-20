@@ -17,10 +17,11 @@ interface EntriesProps {
 
 const FlavorTextEntries = memo(({ textEntries }: EntriesProps) =>
   textEntries?.length ? (
-    <ul className="divide-y-2 divide-slate-400/40">
+    <ul className="divide-y-2 divide-slate-300 dark:divide-slate-700">
       {textEntries.map((entry) => (
         <li key={entry.version?.name} className="p-1 sm:p-2">
           <span className="font-bold capitalize">
+            {/* Display a hardcoded string for the version, with original one as a fallback */}
             {games[entry.version?.name ?? ""]?.label ??
               entry.version?.name.split("-").join(" ")}
           </span>

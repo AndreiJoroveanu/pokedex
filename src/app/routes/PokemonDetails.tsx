@@ -12,6 +12,7 @@ import {
 } from "@/hooks/usePokeApi.ts";
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
 import { capitalize } from "@/utils/capitalize.ts";
+import { playAudio } from "@/utils/playAudio.ts";
 
 import ErrorMessage from "@/components/error/ErrorMessage.tsx";
 import TopButtons from "@/features/pokemon/components/pokemonDetails/TopButtons.tsx";
@@ -72,21 +73,11 @@ const PokemonDetails = () => {
 
   // Play the Pokémon's cry when the page first loads, or when the form is changed
   useEffect(() => {
-    const cry = new Audio(pokemon?.cries.latest);
-    cry.volume = 0.1;
+    if (!pokemon?.cries.latest) return;
+    const { play, stop } = playAudio(pokemon.cries.latest);
 
-    void (async () => {
-      try {
-        await cry.play();
-      } catch {
-        // No need to do anything
-      }
-    })();
-
-    return () => {
-      cry.pause();
-      cry.currentTime = 0;
-    };
+    void play();
+    return () => stop();
   }, [pokemon?.cries.latest]);
 
   // Display an error message if there is an error whole fetching data

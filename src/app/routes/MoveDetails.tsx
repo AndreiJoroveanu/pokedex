@@ -9,6 +9,8 @@ import MoveDiscImage from "@/features/moves/components/moveDetails/MoveDiscImage
 import MoveInfoDisplay from "@/features/moves/components/MoveInfoDisplay.tsx";
 import MoveStats from "@/features/moves/components/moveDetails/MoveStats.tsx";
 import MoveEffect from "@/features/moves/components/moveDetails/MoveEffect.tsx";
+import CollapsingPanel from "@/components/CollapsingPanel.tsx";
+import FlavorTextEntries from "@/features/moves/components/moveDetails/FlavorTextEntries.tsx";
 import Footer from "@/components/Footer.tsx";
 
 const MoveDetails = () => {
@@ -48,6 +50,16 @@ const MoveDetails = () => {
         </div>
 
         <MoveEffect effect={move?.effect_entries} />
+
+        <CollapsingPanel label="Descriptions" className="px-2">
+          {/* All english move descriptions */}
+          <FlavorTextEntries
+            textEntries={move?.flavor_text_entries.filter(
+              (entry) => entry.language.name === "en",
+            )}
+            moveName={move?.name}
+          />
+        </CollapsingPanel>
 
         <Footer />
       </div>
