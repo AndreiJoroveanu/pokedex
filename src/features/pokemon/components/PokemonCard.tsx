@@ -23,6 +23,8 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
         <img
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
           alt={name}
+          decoding="async"
+          loading="lazy"
           onLoad={() => setIsLoadingImage(false)}
           className="aspect-square w-full object-contain text-transparent"
         />

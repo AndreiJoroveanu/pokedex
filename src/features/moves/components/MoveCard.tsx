@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import { useMove } from "@/hooks/usePokeApi.ts";
 import { ItemResource } from "@/types/types.ts";
 import { tmDiscs } from "@/data/tmDiscs.ts";
-import tmDiscsImage from "/tm-discs.png";
+import tmDiscsImage from "/tm-discs.webp";
 
 import Loader from "@/components/Loader.tsx";
 import MoveInfoDisplay from "@/features/moves/components/MoveInfoDisplay.tsx";

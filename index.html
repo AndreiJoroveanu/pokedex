@@ -9,6 +9,28 @@
     />
     <title>Pokédex</title>
 
+    <!-- Preloading the Pokéball SVG and the font -->
+    <script type="module">
+      import pokeballUrl from "/pokéball.svg";
+      import fontUrl from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2";
+
+      const preloadImage = document.createElement("link");
+      preloadImage.rel = "preload";
+      preloadImage.href = pokeballUrl;
+      preloadImage.as = "image";
+      preloadImage.type = "image/svg+xml";
+      document.head.appendChild(preloadImage);
+
+      const preloadFont = document.createElement("link");
+      preloadFont.rel = "preload";
+      preloadFont.href = fontUrl;
+      preloadFont.as = "font";
+      preloadFont.type = "font/woff2";
+      preloadFont.crossOrigin = "anonymous";
+      document.head.appendChild(preloadFont);
+    </script>
+
+    <!-- Makes the app work on GitHub Pages -->
     <script type="text/javascript">
       ((l) => {
         if (l.search[1] === "/") {

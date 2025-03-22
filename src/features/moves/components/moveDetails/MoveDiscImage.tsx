@@ -1,7 +1,7 @@
 import { memo } from "react";
 
-import tmDiscsImage from "/tm-discs.png";
 import { tmDiscs } from "@/data/tmDiscs.ts";
+import tmDiscsImage from "/tm-discs.webp";
 
 import Loader from "@/components/Loader.tsx";
 

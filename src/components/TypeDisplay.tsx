@@ -1,5 +1,5 @@
 import { pokemonTypes } from "@/data/pokemonTypes.ts";
-import types from "/types.png";
+import types from "/types.webp";
 
 interface DisplayProps {
   type: string;
