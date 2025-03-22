@@ -41,7 +41,7 @@ const NavbarLinks = () => {
         : activeLink.includes(path)) && (
         <motion.div
           layoutId="link"
-          className="link:bg-slate-200 absolute top-full left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-slate-800 transition-[background-color] group-hover/link:bg-blue-600 dark:bg-slate-200 dark:group-hover/link:text-blue-400"
+          className="link:bg-slate-200 absolute top-full left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-slate-800 transition-[background-color] group-hover/link:bg-blue-600 dark:bg-slate-200 dark:group-hover/link:bg-blue-400"
         />
       )}
 
