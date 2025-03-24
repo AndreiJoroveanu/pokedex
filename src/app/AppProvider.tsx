@@ -16,7 +16,7 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
     <QueryClientProvider client={queryClient}>
       <Suspense
         fallback={
-          <div className="h-screen bg-slate-100 transition-colors dark:bg-slate-900">
+          <div className="h-screen w-full bg-slate-100 transition-[background_color] max-sm:-mt-18 dark:bg-slate-900">
             <Loader size={24} displaysText={true} />
           </div>
         }
@@ -31,7 +31,7 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
         </ErrorBoundary>
       </Suspense>
 
-      <ReactQueryDevtools initialIsOpen={false} />
+      <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-left" />
     </QueryClientProvider>
   );
 };

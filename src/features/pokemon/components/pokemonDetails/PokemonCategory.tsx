@@ -6,7 +6,7 @@ interface CategoryProps {
 }
 
 const PokemonCategory = memo(({ category }: CategoryProps) => (
-  <h3 className="text-lg font-semibold text-slate-500 dark:text-slate-400">
+  <h3 className="text-lg font-semibold text-slate-600 transition-[color] dark:text-slate-400">
     {category?.genus ?? "Loading..."}
   </h3>
 ));

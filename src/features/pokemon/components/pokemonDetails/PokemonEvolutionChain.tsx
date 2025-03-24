@@ -25,7 +25,7 @@ const PokemonEvolutionText = ({ pokemon }: { pokemon: Evolution }) => {
         to={`/pokedex/pokemon/${pokemon.id}`}
         onClick={resetPanels}
         draggable="false"
-        className="capitalize underline underline-offset-4 transition-colors hover:text-blue-600 focus:text-blue-600 dark:hover:text-blue-400 dark:focus:text-blue-400"
+        className="capitalize underline underline-offset-4 transition-[color] hover:text-blue-600 focus:text-blue-600 dark:hover:text-blue-400 dark:focus:text-blue-400"
       >
         {pokemon.name}
       </Link>

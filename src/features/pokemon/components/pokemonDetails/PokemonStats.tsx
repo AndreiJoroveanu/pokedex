@@ -11,7 +11,7 @@ const PokemonStats = memo(({ pokemonStats }: StatsProps) => (
   <>
     <h2 className="mb-1 text-lg font-semibold">Base Stats:</h2>
 
-    <div className="mb-4 max-w-lg rounded-lg bg-slate-200 p-4 pb-2 shadow-lg transition-colors dark:bg-slate-800 dark:shadow-none">
+    <div className="mb-4 max-w-lg rounded-lg bg-slate-200 p-4 pb-2 shadow-lg transition-[background-color] dark:bg-slate-800 dark:shadow-none">
       <div className="grid grid-cols-[auto_auto_1fr] gap-2">
         {stats?.map((stat, index) => (
           <Fragment key={stat.label}>
@@ -27,7 +27,7 @@ const PokemonStats = memo(({ pokemonStats }: StatsProps) => (
             <div className="relative my-auto h-3/4">
               <div
                 style={{ backgroundColor: stats[index].color }}
-                className="absolute h-full w-full rounded-sm opacity-50 brightness-125 dark:brightness-75"
+                className="absolute h-full w-full rounded-sm opacity-50 brightness-125 transition-[filter] dark:brightness-75"
               />
 
               <div
@@ -35,7 +35,7 @@ const PokemonStats = memo(({ pokemonStats }: StatsProps) => (
                   width: `${((pokemonStats?.[index]?.base_stat ?? 0) / 255) * 100}%`,
                   backgroundColor: stats[index].color,
                 }}
-                className="absolute h-full rounded-sm opacity-75 brightness-90 saturate-125 dark:brightness-110"
+                className="absolute h-full rounded-sm opacity-75 brightness-90 saturate-125 transition-[filter] dark:brightness-110"
               />
             </div>
           </Fragment>

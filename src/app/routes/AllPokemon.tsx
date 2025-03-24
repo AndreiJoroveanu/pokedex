@@ -33,7 +33,7 @@ const AllPokemon = () => {
   useScrollRestoration(gridLoaded);
 
   return (
-    <div className="relative pt-18 sm:pt-24">
+    <div className="relative sm:pt-24">
       <Sidebar>
         <Sidebar.Search itemType="Pokémon" />
         <Sidebar.GenerationFilter />
@@ -56,7 +56,7 @@ const AllPokemon = () => {
             )}
             useWindowScroll
             increaseViewportBy={{ top: 1000, bottom: 1000 }}
-            components={{ Footer: () => <Footer className="pb-4" /> }}
+            components={{ Footer: () => <Footer className="pb-20 sm:pb-4" /> }}
             readyStateChanged={(ready) => setGridLoaded(ready)}
             className="w-full"
             listClassName="grid grid-cols-2 gap-2 @min-[500px]/grid:gap-4 @min-[600px]/grid:grid-cols-3 @min-[800px]/grid:grid-cols-4 @min-[1000px]/grid:grid-cols-5 @min-[1200px]/grid:grid-cols-6"

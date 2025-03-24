@@ -21,7 +21,7 @@ const PokemonImage = memo(({ src, alt }: ImageProps) => {
 
       {/* Display a message if the selected Form doesn't have an image (the src is null) */}
       {src === null && (
-        <div className="absolute top-0 flex aspect-square max-h-128 w-full flex-col items-center justify-center gap-4 bg-slate-100 transition-[background_color] dark:bg-slate-900">
+        <div className="absolute top-0 flex aspect-square max-h-128 w-full flex-col items-center justify-center gap-4 bg-slate-100 transition-[background-color] dark:bg-slate-900">
           <h2 className="text-center text-2xl font-bold sm:text-3xl">
             This Pokémon Form does not have an image
           </h2>

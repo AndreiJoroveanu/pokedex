@@ -31,7 +31,7 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
 
         {/* Covers Pokémon image with the loader if the image hasn't loaded */}
         {isLoadingImage ? (
-          <div className="absolute top-0 aspect-square w-full rounded-sm bg-slate-200 transition-colors group-hover:bg-slate-300 dark:bg-slate-800 dark:group-hover:bg-slate-700">
+          <div className="absolute top-0 aspect-square w-full rounded-sm bg-slate-200 transition-[background-color] group-hover:bg-slate-300 dark:bg-slate-800 dark:group-hover:bg-slate-700">
             <Loader size={8} />
           </div>
         ) : null}

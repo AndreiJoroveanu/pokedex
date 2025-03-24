@@ -3,7 +3,7 @@ const link = (to: string, label: string) => (
     href={to}
     target="_blank"
     rel="noreferrer"
-    className="underline underline-offset-4 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+    className="underline underline-offset-4 transition-[color] hover:text-blue-600 dark:hover:text-blue-400"
   >
     {label}
   </a>
@@ -11,7 +11,7 @@ const link = (to: string, label: string) => (
 
 const Footer = ({ className }: { className?: string }) => (
   <footer
-    className={`mt-4 text-center text-sm text-gray-600 transition-colors dark:text-gray-400 ${className}`}
+    className={`mt-4 text-center text-sm text-gray-600 transition-[color] dark:text-gray-400 ${className}`}
   >
     Made by {link("https://github.com/AndreiJoroveanu", "Andrei Joroveanu")} (
     {link("https://github.com/AndreiJoroveanu/pokedex", "Github repo")}

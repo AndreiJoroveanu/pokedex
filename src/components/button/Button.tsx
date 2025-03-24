@@ -26,7 +26,7 @@ const Button = ({
   <button
     onClick={onClick}
     disabled={disabled}
-    className={`cursor-pointer py-2 font-semibold shadow-md transition-[background-color_shadow] enabled:hover:shadow-lg dark:shadow-none ${buttonStyles[style]} ${className} ${!className?.includes("rounded-") ? "rounded-xl" : ""}`.trim()}
+    className={`cursor-pointer py-2 font-semibold shadow-md transition-[background-color_shadow_filter] enabled:hover:shadow-lg dark:shadow-none ${buttonStyles[style]} ${className} ${!className?.includes("rounded-") ? "rounded-xl" : ""}`.trim()}
   >
     {children}
   </button>

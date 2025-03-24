@@ -13,14 +13,14 @@ const TopButtons = memo(() => {
   const { starredPokemonIds, toggleStarredPokemonIds } = useStarredPokemon();
 
   return (
-    <>
+    <div className="pointer-events-none sticky top-4 z-20 flex w-full justify-between px-2 sm:fixed sm:top-28 sm:px-4">
       <BackButton />
 
       {/* Star (Favorite) button */}
       <Button
         onClick={() => toggleStarredPokemonIds(Number(id))}
         style="gold"
-        className="fixed top-22 right-2 z-20 flex items-center gap-2 px-4 sm:top-28 sm:right-4"
+        className="pointer-events-auto flex items-center gap-2 px-4"
       >
         {starredPokemonIds.includes(Number(id)) ? (
           <>
@@ -32,7 +32,7 @@ const TopButtons = memo(() => {
           </>
         )}
       </Button>
-    </>
+    </div>
   );
 });
 TopButtons.displayName = "TopButtons";

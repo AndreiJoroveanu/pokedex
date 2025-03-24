@@ -12,7 +12,7 @@ const BackButton = memo(() => {
     <Button
       onClick={moveBack}
       style="indigo"
-      className="fixed top-22 left-2 z-20 flex items-center gap-2 px-4 sm:top-28 sm:left-4"
+      className="pointer-events-auto flex items-center gap-2 px-4"
     >
       <ArrowUturnLeftIcon className="size-4" /> Back
     </Button>

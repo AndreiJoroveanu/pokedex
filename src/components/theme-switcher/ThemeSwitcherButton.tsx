@@ -24,7 +24,7 @@ const ThemeSwitcherButton = () => {
     <>
       <button
         onClick={handleOpen}
-        className="cursor-pointer rounded-sm p-2 transition-all hover:bg-slate-700/10 dark:hover:bg-slate-300/10"
+        className="cursor-pointer rounded-sm p-2 transition-[background-color] hover:bg-slate-700/10 max-sm:absolute max-sm:right-4 dark:hover:bg-slate-300/10"
       >
         {MenuIcon ? (
           <MenuIcon className="size-6" />

@@ -6,10 +6,10 @@ import AppProvider from "@/app/AppProvider.tsx";
 const AppLayout = () => (
   <div
     id="app-layout"
-    className="font-medium text-slate-800 transition-colors dark:text-slate-200"
+    className="font-medium text-slate-800 transition-[color] dark:text-slate-200"
   >
     {/* App background */}
-    <div className="fixed inset-0 -z-50 h-screen bg-slate-100 transition-colors dark:bg-slate-900" />
+    <div className="fixed inset-0 -z-50 h-screen bg-slate-100 transition-[background-color] dark:bg-slate-900" />
 
     <Navbar />
 

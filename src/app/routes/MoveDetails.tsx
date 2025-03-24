@@ -27,9 +27,11 @@ const MoveDetails = () => {
       {/* In React 19, you can now render the <title> tag in JSX */}
       <title>{`Pokédex - ${capitalize(move?.name ?? "Loading")}`}</title>
 
-      <BackButton />
+      <div className="pointer-events-none sticky top-4 z-20 px-2 sm:fixed sm:top-28 sm:px-4">
+        <BackButton />
+      </div>
 
-      <div className="mx-auto max-w-3xl px-2 pt-36 pb-6 sm:px-4 sm:pt-42 md:px-0 lg:pt-28">
+      <div className="mx-auto max-w-3xl px-2 pt-4 pb-20 sm:px-4 sm:pt-42 sm:pb-6 md:px-0 lg:pt-28">
         {/* To remove when the page is more complete */}
         <h3 className="mb-4 text-center text-xl font-semibold">
           This page is currently under construction

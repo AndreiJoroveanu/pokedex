@@ -11,7 +11,7 @@ const PokemonAbilitiesDisplayText = memo(({ abilities }: AbilitiesProps) => (
     {abilities?.length ? (
       <>
         {/* Conditionally change the label depending on if there are multiple abilities */}
-        <span className="font-bold text-slate-700 dark:text-slate-300">
+        <span className="font-bold text-slate-700 transition-[color] dark:text-slate-300">
           {abilities.length === 1 ? "Ability: " : "Abilities: "}
         </span>
 
@@ -19,7 +19,7 @@ const PokemonAbilitiesDisplayText = memo(({ abilities }: AbilitiesProps) => (
           <Fragment key={ability.name}>
             {is_hidden ? (
               // If this is a Hidden Ability, apply some styling
-              <span className="text-purple-700 transition-colors dark:text-purple-300">
+              <span className="text-purple-700 transition-[color] dark:text-purple-300">
                 {capitalize(ability.name)}
               </span>
             ) : (
