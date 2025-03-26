@@ -143,7 +143,7 @@ const PokemonDetails = () => {
         />
 
         <div className="my-1">
-          <PokemonTypesDisplay types={pokemon?.types} />
+          <PokemonTypesDisplay types={pokemon?.types} className="gap-2" />
         </div>
 
         <PokemonAbilitiesDisplayText abilities={pokemon?.abilities} />

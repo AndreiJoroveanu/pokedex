@@ -20,7 +20,9 @@ const MoveInfoDisplay = memo(({ move, className = "" }: InfoProps) =>
       />
     </div>
   ) : (
-    <p>Loading...</p>
+    <div
+      className={`h-6 w-52 animate-pulse rounded-full bg-slate-500/50 ${className}`.trim()}
+    />
   ),
 );
 MoveInfoDisplay.displayName = "MoveInfoDisplay";

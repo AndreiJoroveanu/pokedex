@@ -4,7 +4,7 @@ import ThemeSwitcherButton from "@/components/theme-switcher/ThemeSwitcherButton
 
 const Navbar = () => (
   // This is the top navigation bar, on desktop this is fixed
-  <nav className="flex h-18 w-full items-center sm:fixed sm:top-0 sm:z-50 sm:h-24 sm:justify-between sm:border-b sm:border-slate-400 sm:bg-slate-100/80 sm:px-12 sm:shadow-lg sm:backdrop-blur-md sm:transition-[background-color] md:px-24 dark:sm:border-slate-600 dark:sm:bg-slate-900/80 dark:sm:shadow-none">
+  <nav className="relative z-10 flex h-18 w-full items-center sm:fixed sm:top-0 sm:z-50 sm:h-24 sm:justify-between sm:border-b sm:border-slate-400 sm:bg-slate-100/80 sm:px-12 sm:shadow-lg sm:backdrop-blur-md sm:transition-[background-color] md:px-24 dark:sm:border-slate-600 dark:sm:bg-slate-900/80 dark:sm:shadow-none">
     <NavbarLogo />
 
     {/* This is its own bar at the bottom of the screen on mobile */}

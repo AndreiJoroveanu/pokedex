@@ -42,17 +42,19 @@ const PokemonMoveTableRow = memo(
           {moveData ? (
             <TypeDisplay type={moveData.type.name} className="rounded-r-none" />
           ) : (
-            "Loading..."
+            <div className="h-6 w-26 animate-pulse rounded-l-full bg-slate-500/50" />
           )}
         </td>
 
         {/* Move category (physical, special, status) */}
         <td className="pointer-events-none w-28 min-w-28">
-          {moveData && (
+          {moveData ? (
             <MoveCategoryDisplay
               category={moveData.damage_class.name}
               className="rounded-l-none"
             />
+          ) : (
+            <div className="h-6 w-26 animate-pulse rounded-r-full bg-slate-500/50" />
           )}
         </td>
 

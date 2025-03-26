@@ -10,13 +10,15 @@ interface TypesProps {
 
 const PokemonTypesDisplay = memo(({ types, className = "" }: TypesProps) =>
   types?.length ? (
-    <div className={`flex gap-2 ${className}`.trim()}>
+    <div className={`flex ${className}`.trim()}>
       {types.map(({ type }) => (
         <TypeDisplay key={type.name} type={type.name} />
       ))}
     </div>
   ) : (
-    <p>Loading...</p>
+    <div
+      className={`h-6 max-w-54 min-w-50 animate-pulse rounded-full bg-slate-500/50 ${className}`.trim()}
+    />
   ),
 );
 PokemonTypesDisplay.displayName = "PokemonTypesDisplay";
