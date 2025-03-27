@@ -19,36 +19,48 @@ const PokemonStats = memo(({ pokemonStats }: StatsProps) => (
             <h3 className="font-semibold capitalize">{stat.label}:</h3>
 
             {/* Stat number */}
-            <p className="w-8 text-end">
-              {pokemonStats?.[index]?.base_stat ?? 0}
-            </p>
+            {pokemonStats ? (
+              <p className="w-8 text-end">
+                {pokemonStats[index].base_stat ?? 0}
+              </p>
+            ) : (
+              <div className="my-auto -mr-2 h-5 w-8 animate-pulse rounded-l-sm bg-slate-500/50" />
+            )}
 
             {/* Stat bar */}
-            <div className="relative my-auto h-3/4">
-              <div
-                style={{ backgroundColor: stats[index].color }}
-                className="absolute h-full w-full rounded-sm opacity-50 brightness-125 transition-[filter] dark:brightness-75"
-              />
+            {pokemonStats ? (
+              <div className="relative my-auto h-5">
+                <div
+                  style={{ backgroundColor: stats[index].color }}
+                  className="absolute h-full w-full rounded-sm opacity-50 brightness-125 transition-[filter] dark:brightness-75"
+                />
 
-              <div
-                style={{
-                  width: `${((pokemonStats?.[index]?.base_stat ?? 0) / 255) * 100}%`,
-                  backgroundColor: stats[index].color,
-                }}
-                className="absolute h-full rounded-sm opacity-75 brightness-90 saturate-125 transition-[filter] dark:brightness-110"
-              />
-            </div>
+                <div
+                  style={{
+                    width: `${((pokemonStats[index].base_stat ?? 0) / 255) * 100}%`,
+                    backgroundColor: stats[index].color,
+                  }}
+                  className="absolute h-full rounded-sm opacity-75 brightness-90 saturate-125 transition-[filter] dark:brightness-110"
+                />
+              </div>
+            ) : (
+              <div className="my-auto h-5 w-full animate-pulse rounded-r-sm bg-slate-500/50" />
+            )}
           </Fragment>
         ))}
       </div>
 
-      <h3 className="pt-2 font-semibold">
-        {`Base Stat Total: ${
-          pokemonStats
-            ?.map((stat) => stat.base_stat)
-            .reduce((acc, cur) => acc + cur, 0) ?? 0
-        }`}
-      </h3>
+      {pokemonStats ? (
+        <h3 className="pt-2 font-semibold">
+          {`Base Stat Total: ${
+            pokemonStats
+              .map((stat) => stat.base_stat)
+              .reduce((acc, cur) => acc + cur, 0) ?? 0
+          }`}
+        </h3>
+      ) : (
+        <div className="mt-2 mb-1 h-5 w-36 animate-pulse rounded-sm bg-slate-500/50" />
+      )}
     </div>
   </>
 ));
