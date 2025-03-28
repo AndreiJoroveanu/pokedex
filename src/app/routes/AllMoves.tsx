@@ -32,7 +32,7 @@ const AllMoves = () => {
 
       <ScrollToTopButton />
 
-      <section className="@container/grid flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)] lg:pl-0">
+      <section className="@container/grid flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)] lg:min-w-[calc(100vw-320px)] lg:pl-0">
         {!isLoadingAM && !isLoading && moveList?.length ? (
           <VirtuosoGrid
             totalCount={moveList.length}
@@ -44,7 +44,12 @@ const AllMoves = () => {
             components={{ Footer: () => <Footer className="pb-20 sm:pb-4" /> }}
             readyStateChanged={(ready) => setGridLoaded(ready)}
             className="w-full"
-            listClassName="grid grid-cols-1 gap-2 @min-[600px]/grid:gap-4 @min-[600px]/grid:grid-cols-2 @min-[800px]/grid:grid-cols-3 @min-[1000px]/grid:grid-cols-4 @min-[1200px]/grid:grid-cols-5"
+            listClassName="grid grid-cols-1 gap-2
+              @min-[500px]/grid:grid-cols-2 @min-[600px]/grid:gap-4
+              @min-[750px]/grid:grid-cols-3 @min-[750px]/grid:gap-2 @min-[875px]/grid:gap-4
+              @min-[1000px]/grid:grid-cols-4 @min-[1000px]/grid:gap-2 @min-[1150px]/grid:gap-4
+              @min-[1250px]/grid:grid-cols-5 @min-[1250px]/grid:gap-2 @min-[1400px]/grid:gap-4
+              @min-[1500px]/grid:grid-cols-6 @min-[1500px]/grid:gap-2 @min-[1700px]/grid:gap-4"
           />
         ) : null}
 
