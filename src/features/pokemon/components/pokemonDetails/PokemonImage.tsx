@@ -15,6 +15,7 @@ const PokemonImage = memo(({ src, alt }: ImageProps) => {
       <img
         src={src ?? undefined}
         alt={alt ?? ""}
+        decoding="async"
         onLoad={() => setIsLoadingImage(false)}
         className="mx-auto aspect-square max-h-128 w-full object-contain text-transparent"
       />
