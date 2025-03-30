@@ -97,7 +97,7 @@ const PokemonDetails = () => {
 
       <TopButtons />
 
-      <div className="mx-auto max-w-3xl px-2 pt-4 pb-20 sm:px-4 sm:pt-42 sm:pb-6 md:px-0 lg:pt-28">
+      <div className="mx-auto max-w-3xl p-4 max-sm:px-2 sm:pt-42 md:px-0 lg:pt-28">
         {/* List of Pokémon form buttons (if there is more than one) */}
         {pokemonSpecies && pokemonSpecies.varieties.length > 1 && (
           <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:-mx-4 sm:px-4">

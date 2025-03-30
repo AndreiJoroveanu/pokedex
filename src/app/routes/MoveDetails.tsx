@@ -31,11 +31,11 @@ const MoveDetails = () => {
         <BackButton />
       </div>
 
-      <div className="mx-auto max-w-3xl px-2 pt-4 pb-20 sm:px-4 sm:pt-42 sm:pb-6 md:px-0 lg:pt-28">
+      <div className="mx-auto max-w-3xl p-4 max-sm:px-2 sm:pt-42 md:px-0 lg:pt-28">
         {/* To remove when the page is more complete */}
-        <h3 className="mb-4 text-center text-xl font-semibold">
+        <p className="mb-4 text-center text-xl font-semibold">
           This page is currently under construction
-        </h3>
+        </p>
 
         <div className="mb-4 flex gap-2">
           <MoveDiscImage type={move?.type.name} />

@@ -32,7 +32,7 @@ const NavbarLinks = () => {
       onMouseEnter={() => setHoveredLink(index)}
       onMouseLeave={() => setHoveredLink(null)}
       className={({ isActive }) =>
-        `xs:px-4 group/link relative px-2 py-2 font-semibold ${isActive ? "text-slate-800 dark:text-slate-200" : "text-slate-500"} transition-all hover:text-blue-600 dark:hover:text-blue-400`
+        `xs:px-4 group/link relative px-2 py-2 font-semibold ${isActive ? "text-slate-800 dark:text-slate-200" : "text-slate-600 dark:text-slate-400"} transition-all hover:text-blue-600 dark:hover:text-blue-400`
       }
     >
       {/* Highlight the hovered link, if there is none then highlight the active route */}

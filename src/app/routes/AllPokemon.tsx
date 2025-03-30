@@ -46,26 +46,29 @@ const AllPokemon = () => {
 
       <section className="@container/grid flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)] lg:min-w-[calc(100vw-320px)] lg:pl-0">
         {!isLoadingAP && !isLoadingFP && pokemonList?.length ? (
-          <VirtuosoGrid
-            totalCount={pokemonList.length}
-            itemContent={(index) => (
-              <PokemonCard
-                key={pokemonList[index].name}
-                pokemon={pokemonList[index]}
-              />
-            )}
-            useWindowScroll
-            increaseViewportBy={{ top: 1000, bottom: 1000 }}
-            components={{ Footer: () => <Footer className="pb-20 sm:pb-4" /> }}
-            readyStateChanged={(ready) => setGridLoaded(ready)}
-            className="w-full"
-            listClassName="grid grid-cols-2 gap-2 @min-[475px]/grid:gap-4
-              @min-[580px]/grid:grid-cols-3 @min-[580px]/grid:gap-2 @min-[680px]/grid:gap-4
-              @min-[800px]/grid:grid-cols-4 @min-[800px]/grid:gap-2 @min-[900px]/grid:gap-4
-              @min-[1000px]/grid:grid-cols-5 @min-[1000px]/grid:gap-2 @min-[1080px]/grid:gap-4
-              @min-[1250px]/grid:grid-cols-6 @min-[1250px]/grid:gap-2 @min-[1300px]/grid:gap-4
-              @min-[1400px]/grid:grid-cols-7 @min-[1400px]/grid:gap-2 @min-[1500px]/grid:gap-4"
-          />
+          <>
+            <VirtuosoGrid
+              totalCount={pokemonList.length}
+              itemContent={(index) => (
+                <PokemonCard
+                  key={pokemonList[index].name}
+                  pokemon={pokemonList[index]}
+                />
+              )}
+              useWindowScroll
+              increaseViewportBy={{ top: 1000, bottom: 1000 }}
+              readyStateChanged={(ready) => setGridLoaded(ready)}
+              className="w-full"
+              listClassName="grid grid-cols-2 gap-2 @min-[475px]/grid:gap-4
+                @min-[580px]/grid:grid-cols-3 @min-[580px]/grid:gap-2 @min-[680px]/grid:gap-4
+                @min-[800px]/grid:grid-cols-4 @min-[800px]/grid:gap-2 @min-[900px]/grid:gap-4
+                @min-[1000px]/grid:grid-cols-5 @min-[1000px]/grid:gap-2 @min-[1080px]/grid:gap-4
+                @min-[1250px]/grid:grid-cols-6 @min-[1250px]/grid:gap-2 @min-[1300px]/grid:gap-4
+                @min-[1400px]/grid:grid-cols-7 @min-[1400px]/grid:gap-2 @min-[1500px]/grid:gap-4"
+            />
+
+            {gridLoaded && <Footer />}
+          </>
         ) : null}
 
         {/* Cover with a loading screen while the data is fetching or the React Virtuoso grid is rendering */}
