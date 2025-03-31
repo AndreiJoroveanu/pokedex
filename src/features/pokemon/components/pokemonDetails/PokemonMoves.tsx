@@ -5,6 +5,7 @@ import { usePokemonDetailsParams } from "@/hooks/useUrlParams.ts";
 import filterLearnsetData from "@/features/pokemon/utils/filterLearnsetData.ts";
 import { versionGroups } from "@/data/versionGroups.ts";
 
+import Loader from "@/components/Loader.tsx";
 import Button from "@/components/button/Button.tsx";
 import PokemonMovesTable from "@/features/pokemon/components/pokemonDetails/PokemonMovesTable.tsx";
 
@@ -17,11 +18,16 @@ const PokemonMoves = memo(({ moves }: MovesProps) => {
   // Indexing from 1 instead of 0 since this value can be seen by the user
   const currentVersionIndex = Number(getUrlParam("versionGroup") ?? 1) - 1;
 
-  if (!moves) return <p>Loading...</p>;
+  if (!moves)
+    return (
+      <div className="h-60">
+        <Loader size={24} displaysText={true} />
+      </div>
+    );
 
   if (!moves?.length)
     return (
-      <p>
+      <p className="p-2 sm:p-4">
         There seems to be no learnset data regarding this Pokémon&apos;s Form.
         Please try another Form.
       </p>
@@ -43,7 +49,7 @@ const PokemonMoves = memo(({ moves }: MovesProps) => {
   return (
     <>
       {availableVersionGroups.length > 1 && (
-        <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:-mx-4 sm:px-4">
+        <div className="flex flex-nowrap gap-2 overflow-x-scroll px-2 py-4 sm:px-4">
           {/* Buttons to select the game from which to display the data */}
           {availableVersionGroups.map(([group, { label }], index) => (
             <Button

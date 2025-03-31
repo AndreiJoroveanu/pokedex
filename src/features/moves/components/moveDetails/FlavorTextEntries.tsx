@@ -4,6 +4,8 @@ import { FlavorText } from "pokedex-promise-v2";
 import { versionGroups } from "@/data/versionGroups.ts";
 import { capitalize } from "@/utils/capitalize.ts";
 
+import Loader from "@/components/Loader.tsx";
+
 interface EntriesProps {
   textEntries: FlavorText[] | undefined;
   moveName: string | undefined;
@@ -47,9 +49,12 @@ const fixLineBreaksInFlavorText = (entry: FlavorText, moveName: string) =>
 
 const FlavorTextEntries = memo(({ textEntries, moveName }: EntriesProps) =>
   textEntries?.length && moveName ? (
-    <ul className="divide-y-2 divide-slate-300 dark:divide-slate-700">
+    <ul>
       {textEntries.map((entry) => (
-        <li key={entry.version_group?.name} className="p-1 sm:p-2">
+        <li
+          key={entry.version_group?.name}
+          className="p-2 even:bg-slate-500/15 sm:px-4"
+        >
           <span className="font-bold capitalize">
             {/* Display a hardcoded string for the version group, with original one as a fallback */}
             {versionGroups[entry.version_group?.name ?? ""]?.label ??
@@ -60,7 +65,9 @@ const FlavorTextEntries = memo(({ textEntries, moveName }: EntriesProps) =>
       ))}
     </ul>
   ) : (
-    <p>Loading...</p>
+    <div className="h-60">
+      <Loader size={24} displaysText={true} />
+    </div>
   ),
 );
 FlavorTextEntries.displayName = "FlavorTextEntries";

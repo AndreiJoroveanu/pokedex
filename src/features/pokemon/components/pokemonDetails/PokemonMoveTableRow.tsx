@@ -18,7 +18,7 @@ const PokemonMoveTableRow = memo(
     const { data: moveData } = useMove(id);
 
     return (
-      <tr className="group pointer-coarse:h-12 relative h-8 even:bg-slate-400/15 hover:bg-blue-400/20 has-focus:bg-blue-400/20">
+      <tr className="group pointer-coarse:h-12 relative h-8 even:bg-slate-500/15 hover:bg-blue-500/20 has-focus:bg-blue-500/20">
         {/* Invisible Link (has to be the first for the peer class to work) */}
         <td aria-hidden="true" className="peer">
           <Link
@@ -70,7 +70,7 @@ const PokemonMoveTableRow = memo(
         <td className="min-w-6">{moveData?.pp ?? "-"}</td>
 
         {/* Arrow indicating that the row is clickable */}
-        <td className="pointer-events-none scale-75 rounded-lg group-hover:bg-blue-500/25 group-hover:text-blue-500 peer-focus-within:bg-blue-500/25 peer-focus-within:text-blue-500">
+        <td className="pointer-events-none scale-75 rounded-lg group-hover:bg-blue-500/25 group-hover:text-blue-600 peer-focus-within:bg-blue-500/25 peer-focus-within:text-blue-600 dark:group-hover:text-blue-400 dark:peer-focus-within:text-blue-400">
           <ChevronRightIcon className="pointer-coarse:size-12 pointer-coarse:scale-75 size-8" />
         </td>
       </tr>

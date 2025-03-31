@@ -53,7 +53,7 @@ const MoveDetails = () => {
 
         <MoveEffect effect={move?.effect_entries} />
 
-        <CollapsingPanel label="Descriptions" className="px-2">
+        <CollapsingPanel label="Descriptions">
           {/* All english move descriptions */}
           <FlavorTextEntries
             textEntries={move?.flavor_text_entries.filter(

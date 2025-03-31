@@ -2,6 +2,7 @@ import { memo } from "react";
 
 import { typeEffectiveness } from "@/data/typeEffectiveness.ts";
 
+import Loader from "@/components/Loader.tsx";
 import TypeDisplay from "@/components/TypeDisplay.tsx";
 
 interface TypesProps {
@@ -31,8 +32,6 @@ const EffectivenessCategory = ({ title, types, multipliers }: CategoryProps) =>
   ) : null;
 
 const PokemonTypeEffectiveness = memo(({ types }: TypesProps) => {
-  if (!types) return <>Loading...</>;
-
   // An object which will contain all 18 types and the multiplier to which they deal damage to the Pokémon
   const multipliers: Record<string, number> = {};
 
@@ -43,6 +42,13 @@ const PokemonTypeEffectiveness = memo(({ types }: TypesProps) => {
     resistant: { types: [], label: "Resistant to" },
     immune: { types: [], label: "Immune to" },
   };
+
+  if (!types)
+    return (
+      <div className="h-80 w-full rounded-lg bg-slate-200 shadow-lg transition-[background-color] dark:bg-slate-800 dark:shadow-none">
+        <Loader size={24} displaysText={true} />
+      </div>
+    );
 
   // Determine the effectiveness and category of each type
   for (const attackingType of Object.keys(typeEffectiveness)) {

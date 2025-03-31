@@ -3,6 +3,8 @@ import { NamedAPIResource } from "pokedex-promise-v2";
 
 import { games } from "@/data/games.ts";
 
+import Loader from "@/components/Loader.tsx";
+
 interface EntriesProps {
   // Currently pokedex-promise-v2 has a typing bug, so a manual type is used instead
   // (Usually the correct type is FlavorText[])
@@ -17,9 +19,12 @@ interface EntriesProps {
 
 const FlavorTextEntries = memo(({ textEntries }: EntriesProps) =>
   textEntries?.length ? (
-    <ul className="divide-y-2 divide-slate-300 dark:divide-slate-700">
+    <ul>
       {textEntries.map((entry) => (
-        <li key={entry.version?.name} className="p-1 sm:p-2">
+        <li
+          key={entry.version?.name}
+          className="p-2 even:bg-slate-500/15 sm:px-4"
+        >
           <span className="font-bold capitalize">
             {/* Display a hardcoded string for the version, with original one as a fallback */}
             {games[entry.version?.name ?? ""]?.label ??
@@ -30,7 +35,9 @@ const FlavorTextEntries = memo(({ textEntries }: EntriesProps) =>
       ))}
     </ul>
   ) : (
-    <p>Loading...</p>
+    <div className="h-60">
+      <Loader size={24} displaysText={true} />
+    </div>
   ),
 );
 FlavorTextEntries.displayName = "FlavorTextEntries";

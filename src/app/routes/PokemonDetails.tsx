@@ -162,7 +162,6 @@ const PokemonDetails = () => {
           label="Learnset"
           initialIsOpen={isLearnsetPanelOpen}
           toggleOpen={toggleLearnsetPanelOpen}
-          className="p-2 sm:p-4"
         >
           <PokemonMoves moves={pokemon?.moves} />
         </CollapsingPanel>
@@ -171,7 +170,6 @@ const PokemonDetails = () => {
           label="Dex Entries"
           initialIsOpen={isDexEntriesPanelOpen}
           toggleOpen={toggleDexEntriesPanelOpen}
-          className="px-2"
         >
           {/* All english Dex descriptions */}
           <FlavorTextEntries

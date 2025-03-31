@@ -9,9 +9,9 @@ interface MovesProps {
 
 const PokemonMovesTable = ({ moves, label }: MovesProps) => (
   <>
-    <h3 className="mb-1 text-2xl font-bold capitalize max-sm:pl-2">{label}</h3>
+    <h3 className="mb-1 pl-3 text-2xl font-bold capitalize sm:pl-4">{label}</h3>
 
-    <div className="-mx-2 overflow-x-scroll px-2 pb-2">
+    <div className="overflow-x-scroll px-2 pb-4 sm:px-4">
       {/* Table displaying the learnset from the selected version group */}
       <table className="min-w-full text-nowrap">
         <thead className="border-b border-slate-500">
