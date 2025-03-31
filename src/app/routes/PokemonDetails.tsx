@@ -98,17 +98,6 @@ const PokemonDetails = () => {
       <TopButtons />
 
       <div className="mx-auto max-w-3xl p-4 max-sm:px-2 sm:pt-42 md:px-0 lg:pt-28">
-        {/* List of Pokémon form buttons (if there is more than one) */}
-        {pokemonSpecies && pokemonSpecies.varieties.length > 1 && (
-          <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll px-2 pb-4 sm:-mx-4 sm:px-4">
-            <PokemonFormButtons
-              pokemonSpecies={pokemonSpecies.varieties}
-              currentForm={currentFormIndex}
-              handleClick={(index) => setUrlParam("form", String(index + 1))}
-            />
-          </div>
-        )}
-
         <PokemonImage
           key={`${currentFormIndex}${displayShiny ? "-shiny" : ""}`}
           src={
@@ -147,6 +136,12 @@ const PokemonDetails = () => {
         </div>
 
         <PokemonAbilitiesDisplayText abilities={pokemon?.abilities} />
+
+        <PokemonFormButtons
+          pokemonSpecies={pokemonSpecies?.varieties}
+          currentForm={currentFormIndex}
+          handleClick={(index) => setUrlParam("form", String(index + 1))}
+        />
 
         <PokemonStats pokemonStats={pokemon?.stats} />
 

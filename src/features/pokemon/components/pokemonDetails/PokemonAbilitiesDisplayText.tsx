@@ -7,7 +7,7 @@ interface AbilitiesProps {
 }
 
 const PokemonAbilitiesDisplayText = memo(({ abilities }: AbilitiesProps) => (
-  <p>
+  <p className="my-2">
     {abilities?.length ? (
       <>
         {/* Conditionally change the label depending on if there are multiple abilities */}
