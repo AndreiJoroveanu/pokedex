@@ -38,17 +38,10 @@ const PokemonDetails = () => {
   const currentFormIndex = Number(getUrlParam("form") ?? 1) - 1;
   const displayShiny = Boolean(getUrlParam("displayShiny"));
 
-  const [
-    isLearnsetPanelOpen,
-    toggleLearnsetPanelOpen,
-    isDexEntriesPanelOpen,
-    toggleDexEntriesPanelOpen,
-  ] = useAppStore(
+  const [isLearnsetPanelOpen, toggleLearnsetPanelOpen] = useAppStore(
     useShallow((state) => [
       state.isLearnsetPanelOpen,
       state.toggleLearnsetPanelOpen,
-      state.isDexEntriesPanelOpen,
-      state.toggleDexEntriesPanelOpen,
     ]),
   );
 
@@ -158,25 +151,15 @@ const PokemonDetails = () => {
           types={pokemon?.types.map((type) => type.type.name)}
         />
 
+        {/* All english Dex descriptions */}
+        <FlavorTextEntries textEntries={pokemonSpecies?.flavor_text_entries} />
+
         <CollapsingPanel
           label="Learnset"
           initialIsOpen={isLearnsetPanelOpen}
           toggleOpen={toggleLearnsetPanelOpen}
         >
           <PokemonMoves moves={pokemon?.moves} />
-        </CollapsingPanel>
-
-        <CollapsingPanel
-          label="Dex Entries"
-          initialIsOpen={isDexEntriesPanelOpen}
-          toggleOpen={toggleDexEntriesPanelOpen}
-        >
-          {/* All english Dex descriptions */}
-          <FlavorTextEntries
-            textEntries={pokemonSpecies?.flavor_text_entries.filter(
-              (entry) => entry.language.name === "en",
-            )}
-          />
         </CollapsingPanel>
 
         <Footer />
