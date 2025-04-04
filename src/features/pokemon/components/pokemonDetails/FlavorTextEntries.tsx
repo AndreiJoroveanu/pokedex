@@ -42,7 +42,9 @@ const FlavorTextEntries = memo(({ textEntries }: EntriesProps) => {
       <div className="rounded-xl bg-slate-200 transition-[background] dark:bg-slate-800">
         {sortedEntries?.length ? (
           <>
-            <p className="-mb-2 px-2 pt-2 sm:px-4">
+            <p
+              className={`px-2 pt-2 sm:px-4 ${sortedEntries.length > 1 ? "-mb-2" : "pb-2"}`}
+            >
               <span className="font-bold text-slate-600 transition-[color] dark:text-slate-400">
                 {/*{"Dex Entry from Pokémon "}*/}
                 {games[sortedEntries[0].version?.name ?? ""]?.label ??
