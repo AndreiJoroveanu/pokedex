@@ -30,8 +30,8 @@ const MoveCard = memo(({ move: { id, name } }: CardProps) => {
             />
           ) : (
             // The loader has the same positioning classes as the image to ensure no layout shifts
-            <div className="-m-7 inline-block h-34.25 w-33">
-              <Loader size={8} />
+            <div className="-m-7 inline-block h-34.25 w-33 scale-40">
+              <Loader size={20} />
             </div>
           )}
 

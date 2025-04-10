@@ -9,6 +9,8 @@ import MoveDiscImage from "@/features/moves/components/moveDetails/MoveDiscImage
 import MoveInfoDisplay from "@/features/moves/components/MoveInfoDisplay.tsx";
 import MoveStats from "@/features/moves/components/moveDetails/MoveStats.tsx";
 import MoveEffect from "@/features/moves/components/moveDetails/MoveEffect.tsx";
+import MoveTarget from "@/features/moves/components/moveDetails/MoveTarget.tsx";
+import GenerationText from "@/components/GenerationText.tsx";
 import FlavorTextEntries from "@/features/moves/components/moveDetails/FlavorTextEntries.tsx";
 import Footer from "@/components/Footer.tsx";
 
@@ -51,6 +53,10 @@ const MoveDetails = () => {
         </div>
 
         <MoveEffect effect={move?.effect_entries} />
+
+        <MoveTarget target={move?.target.name} />
+
+        <GenerationText generation={move?.generation.name} itemType="move" />
 
         {/* All english move descriptions */}
         <FlavorTextEntries

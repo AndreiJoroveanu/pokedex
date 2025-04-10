@@ -24,7 +24,7 @@ import PokemonTypesDisplay from "@/features/pokemon/components/PokemonTypesDispl
 import PokemonAbilitiesDisplayText from "@/features/pokemon/components/pokemonDetails/PokemonAbilitiesDisplayText.tsx";
 import PokemonStats from "@/features/pokemon/components/pokemonDetails/PokemonStats.tsx";
 import PokemonEvolutionChain from "@/features/pokemon/components/pokemonDetails/PokemonEvolutionChain.tsx";
-import PokemonGenerationDisplay from "@/features/pokemon/components/pokemonDetails/PokemonGenerationDisplay.tsx";
+import GenerationText from "@/components/GenerationText.tsx";
 import PokemonCatchRate from "@/features/pokemon/components/pokemonDetails/PokemonCatchRate.tsx";
 import PokemonTypeEffectiveness from "@/features/pokemon/components/pokemonDetails/PokemonTypeEffectiveness.tsx";
 import CollapsingPanel from "@/components/CollapsingPanel.tsx";
@@ -144,8 +144,9 @@ const PokemonDetails = () => {
           pokemonName={pokemonSpecies?.name}
         />
 
-        <PokemonGenerationDisplay
+        <GenerationText
           generation={pokemonSpecies?.generation.name}
+          itemType="Pokémon"
         />
 
         <PokemonCatchRate catchRate={pokemonSpecies?.capture_rate} />
