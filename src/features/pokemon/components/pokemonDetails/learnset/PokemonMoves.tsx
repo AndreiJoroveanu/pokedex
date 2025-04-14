@@ -7,7 +7,7 @@ import { versionGroups } from "@/data/versionGroups.ts";
 
 import Loader from "@/components/Loader.tsx";
 import Button from "@/components/button/Button.tsx";
-import PokemonMovesTable from "@/features/pokemon/components/pokemonDetails/PokemonMovesTable.tsx";
+import PokemonMovesTable from "@/features/pokemon/components/pokemonDetails/learnset/PokemonMovesTable.tsx";
 
 interface MovesProps {
   moves: MoveElement[] | undefined;

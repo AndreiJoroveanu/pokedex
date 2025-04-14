@@ -1,6 +1,6 @@
 import { ItemResource } from "@/types/types.ts";
 
-import PokemonMoveTableRow from "@/features/pokemon/components/pokemonDetails/PokemonMoveTableRow.tsx";
+import PokemonMoveTableRow from "@/features/pokemon/components/pokemonDetails/learnset/PokemonMoveTableRow.tsx";
 
 interface MovesProps {
   moves: (ItemResource & { level: number })[];

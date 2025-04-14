@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-import { typeEffectiveness } from "@/data/typeEffectiveness.ts";
+import getTypeEffectivenessData from "@/features/pokemon/utils/getTypeEffectivenessData.ts";
 
 import Loader from "@/components/Loader.tsx";
 import TypeDisplay from "@/components/TypeDisplay.tsx";
@@ -24,7 +24,14 @@ const EffectivenessCategory = ({ title, types, multipliers }: CategoryProps) =>
       <div className="flex flex-wrap gap-1 pt-1 pb-2">
         {types.map((type) => (
           <div key={type} className="flex w-34 items-center gap-1 pr-2">
-            <TypeDisplay type={type} /> {`${multipliers[type]}x`}
+            <TypeDisplay type={type} />
+
+            {multipliers[type] === 0.25 ? (
+              // Reduce the X scale when the multiplier is 0.25 because otherwise it would take too much space
+              <span className="-ml-0.5 scale-x-90">{`${multipliers[type]}x`}</span>
+            ) : (
+              <span>{`${multipliers[type]}x`}</span>
+            )}
           </div>
         ))}
       </div>
@@ -32,41 +39,18 @@ const EffectivenessCategory = ({ title, types, multipliers }: CategoryProps) =>
   ) : null;
 
 const PokemonTypeEffectiveness = memo(({ types }: TypesProps) => {
-  // An object which will contain all 18 types and the multiplier to which they deal damage to the Pokémon
-  const multipliers: Record<string, number> = {};
-
-  // An object to categorize the types depending on their damage multiplier against the Pokémon
-  const categories: Record<string, { types: string[]; label: string }> = {
-    normal: { types: [], label: "Damaged normally by" },
-    weak: { types: [], label: "Weak to" },
-    resistant: { types: [], label: "Resistant to" },
-    immune: { types: [], label: "Immune to" },
-  };
-
   if (!types)
     return (
-      <div className="h-80 w-full rounded-lg bg-slate-200 shadow-lg transition-[background-color] dark:bg-slate-800 dark:shadow-none">
-        <Loader size={24} displaysText={true} />
-      </div>
+      <>
+        <h2 className="mb-1 text-lg font-semibold">Type effectiveness:</h2>
+
+        <div className="h-80 w-full rounded-lg bg-slate-200 shadow-lg transition-[background-color] dark:bg-slate-800 dark:shadow-none">
+          <Loader size={24} displaysText={true} />
+        </div>
+      </>
     );
 
-  // Determine the effectiveness and category of each type
-  for (const attackingType of Object.keys(typeEffectiveness)) {
-    // Base multiplier of 1
-    let multiplier = 1;
-
-    // Multiply effectiveness across all the Pokémon's defending types
-    for (const defendingType of types)
-      multiplier *= typeEffectiveness[defendingType]?.[attackingType] ?? 1;
-
-    multipliers[attackingType] = multiplier;
-
-    // Categorize the type based on its effectiveness
-    if (multiplier === 0) categories.immune.types.push(attackingType);
-    else if (multiplier < 1) categories.resistant.types.push(attackingType);
-    else if (multiplier > 1) categories.weak.types.push(attackingType);
-    else categories.normal.types.push(attackingType);
-  }
+  const { categories, multipliers } = getTypeEffectivenessData(types);
 
   return (
     <>

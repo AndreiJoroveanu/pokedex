@@ -12,6 +12,7 @@ interface FilterProps {
 
 const SidebarFilter = ({ name, values, isOpen, toggleOpen }: FilterProps) => {
   const { getUrlParam, setUrlParam } = useAllItemsParams();
+  const currentValue = getUrlParam(name);
 
   return (
     <CollapsingPanel
@@ -24,7 +25,7 @@ const SidebarFilter = ({ name, values, isOpen, toggleOpen }: FilterProps) => {
         <Button
           key={value}
           onClick={() => setUrlParam(name, value)}
-          style={getUrlParam(name) === value ? "indigo" : "normal"}
+          style={currentValue === value ? "indigo" : "normal"}
           className="capitalize"
         >
           {label}

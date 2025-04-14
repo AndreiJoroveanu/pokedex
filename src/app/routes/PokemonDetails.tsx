@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
-import { useShallow } from "zustand/react/shallow";
 import { AxiosError } from "axios";
 
-import useAppStore from "@/store/useAppStore.ts";
 import { usePokemonDetailsParams } from "@/hooks/useUrlParams.ts";
 import {
   useEvolutionChain,
@@ -27,9 +25,8 @@ import PokemonEvolutionChain from "@/features/pokemon/components/pokemonDetails/
 import GenerationText from "@/components/GenerationText.tsx";
 import PokemonCatchRate from "@/features/pokemon/components/pokemonDetails/PokemonCatchRate.tsx";
 import PokemonTypeEffectiveness from "@/features/pokemon/components/pokemonDetails/PokemonTypeEffectiveness.tsx";
-import CollapsingPanel from "@/components/CollapsingPanel.tsx";
-import PokemonMoves from "@/features/pokemon/components/pokemonDetails/PokemonMoves.tsx";
 import FlavorTextEntries from "@/features/pokemon/components/pokemonDetails/FlavorTextEntries.tsx";
+import PokemonLearnset from "@/features/pokemon/components/pokemonDetails/learnset/PokemonLearnset.tsx";
 import Footer from "@/components/Footer.tsx";
 
 const PokemonDetails = () => {
@@ -38,13 +35,6 @@ const PokemonDetails = () => {
   // Indexing from 1 instead of 0 since this value can be seen by the user
   const currentFormIndex = Number(getUrlParam("form") ?? 1) - 1;
   const displayShiny = Boolean(getUrlParam("displayShiny"));
-
-  const [isLearnsetPanelOpen, toggleLearnsetPanelOpen] = useAppStore(
-    useShallow((state) => [
-      state.isLearnsetPanelOpen,
-      state.toggleLearnsetPanelOpen,
-    ]),
-  );
 
   // Fetching data
   // Pokémon Species using the URL Parameter
@@ -158,13 +148,7 @@ const PokemonDetails = () => {
         {/* All english Dex descriptions */}
         <FlavorTextEntries textEntries={pokemonSpecies?.flavor_text_entries} />
 
-        <CollapsingPanel
-          label="Learnset"
-          initialIsOpen={isLearnsetPanelOpen}
-          toggleOpen={toggleLearnsetPanelOpen}
-        >
-          <PokemonMoves moves={pokemon?.moves} />
-        </CollapsingPanel>
+        <PokemonLearnset moves={pokemon?.moves} />
 
         <Footer />
       </div>
