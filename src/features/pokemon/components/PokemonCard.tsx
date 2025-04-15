@@ -37,7 +37,7 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
 
         <div className="p-2 md:p-4">
           <h1 className="mb-1 text-xl font-bold text-nowrap capitalize max-md:px-1">
-            {name}
+            {name.replace("-", " ")}
           </h1>
 
           <PokemonTypesDisplay

@@ -37,12 +37,14 @@ export const useFilteredMoves = (allMoves: ItemResource[] | undefined) => {
 
   // Displayed moves (after search query filtering, if needed)
   const searchedMoves = useMemo<ItemResource[] | undefined>(() => {
-    if (filteredMoves)
-      return searchQuery.trim().length
-        ? filteredMoves?.filter((p) =>
-            p.name.includes(searchQuery.toLowerCase().trim()),
-          )
-        : filteredMoves;
+    // Removes non-alphanumerical characters from search query
+    const query = searchQuery.replace(/[^0-9a-z]/gi, "").trim();
+
+    return filteredMoves && query.length
+      ? filteredMoves.filter((p) =>
+          p.name.split("-").join("").includes(query.toLowerCase()),
+        )
+      : filteredMoves;
   }, [filteredMoves, searchQuery]);
 
   return {
