@@ -1,5 +1,5 @@
 import { Fragment, memo } from "react";
-import { Link } from "react-router";
+import { Link } from "@tanstack/react-router";
 import { Chain } from "pokedex-promise-v2";
 
 import getEvolutionData from "@/features/pokemon/utils/getEvolutionData.ts";
@@ -22,7 +22,8 @@ const PokemonEvolutionText = ({ pokemon }: { pokemon: Evolution }) => {
   return (
     <>
       <Link
-        to={`/pokedex/pokemon/${pokemon.id}`}
+        to="/pokemon/$pokemonId"
+        params={{ pokemonId: String(pokemon.id) }}
         onClick={resetPanels}
         draggable="false"
         className="capitalize underline underline-offset-4 transition-[color] hover:text-blue-600 focus:text-blue-600 dark:hover:text-blue-400 dark:focus:text-blue-400"

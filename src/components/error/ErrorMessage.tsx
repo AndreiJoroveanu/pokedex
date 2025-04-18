@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "@tanstack/react-router";
 import {
   ArrowLeftStartOnRectangleIcon,
   ArrowPathIcon,
@@ -32,7 +32,7 @@ const ErrorMessage = ({ errors = [] }: { errors: string[] }) => {
 
         <div className="mt-6 flex justify-end space-x-2 max-sm:mb-34">
           <Button
-            onClick={() => void navigate(0)}
+            onClick={() => void navigate({ reloadDocument: true })}
             className="flex items-center gap-2 px-4"
           >
             <ArrowPathIcon className="size-4" />
@@ -40,7 +40,7 @@ const ErrorMessage = ({ errors = [] }: { errors: string[] }) => {
           </Button>
 
           <Button
-            onClick={() => void navigate("/pokedex")}
+            onClick={() => void navigate({ to: "/" })}
             className="flex items-center gap-2 px-4"
           >
             <ArrowLeftStartOnRectangleIcon className="size-4" />

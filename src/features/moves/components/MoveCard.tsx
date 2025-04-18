@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Link } from "react-router";
+import { Link } from "@tanstack/react-router";
 
 import { useMove } from "@/hooks/usePokeApi.ts";
 import { ItemResource } from "@/types/types.ts";
@@ -17,7 +17,7 @@ const MoveCard = memo(({ move: { id, name } }: CardProps) => {
   const { data: move } = useMove(id);
 
   return (
-    <Link to={`/pokedex/moves/${id}`}>
+    <Link to="/moves/$moveId" params={{ moveId: String(id) }}>
       <article className="@container/card relative rounded-xl bg-slate-200 shadow-lg transition-[background-color_shadow] hover:bg-slate-300 hover:shadow-xl dark:bg-slate-800 dark:shadow-none dark:hover:bg-slate-700 dark:hover:shadow-none">
         <div className="flex">
           {move ? (

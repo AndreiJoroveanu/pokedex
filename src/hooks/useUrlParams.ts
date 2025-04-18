@@ -1,69 +1,103 @@
-import { useSearchParams } from "react-router";
+import { useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
 
 import { resetScroll } from "@/hooks/useScrollRestoration.ts";
+import { AllItemsParams, PokemonDetailsParams } from "@/types/types.ts";
+
+const orderSearchParams = <T extends object>(
+  rawParams: Partial<T>,
+  order: (keyof T)[],
+): Partial<T> => {
+  const orderedParams: Partial<T> = {};
+
+  order.forEach((key) => {
+    const value = rawParams[key];
+    if (value !== undefined) orderedParams[key] = value;
+  });
+
+  return orderedParams;
+};
 
 export const useAllItemsParams = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const path = useRouterState({ select: (state) => state.location.pathname });
 
-  const getUrlParam = (name: string) => searchParams.get(name);
+  // Determines where to navigate from
+  const from = path.startsWith("/pokedex/pokemon") ? "/pokemon" : "/moves";
 
-  const setUrlParam = (name: string, value: string) => {
-    // Resets URL param if the user clicks an active category or clears the search input
-    if (searchParams.get(name) === value || value === "")
-      searchParams.delete(name);
-    else searchParams.set(name, value);
+  const search: AllItemsParams = useSearch({ strict: false });
+  const navigate = useNavigate({ from });
 
+  // Get a specific param's value from the URL
+  const getUrlParam = <K extends keyof AllItemsParams>(
+    key: K,
+  ): AllItemsParams[K] => search[key];
+
+  const setUrlParam = (key: keyof typeof search, value: string | true) => {
     // Reset sessionStorage value for useScrollRestoration hook
     resetScroll();
 
+    const updatedParams = { ...search };
+
+    // Remove URL param if the user toggles an active filter or clears the search input
+    if (updatedParams[key] === value || !value) delete updatedParams[key];
+    else {
+      // Type checking for TypeScript
+      if (key === "onlyStarred" && value === true) updatedParams[key] = value;
+      else if (key !== "onlyStarred" && typeof value === "string")
+        updatedParams[key] = value;
+    }
+
     // Order URL params
-    const orderedParams = new URLSearchParams();
-    const paramsOrder = ["generation", "type", "onlyStarred", "q"];
+    const orderedParams = orderSearchParams<AllItemsParams>(updatedParams, [
+      "generation",
+      "type",
+      "onlyStarred",
+      "q",
+    ]);
 
-    paramsOrder.map((name) => {
-      const value = searchParams.get(name);
-      if (value) orderedParams.set(name, value);
-    });
-
-    setSearchParams(orderedParams, { replace: true });
+    void navigate({ search: orderedParams, replace: true });
   };
 
   const resetUrlParams = () => {
+    // Reset sessionStorage value for useScrollRestoration hook
     resetScroll();
-    setSearchParams();
+
+    void navigate({ search: {}, replace: true });
   };
 
   return { getUrlParam, setUrlParam, resetUrlParams };
 };
 
 export const usePokemonDetailsParams = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const search: PokemonDetailsParams = useSearch({ strict: false });
+  const navigate = useNavigate({ from: "/pokemon/$pokemonId" });
 
-  const getUrlParam = (name: string) => searchParams.get(name);
+  const getUrlParam = <K extends keyof PokemonDetailsParams>(
+    key: K,
+  ): PokemonDetailsParams[K] => search[key];
 
-  const setUrlParam = (name: string, value: string) => {
+  const setUrlParam = (key: keyof typeof search, value: number | true) => {
+    const updatedParams = { ...search };
+
     // Resets URL param if the user sets either of the numbered values to the first one in the list
-    if (searchParams.get(name) === value || value === "1")
-      searchParams.delete(name);
-    else searchParams.set(name, value);
+    if (updatedParams[key] === true || value === 1) delete updatedParams[key];
+    else {
+      // Type checking for TypeScript
+      if (key === "displayShiny" && value === true) updatedParams[key] = value;
+      else if (key !== "displayShiny" && typeof value === "number")
+        updatedParams[key] = value;
+    }
 
     // Reset versionGroup if it exists and the form param is changed
-    if (name === "form" && searchParams.get("versionGroup"))
-      searchParams.delete("versionGroup");
+    if (key === "form" && updatedParams.versionGroup)
+      delete updatedParams.versionGroup;
 
     // Order URL params
-    const orderedParams = new URLSearchParams();
-    const paramsOrder = ["form", "displayShiny", "versionGroup"];
+    const orderedParams = orderSearchParams<PokemonDetailsParams>(
+      updatedParams,
+      ["form", "displayShiny", "versionGroup"],
+    );
 
-    paramsOrder.map((name) => {
-      const value = searchParams.get(name);
-      if (value) orderedParams.set(name, value);
-    });
-
-    setSearchParams(orderedParams, {
-      replace: true,
-      preventScrollReset: true,
-    });
+    void navigate({ search: orderedParams, replace: true, resetScroll: false });
   };
 
   return { getUrlParam, setUrlParam };

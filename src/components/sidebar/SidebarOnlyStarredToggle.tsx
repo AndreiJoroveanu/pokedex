@@ -11,7 +11,7 @@ const SidebarOnlyStarredToggle = () => {
 
   return (
     <Button
-      onClick={() => setUrlParam("onlyStarred", "true")}
+      onClick={() => setUrlParam("onlyStarred", true)}
       style={isButtonSelected ? "gold" : "normal"}
       className="mb-4 w-full"
     >

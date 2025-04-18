@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { createFileRoute } from "@tanstack/react-router";
 
 import { useMove } from "@/hooks/usePokeApi.ts";
 import { capitalize } from "@/utils/capitalize.ts";
@@ -17,8 +17,8 @@ import Footer from "@/components/Footer.tsx";
 const MoveDetails = () => {
   // Fetching data
   // Move ID using the URL Parameter
-  const { id } = useParams() as { id: string };
-  const { data: move, error: errorM } = useMove(Number(id));
+  const moveId = Number(Route.useLoaderData().moveId);
+  const { data: move, error: errorM } = useMove(moveId);
 
   // Display an error message if there is an error whole fetching data
   if (errorM) return <ErrorMessage errors={[errorM.message]} />;
@@ -69,4 +69,8 @@ const MoveDetails = () => {
     </>
   );
 };
-export default MoveDetails;
+
+export const Route = createFileRoute("/moves/$moveId")({
+  component: MoveDetails,
+  loader: ({ params: { moveId } }) => ({ moveId }),
+});

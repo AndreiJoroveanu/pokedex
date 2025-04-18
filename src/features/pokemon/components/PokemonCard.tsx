@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { Link } from "react-router";
+import { Link } from "@tanstack/react-router";
 
 import { usePokemon } from "@/hooks/usePokeApi.ts";
 import { ItemResource } from "@/types/types.ts";
@@ -16,7 +16,7 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   return (
-    <Link to={`/pokedex/pokemon/${id}`}>
+    <Link to="/pokemon/$pokemonId" params={{ pokemonId: String(id) }}>
       <article className="group @container/card relative rounded-xl bg-slate-200 shadow-lg transition-[background-color_shadow] hover:bg-slate-300 hover:shadow-xl dark:bg-slate-800 dark:shadow-none dark:hover:bg-slate-700 dark:hover:shadow-none">
         {/* Gets the image from a raw link instead of waiting for */}
         {/* the Pokémon object to download because it is faster */}
@@ -30,7 +30,7 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
 
         {/* Covers Pokémon image with the loader if the image hasn't loaded */}
         {isLoadingImage ? (
-          <div className="absolute top-0 aspect-square w-full rounded-sm bg-slate-200 transition-[background-color] group-hover:bg-slate-300 dark:bg-slate-800 dark:group-hover:bg-slate-700">
+          <div className="absolute top-0 aspect-square w-full rounded-xl bg-slate-200 transition-[background-color] group-hover:bg-slate-300 dark:bg-slate-800 dark:group-hover:bg-slate-700">
             <Loader size={8} />
           </div>
         ) : null}

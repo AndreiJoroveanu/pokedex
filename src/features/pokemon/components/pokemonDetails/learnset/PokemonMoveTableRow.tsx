@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Link } from "react-router";
+import { Link } from "@tanstack/react-router";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 import { useMove } from "@/hooks/usePokeApi.ts";
@@ -18,12 +18,12 @@ const PokemonMoveTableRow = memo(
     const { data: moveData } = useMove(id);
 
     return (
-      <tr className="group pointer-coarse:h-12 relative h-8 even:bg-slate-500/15 hover:bg-blue-500/20 has-focus:bg-blue-500/20">
+      <tr className="group relative h-8 even:bg-slate-500/15 hover:bg-blue-500/20 has-focus:bg-blue-500/20 pointer-coarse:h-12">
         {/* Invisible Link (has to be the first for the peer class to work) */}
         <td aria-hidden="true" className="peer">
           <Link
-            to={`/pokedex/moves/${id}`}
-            state={{ initialMove: moveData }}
+            to="/moves/$moveId"
+            params={{ moveId: String(id) }}
             draggable="false"
             className="absolute inset-0"
           />
@@ -71,7 +71,7 @@ const PokemonMoveTableRow = memo(
 
         {/* Arrow indicating that the row is clickable */}
         <td className="pointer-events-none scale-75 rounded-lg group-hover:bg-blue-500/25 group-hover:text-blue-600 peer-focus-within:bg-blue-500/25 peer-focus-within:text-blue-600 dark:group-hover:text-blue-400 dark:peer-focus-within:text-blue-400">
-          <ChevronRightIcon className="pointer-coarse:size-12 pointer-coarse:scale-75 size-8" />
+          <ChevronRightIcon className="size-8 pointer-coarse:size-12 pointer-coarse:scale-75" />
         </td>
       </tr>
     );

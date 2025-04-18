@@ -10,7 +10,7 @@ export const useFilteredPokemon = (allPokemon: ItemResource[] | undefined) => {
   const { getUrlParam } = useAllItemsParams();
   const currentGen = getUrlParam("generation") ?? "";
   const currentType = getUrlParam("type") ?? "";
-  const onlyStarred = Boolean(getUrlParam("onlyStarred"));
+  const onlyStarred = getUrlParam("onlyStarred") ?? false;
   const searchQuery = getUrlParam("q") ?? "";
 
   // Fetch Pokémon filtered by gen/type

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import { useAllPokemonSpecies } from "@/hooks/usePokeApi.ts";
 import { useFilteredPokemon } from "@/features/pokemon/hooks/useFilteredPokemon.ts";
 import useAppStore from "@/store/useAppStore.ts";
 import { useScrollRestoration } from "@/hooks/useScrollRestoration.ts";
+import { AllItemsParams } from "@/types/types.ts";
 
 import Sidebar from "@/components/sidebar/Sidebar.tsx";
 import ScrollToTopButton from "@/components/button/ScrollToTopButton.tsx";
@@ -87,4 +89,8 @@ const AllPokemon = () => {
     </div>
   );
 };
-export default AllPokemon;
+
+export const Route = createFileRoute("/pokemon/")({
+  component: AllPokemon,
+  validateSearch: (search) => ({ ...search }) as AllItemsParams,
+});

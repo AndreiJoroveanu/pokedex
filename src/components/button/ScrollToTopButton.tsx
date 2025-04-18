@@ -18,13 +18,12 @@ const ScrollToTopButton = () => {
   useEffect(() => {
     const updateScroll = () => {
       // Refresh a timeout every 200ms to set the state depending on the page scroll
-      if (!throttleTimeout.current)
-        throttleTimeout.current = window.setTimeout(() => {
-          // Set the state to true if the page scroll exceeds the specified threshold
-          setHasScrolledEnough(window.scrollY > SCROLL_THRESHOLD);
-          // Remove the timeout so that it can be created again
-          throttleTimeout.current = null;
-        }, 200);
+      throttleTimeout.current ??= window.setTimeout(() => {
+        // Set the state to true if the page scroll exceeds the specified threshold
+        setHasScrolledEnough(window.scrollY > SCROLL_THRESHOLD);
+        // Remove the timeout so that it can be created again
+        throttleTimeout.current = null;
+      }, 200);
     };
 
     // Add the scroll tracking event listener

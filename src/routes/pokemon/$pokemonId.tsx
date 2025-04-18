@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { AxiosError } from "axios";
 
 import { usePokemonDetailsParams } from "@/hooks/useUrlParams.ts";
@@ -11,6 +11,7 @@ import {
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
 import { capitalize } from "@/utils/capitalize.ts";
 import { playAudio } from "@/utils/playAudio.ts";
+import { PokemonDetailsParams } from "@/types/types.ts";
 
 import ErrorMessage from "@/components/error/ErrorMessage.tsx";
 import TopButtons from "@/features/pokemon/components/pokemonDetails/TopButtons.tsx";
@@ -33,20 +34,18 @@ const PokemonDetails = () => {
   // State specific to this page
   const { getUrlParam, setUrlParam } = usePokemonDetailsParams();
   // Indexing from 1 instead of 0 since this value can be seen by the user
-  const currentFormIndex = Number(getUrlParam("form") ?? 1) - 1;
-  const displayShiny = Boolean(getUrlParam("displayShiny"));
+  const currentFormIndex = (getUrlParam("form") ?? 1) - 1;
+  const displayShiny = getUrlParam("displayShiny") ?? false;
 
   // Fetching data
   // Pokémon Species using the URL Parameter
-  const { id } = useParams() as { id: string };
-  const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(
-    Number(id),
-  );
+  const pokemonId = Number(Route.useLoaderData().pokemonId);
+  const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(pokemonId);
 
   // Pokémon based on the selected Form
   const { data: pokemon, error: errorP } = usePokemon(
     currentFormIndex === 0
-      ? Number(id)
+      ? pokemonId
       : getIdFromUrl(pokemonSpecies?.varieties[currentFormIndex].pokemon.url),
   );
 
@@ -105,7 +104,7 @@ const PokemonDetails = () => {
 
           <ToggleShinyButton
             displayShiny={displayShiny}
-            setDisplayShiny={() => setUrlParam("displayShiny", "true")}
+            setDisplayShiny={() => setUrlParam("displayShiny", true)}
           />
         </div>
 
@@ -124,7 +123,7 @@ const PokemonDetails = () => {
         <PokemonFormButtons
           pokemonSpecies={pokemonSpecies?.varieties}
           currentForm={currentFormIndex}
-          handleClick={(index) => setUrlParam("form", String(index + 1))}
+          handleClick={(index) => setUrlParam("form", index + 1)}
         />
 
         <PokemonStats pokemonStats={pokemon?.stats} />
@@ -155,4 +154,9 @@ const PokemonDetails = () => {
     </>
   );
 };
-export default PokemonDetails;
+export const Route = createFileRoute("/pokemon/$pokemonId")({
+  component: PokemonDetails,
+  loader: ({ params: { pokemonId } }) => ({ pokemonId }),
+  validateSearch: (search) => ({ ...search }) as PokemonDetailsParams,
+  remountDeps: ({ params }) => params.pokemonId,
+});

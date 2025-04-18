@@ -16,7 +16,7 @@ interface MovesProps {
 const PokemonMoves = memo(({ moves }: MovesProps) => {
   const { getUrlParam, setUrlParam } = usePokemonDetailsParams();
   // Indexing from 1 instead of 0 since this value can be seen by the user
-  const currentVersionIndex = Number(getUrlParam("versionGroup") ?? 1) - 1;
+  const currentVersionIndex = (getUrlParam("versionGroup") ?? 1) - 1;
 
   if (!moves)
     return (
@@ -54,7 +54,7 @@ const PokemonMoves = memo(({ moves }: MovesProps) => {
           {availableVersionGroups.map(([group, { label }], index) => (
             <Button
               key={group}
-              onClick={() => setUrlParam("versionGroup", String(index + 1))}
+              onClick={() => setUrlParam("versionGroup", index + 1)}
               disabled={currentVersionIndex === index}
               style={currentVersionIndex === index ? "indigo" : "normal"}
               className="px-4 text-nowrap capitalize disabled:cursor-default"

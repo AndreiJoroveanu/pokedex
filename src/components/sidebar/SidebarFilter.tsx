@@ -4,7 +4,7 @@ import CollapsingPanel from "@/components/CollapsingPanel.tsx";
 import Button from "@/components/button/Button.tsx";
 
 interface FilterProps {
-  name: string;
+  name: "generation" | "type";
   values?: { value: string; label: string }[];
   isOpen: boolean;
   toggleOpen: () => void;

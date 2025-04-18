@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 import { VirtuosoGrid } from "react-virtuoso";
 
 import { useAllMoves } from "@/hooks/usePokeApi.ts";
 import { useFilteredMoves } from "@/features/moves/hooks/useFilteredMoves.ts";
 import { useScrollRestoration } from "@/hooks/useScrollRestoration.ts";
+import { AllItemsParams } from "@/types/types.ts";
 
 import Sidebar from "@/components/sidebar/Sidebar.tsx";
 import ScrollToTopButton from "@/components/button/ScrollToTopButton.tsx";
@@ -72,4 +74,8 @@ const AllMoves = () => {
     </div>
   );
 };
-export default AllMoves;
+
+export const Route = createFileRoute("/moves/")({
+  component: AllMoves,
+  validateSearch: (search) => ({ ...search }) as AllItemsParams,
+});

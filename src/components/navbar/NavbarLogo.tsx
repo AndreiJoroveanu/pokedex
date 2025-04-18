@@ -1,10 +1,10 @@
-import { Link } from "react-router";
+import { Link } from "@tanstack/react-router";
 
 import pokeballLogo from "/pokéball.svg";
 
 const NavbarLogo = () => (
-  <Link to={"/pokedex/pokemon"}>
-    <h1 className="flex items-end rounded-sm px-4 py-2 text-3xl font-bold transition-[background-color] hover:bg-slate-700/10 dark:hover:bg-slate-300/10">
+  <Link to="/pokemon">
+    <h1 className="flex items-end rounded-lg px-4 py-2 text-3xl font-bold transition-[background-color] hover:bg-slate-700/10 dark:hover:bg-slate-300/10">
       P
       <img
         src={pokeballLogo}

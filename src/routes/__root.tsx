@@ -1,9 +1,8 @@
-import { Outlet, ScrollRestoration } from "react-router";
+import { Outlet, createRootRoute } from "@tanstack/react-router";
 
 import Navbar from "@/components/navbar/Navbar.tsx";
-import AppProvider from "@/app/AppProvider.tsx";
 
-const AppLayout = () => (
+const RootComponent = () => (
   <div
     id="app-layout"
     className="font-medium text-slate-800 transition-[color] dark:text-slate-200"
@@ -13,11 +12,8 @@ const AppLayout = () => (
 
     <Navbar />
 
-    <AppProvider>
-      <Outlet />
-    </AppProvider>
-
-    <ScrollRestoration />
+    <Outlet />
   </div>
 );
-export default AppLayout;
+
+export const Route = createRootRoute({ component: RootComponent });
