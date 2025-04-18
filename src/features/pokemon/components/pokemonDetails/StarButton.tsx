@@ -2,7 +2,7 @@ import { memo } from "react";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 
-import { Route } from "@/routes/pokemon/$pokemonId.tsx";
+import { Route } from "@/routes/pokemon.$pokemonId.tsx";
 import { useStarredPokemon } from "@/features/pokemon/hooks/useStarredPokemon.ts";
 
 import Button from "@/components/button/Button.tsx";

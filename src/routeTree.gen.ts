@@ -12,10 +12,10 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as PokemonIndexImport } from './routes/pokemon/index'
-import { Route as MovesIndexImport } from './routes/moves/index'
-import { Route as PokemonPokemonIdImport } from './routes/pokemon/$pokemonId'
-import { Route as MovesMoveIdImport } from './routes/moves/$moveId'
+import { Route as PokemonIndexImport } from './routes/pokemon.index'
+import { Route as MovesIndexImport } from './routes/moves.index'
+import { Route as PokemonPokemonIdImport } from './routes/pokemon.$pokemonId'
+import { Route as MovesMoveIdImport } from './routes/moves.$moveId'
 
 // Create/Update Routes
 
@@ -175,16 +175,16 @@ export const routeTree = rootRoute
       "filePath": "index.tsx"
     },
     "/moves/$moveId": {
-      "filePath": "moves/$moveId.tsx"
+      "filePath": "moves.$moveId.tsx"
     },
     "/pokemon/$pokemonId": {
-      "filePath": "pokemon/$pokemonId.tsx"
+      "filePath": "pokemon.$pokemonId.tsx"
     },
     "/moves/": {
-      "filePath": "moves/index.tsx"
+      "filePath": "moves.index.tsx"
     },
     "/pokemon/": {
-      "filePath": "pokemon/index.tsx"
+      "filePath": "pokemon.index.tsx"
     }
   }
 }
