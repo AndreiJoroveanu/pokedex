@@ -1,6 +1,5 @@
 import { useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
 
-import { resetScroll } from "@/hooks/useScrollRestoration.ts";
 import { AllItemsParams, PokemonDetailsParams } from "@/types/types.ts";
 
 const orderSearchParams = <T extends object>(
@@ -32,9 +31,6 @@ export const useAllItemsParams = () => {
   ): AllItemsParams[K] => search[key];
 
   const setUrlParam = (key: keyof typeof search, value: string | true) => {
-    // Reset sessionStorage value for useScrollRestoration hook
-    resetScroll();
-
     const updatedParams = { ...search };
 
     // Remove URL param if the user toggles an active filter or clears the search input
@@ -57,12 +53,7 @@ export const useAllItemsParams = () => {
     void navigate({ search: orderedParams, replace: true });
   };
 
-  const resetUrlParams = () => {
-    // Reset sessionStorage value for useScrollRestoration hook
-    resetScroll();
-
-    void navigate({ search: {}, replace: true });
-  };
+  const resetUrlParams = () => void navigate({ search: {}, replace: true });
 
   return { getUrlParam, setUrlParam, resetUrlParams };
 };
