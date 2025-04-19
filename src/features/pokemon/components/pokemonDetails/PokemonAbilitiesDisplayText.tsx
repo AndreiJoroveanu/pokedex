@@ -1,12 +1,13 @@
-import { Fragment, memo } from "react";
+import { Fragment } from "react";
 import { PokemonAbility } from "pokedex-promise-v2";
+
 import { capitalize } from "@/utils/capitalize.ts";
 
 interface AbilitiesProps {
   abilities: PokemonAbility[] | undefined;
 }
 
-const PokemonAbilitiesDisplayText = memo(({ abilities }: AbilitiesProps) => (
+const PokemonAbilitiesDisplayText = ({ abilities }: AbilitiesProps) => (
   <p className="my-2">
     {abilities?.length ? (
       <>
@@ -35,6 +36,5 @@ const PokemonAbilitiesDisplayText = memo(({ abilities }: AbilitiesProps) => (
       "Loading..."
     )}
   </p>
-));
-PokemonAbilitiesDisplayText.displayName = "PokemonAbilitiesDisplayText";
+);
 export default PokemonAbilitiesDisplayText;

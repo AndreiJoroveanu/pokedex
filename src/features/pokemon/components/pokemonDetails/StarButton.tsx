@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
 import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
 
@@ -7,7 +6,7 @@ import { useStarredPokemon } from "@/features/pokemon/hooks/useStarredPokemon.ts
 
 import Button from "@/components/button/Button.tsx";
 
-const StarButton = memo(() => {
+const StarButton = () => {
   const { pokemonId } = Route.useLoaderData();
   const { starredPokemonIds, toggleStarredPokemonIds } = useStarredPokemon();
 
@@ -28,6 +27,5 @@ const StarButton = memo(() => {
       )}
     </Button>
   );
-});
-StarButton.displayName = "StarButton";
+};
 export default StarButton;

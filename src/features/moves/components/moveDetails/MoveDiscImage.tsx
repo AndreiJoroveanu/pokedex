@@ -1,11 +1,9 @@
-import { memo } from "react";
-
 import { tmDiscs } from "@/data/tmDiscs.ts";
 import tmDiscsImage from "/tm-discs.webp";
 
 import Loader from "@/components/Loader.tsx";
 
-const MoveDiscImage = memo(({ type }: { type: string | undefined }) =>
+const MoveDiscImage = ({ type }: { type: string | undefined }) =>
   type ? (
     <div
       className="my-2 inline-block h-34.25 min-w-33"
@@ -19,7 +17,5 @@ const MoveDiscImage = memo(({ type }: { type: string | undefined }) =>
     <div className="my-2 inline-block h-34.25 w-33">
       <Loader size={12} />
     </div>
-  ),
-);
-MoveDiscImage.displayName = "MoveDiscImage";
+  );
 export default MoveDiscImage;

@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 
 import Loader from "@/components/Loader.tsx";
 
@@ -7,7 +7,7 @@ interface ImageProps {
   alt: string | undefined;
 }
 
-const PokemonImage = memo(({ src, alt }: ImageProps) => {
+const PokemonImage = ({ src, alt }: ImageProps) => {
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
   return (
@@ -41,6 +41,5 @@ const PokemonImage = memo(({ src, alt }: ImageProps) => {
       )}
     </div>
   );
-});
-PokemonImage.displayName = "PokemonImage";
+};
 export default PokemonImage;

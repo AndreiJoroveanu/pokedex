@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { NamedAPIResource } from "pokedex-promise-v2";
 
@@ -21,7 +20,7 @@ interface EntriesProps {
     | undefined;
 }
 
-const FlavorTextEntries = memo(({ textEntries }: EntriesProps) => {
+const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
   const [isDexEntriesPanelOpen, toggleDexEntriesPanelOpen] = useAppStore(
     useShallow((state) => [
       state.isDexEntriesPanelOpen,
@@ -87,6 +86,5 @@ const FlavorTextEntries = memo(({ textEntries }: EntriesProps) => {
       </div>
     </>
   );
-});
-FlavorTextEntries.displayName = "FlavorTextEntries";
+};
 export default FlavorTextEntries;

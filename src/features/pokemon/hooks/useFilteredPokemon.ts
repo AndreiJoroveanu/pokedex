@@ -32,20 +32,23 @@ export const useFilteredPokemon = (allPokemon: ItemResource[] | undefined) => {
       return filteredByGen.filter((pg) =>
         new Set(filteredByType.map((pt) => pt.id)).has(pg.id),
       );
+
     // If there is a gen selected
-    else if (filteredByGen?.length) return filteredByGen;
+    if (filteredByGen?.length) return filteredByGen;
+
     // If there is a type selected (still need to filter because
     // the filteredByType doesn't return Pokémon species)
-    else if (filteredByType?.length)
+    if (filteredByType?.length)
       return allPokemon.filter((ap) =>
         new Set(filteredByType.map((pt) => pt.id)).has(ap.id),
       );
+
     // No filtering
-    else return allPokemon;
+    return allPokemon;
   }, [allPokemon, filteredByGen, filteredByType]);
 
   // Starred Pokémon (if needed)
-  const filteredStarredPokemon = useMemo<ItemResource[] | undefined>(() => {
+  const starredPokemon = useMemo<ItemResource[] | undefined>(() => {
     return filteredPokemon && onlyStarred
       ? filteredPokemon.filter((p) => starredPokemonIds.includes(p.id))
       : filteredPokemon;
@@ -56,12 +59,12 @@ export const useFilteredPokemon = (allPokemon: ItemResource[] | undefined) => {
     // Removes non-alphanumerical characters from search query
     const query = searchQuery.replace(/[^0-9a-z]/gi, "").trim();
 
-    return filteredStarredPokemon && query.length
-      ? filteredStarredPokemon.filter((p) =>
+    return starredPokemon && query.length
+      ? starredPokemon.filter((p) =>
           p.name.replace("-", "").includes(query.toLowerCase()),
         )
-      : filteredStarredPokemon;
-  }, [filteredStarredPokemon, searchQuery]);
+      : starredPokemon;
+  }, [starredPokemon, searchQuery]);
 
   return {
     pokemonList: searchedPokemon,

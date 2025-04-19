@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { PokemonType } from "pokedex-promise-v2";
 
 import TypeDisplay from "@/components/TypeDisplay.tsx";
@@ -8,7 +7,7 @@ interface TypesProps {
   className?: string;
 }
 
-const PokemonTypesDisplay = memo(({ types, className = "" }: TypesProps) =>
+const PokemonTypesDisplay = ({ types, className = "" }: TypesProps) =>
   types?.length ? (
     <div className={`flex ${className}`.trim()}>
       {types.map(({ type }) => (
@@ -19,7 +18,5 @@ const PokemonTypesDisplay = memo(({ types, className = "" }: TypesProps) =>
     <div
       className={`h-6 max-w-54 min-w-50 animate-pulse rounded-full bg-slate-500/50 ${className}`.trim()}
     />
-  ),
-);
-PokemonTypesDisplay.displayName = "PokemonTypesDisplay";
+  );
 export default PokemonTypesDisplay;

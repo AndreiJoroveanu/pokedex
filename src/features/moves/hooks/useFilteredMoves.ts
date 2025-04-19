@@ -27,12 +27,15 @@ export const useFilteredMoves = (allMoves: ItemResource[] | undefined) => {
       return filteredByGen.filter((pg) =>
         new Set(filteredByType.map((pt) => pt.id)).has(pg.id),
       );
+
     // If there is a gen selected
-    else if (filteredByGen?.length) return filteredByGen;
+    if (filteredByGen?.length) return filteredByGen;
+
     // If there is a type selected
-    else if (filteredByType?.length) return filteredByType;
+    if (filteredByType?.length) return filteredByType;
+
     // No filtering
-    else return allMoves;
+    return allMoves;
   }, [allMoves, filteredByGen, filteredByType]);
 
   // Displayed moves (after search query filtering, if needed)

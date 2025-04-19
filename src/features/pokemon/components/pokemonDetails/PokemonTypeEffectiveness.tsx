@@ -1,5 +1,3 @@
-import { memo } from "react";
-
 import getTypeEffectivenessData from "@/features/pokemon/utils/getTypeEffectivenessData.ts";
 
 import Loader from "@/components/Loader.tsx";
@@ -38,7 +36,7 @@ const EffectivenessCategory = ({ title, types, multipliers }: CategoryProps) =>
     </>
   ) : null;
 
-const PokemonTypeEffectiveness = memo(({ types }: TypesProps) => {
+const PokemonTypeEffectiveness = ({ types }: TypesProps) => {
   if (!types)
     return (
       <>
@@ -70,6 +68,5 @@ const PokemonTypeEffectiveness = memo(({ types }: TypesProps) => {
       </div>
     </>
   );
-});
-PokemonTypeEffectiveness.displayName = "PokemonTypeEffectiveness";
+};
 export default PokemonTypeEffectiveness;

@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { FlavorText } from "pokedex-promise-v2";
 
 import { versionGroups } from "@/data/versionGroups.ts";
@@ -13,7 +12,7 @@ interface EntriesProps {
   moveName: string | undefined;
 }
 
-const FlavorTextEntries = memo(({ textEntries, moveName }: EntriesProps) => {
+const FlavorTextEntries = ({ textEntries, moveName }: EntriesProps) => {
   const sortedEntries = formatFlavorTextEntries(textEntries, moveName);
 
   return (
@@ -70,6 +69,5 @@ const FlavorTextEntries = memo(({ textEntries, moveName }: EntriesProps) => {
       </div>
     </>
   );
-});
-FlavorTextEntries.displayName = "FlavorTextEntries";
+};
 export default FlavorTextEntries;

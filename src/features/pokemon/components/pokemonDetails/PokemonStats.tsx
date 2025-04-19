@@ -1,4 +1,4 @@
-import { Fragment, memo } from "react";
+import { Fragment } from "react";
 import { StatElement } from "pokedex-promise-v2";
 
 import { stats } from "@/data/stats.ts";
@@ -7,7 +7,7 @@ interface StatsProps {
   pokemonStats: StatElement[] | undefined;
 }
 
-const PokemonStats = memo(({ pokemonStats }: StatsProps) => (
+const PokemonStats = ({ pokemonStats }: StatsProps) => (
   <>
     <h2 className="mb-1 text-lg font-semibold">Base Stats:</h2>
 
@@ -63,6 +63,5 @@ const PokemonStats = memo(({ pokemonStats }: StatsProps) => (
       )}
     </div>
   </>
-));
-PokemonStats.displayName = "PokemonStats";
+);
 export default PokemonStats;

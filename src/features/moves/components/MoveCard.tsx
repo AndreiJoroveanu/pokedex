@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { Link } from "@tanstack/react-router";
 
 import { useMove } from "@/hooks/usePokeApi.ts";
@@ -13,7 +12,7 @@ interface CardProps {
   move: ItemResource;
 }
 
-const MoveCard = memo(({ move: { id, name } }: CardProps) => {
+const MoveCard = ({ move: { id, name } }: CardProps) => {
   const { data: move } = useMove(id);
 
   return (
@@ -49,6 +48,5 @@ const MoveCard = memo(({ move: { id, name } }: CardProps) => {
       </article>
     </Link>
   );
-});
-MoveCard.displayName = "MoveCard";
+};
 export default MoveCard;

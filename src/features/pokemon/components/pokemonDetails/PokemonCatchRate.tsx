@@ -1,10 +1,8 @@
-import { memo } from "react";
-
 interface CatchRateProps {
   catchRate: number | undefined;
 }
 
-const PokemonCatchRate = memo(({ catchRate }: CatchRateProps) => {
+const PokemonCatchRate = ({ catchRate }: CatchRateProps) => {
   // Simplified (but still accurate) formula for catching the Pokémon
   // at full HP with a normal Pokéball based on its catch rate
   const probability = (Math.pow((catchRate ?? 0) / 765, 0.75) * 100).toFixed(2);
@@ -35,6 +33,5 @@ const PokemonCatchRate = memo(({ catchRate }: CatchRateProps) => {
       )}
     </p>
   );
-});
-PokemonCatchRate.displayName = "PokemonCatchRate";
+};
 export default PokemonCatchRate;

@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { MoveElement } from "pokedex-promise-v2";
 
 import { usePokemonDetailsParams } from "@/hooks/useUrlParams.ts";
@@ -13,7 +12,7 @@ interface MovesProps {
   moves: MoveElement[] | undefined;
 }
 
-const PokemonMoves = memo(({ moves }: MovesProps) => {
+const PokemonMoves = ({ moves }: MovesProps) => {
   const { getUrlParam, setUrlParam } = usePokemonDetailsParams();
   // Indexing from 1 instead of 0 since this value can be seen by the user
   const currentVersionIndex = (getUrlParam("versionGroup") ?? 1) - 1;
@@ -77,6 +76,5 @@ const PokemonMoves = memo(({ moves }: MovesProps) => {
         ))}
     </>
   );
-});
-PokemonMoves.displayName = "PokemonMoves";
+};
 export default PokemonMoves;

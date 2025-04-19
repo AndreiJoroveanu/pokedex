@@ -1,8 +1,6 @@
-import { memo } from "react";
-
 import { capitalize } from "@/utils/capitalize.ts";
 
-const MoveTarget = memo(({ target }: { target: string | undefined }) => (
+const MoveTarget = ({ target }: { target: string | undefined }) => (
   <p className="my-2">
     {target ? (
       <>
@@ -16,6 +14,5 @@ const MoveTarget = memo(({ target }: { target: string | undefined }) => (
       "Loading..."
     )}
   </p>
-));
-MoveTarget.displayName = "MoveTarget";
+);
 export default MoveTarget;

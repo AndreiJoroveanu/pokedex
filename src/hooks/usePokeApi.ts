@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
@@ -64,13 +63,11 @@ export const useAllPokemonSpecies = () => {
     queryKey: ["allPokemonSpecies"],
   });
 
-  const transformedData = useMemo(() => {
-    return data?.results.map((p) => ({
-      // Extract the Pokémon Species ID from the URL
-      id: getIdFromUrl(p.url)!,
-      name: p.name,
-    }));
-  }, [data]);
+  const transformedData = data?.results.map((p) => ({
+    // Extract the Pokémon Species ID from the URL
+    id: getIdFromUrl(p.url)!,
+    name: p.name,
+  }));
 
   return { data: transformedData, isLoading, error };
 };
@@ -82,18 +79,14 @@ export const useAllMoves = () => {
     queryKey: ["allMoves"],
   });
 
-  const transformedData = useMemo(() => {
-    return (
-      data?.results
-        .map((m) => ({
-          // Extract the move ID from the URL
-          id: getIdFromUrl(m.url)!,
-          name: m.name,
-        }))
-        // Filtering as to not show "Shadow" moves, which have IDs over 10000
-        .filter((m) => m.id < 10000)
-    );
-  }, [data]);
+  const transformedData = data?.results
+    .map((m) => ({
+      // Extract the move ID from the URL
+      id: getIdFromUrl(m.url)!,
+      name: m.name,
+    }))
+    // Filtering as to not show "Shadow" moves, which have IDs over 10000
+    .filter((m) => m.id < 10000);
 
   return { data: transformedData, isLoading, error };
 };
@@ -107,18 +100,16 @@ export const useAllPokemonByGen = (gen: string | undefined) => {
     enabled: Boolean(gen),
   });
 
-  const transformedData = useMemo(() => {
-    return gen
-      ? (data?.pokemon_species
-          .map((p) => ({
-            // Extract the Pokémon Species ID from the URL
-            id: getIdFromUrl(p.url)!,
-            name: p.name,
-          }))
-          // Sort all Pokémon by ID
-          .sort((p1, p2) => p1.id - p2.id) ?? [])
-      : [];
-  }, [data?.pokemon_species, gen]);
+  const transformedData = gen
+    ? (data?.pokemon_species
+        .map((p) => ({
+          // Extract the Pokémon Species ID from the URL
+          id: getIdFromUrl(p.url)!,
+          name: p.name,
+        }))
+        // Sort all Pokémon by ID
+        .sort((p1, p2) => p1.id - p2.id) ?? [])
+    : [];
 
   return { data: transformedData, isLoading, error };
 };
@@ -131,18 +122,16 @@ export const useAllPokemonByType = (type: string | undefined) => {
     enabled: Boolean(type),
   });
 
-  const transformedData = useMemo(() => {
-    return type
-      ? (data?.pokemon
-          .map((p) => ({
-            // Extract the Pokémon ID from the URL
-            id: getIdFromUrl(p.pokemon.url)!,
-            name: p.pokemon.name,
-          }))
-          // Filtering as to not show alternate forms, which have IDs over 10000
-          .filter((p) => p.id < 10000) ?? [])
-      : [];
-  }, [data?.pokemon, type]);
+  const transformedData = type
+    ? (data?.pokemon
+        .map((p) => ({
+          // Extract the Pokémon ID from the URL
+          id: getIdFromUrl(p.pokemon.url)!,
+          name: p.pokemon.name,
+        }))
+        // Filtering as to not show alternate forms, which have IDs over 10000
+        .filter((p) => p.id < 10000) ?? [])
+    : [];
 
   return { data: transformedData, isLoading, error };
 };
@@ -155,18 +144,16 @@ export const useAllMovesByGen = (gen: string | undefined) => {
     enabled: Boolean(gen),
   });
 
-  const transformedData = useMemo(() => {
-    return gen
-      ? (data?.moves
-          .map((m) => ({
-            // Extract the move ID from the URL
-            id: getIdFromUrl(m.url)!,
-            name: m.name,
-          }))
-          // Filtering as to not show "Shadow" moves, which have IDs over 10000
-          .filter((m) => m.id < 10000) ?? [])
-      : [];
-  }, [data?.moves, gen]);
+  const transformedData = gen
+    ? (data?.moves
+        .map((m) => ({
+          // Extract the move ID from the URL
+          id: getIdFromUrl(m.url)!,
+          name: m.name,
+        }))
+        // Filtering as to not show "Shadow" moves, which have IDs over 10000
+        .filter((m) => m.id < 10000) ?? [])
+    : [];
 
   return { data: transformedData, isLoading, error };
 };
@@ -179,15 +166,13 @@ export const useAllMovesByType = (type: string | undefined) => {
     enabled: Boolean(type),
   });
 
-  const transformedData = useMemo(() => {
-    return type
-      ? (data?.moves.map((m) => ({
-          // Extract the move ID from the URL
-          id: getIdFromUrl(m.url)!,
-          name: m.name,
-        })) ?? [])
-      : [];
-  }, [data?.moves, type]);
+  const transformedData = type
+    ? (data?.moves.map((m) => ({
+        // Extract the move ID from the URL
+        id: getIdFromUrl(m.url)!,
+        name: m.name,
+      })) ?? [])
+    : [];
 
   return { data: transformedData, isLoading, error };
 };
