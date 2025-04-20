@@ -1,17 +1,16 @@
 import { useMemo } from "react";
 
-import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
+import { useAllItemsParam } from "@/hooks/useUrlParam.ts";
 import { useAllPokemonByGen, useAllPokemonByType } from "@/hooks/usePokeApi.ts";
 import { useStarredPokemon } from "@/features/pokemon/hooks/useStarredPokemon.ts";
 import { ItemResource } from "@/types/types.ts";
 
 export const useFilteredPokemon = (allPokemon: ItemResource[] | undefined) => {
   // Get the URL Params
-  const { getUrlParam } = useAllItemsParams();
-  const currentGen = getUrlParam("generation") ?? "";
-  const currentType = getUrlParam("type") ?? "";
-  const onlyStarred = getUrlParam("onlyStarred") ?? false;
-  const searchQuery = getUrlParam("q") ?? "";
+  const [currentGen] = useAllItemsParam("generation");
+  const [currentType] = useAllItemsParam("type");
+  const [onlyStarred] = useAllItemsParam("onlyStarred");
+  const [searchQuery] = useAllItemsParam("q");
 
   // Fetch Pokémon filtered by gen/type
   const { data: filteredByGen, isLoading: isLoadingFG } =
@@ -57,9 +56,9 @@ export const useFilteredPokemon = (allPokemon: ItemResource[] | undefined) => {
   // Displayed Pokémon (after search query filtering, if needed)
   const searchedPokemon = useMemo<ItemResource[] | undefined>(() => {
     // Removes non-alphanumerical characters from search query
-    const query = searchQuery.replace(/[^0-9a-z]/gi, "").trim();
+    const query = searchQuery?.replace(/[^0-9a-z]/gi, "").trim();
 
-    return starredPokemon && query.length
+    return starredPokemon && query?.length
       ? starredPokemon.filter((p) =>
           p.name.replace("-", "").includes(query.toLowerCase()),
         )
@@ -70,7 +69,7 @@ export const useFilteredPokemon = (allPokemon: ItemResource[] | undefined) => {
     pokemonList: searchedPokemon,
     isLoading: isLoadingFG || isLoadingFT,
     isFiltered: Boolean(
-      currentGen || currentType || onlyStarred || searchQuery,
+      currentGen ?? currentType ?? onlyStarred ?? searchQuery,
     ),
   };
 };

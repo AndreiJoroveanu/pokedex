@@ -1,20 +1,15 @@
-import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
+import { useResetAllItemsUrlParams } from "@/hooks/useResetAllItemsUrlParams.ts";
 
 import Button from "@/components/button/Button.tsx";
 
 const SidebarClearFilter = () => {
-  const { getUrlParam, resetUrlParams } = useAllItemsParams();
-  const isClearButtonDisabled =
-    !getUrlParam("generation") &&
-    !getUrlParam("type") &&
-    !getUrlParam("onlyStarred") &&
-    !getUrlParam("q");
+  const { reset, canReset } = useResetAllItemsUrlParams();
 
   return (
     <Button
-      onClick={resetUrlParams}
-      disabled={isClearButtonDisabled}
-      style={!isClearButtonDisabled ? "indigo" : "normal"}
+      onClick={reset}
+      disabled={!canReset}
+      style={canReset ? "indigo" : "normal"}
       className="w-full disabled:cursor-not-allowed disabled:opacity-25 lg:mb-4"
     >
       Clear Filtering

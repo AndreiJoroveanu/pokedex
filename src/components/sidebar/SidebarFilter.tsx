@@ -1,4 +1,4 @@
-import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
+import { useAllItemsParam } from "@/hooks/useUrlParam.ts";
 
 import CollapsingPanel from "@/components/CollapsingPanel.tsx";
 import Button from "@/components/button/Button.tsx";
@@ -11,8 +11,7 @@ interface FilterProps {
 }
 
 const SidebarFilter = ({ name, values, isOpen, toggleOpen }: FilterProps) => {
-  const { getUrlParam, setUrlParam } = useAllItemsParams();
-  const currentValue = getUrlParam(name);
+  const [currentValue, setCurrentValue] = useAllItemsParam(name);
 
   return (
     <CollapsingPanel
@@ -24,7 +23,7 @@ const SidebarFilter = ({ name, values, isOpen, toggleOpen }: FilterProps) => {
       {values?.map(({ value, label }) => (
         <Button
           key={value}
-          onClick={() => setUrlParam(name, value)}
+          onClick={() => setCurrentValue(value)}
           style={currentValue === value ? "indigo" : "normal"}
           className="capitalize"
         >

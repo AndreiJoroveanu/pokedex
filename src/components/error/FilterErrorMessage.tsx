@@ -1,9 +1,9 @@
-import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
+import { useResetAllItemsUrlParams } from "@/hooks/useResetAllItemsUrlParams.ts";
 
 import Button from "@/components/button/Button.tsx";
 
 const FilterErrorMessage = ({ itemType }: { itemType: string }) => {
-  const { resetUrlParams } = useAllItemsParams();
+  const { reset } = useResetAllItemsUrlParams();
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 pt-4 pb-16 text-center sm:pb-6 lg:h-screen">
@@ -13,11 +13,7 @@ const FilterErrorMessage = ({ itemType }: { itemType: string }) => {
         Try other filtering options or another search query
       </p>
 
-      <Button
-        onClick={resetUrlParams}
-        style="indigo"
-        className="w-full max-lg:hidden"
-      >
+      <Button onClick={reset} style="indigo" className="w-full max-lg:hidden">
         Clear Filtering
       </Button>
     </div>

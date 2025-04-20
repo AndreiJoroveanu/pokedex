@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AxiosError } from "axios";
 
-import { usePokemonDetailsParams } from "@/hooks/useUrlParams.ts";
+import { usePokemonDetailsParam } from "@/hooks/useUrlParam.ts";
 import {
   useEvolutionChain,
   usePokemon,
@@ -32,10 +32,11 @@ import Footer from "@/components/Footer.tsx";
 
 const PokemonDetails = () => {
   // State specific to this page
-  const { getUrlParam, setUrlParam } = usePokemonDetailsParams();
+  const [displayShiny, setDisplayShiny] =
+    usePokemonDetailsParam("displayShiny");
+  const [formIndex, setFormIndex] = usePokemonDetailsParam("form");
   // Indexing from 1 instead of 0 since this value can be seen by the user
-  const currentFormIndex = (getUrlParam("form") ?? 1) - 1;
-  const displayShiny = getUrlParam("displayShiny") ?? false;
+  const currentFormIndex = (formIndex ?? 1) - 1;
 
   // Fetching data
   // Pokémon Species using the URL Parameter
@@ -103,8 +104,8 @@ const PokemonDetails = () => {
           </h1>
 
           <ToggleShinyButton
-            displayShiny={displayShiny}
-            setDisplayShiny={() => setUrlParam("displayShiny", true)}
+            displayShiny={displayShiny ?? false}
+            setDisplayShiny={() => setDisplayShiny(true)}
           />
         </div>
 
@@ -123,7 +124,7 @@ const PokemonDetails = () => {
         <PokemonFormButtons
           pokemonSpecies={pokemonSpecies?.varieties}
           currentForm={currentFormIndex}
-          handleClick={(index) => setUrlParam("form", index + 1)}
+          handleClick={(index) => setFormIndex(index + 1)}
         />
 
         <PokemonStats pokemonStats={pokemon?.stats} />

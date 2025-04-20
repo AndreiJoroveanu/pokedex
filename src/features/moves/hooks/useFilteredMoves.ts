@@ -1,15 +1,14 @@
 import { useMemo } from "react";
 
-import { useAllItemsParams } from "@/hooks/useUrlParams.ts";
+import { useAllItemsParam } from "@/hooks/useUrlParam.ts";
 import { useAllMovesByGen, useAllMovesByType } from "@/hooks/usePokeApi.ts";
 import { ItemResource } from "@/types/types.ts";
 
 export const useFilteredMoves = (allMoves: ItemResource[] | undefined) => {
   // Get the URL Params
-  const { getUrlParam } = useAllItemsParams();
-  const currentGen = getUrlParam("generation") ?? "";
-  const currentType = getUrlParam("type") ?? "";
-  const searchQuery = getUrlParam("q") ?? "";
+  const [currentGen] = useAllItemsParam("generation");
+  const [currentType] = useAllItemsParam("type");
+  const [searchQuery] = useAllItemsParam("q");
 
   // Fetch moves filtered by gen/type
   const { data: filteredByGen, isLoading: isLoadingFG } =
@@ -41,9 +40,9 @@ export const useFilteredMoves = (allMoves: ItemResource[] | undefined) => {
   // Displayed moves (after search query filtering, if needed)
   const searchedMoves = useMemo<ItemResource[] | undefined>(() => {
     // Removes non-alphanumerical characters from search query
-    const query = searchQuery.replace(/[^0-9a-z]/gi, "").trim();
+    const query = searchQuery?.replace(/[^0-9a-z]/gi, "").trim();
 
-    return filteredMoves && query.length
+    return filteredMoves && query?.length
       ? filteredMoves.filter((p) =>
           p.name.split("-").join("").includes(query.toLowerCase()),
         )
@@ -53,6 +52,6 @@ export const useFilteredMoves = (allMoves: ItemResource[] | undefined) => {
   return {
     moveList: searchedMoves,
     isLoading: isLoadingFG || isLoadingFT,
-    isFiltered: Boolean(currentGen || currentType || searchQuery),
+    isFiltered: Boolean(currentGen ?? currentType ?? searchQuery),
   };
 };

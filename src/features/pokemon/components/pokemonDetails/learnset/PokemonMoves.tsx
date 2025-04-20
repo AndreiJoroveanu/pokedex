@@ -1,6 +1,6 @@
 import { MoveElement } from "pokedex-promise-v2";
 
-import { usePokemonDetailsParams } from "@/hooks/useUrlParams.ts";
+import { usePokemonDetailsParam } from "@/hooks/useUrlParam.ts";
 import filterLearnsetData from "@/features/pokemon/utils/filterLearnsetData.ts";
 import { versionGroups } from "@/data/versionGroups.ts";
 
@@ -13,9 +13,10 @@ interface MovesProps {
 }
 
 const PokemonMoves = ({ moves }: MovesProps) => {
-  const { getUrlParam, setUrlParam } = usePokemonDetailsParams();
+  const [versionGroup, setVersionGroup] =
+    usePokemonDetailsParam("versionGroup");
   // Indexing from 1 instead of 0 since this value can be seen by the user
-  const currentVersionIndex = (getUrlParam("versionGroup") ?? 1) - 1;
+  const currentVersionIndex = (versionGroup ?? 1) - 1;
 
   if (!moves)
     return (
@@ -53,7 +54,7 @@ const PokemonMoves = ({ moves }: MovesProps) => {
           {availableVersionGroups.map(([group, { label }], index) => (
             <Button
               key={group}
-              onClick={() => setUrlParam("versionGroup", index + 1)}
+              onClick={() => setVersionGroup(index + 1)}
               disabled={currentVersionIndex === index}
               style={currentVersionIndex === index ? "indigo" : "normal"}
               className="px-4 text-nowrap capitalize disabled:cursor-default"
