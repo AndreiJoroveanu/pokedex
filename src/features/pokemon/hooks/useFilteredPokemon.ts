@@ -47,14 +47,14 @@ export const useFilteredPokemon = (allPokemon: ItemResource[] | undefined) => {
   }, [allPokemon, filteredByGen, filteredByType]);
 
   // Starred Pokémon (if needed)
-  const starredPokemon = useMemo<ItemResource[] | undefined>(() => {
-    return filteredPokemon && onlyStarred
+  const starredPokemon = useMemo(() => {
+    return onlyStarred && filteredPokemon
       ? filteredPokemon.filter((p) => starredPokemonIds.includes(p.id))
       : filteredPokemon;
   }, [filteredPokemon, onlyStarred, starredPokemonIds]);
 
   // Displayed Pokémon (after search query filtering, if needed)
-  const searchedPokemon = useMemo<ItemResource[] | undefined>(() => {
+  const searchedPokemon = useMemo(() => {
     // Removes non-alphanumerical characters from search query
     const query = searchQuery?.replace(/[^0-9a-z]/gi, "").trim();
 

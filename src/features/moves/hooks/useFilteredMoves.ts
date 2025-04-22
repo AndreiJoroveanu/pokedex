@@ -18,7 +18,7 @@ export const useFilteredMoves = (allMoves: ItemResource[] | undefined) => {
 
   // Move filtering
   const filteredMoves = useMemo(() => {
-    // Abort if the all move list hasn't fetched yet
+    // Abort if the all moves list hasn't fetched yet
     if (!allMoves) return;
 
     // If there is a gen and a type selected
@@ -38,7 +38,7 @@ export const useFilteredMoves = (allMoves: ItemResource[] | undefined) => {
   }, [allMoves, filteredByGen, filteredByType]);
 
   // Displayed moves (after search query filtering, if needed)
-  const searchedMoves = useMemo<ItemResource[] | undefined>(() => {
+  const searchedMoves = useMemo(() => {
     // Removes non-alphanumerical characters from search query
     const query = searchQuery?.replace(/[^0-9a-z]/gi, "").trim();
 
