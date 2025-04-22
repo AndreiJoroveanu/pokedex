@@ -7,9 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [
     TanStackRouterVite({ target: "react", autoCodeSplitting: true }),
-    react({
-      babel: { plugins: [["babel-plugin-react-compiler", { target: "19" }]] },
-    }),
+    react({ babel: { plugins: [["babel-plugin-react-compiler"]] } }),
     tailwindcss(),
   ],
   base: "/pokedex",

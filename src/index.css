@@ -24,6 +24,3 @@
 @theme {
   --breakpoint-xs: 25rem; /* 400px */
 }
-
-/* Detects if the user has a touchscreen device */
-@custom-variant pointer-coarse (@media (pointer: coarse));

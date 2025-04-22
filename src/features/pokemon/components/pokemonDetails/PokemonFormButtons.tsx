@@ -17,14 +17,7 @@ const PokemonFormButtons = ({
     <h2 className="text-lg font-semibold">Current Form:</h2>
 
     {pokemonSpecies ? (
-      <div
-        style={{
-          maskImage:
-            // Adds a fade out effect to the horizontal edges of the button list
-            "linear-gradient(to right, transparent, black 1%, black 99%, transparent)",
-        }}
-        className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll p-2 pt-1"
-      >
+      <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll mask-x-from-99% mask-x-to-100% p-2 pt-1">
         {pokemonSpecies.map((form, index) => (
           <Button
             key={form.pokemon.name}
