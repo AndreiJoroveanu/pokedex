@@ -17,7 +17,7 @@ import Footer from "@/components/Footer.tsx";
 const MoveDetails = () => {
   // Fetching data
   // Move ID using the URL Parameter
-  const moveId = Number(Route.useLoaderData().moveId);
+  const { moveId } = Route.useLoaderData();
   const { data: move, error: errorM } = useMove(moveId);
 
   // Display an error message if there is an error whole fetching data
@@ -33,11 +33,6 @@ const MoveDetails = () => {
       </div>
 
       <div className="mx-auto max-w-3xl p-4 max-sm:px-2 sm:pt-42 md:px-0 lg:pt-28">
-        {/* To remove when the page is more complete */}
-        <p className="mb-4 text-center text-xl font-semibold">
-          This page is currently under construction
-        </p>
-
         <div className="mb-4 flex gap-2">
           <MoveDiscImage type={move?.type.name} />
 
@@ -72,5 +67,16 @@ const MoveDetails = () => {
 
 export const Route = createFileRoute("/moves/$moveId")({
   component: MoveDetails,
-  loader: ({ params: { moveId } }) => ({ moveId }),
+  loader: ({ context: { queryClient, pokeApi }, params: { moveId } }) => {
+    // Display an error if the Move ID is not a number
+    if (!Number(moveId)) throw new Error("Move ID must be a number");
+
+    // Prefetch the Move data
+    void queryClient.ensureQueryData({
+      queryFn: () => pokeApi.getMoveByName(Number(moveId)),
+      queryKey: ["move", Number(moveId)],
+    });
+
+    return { moveId: Number(moveId) };
+  },
 });

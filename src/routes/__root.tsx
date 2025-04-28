@@ -1,4 +1,6 @@
-import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
+import { QueryClient } from "@tanstack/react-query";
+import PokeAPI from "pokedex-promise-v2";
 
 import Navbar from "@/components/navbar/Navbar.tsx";
 
@@ -16,4 +18,7 @@ const RootComponent = () => (
   </div>
 );
 
-export const Route = createRootRoute({ component: RootComponent });
+export const Route = createRootRouteWithContext<{
+  queryClient: QueryClient;
+  pokeApi: PokeAPI;
+}>()({ component: RootComponent });

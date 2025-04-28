@@ -6,6 +6,7 @@ import "@/index.css";
 
 import { routeTree } from "@/routeTree.gen.ts";
 import { queryClient } from "@/lib/reactQuery.ts";
+import { pokeApi } from "@/lib/pokeApi.ts";
 
 import ErrorMessage from "@/components/error/ErrorMessage.tsx";
 import Loader from "@/components/Loader.tsx";
@@ -20,6 +21,7 @@ const router = createRouter({
   routeTree,
   scrollRestoration: true,
   basepath: "/pokedex",
+  context: { queryClient, pokeApi },
   defaultErrorComponent: ({ error }) => (
     <ErrorMessage errors={[error.message]} />
   ),

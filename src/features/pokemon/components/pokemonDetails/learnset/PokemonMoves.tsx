@@ -49,7 +49,7 @@ const PokemonMoves = ({ moves }: MovesProps) => {
   return (
     <>
       {availableVersionGroups.length > 1 && (
-        <div className="flex flex-nowrap gap-2 overflow-x-scroll px-2 py-4 sm:px-4">
+        <div className="mb-2 flex flex-nowrap gap-2 overflow-x-scroll p-2 pt-4 sm:px-4">
           {/* Buttons to select the game from which to display the data */}
           {availableVersionGroups.map(([group, { label }], index) => (
             <Button

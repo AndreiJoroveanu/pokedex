@@ -24,4 +24,10 @@ const AllMoves = () => (
 export const Route = createFileRoute("/moves/")({
   component: AllMoves,
   validateSearch: (search) => ({ ...search }) as AllItemsParams,
+  loader: ({ context: { queryClient, pokeApi } }) =>
+    // Prefetch the list of all Moves
+    void queryClient.ensureQueryData({
+      queryFn: () => pokeApi.getMovesList(),
+      queryKey: ["allMoves"],
+    }),
 });

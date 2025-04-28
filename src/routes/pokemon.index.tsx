@@ -35,4 +35,10 @@ const AllPokemon = () => {
 export const Route = createFileRoute("/pokemon/")({
   component: AllPokemon,
   validateSearch: (search) => ({ ...search }) as AllItemsParams,
+  loader: ({ context: { queryClient, pokeApi } }) =>
+    // Prefetch the list of all Pokémon Species
+    void queryClient.ensureQueryData({
+      queryFn: () => pokeApi.getPokemonSpeciesList(),
+      queryKey: ["allPokemonSpecies"],
+    }),
 });

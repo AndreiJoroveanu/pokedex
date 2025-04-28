@@ -40,7 +40,7 @@ const PokemonDetails = () => {
 
   // Fetching data
   // Pokémon Species using the URL Parameter
-  const pokemonId = Number(Route.useLoaderData().pokemonId);
+  const { pokemonId } = Route.useLoaderData();
   const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(pokemonId);
 
   // Pokémon based on the selected Form
@@ -155,9 +155,34 @@ const PokemonDetails = () => {
     </>
   );
 };
+
 export const Route = createFileRoute("/pokemon/$pokemonId")({
   component: PokemonDetails,
-  loader: ({ params: { pokemonId } }) => ({ pokemonId }),
   validateSearch: (search) => ({ ...search }) as PokemonDetailsParams,
+  loaderDeps: ({ search: { form } }) => ({ form }),
+  loader: ({
+    context: { queryClient, pokeApi },
+    params: { pokemonId },
+    deps: { form },
+  }) => {
+    // Display an error if the Pokémon ID is not a number
+    if (!Number(pokemonId)) throw new Error("Pokémon ID must be a number");
+
+    // Prefetch the Pokémon Species data
+    void queryClient.ensureQueryData({
+      queryFn: () => pokeApi.getPokemonSpeciesByName(Number(pokemonId)),
+      queryKey: ["pokemonSpecies", Number(pokemonId)],
+    });
+
+    // Don't prefetch the Pokémon details if the user has a different Pokémon Form selected,
+    // as the Pokémon ID is located in the Pokémon Species details, which aren't fetched yet
+    if (!form)
+      void queryClient.ensureQueryData({
+        queryFn: () => pokeApi.getPokemonByName(Number(pokemonId)),
+        queryKey: ["pokemon", Number(pokemonId)],
+      });
+
+    return { pokemonId: Number(pokemonId) };
+  },
   remountDeps: ({ params }) => params.pokemonId,
 });
