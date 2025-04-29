@@ -21,7 +21,7 @@ const MoveDetails = () => {
   const { data: move, error: errorM } = useMove(moveId);
 
   // Display an error message if there is an error whole fetching data
-  if (errorM) return <ErrorMessage errors={[errorM.message]} />;
+  if (!move && errorM) return <ErrorMessage errors={[errorM.message]} />;
 
   return (
     <>

@@ -65,7 +65,7 @@ const PokemonDetails = () => {
   }, [pokemon?.cries.latest]);
 
   // Display an error message if there is an error whole fetching data
-  if (errorPS || errorEC || errorP)
+  if ((!pokemon || !pokemonSpecies) && (errorPS || errorEC || errorP))
     return (
       <ErrorMessage
         errors={[errorPS, errorEC, errorP]
