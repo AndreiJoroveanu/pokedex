@@ -1,6 +1,6 @@
 export const playAudio = (src: string) => {
   const audio = new Audio(src);
-  audio.volume = 0.1;
+  audio.volume = 0.02 * Number(localStorage.getItem("volume") ?? 5);
 
   const play = async () => {
     try {

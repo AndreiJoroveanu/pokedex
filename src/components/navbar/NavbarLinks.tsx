@@ -29,13 +29,13 @@ const NavbarLinks = () => {
       inactiveProps={{ className: "text-slate-600 dark:text-slate-400" }}
       activeProps={{ className: "text-slate-800 dark:text-slate-200" }}
     >
-      {/* Highlight the hovered link, if there is none then highlight the active route */}
+      {/* Underline the hovered link, if there is none then underline the active route */}
       {(hoveredLink !== null
         ? hoveredLink === index
         : activeLink.includes(path)) && (
         <motion.div
-          layoutId="link-highlight"
-          // Makes it so the highlight doesn't vertically jump when moving between scrolled pages
+          layoutId="link-underline"
+          // Makes it so the underline doesn't vertically jump when moving between scrolled pages
           style={{ originY: "0px" }}
           className="absolute top-full left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-slate-800 transition-[background-color] group-hover/link:bg-blue-600 dark:bg-slate-200 dark:group-hover/link:bg-blue-400"
         />

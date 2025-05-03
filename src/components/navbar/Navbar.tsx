@@ -1,6 +1,6 @@
 import NavbarLogo from "@/components/navbar/NavbarLogo.tsx";
 import NavbarLinks from "@/components/navbar/NavbarLinks.tsx";
-import ThemeSwitcherButton from "@/components/theme-switcher/ThemeSwitcherButton.tsx";
+import SettingsMenuButton from "@/components/settings-menu/SettingsMenuButton.tsx";
 
 const Navbar = () => (
   // This is the top navigation bar, on desktop this is fixed
@@ -10,7 +10,7 @@ const Navbar = () => (
     {/* This is its own bar at the bottom of the screen on mobile */}
     <div className="flex items-center gap-2 max-sm:fixed max-sm:bottom-0 max-sm:left-0 max-sm:z-50 max-sm:h-16 max-sm:w-full max-sm:justify-center max-sm:border-t max-sm:border-slate-400 max-sm:bg-slate-100/80 max-sm:backdrop-blur-md max-sm:transition-[background-color] dark:max-sm:border-slate-600 dark:max-sm:bg-slate-900/80">
       <NavbarLinks />
-      <ThemeSwitcherButton />
+      <SettingsMenuButton />
     </div>
   </nav>
 );

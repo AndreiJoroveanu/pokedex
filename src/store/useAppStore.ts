@@ -6,8 +6,10 @@ import { changeTheme, initialTheme, Theme } from "@/utils/themeUtils.ts";
 interface State {
   theme: Theme;
   actualTheme: "light" | "dark";
-
   changeTheme: (newTheme: Theme) => void;
+
+  volume: number;
+  changeVolume: (newVolume: number) => void;
 
   isGenPanelOpen: boolean;
   toggleGenPanelOpen: () => void;
@@ -40,6 +42,12 @@ const useAppStore = create<State>((set) => ({
 
     // Set the "actualTheme" variable, calling this function also sets the HTML class
     set({ actualTheme: changeTheme(newTheme) });
+  },
+
+  volume: Number(localStorage.getItem("volume") ?? 5),
+  changeVolume: (newVolume) => {
+    set({ volume: newVolume });
+    localStorage.setItem("volume", String(newVolume));
   },
 
   // Used for the Collapsing Panels from the Sidebar in the All Pokémon/Moves pages
