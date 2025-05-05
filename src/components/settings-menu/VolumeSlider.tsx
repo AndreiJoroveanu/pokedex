@@ -5,6 +5,8 @@ import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/outline";
 
 import useAppStore from "@/store/useAppStore.ts";
 
+import Slider from "@/components/Slider.tsx";
+
 const sliderVariants = {
   hidden: {
     x: "var(--x-from-item, 0px)", // for sm-
@@ -24,7 +26,7 @@ const VolumeSlider = () => {
     useShallow((state) => [state.volume, state.changeVolume]),
   );
 
-  const handleToggleMute = (e: MouseEvent<HTMLDivElement>) => {
+  const handleToggleMute = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setVolume(volume === 0 ? 5 : 0);
   };
@@ -42,23 +44,21 @@ const VolumeSlider = () => {
         variants={sliderVariants}
         className="mx-6 mb-4 flex flex-row gap-2"
       >
-        <div
+        <button
           onClick={handleToggleMute}
-          className="cursor-pointer transition-[color] hover:text-blue-600 dark:hover:text-blue-400"
+          className="cursor-pointer rounded-lg transition-[color] hover:text-blue-600 dark:hover:text-blue-400"
         >
           {volume > 0 ? (
             <SpeakerWaveIcon className="size-6" />
           ) : (
             <SpeakerXMarkIcon className="size-6" />
           )}
-        </div>
+        </button>
 
-        <input
-          type="range"
-          max="10"
+        <Slider
+          max={10}
           value={volume}
           onChange={(e) => setVolume(Number(e.target.value))}
-          className="h-6 w-48 cursor-grab appearance-none rounded-full bg-slate-500/50 px-0.5 active:cursor-grabbing [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-6 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:border-none [&::-moz-range-thumb]:bg-slate-700 dark:[&::-moz-range-thumb]:bg-slate-300 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-6 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:border-none [&::-webkit-slider-thumb]:bg-slate-700 dark:[&::-webkit-slider-thumb]:bg-slate-300"
         />
 
         <p className="w-10 text-end">{volume * 10}%</p>
