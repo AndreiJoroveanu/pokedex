@@ -20,7 +20,7 @@ export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
   const path = useRouterState({ select: (state) => state.location.pathname });
 
   // Determines where to navigate from
-  const from = path.startsWith("/pokedex/pokemon") ? "/pokemon" : "/moves";
+  const from = path === "/pokemon" ? "/pokemon" : "/moves";
 
   const search: AllItemsParams = useSearch({ strict: false });
   const navigate = useNavigate({ from });

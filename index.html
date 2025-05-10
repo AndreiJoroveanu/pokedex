@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/pokéball.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Pokédex app by Andrei Joroveanu" />
+    <meta name="description" content="Simple Pokédex app by Andrei Joroveanu" />
     <title>Pokédex</title>
 
-    <!-- Preloading the Pokéball SVG and the font -->
     <script type="module">
       import pokeballUrl from "/pokéball.svg";
       import fontUrl from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2";
@@ -26,24 +25,6 @@
       preloadFont.type = "font/woff2";
       preloadFont.crossOrigin = "anonymous";
       document.head.appendChild(preloadFont);
-    </script>
-
-    <!-- Makes the app work on GitHub Pages -->
-    <script type="text/javascript">
-      ((l) => {
-        if (l.search[1] === "/") {
-          const decoded = l.search
-            .slice(1)
-            .split("&")
-            .map((s) => s.replace(/~and~/g, "&"))
-            .join("?");
-          window.history.replaceState(
-            null,
-            null,
-            l.pathname.slice(0, -1) + decoded + l.hash,
-          );
-        }
-      })(window.location);
     </script>
   </head>
 

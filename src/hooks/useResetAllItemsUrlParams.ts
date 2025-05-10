@@ -6,7 +6,7 @@ export const useResetAllItemsUrlParams = () => {
   const path = useRouterState({ select: (state) => state.location.pathname });
 
   // Determines where to navigate from
-  const from = path.startsWith("/pokedex/pokemon") ? "/pokemon" : "/moves";
+  const from = path === "/pokemon" ? "/pokemon" : "/moves";
 
   const search: Partial<AllItemsParams> = useSearch({ strict: false });
   const navigate = useNavigate({ from });

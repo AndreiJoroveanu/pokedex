@@ -1,4 +1,4 @@
-import { createRouter } from "@tanstack/react-router";
+import { createHashHistory, createRouter } from "@tanstack/react-router";
 
 import { routeTree } from "@/routeTree.gen.ts";
 import { queryClient } from "@/lib/reactQuery.ts";
@@ -13,10 +13,12 @@ declare module "@tanstack/react-router" {
   }
 }
 
+const hashHistory = createHashHistory();
+
 export const router = createRouter({
   routeTree,
+  history: hashHistory,
   scrollRestoration: true,
-  basepath: "/pokedex",
   context: { queryClient, pokeApi },
   defaultErrorComponent: ({ error }) => (
     <ErrorMessage errors={[error.message]} />
