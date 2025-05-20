@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useAllItemsParam } from "@/hooks/useUrlParam.ts";
 import { useAllPokemonByGen, useAllPokemonByType } from "@/hooks/usePokeApi.ts";
 import { useStarredPokemon } from "@/features/pokemon/hooks/useStarredPokemon.ts";
-import { ItemResource } from "@/types/types.ts";
+import type { ItemResource } from "@/types/types.ts";
 
 export const useFilteredPokemon = (allPokemon: ItemResource[] | undefined) => {
   // Get the URL Params

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { StatElement } from "pokedex-promise-v2";
+import type { StatElement } from "pokedex-promise-v2";
 
 import { stats } from "@/data/stats.ts";
 

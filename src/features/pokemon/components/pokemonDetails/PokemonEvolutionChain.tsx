@@ -1,10 +1,10 @@
 import { Fragment } from "react";
 import { Link } from "@tanstack/react-router";
-import { Chain } from "pokedex-promise-v2";
+import type { Chain } from "pokedex-promise-v2";
 
 import getEvolutionData from "@/features/pokemon/utils/getEvolutionData.ts";
 import useAppStore from "@/store/useAppStore.ts";
-import { ItemResource } from "@/types/types.ts";
+import type { ItemResource } from "@/types/types.ts";
 
 interface ChainProps {
   chain: Chain | undefined;

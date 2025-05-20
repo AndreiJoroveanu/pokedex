@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { type MouseEvent, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { AnimatePresence } from "motion/react";
 import {

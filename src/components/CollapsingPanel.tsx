@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { type ReactNode, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { spring } from "motion";
 import useMeasure from "react-use-measure";

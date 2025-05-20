@@ -1,4 +1,4 @@
-import { PokemonType } from "pokedex-promise-v2";
+import type { PokemonType } from "pokedex-promise-v2";
 
 import TypeDisplay from "@/components/TypeDisplay.tsx";
 

@@ -1,8 +1,8 @@
-import { Chain, EvolutionDetail } from "pokedex-promise-v2";
+import type { Chain, EvolutionDetail } from "pokedex-promise-v2";
 
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
 import formatEvolutionMethod from "@/features/pokemon/utils/formatEvolutionMethod.ts";
-import { ItemResource } from "@/types/types.ts";
+import type { ItemResource } from "@/types/types.ts";
 
 interface Evolution extends ItemResource {
   evolutionMethod: string;

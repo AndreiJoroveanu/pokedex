@@ -1,4 +1,4 @@
-import { MoveElement } from "pokedex-promise-v2";
+import type { MoveElement } from "pokedex-promise-v2";
 
 import { usePokemonDetailsParam } from "@/hooks/useUrlParam.ts";
 import filterLearnsetData from "@/features/pokemon/utils/filterLearnsetData.ts";

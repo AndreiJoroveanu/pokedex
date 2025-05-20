@@ -1,4 +1,4 @@
-import { VerboseEffect } from "pokedex-promise-v2";
+import type { VerboseEffect } from "pokedex-promise-v2";
 
 const MoveEffect = ({ effect }: { effect: VerboseEffect[] | undefined }) => (
   <p className="mb-2">

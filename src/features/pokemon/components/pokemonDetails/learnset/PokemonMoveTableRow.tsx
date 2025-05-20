@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 import { useMove } from "@/hooks/usePokeApi.ts";
-import { ItemResource } from "@/types/types.ts";
+import type { ItemResource } from "@/types/types.ts";
 
 import TypeDisplay from "@/components/TypeDisplay.tsx";
 import MoveCategoryDisplay from "@/components/MoveCategoryDisplay.tsx";

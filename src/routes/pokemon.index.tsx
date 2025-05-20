@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import useAppStore from "@/store/useAppStore.ts";
-import { AllItemsParams } from "@/types/types.ts";
+import type { AllItemsParams } from "@/types/types.ts";
 
 import Sidebar from "@/components/sidebar/Sidebar.tsx";
 import ScrollToTopButton from "@/components/button/ScrollToTopButton.tsx";

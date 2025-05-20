@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { AllItemsParams } from "@/types/types.ts";
+import type { AllItemsParams } from "@/types/types.ts";
 
 import Sidebar from "@/components/sidebar/Sidebar.tsx";
 import ScrollToTopButton from "@/components/button/ScrollToTopButton.tsx";

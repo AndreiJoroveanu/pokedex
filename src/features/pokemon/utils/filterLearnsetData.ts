@@ -1,7 +1,7 @@
-import { MoveElement } from "pokedex-promise-v2";
+import type { MoveElement } from "pokedex-promise-v2";
 
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
-import { ItemResource } from "@/types/types.ts";
+import type { ItemResource } from "@/types/types.ts";
 
 interface Moves {
   label: string;

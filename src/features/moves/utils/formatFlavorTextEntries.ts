@@ -1,4 +1,4 @@
-import { FlavorText } from "pokedex-promise-v2";
+import type { FlavorText } from "pokedex-promise-v2";
 
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
 

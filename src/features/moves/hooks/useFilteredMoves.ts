@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { useAllItemsParam } from "@/hooks/useUrlParam.ts";
 import { useAllMovesByGen, useAllMovesByType } from "@/hooks/usePokeApi.ts";
-import { ItemResource } from "@/types/types.ts";
+import type { ItemResource } from "@/types/types.ts";
 
 export const useFilteredMoves = (allMoves: ItemResource[] | undefined) => {
   // Get the URL Params

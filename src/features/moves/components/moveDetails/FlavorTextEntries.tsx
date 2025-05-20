@@ -1,4 +1,4 @@
-import { FlavorText } from "pokedex-promise-v2";
+import type { FlavorText } from "pokedex-promise-v2";
 
 import { versionGroups } from "@/data/versionGroups.ts";
 import formatFlavorTextEntries from "@/features/moves/utils/formatFlavorTextEntries.ts";

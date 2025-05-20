@@ -1,4 +1,4 @@
-import { Move } from "pokedex-promise-v2";
+import type { Move } from "pokedex-promise-v2";
 
 import TypeDisplay from "@/components/TypeDisplay.tsx";
 import MoveCategoryDisplay from "@/components/MoveCategoryDisplay.tsx";

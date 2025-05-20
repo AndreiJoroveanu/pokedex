@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 
 import useAppStore from "@/store/useAppStore.ts";
 import { themeOptions } from "@/data/themeOptions.tsx";
-import { Theme } from "@/utils/themeUtils.ts";
+import type { Theme } from "@/utils/themeUtils.ts";
 
 const optionsVariants = {
   hidden: {

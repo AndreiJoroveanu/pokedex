@@ -1,4 +1,4 @@
-import { Move } from "pokedex-promise-v2";
+import type { Move } from "pokedex-promise-v2";
 
 const MoveStats = ({ move }: { move: Move | undefined }) => (
   <div className="mt-2 h-20 w-34 rounded-lg bg-slate-200 py-1 pl-2 shadow transition-[background-color] dark:bg-slate-800 dark:shadow-none">

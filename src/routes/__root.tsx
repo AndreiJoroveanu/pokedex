@@ -1,6 +1,6 @@
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
-import { QueryClient } from "@tanstack/react-query";
-import PokeAPI from "pokedex-promise-v2";
+import type { QueryClient } from "@tanstack/react-query";
+import type PokeAPI from "pokedex-promise-v2";
 
 import Navbar from "@/components/navbar/Navbar.tsx";
 

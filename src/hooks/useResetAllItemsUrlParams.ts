@@ -1,6 +1,6 @@
 import { useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
 
-import { AllItemsParams } from "@/types/types.ts";
+import type { AllItemsParams } from "@/types/types.ts";
 
 export const useResetAllItemsUrlParams = () => {
   const path = useRouterState({ select: (state) => state.location.pathname });

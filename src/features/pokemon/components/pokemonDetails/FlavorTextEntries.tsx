@@ -1,5 +1,5 @@
 import { useShallow } from "zustand/react/shallow";
-import { NamedAPIResource } from "pokedex-promise-v2";
+import type { NamedAPIResource } from "pokedex-promise-v2";
 
 import useAppStore from "@/store/useAppStore.ts";
 import { games } from "@/data/games.ts";

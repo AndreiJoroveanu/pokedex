@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import SidebarSearch from "@/components/sidebar/SidebarSearch.tsx";
 import SidebarGenerationFilter from "@/components/sidebar/SidebarGenerationFilter.tsx";

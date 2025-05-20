@@ -1,4 +1,4 @@
-import { EvolutionDetail } from "pokedex-promise-v2";
+import type { EvolutionDetail } from "pokedex-promise-v2";
 
 import { capitalize } from "@/utils/capitalize.ts";
 

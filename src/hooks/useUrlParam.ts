@@ -1,6 +1,6 @@
 import { useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
 
-import { AllItemsParams, PokemonDetailsParams } from "@/types/types.ts";
+import type { AllItemsParams, PokemonDetailsParams } from "@/types/types.ts";
 
 const orderSearchParams = <T extends object>(
   rawParams: Partial<T>,

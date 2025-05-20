@@ -1,4 +1,4 @@
-import { ElementType } from "react";
+import type { ElementType } from "react";
 import { Cog6ToothIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 
 interface themeOption {

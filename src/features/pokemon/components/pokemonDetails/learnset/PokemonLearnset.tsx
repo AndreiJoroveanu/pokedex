@@ -1,5 +1,5 @@
 import { useShallow } from "zustand/react/shallow";
-import { MoveElement } from "pokedex-promise-v2";
+import type { MoveElement } from "pokedex-promise-v2";
 
 import useAppStore from "@/store/useAppStore.ts";
 

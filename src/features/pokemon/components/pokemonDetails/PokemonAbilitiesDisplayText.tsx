@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { PokemonAbility } from "pokedex-promise-v2";
+import type { PokemonAbility } from "pokedex-promise-v2";
 
 import { capitalize } from "@/utils/capitalize.ts";
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 import { usePokemon } from "@/hooks/usePokeApi.ts";
-import { ItemResource } from "@/types/types.ts";
+import type { ItemResource } from "@/types/types.ts";
 
 import Loader from "@/components/Loader.tsx";
 import PokemonTypesDisplay from "@/features/pokemon/components/PokemonTypesDisplay.tsx";

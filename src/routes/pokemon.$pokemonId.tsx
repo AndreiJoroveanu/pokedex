@@ -11,7 +11,7 @@ import {
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
 import { capitalize } from "@/utils/capitalize.ts";
 import { playAudio } from "@/utils/playAudio.ts";
-import { PokemonDetailsParams } from "@/types/types.ts";
+import type { PokemonDetailsParams } from "@/types/types.ts";
 
 import ErrorMessage from "@/components/error/ErrorMessage.tsx";
 import TopButtons from "@/features/pokemon/components/pokemonDetails/TopButtons.tsx";

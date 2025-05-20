@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
 import { useMove } from "@/hooks/usePokeApi.ts";
-import { ItemResource } from "@/types/types.ts";
+import type { ItemResource } from "@/types/types.ts";
 import { tmDiscs } from "@/data/tmDiscs.ts";
 import tmDiscsImage from "/tm-discs.webp";
 

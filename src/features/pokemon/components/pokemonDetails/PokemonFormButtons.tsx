@@ -1,4 +1,4 @@
-import { Variety } from "pokedex-promise-v2";
+import type { Variety } from "pokedex-promise-v2";
 
 import Button from "@/components/button/Button.tsx";
 

@@ -1,9 +1,9 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import type { AxiosError } from "axios";
 
 import { pokeApi } from "@/lib/pokeApi";
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
-import { ItemResource } from "@/types/types.ts";
+import type { ItemResource } from "@/types/types.ts";
 
 declare module "@tanstack/react-query" {
   interface Register {
