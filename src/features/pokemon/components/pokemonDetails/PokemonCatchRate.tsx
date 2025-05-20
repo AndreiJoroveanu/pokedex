@@ -8,7 +8,7 @@ const PokemonCatchRate = ({ catchRate }: CatchRateProps) => {
   const probability = (Math.pow((catchRate ?? 0) / 765, 0.75) * 100).toFixed(2);
 
   return (
-    <p className="my-2">
+    <p className="m-2">
       {catchRate ? (
         <>
           <span className="font-bold text-slate-700 transition-[color] dark:text-slate-300">

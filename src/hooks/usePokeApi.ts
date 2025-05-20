@@ -135,3 +135,9 @@ export const useAllMovesByType = (type: string | undefined) =>
       })) as ItemResource[],
     queryKey: ["type", type],
   });
+
+export const usePokemonAbility = (id: number | undefined) =>
+  useQuery({
+    queryFn: id ? () => pokeApi.getAbilityByName(id) : skipToken,
+    queryKey: ["ability", id],
+  });

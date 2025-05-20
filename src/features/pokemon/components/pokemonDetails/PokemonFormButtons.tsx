@@ -14,10 +14,10 @@ const PokemonFormButtons = ({
   handleClick,
 }: FormButtonProps) => (
   <>
-    <h2 className="text-lg font-semibold">Current Form:</h2>
+    <h2 className="mx-4 text-lg font-semibold">Current Form:</h2>
 
     {pokemonSpecies ? (
-      <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll mask-x-from-99% mask-x-to-100% p-2 pt-1">
+      <div className="-mx-2 flex flex-nowrap gap-2 overflow-x-scroll mask-x-from-99% mask-x-to-100% px-4 py-2 pt-1">
         {pokemonSpecies.map((form, index) => (
           <Button
             key={form.pokemon.name}

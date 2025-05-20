@@ -1,7 +1,7 @@
 import type { VerboseEffect } from "pokedex-promise-v2";
 
 const MoveEffect = ({ effect }: { effect: VerboseEffect[] | undefined }) => (
-  <p className="mb-2">
+  <p className="mx-2 mb-2">
     {/* Display loading text if the data is fetching, or display a message if there is no data from the API */}
     {effect === undefined
       ? "Loading..."

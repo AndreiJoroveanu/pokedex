@@ -4,7 +4,7 @@ interface GenerationProps {
 }
 
 const GenerationText = ({ generation, itemType }: GenerationProps) => (
-  <p className="my-2">
+  <p className="m-2">
     {generation
       ? `This ${itemType} originates from Generation ${generation.split("-")[1].toUpperCase()}.`
       : "Loading..."}

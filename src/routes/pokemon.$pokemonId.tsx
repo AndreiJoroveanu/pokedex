@@ -15,12 +15,12 @@ import type { PokemonDetailsParams } from "@/types/types.ts";
 
 import ErrorMessage from "@/components/error/ErrorMessage.tsx";
 import TopButtons from "@/features/pokemon/components/pokemonDetails/TopButtons.tsx";
-import PokemonFormButtons from "@/features/pokemon/components/pokemonDetails/PokemonFormButtons.tsx";
 import PokemonImage from "@/features/pokemon/components/pokemonDetails/PokemonImage.tsx";
 import ToggleShinyButton from "@/features/pokemon/components/pokemonDetails/ToggleShinyButton.tsx";
 import PokemonCategory from "@/features/pokemon/components/pokemonDetails/PokemonCategory.tsx";
 import PokemonTypesDisplay from "@/features/pokemon/components/PokemonTypesDisplay.tsx";
-import PokemonAbilitiesDisplayText from "@/features/pokemon/components/pokemonDetails/PokemonAbilitiesDisplayText.tsx";
+import PokemonFormButtons from "@/features/pokemon/components/pokemonDetails/PokemonFormButtons.tsx";
+import PokemonAbilities from "@/features/pokemon/components/pokemonDetails/PokemonAbilities.tsx";
 import PokemonStats from "@/features/pokemon/components/pokemonDetails/PokemonStats.tsx";
 import PokemonEvolutionChain from "@/features/pokemon/components/pokemonDetails/PokemonEvolutionChain.tsx";
 import GenerationText from "@/components/GenerationText.tsx";
@@ -97,7 +97,7 @@ const PokemonDetails = () => {
           alt={pokemon?.name}
         />
 
-        <div className="flex items-end justify-between">
+        <div className="flex items-end justify-between px-2">
           {/* Name */}
           <h1 className="text-2xl font-bold capitalize">
             {pokemon?.name.split("-").join(" ") ?? "Loading..."}
@@ -115,17 +115,18 @@ const PokemonDetails = () => {
           )}
         />
 
-        <div className="my-1">
-          <PokemonTypesDisplay types={pokemon?.types} className="gap-2" />
-        </div>
-
-        <PokemonAbilitiesDisplayText abilities={pokemon?.abilities} />
+        <PokemonTypesDisplay
+          types={pokemon?.types}
+          className="mx-2 my-1 gap-2"
+        />
 
         <PokemonFormButtons
           pokemonSpecies={pokemonSpecies?.varieties}
           currentForm={currentFormIndex}
           handleClick={(index) => setFormIndex(index + 1)}
         />
+
+        <PokemonAbilities abilities={pokemon?.abilities} />
 
         <PokemonStats pokemonStats={pokemon?.stats} />
 

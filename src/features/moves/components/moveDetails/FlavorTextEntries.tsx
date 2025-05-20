@@ -17,7 +17,7 @@ const FlavorTextEntries = ({ textEntries, moveName }: EntriesProps) => {
 
   return (
     <>
-      <h2 className="mb-1 text-lg font-semibold">Descriptions:</h2>
+      <h2 className="mx-2 mb-1 text-lg font-semibold sm:mx-4">Descriptions:</h2>
 
       <div className="rounded-xl bg-slate-200 transition-[background] dark:bg-slate-800">
         {sortedEntries?.length && moveName ? (

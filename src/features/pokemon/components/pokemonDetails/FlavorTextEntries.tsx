@@ -36,7 +36,7 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
 
   return (
     <>
-      <h2 className="mb-1 text-lg font-semibold">Dex Entries:</h2>
+      <h2 className="mx-2 mb-1 text-lg font-semibold sm:ml-4">Dex Entries:</h2>
 
       <div className="rounded-xl bg-slate-200 transition-[background] dark:bg-slate-800">
         {sortedEntries?.length ? (

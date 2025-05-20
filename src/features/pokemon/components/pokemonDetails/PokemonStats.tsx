@@ -9,7 +9,7 @@ interface StatsProps {
 
 const PokemonStats = ({ pokemonStats }: StatsProps) => (
   <>
-    <h2 className="mb-1 text-lg font-semibold">Base Stats:</h2>
+    <h2 className="mx-4 mb-1 text-lg font-semibold">Base Stats:</h2>
 
     <div className="mb-4 max-w-lg rounded-xl bg-slate-200 p-4 pb-2 shadow-lg transition-[background-color] dark:bg-slate-800 dark:shadow-none">
       <div className="grid grid-cols-[auto_auto_1fr] gap-2">

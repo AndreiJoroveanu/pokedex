@@ -30,10 +30,7 @@ const PokemonGrid = () => {
           <VirtuosoGrid
             totalCount={pokemonList.length}
             itemContent={(index) => (
-              <PokemonCard
-                key={pokemonList[index].name}
-                pokemon={pokemonList[index]}
-              />
+              <PokemonCard pokemon={pokemonList[index]} />
             )}
             useWindowScroll
             increaseViewportBy={{ top: 1000, bottom: 1000 }}

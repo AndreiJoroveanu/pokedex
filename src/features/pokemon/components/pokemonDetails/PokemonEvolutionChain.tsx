@@ -72,23 +72,28 @@ const PokemonEvolutionChain = ({ chain, pokemonName }: ChainProps) => {
   const { previous, next } = getEvolutionData(chain, pokemonName);
 
   // If this Pokémon doesn't evolve at all
-  if (!previous && !next.length) return <p>This Pokémon does not evolve.</p>;
+  if (!previous && !next.length)
+    return <p className="mx-2">This Pokémon does not evolve.</p>;
 
   // If this Pokémon is a base form
   if (!previous)
-    return <p>This Pokémon evolves into {formatEvolutions(next)}.</p>;
+    return (
+      <p className="mx-2">
+        This Pokémon evolves into {formatEvolutions(next)}.
+      </p>
+    );
 
   // If this Pokémon is fully evolved
   if (!next.length)
     return (
-      <p>
+      <p className="mx-2">
         This Pokémon evolves from <PokemonEvolutionText pokemon={previous} />.
       </p>
     );
 
   // If this Pokémon is a middle evolution
   return (
-    <p>
+    <p className="mx-2">
       This Pokémon evolves from <PokemonEvolutionText pokemon={previous} />, and
       evolves into {formatEvolutions(next)}.
     </p>

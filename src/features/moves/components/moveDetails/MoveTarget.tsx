@@ -1,7 +1,7 @@
 import { capitalize } from "@/utils/capitalize.ts";
 
 const MoveTarget = ({ target }: { target: string | undefined }) => (
-  <p className="my-2">
+  <p className="m-2">
     {target ? (
       <>
         <span className="font-bold text-slate-700 transition-[color] dark:text-slate-300">
