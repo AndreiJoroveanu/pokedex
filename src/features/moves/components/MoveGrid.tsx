@@ -25,7 +25,9 @@ const MoveGrid = () => {
         <>
           <VirtuosoGrid
             totalCount={moveList.length}
-            itemContent={(index) => <MoveCard move={moveList[index]} />}
+            itemContent={(index) => (
+              <MoveCard key={moveList[index].name} move={moveList[index]} />
+            )}
             useWindowScroll
             increaseViewportBy={{ top: 1000, bottom: 1000 }}
             readyStateChanged={(ready) => setGridLoaded(ready)}
