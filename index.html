@@ -7,16 +7,10 @@
     <meta name="description" content="Simple Pokédex app by Andrei Joroveanu" />
     <title>Pokédex</title>
 
-
-    <!-- Makes the app work on GitHub Pages -->
+    <!-- Decode redirected path from query and restore original URL for the router to handle -->
     <script type="text/javascript">
       const l = window.location;
-
-      console.log(l.search, l.search[1]);
-
       if (l.search[1] === "/") {
-        console.log("IF STATEMENT RAN");
-
         const decoded = l.search
           .slice(1)
           .split("&")
@@ -28,23 +22,10 @@
           l.pathname.slice(0, -1) + decoded + l.hash,
         );
       }
-
-      // ((l) => {
-      //   if (l.search[1] === "/") {
-      //     const decoded = l.search
-      //       .slice(1)
-      //       .split("&")
-      //       .map((s) => s.replace(/~and~/g, "&"))
-      //       .join("?");
-      //     window.history.replaceState(
-      //       null,
-      //       null,
-      //       l.pathname.slice(0, -1) + decoded + l.hash,
-      //     );
-      //   }
-      // })(window.location);
     </script>
-    <script type="module" crossorigin src="/pokedex/assets/index-DgXEMXQn.js"></script>
+
+    <!-- Preload the Pokéball SVG and the font -->
+    <script type="module" crossorigin src="/pokedex/assets/index-BKX6i-XL.js"></script>
     <link rel="stylesheet" crossorigin href="/pokedex/assets/index-BC-tVGa_.css">
   </head>
 
