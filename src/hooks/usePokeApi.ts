@@ -40,6 +40,13 @@ export const useEvolutionChain = (id: number | undefined) =>
     queryKey: ["evolutionChain", id],
   });
 
+// Specific Pokémon Ability
+export const usePokemonAbility = (id: number | undefined) =>
+  useQuery({
+    queryFn: id ? () => pokeApi.getAbilityByName(id) : skipToken,
+    queryKey: ["ability", id],
+  });
+
 // ---------- General List Hooks ----------
 // All Pokémon Species
 export const useAllPokemonSpecies = () =>
@@ -134,10 +141,4 @@ export const useAllMovesByType = (type: string | undefined) =>
         name: m.name,
       })) as ItemResource[],
     queryKey: ["type", type],
-  });
-
-export const usePokemonAbility = (id: number | undefined) =>
-  useQuery({
-    queryFn: id ? () => pokeApi.getAbilityByName(id) : skipToken,
-    queryKey: ["ability", id],
   });

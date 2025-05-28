@@ -40,13 +40,15 @@ const PokemonDetails = () => {
 
   // Fetching data
   // Pokémon Species using the URL Parameter
-  const { pokemonId } = Route.useLoaderData();
-  const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(pokemonId);
+  const { pokemonId } = Route.useParams();
+  const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(
+    Number(pokemonId),
+  );
 
   // Pokémon based on the selected Form
   const { data: pokemon, error: errorP } = usePokemon(
     currentFormIndex === 0
-      ? pokemonId
+      ? Number(pokemonId)
       : getIdFromUrl(pokemonSpecies?.varieties[currentFormIndex].pokemon.url),
   );
 
@@ -166,24 +168,25 @@ export const Route = createFileRoute("/pokemon/$pokemonId")({
     params: { pokemonId },
     deps: { form },
   }) => {
+    const pokemonIdAsNumber = Number(pokemonId);
+
     // Display an error if the Pokémon ID is not a number
-    if (!Number(pokemonId)) throw new Error("Pokémon ID must be a number");
+    if (isNaN(pokemonIdAsNumber))
+      throw new Error("Pokémon ID must be a number");
 
     // Prefetch the Pokémon Species data
     void queryClient.ensureQueryData({
-      queryFn: () => pokeApi.getPokemonSpeciesByName(Number(pokemonId)),
-      queryKey: ["pokemonSpecies", Number(pokemonId)],
+      queryFn: () => pokeApi.getPokemonSpeciesByName(pokemonIdAsNumber),
+      queryKey: ["pokemonSpecies", pokemonIdAsNumber],
     });
 
     // Don't prefetch the Pokémon details if the user has a different Pokémon Form selected,
     // as the Pokémon ID is located in the Pokémon Species details, which aren't fetched yet
     if (!form)
       void queryClient.ensureQueryData({
-        queryFn: () => pokeApi.getPokemonByName(Number(pokemonId)),
-        queryKey: ["pokemon", Number(pokemonId)],
+        queryFn: () => pokeApi.getPokemonByName(pokemonIdAsNumber),
+        queryKey: ["pokemon", pokemonIdAsNumber],
       });
-
-    return { pokemonId: Number(pokemonId) };
   },
   remountDeps: ({ params }) => params.pokemonId,
 });

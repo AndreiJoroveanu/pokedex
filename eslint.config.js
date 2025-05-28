@@ -7,7 +7,7 @@ import pluginQuery from "@tanstack/eslint-plugin-query";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  { ignores: ["dist", "src/routeTree.gen.ts"] },
   {
     extends: [
       js.configs.recommended,

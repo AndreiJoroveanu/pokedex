@@ -6,14 +6,14 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    TanStackRouterVite({ target: "react", autoCodeSplitting: true }),
+    TanStackRouterVite({
+      target: "react",
+      autoCodeSplitting: true,
+      quoteStyle: "double",
+    }),
     react({ babel: { plugins: [["babel-plugin-react-compiler"]] } }),
     tailwindcss(),
   ],
   base: "/pokedex",
-  resolve: {
-    alias: {
-      "@": "/src",
-    },
-  },
+  resolve: { alias: { "@": "/src" } },
 });

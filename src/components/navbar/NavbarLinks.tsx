@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 
 import useAppStore from "@/store/useAppStore.ts";
@@ -11,9 +11,6 @@ const NAV_LINKS = [
 
 const NavbarLinks = () => {
   const resetSidebarPanels = useAppStore((state) => state.resetSidebarPanels);
-
-  const location = useLocation();
-  const activeLink = location.pathname;
 
   // Track the hovered link if there is one
   const [hoveredLink, setHoveredLink] = useState<number | null>(null);
@@ -29,19 +26,20 @@ const NavbarLinks = () => {
       inactiveProps={{ className: "text-slate-600 dark:text-slate-400" }}
       activeProps={{ className: "text-slate-800 dark:text-slate-200" }}
     >
-      {/* Underline the hovered link, if there is none then underline the active route */}
-      {(hoveredLink !== null
-        ? hoveredLink === index
-        : activeLink.includes(path)) && (
-        <motion.div
-          layoutId="link-underline"
-          // Makes it so the underline doesn't vertically jump when moving between scrolled pages
-          style={{ originY: "0px" }}
-          className="absolute top-full left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-slate-800 transition-[background-color] group-hover/link:bg-blue-600 dark:bg-slate-200 dark:group-hover/link:bg-blue-400"
-        />
-      )}
+      {({ isActive }) => (
+        <>
+          {/* Underline the hovered link, if there is none then underline the active route */}
+          {(hoveredLink !== null ? hoveredLink === index : isActive) && (
+            <motion.div
+              layoutId="link-underline"
+              style={{ originY: "0px" }}
+              className="absolute top-full left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-slate-800 transition-[background-color] group-hover/link:bg-blue-600 dark:bg-slate-200 dark:group-hover/link:bg-blue-400"
+            />
+          )}
 
-      {title}
+          {title}
+        </>
+      )}
     </Link>
   ));
 };

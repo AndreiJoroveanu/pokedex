@@ -26,7 +26,7 @@ const Slider = ({ value, min = 0, max = 100, ...rest }: SliderProps) => {
         min={min}
         max={max}
         {...rest}
-        className="absolute inset-0 cursor-grab appearance-none rounded-full bg-slate-500/50 px-0.5 active:cursor-grabbing [&::-moz-range-thumb]:hidden [&::-moz-range-thumb]:opacity-0 [&::-webkit-slider-thumb]:hidden [&::-webkit-slider-thumb]:opacity-0"
+        className="absolute inset-0 cursor-grab appearance-none rounded-full bg-slate-500/50 px-0.5 active:cursor-grabbing [&::-moz-range-thumb]:opacity-0 [&::-webkit-slider-thumb]:opacity-0"
       />
 
       {/* Filled track */}

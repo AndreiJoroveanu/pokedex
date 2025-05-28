@@ -27,6 +27,7 @@ export const router = createRouter({
       <Loader size={24} displaysText={true} />
     </div>
   ),
+  defaultViewTransition: true,
   // These make the pending component show instantly when navigating to a new route
   defaultPendingMinMs: 0,
   defaultPendingMs: 0,

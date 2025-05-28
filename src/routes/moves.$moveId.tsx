@@ -17,8 +17,8 @@ import Footer from "@/components/Footer.tsx";
 const MoveDetails = () => {
   // Fetching data
   // Move ID using the URL Parameter
-  const { moveId } = Route.useLoaderData();
-  const { data: move, error: errorM } = useMove(moveId);
+  const { moveId } = Route.useParams();
+  const { data: move, error: errorM } = useMove(Number(moveId));
 
   // Display an error message if there is an error whole fetching data
   if (!move && errorM) return <ErrorMessage errors={[errorM.message]} />;
@@ -68,15 +68,15 @@ const MoveDetails = () => {
 export const Route = createFileRoute("/moves/$moveId")({
   component: MoveDetails,
   loader: ({ context: { queryClient, pokeApi }, params: { moveId } }) => {
+    const moveIdAsNumber = Number(moveId);
+
     // Display an error if the Move ID is not a number
-    if (!Number(moveId)) throw new Error("Move ID must be a number");
+    if (isNaN(moveIdAsNumber)) throw new Error("Move ID must be a number");
 
     // Prefetch the Move data
     void queryClient.ensureQueryData({
-      queryFn: () => pokeApi.getMoveByName(Number(moveId)),
-      queryKey: ["move", Number(moveId)],
+      queryFn: () => pokeApi.getMoveByName(moveIdAsNumber),
+      queryKey: ["move", moveIdAsNumber],
     });
-
-    return { moveId: Number(moveId) };
   },
 });
