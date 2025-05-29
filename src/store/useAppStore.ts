@@ -1,11 +1,15 @@
 import { create } from "zustand";
 
-import { changeTheme, initialTheme, type Theme } from "@/utils/themeUtils.ts";
+import {
+  getEffectiveTheme,
+  initialTheme,
+  type Theme,
+} from "@/utils/themeUtils.ts";
 
 // Typescript interface
 interface State {
   theme: Theme;
-  actualTheme: "light" | "dark";
+  effectiveTheme: "light" | "dark";
   changeTheme: (newTheme: Theme) => void;
 
   volume: number;
@@ -32,16 +36,19 @@ interface State {
 const useAppStore = create<State>((set) => ({
   theme: initialTheme,
 
-  // Used for some UI display, calling this function also sets the HTML class initially
-  actualTheme: changeTheme(initialTheme),
+  // Used for some UI display
+  effectiveTheme: getEffectiveTheme(initialTheme),
 
   changeTheme: (newTheme) => {
     // Set the "theme" variable and set it in localStorage
     set({ theme: newTheme });
     localStorage.setItem("theme", newTheme);
 
-    // Set the "actualTheme" variable, calling this function also sets the HTML class
-    set({ actualTheme: changeTheme(newTheme) });
+    // Set the "effectiveTheme" variable
+    set({ effectiveTheme: getEffectiveTheme(newTheme) });
+
+    // Set the HTML class
+    document.documentElement.className = newTheme;
   },
 
   volume: Number(localStorage.getItem("volume") ?? 5),

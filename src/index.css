@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark {
+  &:where(.dark, .dark *) {
+    @slot;
+  }
+
+  &:where(.system, .system *) {
+    @media (prefers-color-scheme: dark) {
+      @slot;
+    }
+  }
+}
 
 @supports (font-variation-settings: normal) {
   @font-face {

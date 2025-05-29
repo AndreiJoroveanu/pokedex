@@ -20,8 +20,12 @@ const optionsVariants = {
 };
 
 const ThemeSwitcher = ({ onClose }: { onClose: () => void }) => {
-  const [theme, actualTheme, changeTheme] = useAppStore(
-    useShallow((state) => [state.theme, state.actualTheme, state.changeTheme]),
+  const [theme, effectiveTheme, changeTheme] = useAppStore(
+    useShallow((state) => [
+      state.theme,
+      state.effectiveTheme,
+      state.changeTheme,
+    ]),
   );
 
   const handleClick = (theme: Theme) => {
@@ -35,8 +39,7 @@ const ThemeSwitcher = ({ onClose }: { onClose: () => void }) => {
         <h2 className="mb-1 text-lg font-semibold">Select an App Theme</h2>
 
         <p className="text-sm text-slate-600 capitalize dark:text-slate-400">
-          Current Theme: {theme}
-          {theme === "system" && ` (${actualTheme})`}
+          {`Current Theme: ${theme}${theme === "system" ? ` (${effectiveTheme})` : ""}`}
         </p>
       </motion.div>
 

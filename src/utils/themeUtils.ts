@@ -2,36 +2,25 @@ import useAppStore from "@/store/useAppStore.ts";
 
 export type Theme = "light" | "dark" | "system";
 
-// Gets the initial theme from localStorage, with "system" as a fallback
+// Get the initial theme from localStorage, with "system" as a fallback
 export const initialTheme =
   (localStorage.getItem("theme") as Theme) ?? "system";
+
+// Set the initial HTML class
+document.documentElement.className = initialTheme;
 
 // Media query to check if the system is set to dark mode
 const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-// Returns the value used for actualTheme, and sets the HTML class
-export const changeTheme = (theme: Theme) => {
-  // Determine the next theme for display
-  const actualTheme =
-    theme === "system" ? (mediaQuery.matches ? "dark" : "light") : theme;
-
-  // Set the HTML class
-  document.documentElement.className = actualTheme;
-
-  // Add/remove the event listener to listen for system theme changes
+export const getEffectiveTheme = (theme: Theme) => {
+  // Add/remove an event listener to listen for system theme changes
   mediaQuery.removeEventListener("change", handleSystemThemeChange);
   if (theme === "system")
     mediaQuery.addEventListener("change", handleSystemThemeChange);
 
-  return actualTheme;
+  return theme === "system" ? (mediaQuery.matches ? "dark" : "light") : theme;
 };
 
 // Used for the event listener when the app theme is set to "system"
-const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-  // Determine the next theme for display
-  const themeToSet = e.matches ? "dark" : "light";
-
-  // Set the "actualTheme" variable and the HTML class
-  useAppStore.setState({ actualTheme: themeToSet });
-  document.documentElement.className = themeToSet;
-};
+const handleSystemThemeChange = (e: MediaQueryListEvent) =>
+  useAppStore.setState({ effectiveTheme: e.matches ? "dark" : "light" });
