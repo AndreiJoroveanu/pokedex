@@ -8,10 +8,14 @@ export interface AllItemsParams {
   type?: string;
   onlyStarred?: true;
   q?: string;
+  isGenPanelOpen?: true;
+  isTypePanelOpen?: true;
 }
 
 export interface PokemonDetailsParams {
   form?: number;
   displayShiny?: true;
   versionGroup?: number;
+  isLearnsetPanelOpen?: true;
+  isDexEntriesPanelOpen?: true;
 }

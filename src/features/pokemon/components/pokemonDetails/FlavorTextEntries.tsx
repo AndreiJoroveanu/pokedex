@@ -1,7 +1,6 @@
-import { useShallow } from "zustand/react/shallow";
 import type { NamedAPIResource } from "pokedex-promise-v2";
 
-import useAppStore from "@/store/useAppStore.ts";
+import { usePokemonDetailsParam } from "@/features/pokemon/hooks/usePokemonDetailsParam.ts";
 import { games } from "@/data/games.ts";
 import { capitalize } from "@/utils/capitalize.ts";
 
@@ -21,12 +20,7 @@ interface EntriesProps {
 }
 
 const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
-  const [isDexEntriesPanelOpen, toggleDexEntriesPanelOpen] = useAppStore(
-    useShallow((state) => [
-      state.isDexEntriesPanelOpen,
-      state.toggleDexEntriesPanelOpen,
-    ]),
-  );
+  const [isOpen, setIsOpen] = usePokemonDetailsParam("isDexEntriesPanelOpen");
 
   const sortedEntries = textEntries
     // Filter to display only the english Dex Entries
@@ -56,8 +50,8 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
             {sortedEntries.length > 1 && (
               <CollapsingPanel
                 label="More Dex Entries"
-                initialIsOpen={isDexEntriesPanelOpen}
-                toggleOpen={toggleDexEntriesPanelOpen}
+                initialIsOpen={isOpen}
+                toggleOpen={() => setIsOpen(isOpen ? undefined : true)}
               >
                 <ul>
                   {sortedEntries.slice(1).map((entry) => (

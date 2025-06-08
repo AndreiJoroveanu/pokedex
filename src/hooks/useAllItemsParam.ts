@@ -7,10 +7,15 @@ import type { AllItemsParams } from "@/types/types.ts";
 export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
   // Determine current route context
   const path = useRouterState({ select: (state) => state.location.pathname });
-  const from = path === "/pokedex/pokemon" ? "/pokemon" : "/moves";
+  const from =
+    path === "/pokedex/pokemon"
+      ? "/pokemon"
+      : path === "/pokedex/moves"
+        ? "/moves"
+        : undefined;
 
   // Store latest search params in a ref to avoid unnecessary rerenders
-  const fullSearch = useSearch({ from: `${from}/` });
+  const fullSearch = useSearch({ strict: false });
   const latestSearchRef = useRef(fullSearch);
   useEffect(() => void (latestSearchRef.current = fullSearch), [fullSearch]);
 
@@ -18,7 +23,7 @@ export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
 
   // Get specific param's value from URL
   const value = useSearch({
-    from: `${from}/`,
+    strict: false,
     select: (search) => search[key] ?? undefined,
   });
 
@@ -33,9 +38,24 @@ export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
       "type",
       "onlyStarred",
       "q",
+      "isGenPanelOpen",
+      "isTypePanelOpen",
     ]);
 
-    void navigate({ search: orderedParams, replace: true });
+    void navigate({
+      search: orderedParams,
+      replace: true,
+      // Need to imperatively set the mask as to keep search params in sync
+      mask: {
+        search: {
+          ...orderedParams,
+          isGenPanelOpen: undefined,
+          isTypePanelOpen: undefined,
+        },
+      },
+      // Don't display the view transition the toggling app panels
+      viewTransition: key !== "isGenPanelOpen" && key !== "isTypePanelOpen",
+    });
   };
 
   return [value, setValue] as const;

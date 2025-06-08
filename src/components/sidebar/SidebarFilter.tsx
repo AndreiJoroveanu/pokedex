@@ -6,7 +6,7 @@ import Button from "@/components/button/Button.tsx";
 interface FilterProps {
   name: "generation" | "type";
   values?: { value: string; label: string }[];
-  isOpen: boolean;
+  isOpen: boolean | undefined;
   toggleOpen: () => void;
 }
 

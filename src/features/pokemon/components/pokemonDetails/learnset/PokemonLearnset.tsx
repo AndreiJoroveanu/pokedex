@@ -1,24 +1,18 @@
-import { useShallow } from "zustand/react/shallow";
 import type { MoveElement } from "pokedex-promise-v2";
 
-import useAppStore from "@/store/useAppStore.ts";
+import { usePokemonDetailsParam } from "@/features/pokemon/hooks/usePokemonDetailsParam.ts";
 
 import CollapsingPanel from "@/components/CollapsingPanel.tsx";
 import PokemonMoves from "@/features/pokemon/components/pokemonDetails/learnset/PokemonMoves.tsx";
 
 const PokemonLearnset = ({ moves }: { moves: MoveElement[] | undefined }) => {
-  const [isLearnsetPanelOpen, toggleLearnsetPanelOpen] = useAppStore(
-    useShallow((state) => [
-      state.isLearnsetPanelOpen,
-      state.toggleLearnsetPanelOpen,
-    ]),
-  );
+  const [isOpen, setIsOpen] = usePokemonDetailsParam("isLearnsetPanelOpen");
 
   return (
     <CollapsingPanel
       label="Learnset"
-      initialIsOpen={isLearnsetPanelOpen}
-      toggleOpen={toggleLearnsetPanelOpen}
+      initialIsOpen={isOpen}
+      toggleOpen={() => setIsOpen(isOpen ? undefined : true)}
     >
       <PokemonMoves moves={moves} />
     </CollapsingPanel>

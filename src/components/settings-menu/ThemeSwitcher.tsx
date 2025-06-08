@@ -1,7 +1,7 @@
 import { useShallow } from "zustand/react/shallow";
 import { motion } from "motion/react";
 
-import useAppStore from "@/store/useAppStore.ts";
+import useSettingsStore from "@/store/useSettingsStore.ts";
 import { themeOptions } from "@/data/themeOptions.tsx";
 import type { Theme } from "@/utils/themeUtils.ts";
 
@@ -20,7 +20,7 @@ const optionsVariants = {
 };
 
 const ThemeSwitcher = ({ onClose }: { onClose: () => void }) => {
-  const [theme, effectiveTheme, changeTheme] = useAppStore(
+  const [theme, effectiveTheme, changeTheme] = useSettingsStore(
     useShallow((state) => [
       state.theme,
       state.effectiveTheme,

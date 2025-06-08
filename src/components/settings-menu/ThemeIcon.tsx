@@ -1,10 +1,10 @@
 import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 
-import useAppStore from "@/store/useAppStore.ts";
+import useSettingsStore from "@/store/useSettingsStore.ts";
 import { themeOptions } from "@/data/themeOptions.tsx";
 
 const ThemeIcon = () => {
-  const effectiveTheme = useAppStore((state) => state.effectiveTheme);
+  const effectiveTheme = useSettingsStore((state) => state.effectiveTheme);
 
   const Icon = themeOptions.find((item) => item.theme === effectiveTheme)?.icon;
 

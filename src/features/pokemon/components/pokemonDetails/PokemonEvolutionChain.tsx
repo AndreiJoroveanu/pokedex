@@ -3,7 +3,6 @@ import { Link } from "@tanstack/react-router";
 import type { Chain } from "pokedex-promise-v2";
 
 import getEvolutionData from "@/features/pokemon/utils/getEvolutionData.ts";
-import useAppStore from "@/store/useAppStore.ts";
 import type { ItemResource } from "@/types/types.ts";
 
 interface ChainProps {
@@ -16,24 +15,19 @@ interface Evolution extends ItemResource {
 }
 
 // Link to the respective Pokémon page and the evolution description
-const PokemonEvolutionText = ({ pokemon }: { pokemon: Evolution }) => {
-  const resetPanels = useAppStore((state) => state.resetPokemonDetailsPanels);
-
-  return (
-    <>
-      <Link
-        to="/pokemon/$pokemonId"
-        params={{ pokemonId: String(pokemon.id) }}
-        onClick={resetPanels}
-        draggable="false"
-        className="capitalize underline underline-offset-4 transition-[color] hover:text-blue-600 focus:text-blue-600 dark:hover:text-blue-400 dark:focus:text-blue-400"
-      >
-        {pokemon.name}
-      </Link>
-      {` ${pokemon.evolutionMethod || "(no data available)"}`}
-    </>
-  );
-};
+const PokemonEvolutionText = ({ pokemon }: { pokemon: Evolution }) => (
+  <>
+    <Link
+      to="/pokemon/$pokemonId"
+      params={{ pokemonId: String(pokemon.id) }}
+      draggable="false"
+      className="capitalize underline underline-offset-4 transition-[color] hover:text-blue-600 focus:text-blue-600 dark:hover:text-blue-400 dark:focus:text-blue-400"
+    >
+      {pokemon.name}
+    </Link>
+    {` ${pokemon.evolutionMethod || "(no data available)"}`}
+  </>
+);
 
 // Format the list of evolutions
 const formatEvolutions = (pokemonList: Evolution[]) => {

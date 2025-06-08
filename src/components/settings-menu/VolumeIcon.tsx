@@ -1,9 +1,9 @@
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/outline";
 
-import useAppStore from "@/store/useAppStore.ts";
+import useSettingsStore from "@/store/useSettingsStore.ts";
 
 const VolumeIcon = () => {
-  const volume = useAppStore((state) => state.volume);
+  const volume = useSettingsStore((state) => state.volume);
 
   return volume > 0 ? (
     <SpeakerWaveIcon className="xs:size-6 size-5" />

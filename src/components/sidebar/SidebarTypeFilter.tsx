@@ -1,14 +1,10 @@
-import { useShallow } from "zustand/react/shallow";
-
-import useAppStore from "@/store/useAppStore.ts";
+import { useAllItemsParam } from "@/hooks/useAllItemsParam.ts";
 import { pokemonTypes } from "@/data/pokemonTypes.ts";
 
 import SidebarFilter from "@/components/sidebar/SidebarFilter.tsx";
 
 const SidebarTypeFilter = () => {
-  const [isTypePanelOpen, toggleTypePanelOpen] = useAppStore(
-    useShallow((state) => [state.isTypePanelOpen, state.toggleTypePanelOpen]),
-  );
+  const [isOpen, setIsOpen] = useAllItemsParam("isTypePanelOpen");
 
   return (
     <SidebarFilter
@@ -17,8 +13,8 @@ const SidebarTypeFilter = () => {
         value,
         label,
       }))}
-      isOpen={isTypePanelOpen}
-      toggleOpen={toggleTypePanelOpen}
+      isOpen={isOpen}
+      toggleOpen={() => setIsOpen(isOpen ? undefined : true)}
     />
   );
 };

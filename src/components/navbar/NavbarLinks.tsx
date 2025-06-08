@@ -2,16 +2,12 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 
-import useAppStore from "@/store/useAppStore.ts";
-
 const NAV_LINKS = [
   { title: "Pokémon", path: "/pokemon" },
   { title: "Moves", path: "/moves" },
 ] as const;
 
 const NavbarLinks = () => {
-  const resetSidebarPanels = useAppStore((state) => state.resetSidebarPanels);
-
   // Track the hovered link if there is one
   const [hoveredLink, setHoveredLink] = useState<number | null>(null);
 
@@ -19,7 +15,6 @@ const NavbarLinks = () => {
     <Link
       key={title}
       to={path}
-      onClick={resetSidebarPanels}
       onMouseEnter={() => setHoveredLink(index)}
       onMouseLeave={() => setHoveredLink(null)}
       className="xs:px-4 group/link relative px-2 py-2 font-semibold transition-[color] hover:text-blue-600 dark:hover:text-blue-400"

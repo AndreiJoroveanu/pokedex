@@ -1,4 +1,4 @@
-import useAppStore from "@/store/useAppStore.ts";
+import useSettingsStore from "@/store/useSettingsStore.ts";
 
 export type Theme = "light" | "dark" | "system";
 
@@ -23,4 +23,4 @@ export const getEffectiveTheme = (theme: Theme) => {
 
 // Used for the event listener when the app theme is set to "system"
 const handleSystemThemeChange = (e: MediaQueryListEvent) =>
-  useAppStore.setState({ effectiveTheme: e.matches ? "dark" : "light" });
+  useSettingsStore.setState({ effectiveTheme: e.matches ? "dark" : "light" });

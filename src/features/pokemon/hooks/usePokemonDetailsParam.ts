@@ -36,9 +36,26 @@ export const usePokemonDetailsParam = <K extends keyof PokemonDetailsParams>(
       "form",
       "displayShiny",
       "versionGroup",
+      "isLearnsetPanelOpen",
+      "isDexEntriesPanelOpen",
     ]);
 
-    void navigate({ search: orderedParams, replace: true, resetScroll: false });
+    void navigate({
+      search: orderedParams,
+      replace: true,
+      resetScroll: false,
+      // Need to imperatively set the mask as to keep search params in sync
+      mask: {
+        search: {
+          ...orderedParams,
+          isLearnsetPanelOpen: undefined,
+          isDexEntriesPanelOpen: undefined,
+        },
+      },
+      // Don't display the view transition the toggling app panels
+      viewTransition:
+        key !== "isLearnsetPanelOpen" && key !== "isDexEntriesPanelOpen",
+    });
   };
 
   return [value, setValue] as const;

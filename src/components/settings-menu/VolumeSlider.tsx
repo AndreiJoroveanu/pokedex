@@ -3,7 +3,7 @@ import { useShallow } from "zustand/react/shallow";
 import { motion } from "motion/react";
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/outline";
 
-import useAppStore from "@/store/useAppStore.ts";
+import useSettingsStore from "@/store/useSettingsStore.ts";
 
 import Slider from "@/components/Slider.tsx";
 
@@ -22,7 +22,7 @@ const sliderVariants = {
 };
 
 const VolumeSlider = () => {
-  const [volume, setVolume] = useAppStore(
+  const [volume, setVolume] = useSettingsStore(
     useShallow((state) => [state.volume, state.changeVolume]),
   );
 

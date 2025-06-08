@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 
-import useAppStore from "@/store/useAppStore.ts";
 import type { AllItemsParams } from "@/types/types.ts";
 
 import Sidebar from "@/components/sidebar/Sidebar.tsx";
@@ -9,12 +8,6 @@ import ScrollToTopButton from "@/components/button/ScrollToTopButton.tsx";
 import PokemonGrid from "@/features/pokemon/components/PokemonGrid.tsx";
 
 const AllPokemon = () => {
-  // Reset the Collapsable Panels' states in the Pokémon Details page
-  const resetPokemonDetailsPanels = useAppStore(
-    (state) => state.resetPokemonDetailsPanels,
-  );
-  useEffect(resetPokemonDetailsPanels, [resetPokemonDetailsPanels]);
-
   // Preload the individual Pokémon page
   const router = useRouter();
   useEffect(() => {
