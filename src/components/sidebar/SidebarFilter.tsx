@@ -23,7 +23,9 @@ const SidebarFilter = ({ name, values, isOpen, toggleOpen }: FilterProps) => {
       {values?.map(({ value, label }) => (
         <Button
           key={value}
-          onClick={() => setCurrentValue(value)}
+          onClick={() =>
+            setCurrentValue(currentValue === value ? undefined : value)
+          }
           style={currentValue === value ? "indigo" : "normal"}
           className="capitalize"
         >

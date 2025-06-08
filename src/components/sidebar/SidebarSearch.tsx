@@ -13,7 +13,7 @@ const SidebarSearch = ({ itemType }: { itemType: string }) => {
 
   const handleChange = (input: string) => {
     setQuery(input);
-    setQueryParam(input);
+    setQueryParam(input || undefined);
   };
 
   return (

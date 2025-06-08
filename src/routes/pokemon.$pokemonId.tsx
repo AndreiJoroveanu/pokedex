@@ -107,7 +107,9 @@ const PokemonDetails = () => {
 
           <ToggleShinyButton
             displayShiny={displayShiny ?? false}
-            setDisplayShiny={() => setDisplayShiny(true)}
+            setDisplayShiny={() =>
+              setDisplayShiny(displayShiny ? undefined : true)
+            }
           />
         </div>
 
@@ -125,7 +127,9 @@ const PokemonDetails = () => {
         <PokemonFormButtons
           pokemonSpecies={pokemonSpecies?.varieties}
           currentForm={currentFormIndex}
-          handleClick={(index) => setFormIndex(index + 1)}
+          handleClick={(index) =>
+            setFormIndex(index === 0 ? undefined : index + 1)
+          }
         />
 
         <PokemonAbilities abilities={pokemon?.abilities} />

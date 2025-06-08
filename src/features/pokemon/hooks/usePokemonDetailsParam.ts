@@ -25,9 +25,7 @@ export const usePokemonDetailsParam = <K extends keyof PokemonDetailsParams>(
   const setValue = (value: PokemonDetailsParams[K]) => {
     const updatedParams = { ...latestSearchRef.current };
 
-    // Remove URL param if the user sets either of the numbered values to 1
-    if (updatedParams[key] === true || value === 1) delete updatedParams[key];
-    else updatedParams[key] = value;
+    updatedParams[key] = value;
 
     // Reset versionGroup if it exists and the form param is changed
     if (key === "form" && updatedParams.versionGroup)
@@ -40,11 +38,7 @@ export const usePokemonDetailsParam = <K extends keyof PokemonDetailsParams>(
       "versionGroup",
     ]);
 
-    void navigate({
-      search: orderedParams,
-      replace: true,
-      resetScroll: false,
-    });
+    void navigate({ search: orderedParams, replace: true, resetScroll: false });
   };
 
   return [value, setValue] as const;

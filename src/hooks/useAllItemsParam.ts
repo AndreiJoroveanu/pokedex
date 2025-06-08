@@ -25,9 +25,7 @@ export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
   const setValue = (value: AllItemsParams[K]) => {
     const updatedParams = { ...latestSearchRef.current };
 
-    // Remove URL param if the user toggles off a filter or clears the search input
-    if (updatedParams[key] === value || value === "") delete updatedParams[key];
-    else updatedParams[key] = value;
+    updatedParams[key] = value;
 
     // Order URL Params
     const orderedParams = orderSearchParams(updatedParams, [

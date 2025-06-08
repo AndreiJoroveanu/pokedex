@@ -54,7 +54,9 @@ const PokemonMoves = ({ moves }: MovesProps) => {
           {availableVersionGroups.map(([group, { label }], index) => (
             <Button
               key={group}
-              onClick={() => setVersionGroup(index + 1)}
+              onClick={() =>
+                setVersionGroup(index === 0 ? undefined : index + 1)
+              }
               disabled={currentVersionIndex === index}
               style={currentVersionIndex === index ? "indigo" : "normal"}
               className="px-4 text-nowrap capitalize disabled:cursor-default"

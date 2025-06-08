@@ -4,10 +4,7 @@ export const orderSearchParams = <T extends object>(
 ): Partial<T> => {
   const orderedParams: Partial<T> = {};
 
-  order.forEach((key) => {
-    const value = rawParams[key];
-    if (value !== undefined) orderedParams[key] = value;
-  });
+  order.forEach((key) => (orderedParams[key] = rawParams[key]));
 
   return orderedParams;
 };

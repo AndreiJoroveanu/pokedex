@@ -9,11 +9,11 @@ const SidebarOnlyStarredToggle = () => {
 
   return (
     <Button
-      onClick={() => setOnlyStarred(true)}
+      onClick={() => setOnlyStarred(onlyStarred ? undefined : true)}
       style={onlyStarred ? "gold" : "normal"}
       className="mb-4 w-full"
     >
-      Show{onlyStarred ? `ing ${length}` : " only"} starred Pokémon
+      {`Show${onlyStarred ? `ing ${length}` : " only"} starred Pokémon`}
     </Button>
   );
 };
