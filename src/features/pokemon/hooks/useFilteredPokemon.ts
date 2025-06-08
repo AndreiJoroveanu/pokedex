@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { useAllItemsParam } from "@/hooks/useUrlParam.ts";
+import { useAllItemsParam } from "@/hooks/useAllItemsParam.ts";
 import { useAllPokemonByGen, useAllPokemonByType } from "@/hooks/usePokeApi.ts";
 import { useStarredPokemon } from "@/features/pokemon/hooks/useStarredPokemon.ts";
 import type { ItemResource } from "@/types/types.ts";

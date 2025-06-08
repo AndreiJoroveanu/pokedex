@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useAllItemsParam } from "@/hooks/useUrlParam.ts";
+import { useAllItemsParam } from "@/hooks/useAllItemsParam.ts";
 
 const SidebarSearch = ({ itemType }: { itemType: string }) => {
   const [queryParam, setQueryParam] = useAllItemsParam("q");

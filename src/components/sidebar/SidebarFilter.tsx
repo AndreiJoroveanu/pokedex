@@ -1,4 +1,4 @@
-import { useAllItemsParam } from "@/hooks/useUrlParam.ts";
+import { useAllItemsParam } from "@/hooks/useAllItemsParam.ts";
 
 import CollapsingPanel from "@/components/CollapsingPanel.tsx";
 import Button from "@/components/button/Button.tsx";

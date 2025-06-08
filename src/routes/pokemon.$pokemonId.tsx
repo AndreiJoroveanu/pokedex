@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { AxiosError } from "axios";
 
-import { usePokemonDetailsParam } from "@/hooks/useUrlParam.ts";
+import { usePokemonDetailsParam } from "@/features/pokemon/hooks/usePokemonDetailsParam.ts";
 import {
   useEvolutionChain,
   usePokemon,

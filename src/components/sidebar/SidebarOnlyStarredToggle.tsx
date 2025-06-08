@@ -1,4 +1,4 @@
-import { useAllItemsParam } from "@/hooks/useUrlParam.ts";
+import { useAllItemsParam } from "@/hooks/useAllItemsParam.ts";
 import { useStarredPokemon } from "@/features/pokemon/hooks/useStarredPokemon.ts";
 
 import Button from "@/components/button/Button.tsx";
