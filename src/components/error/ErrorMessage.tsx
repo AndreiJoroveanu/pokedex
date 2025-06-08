@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { useNavigate, useRouter } from "@tanstack/react-router";
 import {
   ArrowLeftStartOnRectangleIcon,
   ArrowPathIcon,
@@ -8,6 +8,7 @@ import {
 import Button from "@/components/button/Button.tsx";
 
 const ErrorMessage = ({ errors = [] }: { errors: string[] }) => {
+  const router = useRouter();
   const navigate = useNavigate();
 
   return (
@@ -32,7 +33,7 @@ const ErrorMessage = ({ errors = [] }: { errors: string[] }) => {
 
         <div className="mt-6 flex justify-end space-x-2 max-sm:mb-34">
           <Button
-            onClick={() => void navigate({ reloadDocument: true })}
+            onClick={() => void router.invalidate()}
             className="flex items-center gap-2 px-4"
           >
             <ArrowPathIcon className="size-4" />

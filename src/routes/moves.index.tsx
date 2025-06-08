@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 
 import type { AllItemsParams } from "@/types/types.ts";
 
@@ -6,20 +7,28 @@ import Sidebar from "@/components/sidebar/Sidebar.tsx";
 import ScrollToTopButton from "@/components/button/ScrollToTopButton.tsx";
 import MoveGrid from "@/features/moves/components/MoveGrid.tsx";
 
-const AllMoves = () => (
-  <div className="relative sm:pt-24">
-    <Sidebar>
-      <Sidebar.Search itemType="move" />
-      <Sidebar.GenerationFilter />
-      <Sidebar.TypeFilter />
-      <Sidebar.ClearFilter />
-    </Sidebar>
+const AllMoves = () => {
+  // Preload the individual move page
+  const router = useRouter();
+  useEffect(() => {
+    void router.loadRouteChunk(router.routesByPath["/moves/$moveId"]);
+  }, [router]);
 
-    <ScrollToTopButton />
+  return (
+    <div className="relative sm:pt-24">
+      <Sidebar>
+        <Sidebar.Search itemType="move" />
+        <Sidebar.GenerationFilter />
+        <Sidebar.TypeFilter />
+        <Sidebar.ClearFilter />
+      </Sidebar>
 
-    <MoveGrid />
-  </div>
-);
+      <ScrollToTopButton />
+
+      <MoveGrid />
+    </div>
+  );
+};
 
 export const Route = createFileRoute("/moves/")({
   component: AllMoves,

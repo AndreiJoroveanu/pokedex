@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 
 import useAppStore from "@/store/useAppStore.ts";
 import type { AllItemsParams } from "@/types/types.ts";
@@ -14,6 +14,12 @@ const AllPokemon = () => {
     (state) => state.resetPokemonDetailsPanels,
   );
   useEffect(resetPokemonDetailsPanels, [resetPokemonDetailsPanels]);
+
+  // Preload the individual Pokémon page
+  const router = useRouter();
+  useEffect(() => {
+    void router.loadRouteChunk(router.routesByPath["/pokemon/$pokemonId"]);
+  }, [router]);
 
   return (
     <div className="relative sm:pt-24">
