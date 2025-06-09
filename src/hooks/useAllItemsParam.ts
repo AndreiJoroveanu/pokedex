@@ -15,7 +15,7 @@ export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
         : undefined;
 
   // Store latest search params in a ref to avoid unnecessary rerenders
-  const fullSearch = useSearch({ strict: false });
+  const fullSearch: Partial<AllItemsParams> = useSearch({ strict: false });
   const latestSearchRef = useRef(fullSearch);
   useEffect(() => void (latestSearchRef.current = fullSearch), [fullSearch]);
 
@@ -24,7 +24,7 @@ export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
   // Get specific param's value from URL
   const value = useSearch({
     strict: false,
-    select: (search) => search[key] ?? undefined,
+    select: (search): AllItemsParams[K] | undefined => search[key],
   });
 
   const setValue = (value: AllItemsParams[K]) => {
@@ -53,7 +53,7 @@ export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
           isTypePanelOpen: undefined,
         },
       },
-      // Don't display the view transition the toggling app panels
+      // Don't display the view transition while toggling app panels
       viewTransition: key !== "isGenPanelOpen" && key !== "isTypePanelOpen",
     });
   };

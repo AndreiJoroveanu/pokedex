@@ -52,7 +52,7 @@ export const usePokemonDetailsParam = <K extends keyof PokemonDetailsParams>(
           isDexEntriesPanelOpen: undefined,
         },
       },
-      // Don't display the view transition the toggling app panels
+      // Don't display the view transition while toggling app panels
       viewTransition:
         key !== "isLearnsetPanelOpen" && key !== "isDexEntriesPanelOpen",
     });

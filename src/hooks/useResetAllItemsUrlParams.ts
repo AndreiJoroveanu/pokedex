@@ -22,6 +22,8 @@ export const useResetAllItemsUrlParams = () => {
         isGenPanelOpen: prev.isGenPanelOpen,
         isTypePanelOpen: prev.isTypePanelOpen,
       }),
+      // Mask the panel states
+      mask: { search: {} },
       replace: true,
     });
 
