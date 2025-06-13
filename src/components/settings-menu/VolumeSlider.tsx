@@ -1,13 +1,13 @@
 import type { MouseEvent } from "react";
 import { useShallow } from "zustand/react/shallow";
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/outline";
 
 import useSettingsStore from "@/store/useSettingsStore.ts";
 
 import Slider from "@/components/Slider.tsx";
 
-const sliderVariants = {
+const sliderVariants: Variants = {
   hidden: {
     x: "var(--x-from-item, 0px)", // for sm-
     y: "var(--y-from-item, 0px)", // for sm+

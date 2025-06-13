@@ -1,11 +1,11 @@
 import { useShallow } from "zustand/react/shallow";
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 
 import useSettingsStore from "@/store/useSettingsStore.ts";
 import { themeOptions } from "@/data/themeOptions.tsx";
 import type { Theme } from "@/utils/themeUtils.ts";
 
-const optionsVariants = {
+const optionsVariants: Variants = {
   hidden: {
     x: "var(--x-from-item, 0px)", // for sm-
     y: "var(--y-from-item, 0px)", // for sm+

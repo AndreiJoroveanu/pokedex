@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import { Link } from "@tanstack/react-router";
-import type { Chain } from "pokedex-promise-v2";
 
+import { useEvolutionChain } from "@/hooks/usePokeApi.ts";
 import getEvolutionData from "@/features/pokemon/utils/getEvolutionData.ts";
 import type { ItemResource } from "@/types/types.ts";
 
 interface ChainProps {
-  chain: Chain | undefined;
+  id: number | undefined;
   pokemonName: string | undefined;
 }
 
@@ -58,12 +58,14 @@ const formatEvolutions = (pokemonList: Evolution[]) => {
   );
 };
 
-const PokemonEvolutionChain = ({ chain, pokemonName }: ChainProps) => {
+const PokemonEvolutionChain = ({ id, pokemonName }: ChainProps) => {
+  const { data: chain } = useEvolutionChain(id);
+
   // If the data hasn't arrived yet
   if (!chain || !pokemonName) return <p>Loading...</p>;
 
   // Calling the function to get the evolution data
-  const { previous, next } = getEvolutionData(chain, pokemonName);
+  const { previous, next } = getEvolutionData(chain.chain, pokemonName);
 
   // If this Pokémon doesn't evolve at all
   if (!previous && !next.length)

@@ -1,5 +1,6 @@
 import { skipToken, useQuery } from "@tanstack/react-query";
 import type { AxiosError } from "axios";
+import type { PokemonEncounter } from "pokedex-promise-v2";
 
 import { pokeApi } from "@/lib/pokeApi";
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
@@ -75,6 +76,16 @@ export const useAllMoves = () =>
         // Filtering as to not show "Shadow" moves, which have IDs over 10000
         .filter((m) => m.id < 10000) as ItemResource[],
     queryKey: ["allMoves"],
+  });
+
+// All of a Pokémon's encounter locations
+export const usePokemonLocations = (id: number | undefined) =>
+  useQuery({
+    queryFn: () =>
+      pokeApi.getResource(`/api/v2/pokemon/${id}/encounters`) as Promise<
+        PokemonEncounter[]
+      >,
+    queryKey: ["pokemonLocation", id],
   });
 
 // ---------- Filtered List Hooks ----------

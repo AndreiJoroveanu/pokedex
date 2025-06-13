@@ -16,6 +16,7 @@ export interface PokemonDetailsParams {
   form?: number;
   displayShiny?: true;
   versionGroup?: number;
-  isLearnsetPanelOpen?: true;
   isDexEntriesPanelOpen?: true;
+  isLearnsetPanelOpen?: true;
+  isLocationsPanelOpen?: true;
 }

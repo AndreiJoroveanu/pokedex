@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { motion } from "motion/react";
+import { motion, type Variants } from "motion/react";
 
 import { useOutsideClick } from "@/hooks/useOutsideClick.ts";
 
 import ThemeSwitcher from "@/components/settings-menu/ThemeSwitcher.tsx";
 import VolumeSlider from "@/components/settings-menu/VolumeSlider.tsx";
 
-const menuVariants = {
+const menuVariants: Variants = {
   hidden: {
     x: "var(--x-from-container, 0px)", // for sm-
     y: "var(--y-from-container, 0px)", // for sm+

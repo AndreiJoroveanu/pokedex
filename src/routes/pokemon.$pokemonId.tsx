@@ -3,11 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AxiosError } from "axios";
 
 import { usePokemonDetailsParam } from "@/features/pokemon/hooks/usePokemonDetailsParam.ts";
-import {
-  useEvolutionChain,
-  usePokemon,
-  usePokemonSpecies,
-} from "@/hooks/usePokeApi.ts";
+import { usePokemon, usePokemonSpecies } from "@/hooks/usePokeApi.ts";
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
 import { capitalize } from "@/utils/capitalize.ts";
 import { playAudio } from "@/utils/playAudio.ts";
@@ -27,7 +23,9 @@ import GenerationText from "@/components/GenerationText.tsx";
 import PokemonCatchRate from "@/features/pokemon/components/pokemonDetails/PokemonCatchRate.tsx";
 import PokemonTypeEffectiveness from "@/features/pokemon/components/pokemonDetails/PokemonTypeEffectiveness.tsx";
 import FlavorTextEntries from "@/features/pokemon/components/pokemonDetails/FlavorTextEntries.tsx";
-import PokemonLearnset from "@/features/pokemon/components/pokemonDetails/learnset/PokemonLearnset.tsx";
+import CollapsingPanel from "@/components/CollapsingPanel.tsx";
+import PokemonMoves from "@/features/pokemon/components/pokemonDetails/learnset/PokemonMoves.tsx";
+import PokemonLocations from "@/features/pokemon/components/pokemonDetails/PokemonLocations.tsx";
 import Footer from "@/components/Footer.tsx";
 
 const PokemonDetails = () => {
@@ -37,6 +35,14 @@ const PokemonDetails = () => {
   const [formIndex, setFormIndex] = usePokemonDetailsParam("form");
   // Indexing from 1 instead of 0 since this value can be seen by the user
   const currentFormIndex = (formIndex ?? 1) - 1;
+
+  // Panel states
+  const [isLearnsetOpen, setLearnsetOpen] = usePokemonDetailsParam(
+    "isLearnsetPanelOpen",
+  );
+  const [isLocationsOpen, setLocationsOpen] = usePokemonDetailsParam(
+    "isLocationsPanelOpen",
+  );
 
   // Fetching data
   // Pokémon Species using the URL Parameter
@@ -52,11 +58,6 @@ const PokemonDetails = () => {
       : getIdFromUrl(pokemonSpecies?.varieties[currentFormIndex].pokemon.url),
   );
 
-  // Pokémon Evolution chain
-  const { data: evolutionChain, error: errorEC } = useEvolutionChain(
-    getIdFromUrl(pokemonSpecies?.evolution_chain.url),
-  );
-
   // Play the Pokémon's cry when the page first loads, or when the form is changed
   useEffect(() => {
     if (!pokemon?.cries.latest) return;
@@ -67,10 +68,10 @@ const PokemonDetails = () => {
   }, [pokemon?.cries.latest]);
 
   // Display an error message if there is an error whole fetching data
-  if ((!pokemon || !pokemonSpecies) && (errorPS || errorEC || errorP))
+  if ((!pokemon || !pokemonSpecies) && (errorPS || errorP))
     return (
       <ErrorMessage
-        errors={[errorPS, errorEC, errorP]
+        errors={[errorPS, errorP]
           .filter((e) => e instanceof AxiosError)
           .map((e) => e.message)}
       />
@@ -137,7 +138,7 @@ const PokemonDetails = () => {
         <PokemonStats pokemonStats={pokemon?.stats} />
 
         <PokemonEvolutionChain
-          chain={evolutionChain?.chain}
+          id={getIdFromUrl(pokemonSpecies?.evolution_chain.url)}
           pokemonName={pokemonSpecies?.name}
         />
 
@@ -155,7 +156,23 @@ const PokemonDetails = () => {
         {/* All english Dex descriptions */}
         <FlavorTextEntries textEntries={pokemonSpecies?.flavor_text_entries} />
 
-        <PokemonLearnset moves={pokemon?.moves} />
+        <CollapsingPanel
+          label="Learnset"
+          initialIsOpen={isLearnsetOpen}
+          toggleOpen={() => setLearnsetOpen(isLearnsetOpen ? undefined : true)}
+        >
+          <PokemonMoves moves={pokemon?.moves} />
+        </CollapsingPanel>
+
+        <CollapsingPanel
+          label="Locations"
+          initialIsOpen={isLocationsOpen}
+          toggleOpen={() =>
+            setLocationsOpen(isLocationsOpen ? undefined : true)
+          }
+        >
+          <PokemonLocations id={Number(pokemonId)} />
+        </CollapsingPanel>
 
         <Footer />
       </div>

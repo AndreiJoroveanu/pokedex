@@ -43,10 +43,12 @@ export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
     ]);
 
     void navigate({
+      to: ".",
       search: orderedParams,
       replace: true,
       // Need to imperatively set the mask as to keep search params in sync
       mask: {
+        to: ".",
         search: {
           ...orderedParams,
           isGenPanelOpen: undefined,

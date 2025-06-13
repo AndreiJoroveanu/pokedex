@@ -28,8 +28,8 @@ const PokemonMoves = ({ moves }: MovesProps) => {
   if (!moves?.length)
     return (
       <p className="p-2 sm:p-4">
-        There seems to be no learnset data regarding this Pokémon&apos;s Form.
-        Please try another Form.
+        There seems to be no learnset data for this Pokémon&apos;s Form. Try
+        checking another Form above.
       </p>
     );
 
