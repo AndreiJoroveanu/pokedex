@@ -17,13 +17,14 @@ export const useResetAllItemsUrlParams = () => {
 
   const reset = () =>
     void navigate({
+      to: ".",
       search: (prev) => ({
         // Reset most search params but keep panel state
         isGenPanelOpen: prev.isGenPanelOpen,
         isTypePanelOpen: prev.isTypePanelOpen,
       }),
       // Mask the panel states
-      mask: { search: {} },
+      mask: { to: ".", search: {} },
       replace: true,
     });
 

@@ -30,17 +30,21 @@ export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
   const setValue = (value: AllItemsParams[K]) => {
     const updatedParams = { ...latestSearchRef.current };
 
+    const paramAlreadyExists = Boolean(updatedParams[key]);
+
     updatedParams[key] = value;
 
-    // Order URL Params
-    const orderedParams = orderSearchParams(updatedParams, [
-      "generation",
-      "type",
-      "onlyStarred",
-      "q",
-      "isGenPanelOpen",
-      "isTypePanelOpen",
-    ]);
+    // Order URL Params only if the changed param didn't already exist
+    const orderedParams = paramAlreadyExists
+      ? updatedParams
+      : orderSearchParams(updatedParams, [
+          "generation",
+          "type",
+          "onlyStarred",
+          "q",
+          "isGenPanelOpen",
+          "isTypePanelOpen",
+        ]);
 
     void navigate({
       to: ".",

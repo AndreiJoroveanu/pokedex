@@ -25,21 +25,25 @@ export const usePokemonDetailsParam = <K extends keyof PokemonDetailsParams>(
   const setValue = (value: PokemonDetailsParams[K]) => {
     const updatedParams = { ...latestSearchRef.current };
 
+    const paramAlreadyExists = Boolean(updatedParams[key]);
+
     updatedParams[key] = value;
 
     // Reset versionGroup if it exists and the form param is changed
     if (key === "form" && updatedParams.versionGroup)
       delete updatedParams.versionGroup;
 
-    // Order URL Params
-    const orderedParams = orderSearchParams(updatedParams, [
-      "form",
-      "displayShiny",
-      "versionGroup",
-      "isDexEntriesPanelOpen",
-      "isLearnsetPanelOpen",
-      "isLocationsPanelOpen",
-    ]);
+    // Order URL Params only if the changed param didn't already exist
+    const orderedParams = paramAlreadyExists
+      ? updatedParams
+      : orderSearchParams(updatedParams, [
+          "form",
+          "displayShiny",
+          "versionGroup",
+          "isDexEntriesPanelOpen",
+          "isLearnsetPanelOpen",
+          "isLocationsPanelOpen",
+        ]);
 
     void navigate({
       to: ".",
