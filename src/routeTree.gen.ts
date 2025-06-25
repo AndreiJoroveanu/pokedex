@@ -10,10 +10,10 @@
 
 import { Route as rootRouteImport } from "./routes/__root"
 import { Route as IndexRouteImport } from "./routes/index"
-import { Route as PokemonIndexRouteImport } from "./routes/pokemon.index"
-import { Route as MovesIndexRouteImport } from "./routes/moves.index"
-import { Route as PokemonPokemonIdRouteImport } from "./routes/pokemon.$pokemonId"
-import { Route as MovesMoveIdRouteImport } from "./routes/moves.$moveId"
+import { Route as PokemonIndexRouteImport } from "./routes/pokemon/index"
+import { Route as MovesIndexRouteImport } from "./routes/moves/index"
+import { Route as PokemonPokemonIdRouteImport } from "./routes/pokemon/$pokemonId"
+import { Route as MovesMoveIdRouteImport } from "./routes/moves/$moveId"
 
 const IndexRoute = IndexRouteImport.update({
   id: "/",
