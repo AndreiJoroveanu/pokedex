@@ -1,13 +1,16 @@
-import { type MouseEvent, useState } from "react";
+import type { Dispatch, MouseEvent, SetStateAction } from "react";
 import { AnimatePresence } from "motion/react";
 
 import VolumeIcon from "@/components/settings-menu/VolumeIcon.tsx";
 import ThemeIcon from "@/components/settings-menu/ThemeIcon.tsx";
 import SettingsMenu from "@/components/settings-menu/SettingsMenu.tsx";
 
-const SettingsMenuButton = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+interface SettingsMenuProps {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
 
+const SettingsMenuButton = ({ isOpen, setIsOpen }: SettingsMenuProps) => {
   const handleOpen = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsOpen((open) => !open);

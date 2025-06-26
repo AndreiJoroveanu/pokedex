@@ -7,12 +7,10 @@ import type { Theme } from "@/utils/themeUtils.ts";
 
 const optionsVariants: Variants = {
   hidden: {
-    x: "var(--x-from-item, 0px)", // for sm-
-    y: "var(--y-from-item, 0px)", // for sm+
+    y: "var(--y-from-item, 0px)",
     opacity: 0,
   },
   visible: {
-    x: 0,
     y: 0,
     opacity: 1,
     transition: { type: "spring", bounce: 0.5, duration: 0.3 },

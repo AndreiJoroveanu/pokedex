@@ -17,7 +17,7 @@ const NavbarLinks = () => {
       to={path}
       onMouseEnter={() => setHoveredLink(index)}
       onMouseLeave={() => setHoveredLink(null)}
-      className="xs:px-4 group/link relative px-2 py-2 font-semibold transition-[color] hover:text-blue-600 dark:hover:text-blue-400"
+      className="xs:px-4 group/link relative -mt-1 px-2 py-2 font-semibold transition-[color] hover:text-blue-600 dark:hover:text-blue-400"
       inactiveProps={{ className: "text-slate-600 dark:text-slate-400" }}
       activeProps={{ className: "text-slate-800 dark:text-slate-200" }}
     >

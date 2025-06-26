@@ -28,11 +28,11 @@ const MoveDetails = () => {
       {/* In React 19, you can now render the <title> tag in JSX */}
       <title>{`Pokédex - ${capitalize(move?.name ?? "Loading")}`}</title>
 
-      <div className="pointer-events-none sticky top-4 z-20 px-2 sm:fixed sm:top-28 sm:px-4">
+      <div className="pointer-events-none sticky top-4 z-20 px-2 sm:fixed sm:top-22 sm:px-4">
         <BackButton />
       </div>
 
-      <div className="mx-auto max-w-3xl p-4 max-sm:px-2 sm:pt-42 md:px-0 lg:pt-28">
+      <div className="mx-auto max-w-3xl p-4 max-sm:px-2 sm:pt-32 md:px-0 lg:pt-20">
         <div className="mb-4 flex gap-2">
           <MoveDiscImage type={move?.type.name} />
 
