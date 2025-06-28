@@ -11,7 +11,7 @@ const PokemonStats = ({ pokemonStats }: StatsProps) => (
   <>
     <h2 className="mx-4 mb-1 text-lg font-semibold">Base Stats:</h2>
 
-    <div className="mb-4 max-w-lg rounded-xl bg-slate-200 p-4 pb-2 shadow-lg transition-[background-color] dark:bg-slate-800 dark:shadow-none">
+    <div className="mb-4 max-w-lg rounded-xl bg-base-200 p-4 pb-2 shadow-lg transition-[background-color] dark:bg-base-800 dark:shadow-none">
       <div className="grid grid-cols-[auto_auto_1fr] gap-2">
         {stats?.map((stat, index) => (
           <Fragment key={stat.label}>
@@ -24,7 +24,7 @@ const PokemonStats = ({ pokemonStats }: StatsProps) => (
                 {pokemonStats[index].base_stat ?? 0}
               </p>
             ) : (
-              <div className="my-auto -mr-2 h-5 w-8 animate-pulse rounded-l-sm bg-slate-500/50" />
+              <div className="my-auto -mr-2 h-5 w-8 animate-pulse rounded-l-sm bg-base-500/50" />
             )}
 
             {/* Stat bar */}
@@ -44,7 +44,7 @@ const PokemonStats = ({ pokemonStats }: StatsProps) => (
                 />
               </div>
             ) : (
-              <div className="my-auto h-5 w-full animate-pulse rounded-r-sm bg-slate-500/50" />
+              <div className="my-auto h-5 w-full animate-pulse rounded-r-sm bg-base-500/50" />
             )}
           </Fragment>
         ))}
@@ -59,7 +59,7 @@ const PokemonStats = ({ pokemonStats }: StatsProps) => (
           }`}
         </h3>
       ) : (
-        <div className="mt-2 mb-1 h-5 w-36 animate-pulse rounded-sm bg-slate-500/50" />
+        <div className="mt-2 mb-1 h-5 w-36 animate-pulse rounded-sm bg-base-500/50" />
       )}
     </div>
   </>

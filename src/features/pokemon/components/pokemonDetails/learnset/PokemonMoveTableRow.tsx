@@ -16,7 +16,7 @@ const PokemonMoveTableRow = ({ move, displayLevel }: RowProps) => {
   const { data: moveData } = useMove(move.id);
 
   return (
-    <tr className="group relative h-8 even:bg-slate-500/15 hover:bg-blue-500/20 has-focus:bg-blue-500/20 pointer-coarse:h-12">
+    <tr className="group relative h-8 even:bg-base-500/15 hover:bg-blue-500/20 has-focus:bg-blue-500/20 pointer-coarse:h-12">
       {/* Invisible Link (has to be the first for the peer class to work) */}
       <td aria-hidden="true" className="peer">
         <Link
@@ -40,7 +40,7 @@ const PokemonMoveTableRow = ({ move, displayLevel }: RowProps) => {
         {moveData ? (
           <TypeDisplay type={moveData.type.name} className="rounded-r-none" />
         ) : (
-          <div className="h-6 w-26 animate-pulse rounded-l-full bg-slate-500/50" />
+          <div className="h-6 w-26 animate-pulse rounded-l-full bg-base-500/50" />
         )}
       </td>
 
@@ -52,7 +52,7 @@ const PokemonMoveTableRow = ({ move, displayLevel }: RowProps) => {
             className="rounded-l-none"
           />
         ) : (
-          <div className="h-6 w-26 animate-pulse rounded-r-full bg-slate-500/50" />
+          <div className="h-6 w-26 animate-pulse rounded-r-full bg-base-500/50" />
         )}
       </td>
 

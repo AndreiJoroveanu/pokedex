@@ -15,7 +15,7 @@ const PokemonAbilityDisplay = ({ ability }: AbilityProps) => {
 
   return (
     <div>
-      <h3 className="font-bold text-slate-600 transition-[color] dark:text-slate-400">
+      <h3 className="font-bold text-base-600 transition-[color] dark:text-base-400">
         {`${capitalize(ability.ability.name)}${ability.is_hidden ? " (Hidden)" : ""}`}
       </h3>
 

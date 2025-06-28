@@ -31,7 +31,7 @@ const PokemonFormButtons = ({
         ))}
       </div>
     ) : (
-      <div className="mt-1 mb-2 h-10 w-full animate-pulse rounded-xl bg-slate-500/50" />
+      <div className="mt-1 mb-2 h-10 w-full animate-pulse rounded-xl bg-base-500/50" />
     )}
   </>
 );

@@ -19,13 +19,13 @@ const FlavorTextEntries = ({ textEntries, moveName }: EntriesProps) => {
     <>
       <h2 className="mx-2 mb-1 text-lg font-semibold sm:mx-4">Descriptions:</h2>
 
-      <div className="rounded-xl bg-slate-200 transition-[background] dark:bg-slate-800">
+      <div className="rounded-xl bg-base-200 transition-[background] dark:bg-base-800">
         {sortedEntries?.length && moveName ? (
           <>
             <p
               className={`px-2 pt-2 sm:px-4 ${sortedEntries.length > 1 ? "-mb-2" : "pb-2"}`}
             >
-              <span className="font-bold text-slate-600 transition-[color] dark:text-slate-400">
+              <span className="font-bold text-base-600 transition-[color] dark:text-base-400">
                 {/* Display a hardcoded string for the version group, with original one as a fallback */}
                 {versionGroups[sortedEntries[0].version_group?.name ?? ""]
                   ?.label ??
@@ -41,9 +41,9 @@ const FlavorTextEntries = ({ textEntries, moveName }: EntriesProps) => {
                   {sortedEntries.slice(1).map((entry) => (
                     <li
                       key={entry.version_group?.name}
-                      className="p-2 even:bg-slate-500/15 sm:px-4"
+                      className="p-2 even:bg-base-500/15 sm:px-4"
                     >
-                      <span className="font-bold text-slate-600 transition-[color] dark:text-slate-400">
+                      <span className="font-bold text-base-600 transition-[color] dark:text-base-400">
                         {/* Display a hardcoded string for the version group, with original one as a fallback */}
                         {versionGroups[entry.version_group?.name ?? ""]
                           ?.label ??

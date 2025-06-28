@@ -17,7 +17,7 @@ const MoveCard = ({ move: { id, name } }: CardProps) => {
 
   return (
     <Link to="/moves/$moveId" params={{ moveId: String(id) }}>
-      <article className="@container/card relative rounded-xl bg-slate-200 shadow-lg transition-[background-color_shadow] hover:bg-slate-300 hover:shadow-xl dark:bg-slate-800 dark:shadow-none dark:hover:bg-slate-700 dark:hover:shadow-none">
+      <article className="@container/card relative rounded-xl bg-base-200 shadow-lg transition-[background-color_shadow] hover:bg-base-300 hover:shadow-xl dark:bg-base-800 dark:shadow-none dark:hover:bg-base-700 dark:hover:shadow-none">
         <div className="flex">
           {move ? (
             <div

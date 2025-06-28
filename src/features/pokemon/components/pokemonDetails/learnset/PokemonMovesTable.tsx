@@ -16,7 +16,7 @@ const PokemonMovesTable = ({ moves, label }: MovesProps) => (
     <div className="overflow-x-scroll px-2 pb-3 sm:px-4">
       {/* Table displaying the learnset from the selected version group */}
       <table className="min-w-full text-nowrap">
-        <thead className="border-b border-slate-500">
+        <thead className="border-b border-base-500">
           <tr>
             {/* Empty th because the first element is an invisible Link */}
             <th className="w-2 min-w-2" />

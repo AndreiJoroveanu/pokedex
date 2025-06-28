@@ -9,9 +9,9 @@ const ThemeIcon = () => {
   const Icon = themeOptions.find((item) => item.theme === effectiveTheme)?.icon;
 
   return Icon ? (
-    <Icon className="xs:size-6 size-5" />
+    <Icon className="size-5 xs:size-6" />
   ) : (
-    <QuestionMarkCircleIcon className="xs:size-6 size-5" />
+    <QuestionMarkCircleIcon className="size-5 xs:size-6" />
   );
 };
 export default ThemeIcon;

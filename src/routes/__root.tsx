@@ -7,10 +7,10 @@ import Navbar from "@/components/navbar/Navbar.tsx";
 const RootComponent = () => (
   <div
     id="app-layout"
-    className="font-medium text-slate-800 transition-[color] dark:text-slate-200"
+    className="font-medium text-base-800 transition-[color] dark:text-base-200"
   >
     {/* App background */}
-    <div className="fixed inset-0 -z-50 h-screen bg-slate-100 transition-[background-color] dark:bg-slate-900" />
+    <div className="fixed inset-0 -z-50 h-screen bg-base-100 transition-[background-color] dark:bg-base-900" />
 
     <Navbar />
 

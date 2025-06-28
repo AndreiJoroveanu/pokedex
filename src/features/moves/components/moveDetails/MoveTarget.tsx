@@ -4,7 +4,7 @@ const MoveTarget = ({ target }: { target: string | undefined }) => (
   <p className="m-2">
     {target ? (
       <>
-        <span className="font-bold text-slate-700 transition-[color] dark:text-slate-300">
+        <span className="font-bold text-base-700 transition-[color] dark:text-base-300">
           Target:
         </span>
         {/* Capitalize and add the é accent if the string contains the word "pokemon" */}

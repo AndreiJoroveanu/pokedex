@@ -26,7 +26,7 @@ const Slider = ({ value, min = 0, max = 100, ...rest }: SliderProps) => {
         min={min}
         max={max}
         {...rest}
-        className="absolute inset-0 cursor-grab appearance-none rounded-full bg-slate-500/50 px-0.5 active:cursor-grabbing [&::-moz-range-thumb]:opacity-0 [&::-webkit-slider-thumb]:opacity-0"
+        className="absolute inset-0 cursor-grab appearance-none rounded-full bg-base-500/50 px-0.5 active:cursor-grabbing [&::-moz-range-thumb]:opacity-0 [&::-webkit-slider-thumb]:opacity-0"
       />
 
       {/* Filled track */}
@@ -48,7 +48,7 @@ const Slider = ({ value, min = 0, max = 100, ...rest }: SliderProps) => {
           left: (SLIDER_WIDTH - THUMB_OFFSET) * percent + PADDING_OFFSET,
         }}
         transition={{ duration: 0.1 }}
-        className="pointer-events-none absolute top-0.5 z-10 h-[calc(100%-4px)] w-6 rounded-full bg-slate-700 dark:bg-slate-300"
+        className="pointer-events-none absolute top-0.5 z-10 h-[calc(100%-4px)] w-6 rounded-full bg-base-700 dark:bg-base-300"
       />
     </div>
   );

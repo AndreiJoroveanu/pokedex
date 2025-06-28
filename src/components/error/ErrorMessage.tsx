@@ -13,7 +13,7 @@ const ErrorMessage = ({ errors = [] }: { errors: string[] }) => {
 
   return (
     <div className="fixed flex h-screen w-full items-center justify-center">
-      <div className="flex min-h-screen w-full flex-col justify-between p-4 transition-[background-color] md:min-h-60 md:max-w-2xl md:rounded-xl md:bg-slate-200 md:shadow-md dark:shadow-none dark:md:bg-slate-800">
+      <div className="flex min-h-screen w-full flex-col justify-between p-4 transition-[background-color] md:min-h-60 md:max-w-2xl md:rounded-xl md:bg-base-200 md:shadow-md dark:shadow-none dark:md:bg-base-800">
         <div className="mt-4 sm:mt-32 md:mt-2">
           <div className="mb-2 flex items-center gap-2">
             <ExclamationCircleIcon className="size-8" />
@@ -24,7 +24,7 @@ const ErrorMessage = ({ errors = [] }: { errors: string[] }) => {
           {[...new Set(errors)].map((error, index) => (
             <p
               key={index}
-              className="text-lg font-semibold text-slate-500 dark:text-slate-400"
+              className="text-lg font-semibold text-base-600 dark:text-base-400"
             >
               {error}
             </p>

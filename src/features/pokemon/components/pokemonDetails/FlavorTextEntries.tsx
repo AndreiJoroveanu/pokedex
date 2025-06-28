@@ -21,7 +21,7 @@ interface EntriesProps {
 
 const FlavorTextEntry = ({ entry }: { entry: Entry }) => (
   <>
-    <span className="font-bold text-slate-600 transition-[color] dark:text-slate-400">
+    <span className="font-bold text-base-600 transition-[color] dark:text-base-400">
       {/* Display a hardcoded string for the version, with original one as a fallback */}
       {games[entry.version?.name ?? ""]?.label ??
         capitalize(entry.version?.name ?? "")}
@@ -44,7 +44,7 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
     <>
       <h2 className="mx-2 mb-1 text-lg font-semibold sm:ml-4">Dex Entries:</h2>
 
-      <div className="rounded-xl bg-slate-200 transition-[background] dark:bg-slate-800">
+      <div className="rounded-xl bg-base-200 transition-[background] dark:bg-base-800">
         {sortedEntries?.length ? (
           <>
             <p
@@ -63,7 +63,7 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
                   {sortedEntries.slice(1).map((entry) => (
                     <li
                       key={entry.version?.name}
-                      className="p-2 even:bg-slate-500/15 sm:px-4"
+                      className="p-2 even:bg-base-500/15 sm:px-4"
                     >
                       <FlavorTextEntry entry={entry} />
                     </li>

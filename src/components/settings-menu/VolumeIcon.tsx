@@ -6,9 +6,9 @@ const VolumeIcon = () => {
   const volume = useSettingsStore((state) => state.volume);
 
   return volume > 0 ? (
-    <SpeakerWaveIcon className="xs:size-6 size-5" />
+    <SpeakerWaveIcon className="size-5 xs:size-6" />
   ) : (
-    <SpeakerXMarkIcon className="xs:size-6 size-5" />
+    <SpeakerXMarkIcon className="size-5 xs:size-6" />
   );
 };
 export default VolumeIcon;

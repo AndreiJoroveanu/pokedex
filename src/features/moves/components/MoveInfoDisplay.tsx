@@ -20,7 +20,7 @@ const MoveInfoDisplay = ({ move, className = "" }: InfoProps) =>
     </div>
   ) : (
     <div
-      className={`h-6 w-52 animate-pulse rounded-full bg-slate-500/50 ${className}`.trim()}
+      className={`h-6 w-52 animate-pulse rounded-full bg-base-500/50 ${className}`.trim()}
     />
   );
 export default MoveInfoDisplay;

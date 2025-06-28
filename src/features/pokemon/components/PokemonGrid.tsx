@@ -39,12 +39,7 @@ const PokemonGrid = () => {
             increaseViewportBy={{ top: 1000, bottom: 1000 }}
             readyStateChanged={(ready) => setGridLoaded(ready)}
             className="w-full"
-            listClassName="grid grid-cols-2 gap-2 @min-[475px]/grid:gap-4
-              @min-[580px]/grid:grid-cols-3 @min-[580px]/grid:gap-2 @min-[680px]/grid:gap-4
-              @min-[800px]/grid:grid-cols-4 @min-[800px]/grid:gap-2 @min-[900px]/grid:gap-4
-              @min-[1000px]/grid:grid-cols-5 @min-[1000px]/grid:gap-2 @min-[1080px]/grid:gap-4
-              @min-[1250px]/grid:grid-cols-6 @min-[1250px]/grid:gap-2 @min-[1300px]/grid:gap-4
-              @min-[1400px]/grid:grid-cols-7 @min-[1400px]/grid:gap-2 @min-[1500px]/grid:gap-4"
+            listClassName="grid grid-cols-2 gap-2 @min-[475px]/grid:gap-4 @min-[580px]/grid:grid-cols-3 @min-[580px]/grid:gap-2 @min-[680px]/grid:gap-4 @min-[800px]/grid:grid-cols-4 @min-[800px]/grid:gap-2 @min-[900px]/grid:gap-4 @min-[1000px]/grid:grid-cols-5 @min-[1000px]/grid:gap-2 @min-[1080px]/grid:gap-4 @min-[1250px]/grid:grid-cols-6 @min-[1250px]/grid:gap-2 @min-[1300px]/grid:gap-4 @min-[1400px]/grid:grid-cols-7 @min-[1400px]/grid:gap-2 @min-[1500px]/grid:gap-4"
           />
 
           {gridLoaded && <Footer />}
@@ -53,7 +48,7 @@ const PokemonGrid = () => {
 
       {/* Cover with a loading screen while the data is fetching or the React Virtuoso grid is rendering */}
       {isLoadingAP || isLoadingFP || (!gridLoaded && pokemonList?.length) ? (
-        <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-slate-100 dark:bg-slate-900">
+        <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-base-100 dark:bg-base-900">
           <Loader size={24} displaysText={true} />
         </div>
       ) : null}

@@ -16,7 +16,7 @@ const PokemonTypesDisplay = ({ types, className = "" }: TypesProps) =>
     </div>
   ) : (
     <div
-      className={`h-6 max-w-54 min-w-50 animate-pulse rounded-full bg-slate-500/50 ${className}`.trim()}
+      className={`h-6 max-w-54 min-w-50 animate-pulse rounded-full bg-base-500/50 ${className}`.trim()}
     />
   );
 export default PokemonTypesDisplay;

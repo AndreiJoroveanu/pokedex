@@ -36,7 +36,7 @@ const ThemeSwitcher = ({ onClose }: { onClose: () => void }) => {
       <motion.div variants={optionsVariants} className="mx-6 my-2">
         <h2 className="mb-1 text-lg font-semibold">Select an App Theme</h2>
 
-        <p className="text-sm text-slate-600 capitalize dark:text-slate-400">
+        <p className="text-sm text-base-600 capitalize dark:text-base-400">
           {`Current Theme: ${theme}${theme === "system" ? ` (${effectiveTheme})` : ""}`}
         </p>
       </motion.div>
@@ -46,7 +46,7 @@ const ThemeSwitcher = ({ onClose }: { onClose: () => void }) => {
           key={theme}
           onClick={() => handleClick(theme)}
           variants={optionsVariants}
-          className="flex w-full cursor-pointer items-center gap-2 px-6 py-3 font-semibold capitalize hover:bg-slate-700/10 dark:hover:bg-slate-300/10"
+          className="flex w-full cursor-pointer items-center gap-2 px-6 py-3 font-semibold capitalize hover:bg-base-700/10 dark:hover:bg-base-300/10"
         >
           <Icon className="size-5" /> {theme}
         </motion.button>

@@ -17,9 +17,9 @@ const NavbarLinks = () => {
       to={path}
       onMouseEnter={() => setHoveredLink(index)}
       onMouseLeave={() => setHoveredLink(null)}
-      className="xs:px-4 group/link relative -mt-1 px-2 py-2 font-semibold transition-[color] hover:text-blue-600 dark:hover:text-blue-400"
-      inactiveProps={{ className: "text-slate-600 dark:text-slate-400" }}
-      activeProps={{ className: "text-slate-800 dark:text-slate-200" }}
+      className="group/link relative -mt-1 px-2 py-2 font-semibold transition-[color] hover:text-blue-600 xs:px-4 dark:hover:text-blue-400"
+      inactiveProps={{ className: "text-base-600 dark:text-base-400" }}
+      activeProps={{ className: "text-base-800 dark:text-base-200" }}
     >
       {({ isActive }) => (
         <>
@@ -28,7 +28,7 @@ const NavbarLinks = () => {
             <motion.div
               layoutId="link-underline"
               style={{ originY: "0px" }}
-              className="absolute top-full left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-slate-800 transition-[background-color] group-hover/link:bg-blue-600 dark:bg-slate-200 dark:group-hover/link:bg-blue-400"
+              className="absolute top-full left-1/2 h-1 w-6 -translate-x-1/2 rounded-full bg-base-800 transition-[background-color] group-hover/link:bg-blue-600 dark:bg-base-200 dark:group-hover/link:bg-blue-400"
             />
           )}
 
