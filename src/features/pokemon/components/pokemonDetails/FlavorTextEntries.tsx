@@ -42,13 +42,15 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
 
   return (
     <>
-      <h2 className="mx-2 mb-1 text-lg font-semibold sm:ml-4">Dex Entries:</h2>
+      <h2 className="mb-1 ml-2 text-lg font-semibold sm:ml-4">Dex Entries:</h2>
 
       <div className="rounded-xl bg-base-200 transition-[background] dark:bg-base-800">
         {sortedEntries?.length ? (
           <>
             <p
-              className={`px-2 pt-2 sm:px-4 ${sortedEntries.length > 1 ? "-mb-2" : "pb-2"}`}
+              className={`${
+                sortedEntries.length > 1 ? "-mb-2" : "pb-2"
+              } px-2 pt-2 sm:px-4`}
             >
               <FlavorTextEntry entry={sortedEntries[0]} />
             </p>

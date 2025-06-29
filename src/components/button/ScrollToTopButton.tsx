@@ -47,7 +47,7 @@ const ScrollToTopButton = () => {
           animate="visible"
           exit="hidden"
           transition={{ type: "spring", bounce: 0, duration: 0.3 }}
-          className="fixed bottom-20 left-4 z-10 sm:bottom-4 lg:left-[calc(20vw+16px)]"
+          className="fixed bottom-18 left-4 z-10 sm:bottom-4 lg:left-[calc(20vw+16px)]"
         >
           <Button
             onClick={() => {

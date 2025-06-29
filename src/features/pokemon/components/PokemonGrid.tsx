@@ -24,7 +24,7 @@ const PokemonGrid = () => {
   useScrollRestoration(gridLoaded);
 
   return (
-    <section className="@container/grid flex flex-col items-center p-4 pt-2 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)] lg:min-w-[calc(100vw-320px)] lg:pl-0">
+    <section className="@container/grid flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)] lg:min-w-[calc(100vw-320px)] lg:pt-20 lg:pl-0">
       {!isLoadingAP && !isLoadingFP && pokemonList?.length ? (
         <>
           <VirtuosoGrid

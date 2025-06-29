@@ -27,7 +27,7 @@ const PokemonLocations = ({ id }: { id: number }) => {
   const formattedEncounters = organizePokemonEncounters(encounters);
 
   return (
-    <div className="space-y-4 px-4 py-2">
+    <div className="space-y-4 p-2 sm:px-4">
       {Object.entries(games).map(
         ([versionName, { label }]) =>
           formattedEncounters[versionName] && (

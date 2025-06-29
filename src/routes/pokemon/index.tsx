@@ -15,7 +15,7 @@ const AllPokemon = () => {
   }, [router]);
 
   return (
-    <div className="relative sm:pt-20">
+    <>
       <Sidebar>
         <Sidebar.Search itemType="Pokémon" />
         <Sidebar.GenerationFilter />
@@ -27,7 +27,7 @@ const AllPokemon = () => {
       <ScrollToTopButton />
 
       <PokemonGrid />
-    </div>
+    </>
   );
 };
 

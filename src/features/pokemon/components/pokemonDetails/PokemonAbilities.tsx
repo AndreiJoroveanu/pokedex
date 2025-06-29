@@ -9,11 +9,11 @@ interface AbilitiesProps {
 
 const PokemonAbilities = ({ abilities }: AbilitiesProps) => (
   <>
-    <h2 className="mb-1 ml-4 text-lg font-semibold">
+    <h2 className="mb-1 ml-2 text-lg font-semibold sm:ml-4">
       {abilities?.length === 1 ? "Ability:" : "Abilities:"}
     </h2>
 
-    <div className="mb-4 flex max-w-lg flex-col gap-4 rounded-xl bg-base-200 px-4 py-2 shadow-lg transition-[background-color] dark:bg-base-800 dark:shadow-none">
+    <div className="mb-2 flex max-w-lg flex-col gap-4 rounded-xl bg-base-200 p-2 pb-3 shadow-lg transition-[background-color] sm:px-4 dark:bg-base-800 dark:shadow-none">
       {abilities ? (
         // Deduplicates abilities by ability name
         Array.from(

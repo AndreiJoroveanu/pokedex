@@ -10,7 +10,7 @@ const link = (to: string, label: string) => (
 );
 
 const Footer = () => (
-  <footer className="mt-4 mb-18 text-center text-sm text-gray-600 transition-[color] sm:mb-2 dark:text-gray-400">
+  <footer className="mt-4 mb-16 text-center text-sm text-gray-600 transition-[color] sm:mb-2 dark:text-gray-400">
     Made by {link("https://github.com/AndreiJoroveanu", "Andrei Joroveanu")} (
     {link("https://github.com/AndreiJoroveanu/pokedex", "Github repo")}
     ). Data from {link("https://pokeapi.co", "PokéAPI")}.

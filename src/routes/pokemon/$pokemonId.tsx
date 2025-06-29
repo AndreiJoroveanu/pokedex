@@ -84,7 +84,7 @@ const PokemonDetails = () => {
 
       <TopButtons />
 
-      <div className="mx-auto max-w-3xl p-4 max-sm:px-2 sm:pt-32 md:px-0 md:pt-20">
+      <div className="mx-auto max-w-3xl p-2 pb-4 sm:px-4 sm:pt-32 md:px-0 md:pt-18">
         <PokemonImage
           key={`${currentFormIndex}${displayShiny ? "-shiny" : ""}`}
           src={

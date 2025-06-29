@@ -8,15 +8,29 @@ const Navbar = () => {
   const [isSettingsMenuOpen, setIsSettingsMenuOpen] = useState<boolean>(false);
 
   return (
-    // This is the top navigation bar, on desktop this is fixed
     <nav
-      className={`${isSettingsMenuOpen ? "sm:bg-base-200/80 sm:shadow-lg dark:sm:bg-base-800/80 dark:sm:shadow-none" : "sm:bg-base-100/80 dark:sm:bg-base-900/80"} relative flex h-18 w-full items-center sm:fixed sm:top-0 sm:z-50 sm:h-20 sm:justify-between sm:px-12 sm:backdrop-blur-md sm:transition-[background-color_shadow] md:px-24`}
+      // On sm+ screens, show blurred background only when the settings menu is open
+      className={`${
+        isSettingsMenuOpen
+          ? "sm:bg-base-200/80 sm:shadow-lg sm:backdrop-blur-md dark:sm:bg-base-800/80 dark:sm:shadow-none"
+          : "pointer-events-none"
+      } relative flex h-18 w-full items-center sm:fixed sm:top-0 sm:z-50 sm:justify-between sm:px-12 sm:transition-[background-color_shadow] sm:ease-out`}
     >
-      <NavbarLogo />
+      {/* Logo:
+          - On sm- screens, placed at the top of the page
+          - On sm+ screens, it floats in the top-left corner */}
+      <NavbarLogo isSettingsMenuOpen={isSettingsMenuOpen} />
 
-      {/* This is its own bar at the bottom of the screen on mobile */}
+      {/* Right section, contains the navigation links and the settings menu button:
+          - On sm- screens, acts as a bottom nav bar
+          - On sm+ screens, it floats in the top-right corner
+          - Background is always displayed on sm- screens, but is only displayed if the settings menu is closed on sm+ screens */}
       <div
-        className={`${isSettingsMenuOpen ? "max-sm:bg-base-200/80 dark:max-sm:bg-base-800/80" : "max-sm:bg-base-100/80 dark:max-sm:bg-base-900/80"} flex items-center gap-2 max-sm:fixed max-sm:bottom-0 max-sm:left-0 max-sm:z-50 max-sm:h-16 max-sm:w-full max-sm:justify-center max-sm:backdrop-blur-md max-sm:transition-[background-color]`}
+        className={`${
+          isSettingsMenuOpen
+            ? "max-sm:bg-base-200/80 max-sm:shadow-lg dark:max-sm:bg-base-800/80 dark:max-sm:shadow-none"
+            : "bg-base-100/80 sm:backdrop-blur-md dark:bg-base-900/80"
+        } pointer-events-auto flex h-14 items-center gap-2 rounded-full transition-[background-color_shadow] ease-out max-sm:fixed max-sm:inset-x-2 max-sm:bottom-2 max-sm:z-50 max-sm:justify-center max-sm:backdrop-blur-md sm:px-2`}
       >
         <NavbarLinks />
         <SettingsMenuButton

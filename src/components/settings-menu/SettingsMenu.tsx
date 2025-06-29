@@ -42,7 +42,7 @@ const SettingsMenu = ({ onClose }: { onClose: () => void }) => {
       animate="visible"
       exit="hidden"
       ref={ref}
-      className="fixed right-2 z-20 flex touch-none flex-col rounded-xl bg-base-200/80 py-2 shadow-lg backdrop-blur-md max-sm:bottom-18 max-sm:[--y-from-container:50px] max-sm:[--y-from-item:20px] sm:top-22 sm:right-12 sm:[--y-from-container:-50px] sm:[--y-from-item:-20px] md:right-24 dark:bg-base-800/80 dark:shadow-none"
+      className="fixed right-2 z-20 flex touch-none flex-col rounded-xl bg-base-200/80 py-2 shadow-lg backdrop-blur-md max-sm:bottom-18 max-sm:[--y-from-container:50px] max-sm:[--y-from-item:20px] sm:top-20 sm:right-12 sm:[--y-from-container:-50px] sm:[--y-from-item:-20px] dark:bg-base-800/80 dark:shadow-none"
     >
       <ThemeSwitcher onClose={onClose} />
 

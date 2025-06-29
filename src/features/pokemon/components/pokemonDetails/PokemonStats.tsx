@@ -9,9 +9,9 @@ interface StatsProps {
 
 const PokemonStats = ({ pokemonStats }: StatsProps) => (
   <>
-    <h2 className="mx-4 mb-1 text-lg font-semibold">Base Stats:</h2>
+    <h2 className="mb-1 ml-2 text-lg font-semibold sm:ml-4">Base Stats:</h2>
 
-    <div className="mb-4 max-w-lg rounded-xl bg-base-200 p-4 pb-2 shadow-lg transition-[background-color] dark:bg-base-800 dark:shadow-none">
+    <div className="mb-4 max-w-lg rounded-xl bg-base-200 p-2 pt-3 shadow-lg transition-[background-color] sm:px-4 dark:bg-base-800 dark:shadow-none">
       <div className="grid grid-cols-[auto_auto_1fr] gap-2">
         {stats?.map((stat, index) => (
           <Fragment key={stat.label}>

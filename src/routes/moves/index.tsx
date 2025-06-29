@@ -15,7 +15,7 @@ const AllMoves = () => {
   }, [router]);
 
   return (
-    <div className="relative sm:pt-20">
+    <>
       <Sidebar>
         <Sidebar.Search itemType="move" />
         <Sidebar.GenerationFilter />
@@ -26,7 +26,7 @@ const AllMoves = () => {
       <ScrollToTopButton />
 
       <MoveGrid />
-    </div>
+    </>
   );
 };
 

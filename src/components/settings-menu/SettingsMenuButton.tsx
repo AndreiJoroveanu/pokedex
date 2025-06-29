@@ -21,7 +21,7 @@ const SettingsMenuButton = ({ isOpen, setIsOpen }: SettingsMenuProps) => {
       <button
         onClick={handleOpen}
         aria-label="Settings Menu"
-        className="flex cursor-pointer gap-4 rounded-lg p-2 transition-[background-color] hover:bg-base-700/10 max-sm:absolute max-sm:right-4 dark:hover:bg-base-300/10"
+        className="flex cursor-pointer gap-4 rounded-full p-2 transition-[background-color] hover:bg-base-700/10 max-sm:absolute max-sm:right-4 dark:hover:bg-base-300/10"
       >
         <VolumeIcon />
         <ThemeIcon />
