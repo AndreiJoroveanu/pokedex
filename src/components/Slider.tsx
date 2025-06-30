@@ -48,7 +48,7 @@ const Slider = ({ value, min = 0, max = 100, ...rest }: SliderProps) => {
           left: (SLIDER_WIDTH - THUMB_OFFSET) * percent + PADDING_OFFSET,
         }}
         transition={{ duration: 0.1 }}
-        className="pointer-events-none absolute top-0.5 z-10 h-[calc(100%-4px)] w-6 rounded-full bg-base-700 dark:bg-base-300"
+        className="pointer-events-none absolute top-0.5 z-10 h-[calc(100%-4px)] w-6 rounded-full bg-base-700 transition-[background-color] dark:bg-base-300"
       />
     </div>
   );
