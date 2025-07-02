@@ -7,6 +7,23 @@
     <meta name="description" content="Simple Pokédex app by Andrei Joroveanu" />
     <title>Pokédex</title>
 
+    <style>
+      /* Set a background that matches the system theme before the React app loads */
+      body {
+        color-scheme: light dark;
+        background-color: Canvas;
+      }
+
+      /* Override the native color-scheme so scrollbars match the app’s actual theme */
+      html.light body {
+        color-scheme: light;
+      }
+
+      html.dark body {
+        color-scheme: dark;
+      }
+    </style>
+
     <!-- Decode redirected path from query and restore original URL for the router to handle -->
     <script type="text/javascript">
       const l = window.location;
@@ -46,7 +63,7 @@
     </script>
   </head>
 
-  <body style="color-scheme: light dark; background-color: Canvas">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

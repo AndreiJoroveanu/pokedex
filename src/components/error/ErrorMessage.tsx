@@ -13,8 +13,8 @@ const ErrorMessage = ({ errors = [] }: { errors: string[] }) => {
 
   return (
     <div className="fixed flex h-screen w-full items-center justify-center">
-      <div className="flex min-h-screen w-full flex-col justify-between p-4 transition-[background-color] md:min-h-60 md:max-w-2xl md:rounded-xl md:bg-base-200 md:shadow-md dark:shadow-none dark:md:bg-base-800">
-        <div className="mt-4 sm:mt-32 md:mt-2">
+      <div className="flex min-h-screen w-full flex-col justify-between p-4 pb-16 transition-[background-color] md:relative md:min-h-60 md:max-w-2xl md:rounded-xl md:bg-base-200 md:shadow-md dark:shadow-none dark:md:bg-base-800">
+        <div className="mt-4 sm:mt-22 md:mt-2">
           <div className="mb-2 flex items-center gap-2">
             <ExclamationCircleIcon className="size-8" />
 
@@ -31,7 +31,7 @@ const ErrorMessage = ({ errors = [] }: { errors: string[] }) => {
           ))}
         </div>
 
-        <div className="mt-6 flex justify-end space-x-2 max-sm:mb-34">
+        <div className="fixed right-4 bottom-18 mt-6 flex space-x-2 sm:bottom-4 md:absolute">
           <Button
             onClick={() => void router.invalidate()}
             className="flex items-center gap-2 px-4"

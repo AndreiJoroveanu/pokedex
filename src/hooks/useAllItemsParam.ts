@@ -52,7 +52,8 @@ export const useAllItemsParam = <K extends keyof AllItemsParams>(key: K) => {
       replace: true,
       // Keep scroll & hide view transition while toggling app panels
       resetScroll: key !== "isGenPanelOpen" && key !== "isTypePanelOpen",
-      viewTransition: key !== "isGenPanelOpen" && key !== "isTypePanelOpen",
+      viewTransition:
+        key !== "q" && key !== "isGenPanelOpen" && key !== "isTypePanelOpen",
       // Need to imperatively set the mask as to keep search params in sync
       mask: {
         to: ".",
