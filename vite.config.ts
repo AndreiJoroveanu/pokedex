@@ -16,4 +16,5 @@ export default defineConfig({
   ],
   base: "/pokedex",
   resolve: { alias: { "@": "/src" } },
+  build: { sourcemap: true },
 });
