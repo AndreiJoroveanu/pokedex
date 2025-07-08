@@ -1,19 +1,25 @@
 import { useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
 
-import type { AllItemsParams } from "@/types/types.ts";
-
 export const useResetAllItemsUrlParams = () => {
-  // Determines where to navigate from
+  // Determine current route context
   const path = useRouterState({ select: (state) => state.location.pathname });
-  const from =
-    path === "/pokedex/pokemon"
-      ? "/pokemon"
-      : path === "/pokedex/moves"
-        ? "/moves"
-        : undefined;
+  const fromMap: Record<string, "/pokemon" | "/moves" | undefined> = {
+    "/pokedex/pokemon": "/pokemon",
+    "/pokedex/moves": "/moves",
+  };
+  const from = fromMap[path];
 
-  const search: Partial<AllItemsParams> = useSearch({ strict: false });
   const navigate = useNavigate({ from });
+
+  // Determine if any filter param is active
+  const canReset = useSearch({
+    strict: false,
+    select: (search) =>
+      Boolean(search.generation) ||
+      Boolean(search.type) ||
+      Boolean(search.onlyStarred) ||
+      Boolean(search.q),
+  });
 
   const reset = () =>
     void navigate({
@@ -28,10 +34,5 @@ export const useResetAllItemsUrlParams = () => {
       replace: true,
     });
 
-  // Determine if any filter param is active
-  const canReset = Boolean(
-    search.generation ?? search.type ?? search.onlyStarred ?? search.q,
-  );
-
-  return { reset, canReset };
+  return { canReset, reset };
 };

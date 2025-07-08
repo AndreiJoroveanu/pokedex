@@ -48,7 +48,7 @@ const PokemonGrid = () => {
 
       {/* Cover with a loading screen while the data is fetching or the React Virtuoso grid is rendering */}
       {isLoadingAP || isLoadingFP || (!gridLoaded && pokemonList?.length) ? (
-        <div className="fixed top-0 flex h-screen w-full items-center justify-center bg-base-100 dark:bg-base-900">
+        <div className="fixed top-0 z-10 flex h-screen w-full items-center justify-center bg-base-100 dark:bg-base-900">
           <Loader size={24} displaysText={true} />
         </div>
       ) : null}

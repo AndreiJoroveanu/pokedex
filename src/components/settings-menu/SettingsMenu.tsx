@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { motion, type Variants } from "motion/react";
+import { motion, stagger, type Variants } from "motion/react";
 
 import { useOutsideClick } from "@/hooks/useOutsideClick.ts";
 
@@ -17,7 +17,7 @@ const menuVariants: Variants = {
     y: 0,
     opacity: 1,
     transition: {
-      staggerChildren: 0.05,
+      delayChildren: stagger(0.05),
       type: "spring",
       bounce: 0,
       duration: 0.3,

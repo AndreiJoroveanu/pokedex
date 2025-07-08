@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 import { usePokemon } from "@/hooks/usePokeApi.ts";
@@ -11,7 +11,7 @@ interface CardProps {
   pokemon: ItemResource;
 }
 
-const PokemonCard = ({ pokemon: { id, name } }: CardProps) => {
+const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
   const { data: pokemon } = usePokemon(id);
   const [isLoadingImage, setIsLoadingImage] = useState(true);
 
@@ -48,5 +48,6 @@ const PokemonCard = ({ pokemon: { id, name } }: CardProps) => {
       </article>
     </Link>
   );
-};
+});
+PokemonCard.displayName = "PokemonCard";
 export default PokemonCard;

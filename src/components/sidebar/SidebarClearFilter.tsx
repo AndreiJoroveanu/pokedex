@@ -3,7 +3,7 @@ import { useResetAllItemsUrlParams } from "@/hooks/useResetAllItemsUrlParams.ts"
 import Button from "@/components/button/Button.tsx";
 
 const SidebarClearFilter = () => {
-  const { reset, canReset } = useResetAllItemsUrlParams();
+  const { canReset, reset } = useResetAllItemsUrlParams();
 
   return (
     <Button
