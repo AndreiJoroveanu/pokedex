@@ -14,10 +14,13 @@ interface State {
 
   volume: number;
   changeVolume: (newVolume: number) => void;
+
+  isMuted: boolean;
+  toggleMuted: (newMuted?: boolean) => void;
 }
 
 // Actual Zustand Store
-const useSettingsStore = create<State>((set) => ({
+const useSettingsStore = create<State>((set, get) => ({
   theme: initialTheme,
 
   // Used for some UI display
@@ -37,8 +40,19 @@ const useSettingsStore = create<State>((set) => ({
 
   volume: Number(localStorage.getItem("volume") ?? 5),
   changeVolume: (newVolume) => {
-    set({ volume: newVolume });
-    localStorage.setItem("volume", String(newVolume));
+    if (newVolume > 0) {
+      set({ volume: newVolume });
+      localStorage.setItem("volume", String(newVolume));
+
+      get().toggleMuted(false);
+    } else get().toggleMuted(true);
+  },
+
+  isMuted: localStorage.getItem("isMuted") === "true",
+  toggleMuted: (newMuted) => {
+    const isMuted = newMuted !== undefined ? !newMuted : get().isMuted;
+    set({ isMuted: !isMuted });
+    localStorage.setItem("isMuted", isMuted ? "false" : "true");
   },
 }));
 export default useSettingsStore;

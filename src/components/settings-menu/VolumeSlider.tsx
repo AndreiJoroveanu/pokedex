@@ -20,23 +20,31 @@ const sliderVariants: Variants = {
 };
 
 const VolumeSlider = () => {
-  const [volume, setVolume] = useSettingsStore(
-    useShallow((state) => [state.volume, state.changeVolume]),
+  const [volume, setVolume, isMuted, toggleMuted] = useSettingsStore(
+    useShallow((state) => [
+      state.volume,
+      state.changeVolume,
+      state.isMuted,
+      state.toggleMuted,
+    ]),
   );
+
+  const displayVolume = isMuted ? 0 : volume;
 
   const handleToggleMute = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    setVolume(volume === 0 ? 5 : 0);
+    toggleMuted();
   };
 
   return (
     <>
-      <motion.p
-        variants={sliderVariants}
-        className="mx-6 my-4 text-lg font-semibold"
-      >
-        Change the App Volume
-      </motion.p>
+      <motion.div variants={sliderVariants} className="mx-6 my-4">
+        <h2 className="mb-1 text-lg font-semibold">Change the App Volume</h2>
+
+        <p className="text-sm text-base-600 transition-[color] dark:text-base-400">
+          Affects the volume of Pokémon cries
+        </p>
+      </motion.div>
 
       <motion.div
         variants={sliderVariants}
@@ -46,20 +54,20 @@ const VolumeSlider = () => {
           onClick={handleToggleMute}
           className="cursor-pointer rounded-lg transition-[color] hover:text-blue-600 dark:hover:text-blue-400"
         >
-          {volume > 0 ? (
-            <SpeakerWaveIcon className="size-6" />
-          ) : (
+          {isMuted ? (
             <SpeakerXMarkIcon className="size-6" />
+          ) : (
+            <SpeakerWaveIcon className="size-6" />
           )}
         </button>
 
         <Slider
           max={10}
-          value={volume}
+          value={displayVolume}
           onChange={(e) => setVolume(Number(e.target.value))}
         />
 
-        <p className="w-10 text-end">{volume * 10}%</p>
+        <p className="w-10 text-end">{displayVolume * 10}%</p>
       </motion.div>
     </>
   );

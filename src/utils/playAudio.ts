@@ -1,6 +1,9 @@
 export const playAudio = (src: string) => {
+  const volume = Number(localStorage.getItem("volume") ?? 5);
+  const isMuted = localStorage.getItem("isMuted") === "true";
+
   const audio = new Audio(src);
-  audio.volume = 0.02 * Number(localStorage.getItem("volume") ?? 5);
+  audio.volume = isMuted ? 0 : 0.02 * volume;
 
   const play = async () => {
     try {
