@@ -54,10 +54,11 @@ const ScrollToTopButton = () => {
               window.scrollTo({ top: 0 });
               setHasScrolledEnough(false);
             }}
-            style="gold"
+            variant="gold"
             className="flex items-center gap-2 rounded-full px-4 py-4 sm:rounded-xl sm:px-3 sm:py-2"
           >
             <ChevronDoubleUpIcon className="size-5" />
+
             <span className="max-sm:hidden">Scroll to top</span>
           </Button>
         </motion.div>

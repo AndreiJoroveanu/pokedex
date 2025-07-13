@@ -18,7 +18,7 @@ const MoveCard = memo(({ move: { id, name } }: CardProps) => {
 
   return (
     <Link to="/moves/$moveId" params={{ moveId: String(id) }}>
-      <article className="@container/card relative rounded-xl bg-base-100 shadow-lg transition-[background-color_shadow] hover:bg-base-200 hover:shadow-xl dark:bg-base-900 dark:shadow-none dark:hover:bg-base-800 dark:hover:shadow-none">
+      <article className="@container/card relative rounded-xl bg-base-100 shadow-md transition-[background-color_shadow] hover:bg-base-200 hover:shadow-lg dark:bg-base-900 dark:shadow-none dark:hover:bg-base-800 dark:hover:shadow-none">
         <div className="flex">
           {move ? (
             <div

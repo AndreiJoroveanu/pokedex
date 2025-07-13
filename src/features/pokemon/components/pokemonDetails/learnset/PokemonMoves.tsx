@@ -58,7 +58,7 @@ const PokemonMoves = ({ moves }: MovesProps) => {
                 setVersionGroup(index === 0 ? undefined : index + 1)
               }
               disabled={currentVersionIndex === index}
-              style={currentVersionIndex === index ? "indigo" : "normal"}
+              variant={currentVersionIndex === index ? "indigo" : "normal"}
               className="px-4 text-nowrap capitalize disabled:cursor-default"
             >
               {label}

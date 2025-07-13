@@ -9,7 +9,7 @@ const SidebarClearFilter = () => {
     <Button
       onClick={reset}
       disabled={!canReset}
-      style={canReset ? "indigo" : "normal"}
+      variant={canReset ? "indigo" : "normal"}
       className="w-full disabled:cursor-not-allowed disabled:opacity-25 lg:mb-4"
     >
       Clear Filtering

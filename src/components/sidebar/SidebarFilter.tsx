@@ -1,6 +1,6 @@
 import { useAllItemsParam } from "@/hooks/useAllItemsParam.ts";
 
-import CollapsingPanel from "@/components/CollapsingPanel.tsx";
+import Accordion from "@/components/Accordion.tsx";
 import Button from "@/components/button/Button.tsx";
 
 interface FilterProps {
@@ -14,7 +14,7 @@ const SidebarFilter = ({ name, values, isOpen, toggleOpen }: FilterProps) => {
   const [currentValue, setCurrentValue] = useAllItemsParam(name);
 
   return (
-    <CollapsingPanel
+    <Accordion
       label={`${name} Filtering`}
       initialIsOpen={isOpen}
       toggleOpen={toggleOpen}
@@ -26,13 +26,13 @@ const SidebarFilter = ({ name, values, isOpen, toggleOpen }: FilterProps) => {
           onClick={() =>
             setCurrentValue(currentValue === value ? undefined : value)
           }
-          style={currentValue === value ? "indigo" : "normal"}
+          variant={currentValue === value ? "indigo" : "normal"}
           className="capitalize"
         >
           {label}
         </Button>
       ))}
-    </CollapsingPanel>
+    </Accordion>
   );
 };
 export default SidebarFilter;

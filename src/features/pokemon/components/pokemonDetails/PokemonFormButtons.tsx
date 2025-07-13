@@ -6,12 +6,14 @@ interface FormButtonProps {
   pokemonSpecies: Variety[] | undefined;
   currentForm: number;
   handleClick: (index: number) => void;
+  placeholderName: string | undefined;
 }
 
 const PokemonFormButtons = ({
   pokemonSpecies,
   currentForm,
   handleClick,
+  placeholderName,
 }: FormButtonProps) => (
   <>
     <h2 className="ml-2 text-lg font-semibold sm:ml-4">Current Form:</h2>
@@ -23,12 +25,24 @@ const PokemonFormButtons = ({
             key={form.pokemon.name}
             onClick={() => handleClick(index)}
             disabled={currentForm === index}
-            style={currentForm === index ? "indigo" : "normal"}
-            className="z-10 px-4 text-nowrap capitalize disabled:cursor-default"
+            variant={currentForm === index ? "indigo" : "normal"}
+            className="px-4 text-nowrap capitalize disabled:cursor-default"
           >
             {form.pokemon.name.split("-").join(" ")}
           </Button>
         ))}
+      </div>
+    ) : placeholderName ? (
+      <div className="mt-1 mb-2 flex items-center gap-2">
+        <Button
+          disabled={true}
+          variant="indigo"
+          className="cursor-default px-4 text-nowrap capitalize"
+        >
+          {placeholderName.split("-").join(" ")}
+        </Button>
+
+        <div className="h-10 w-full animate-pulse rounded-xl bg-base-500/50" />
       </div>
     ) : (
       <div className="mt-1 mb-2 h-10 w-full animate-pulse rounded-xl bg-base-500/50" />

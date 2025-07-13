@@ -1,9 +1,7 @@
-import type { MouseEventHandler, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-interface ButtonProps {
-  onClick: MouseEventHandler<HTMLButtonElement>;
-  disabled?: boolean;
-  style?: "normal" | "indigo" | "gold";
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "normal" | "indigo" | "gold";
   className?: string;
   children: ReactNode;
 }
@@ -17,16 +15,14 @@ const buttonStyles = {
 };
 
 const Button = ({
-  onClick,
-  disabled = false,
-  style = "normal",
+  variant = "normal",
   className = "",
   children,
+  ...props
 }: ButtonProps) => (
   <button
-    onClick={onClick}
-    disabled={disabled}
-    className={`cursor-pointer py-2 font-semibold shadow-md transition-[background-color_shadow_filter] enabled:hover:shadow-lg dark:shadow-none ${buttonStyles[style]} ${className} ${!className?.includes("rounded-") ? "rounded-xl" : ""}`.trim()}
+    className={`cursor-pointer py-2 font-semibold shadow-sm transition-[background-color_shadow_filter] enabled:hover:shadow-md dark:shadow-none ${buttonStyles[variant]} ${className} ${!className?.includes("rounded-") ? "rounded-xl" : ""}`.trim()}
+    {...props}
   >
     {children}
   </button>

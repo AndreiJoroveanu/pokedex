@@ -16,7 +16,7 @@ const NavbarLogo = ({ isSettingsMenuOpen }: LogoProps) => (
     } pointer-events-auto z-20 rounded-full sm:transition-[background-color]`}
   >
     <Link to="/pokemon">
-      <h1 className="flex items-end rounded-full px-4 py-2.5 text-3xl font-bold transition-[background-color] hover:bg-base-700/10 dark:hover:bg-base-300/10">
+      <h1 className="flex items-end rounded-full px-4 py-2.5 text-3xl font-bold transition-[background-color] hover:bg-base-500/25 dark:hover:bg-base-400/25">
         P
         <img
           src={pokeballLogo}

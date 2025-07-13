@@ -11,7 +11,7 @@ interface ButtonProps {
 const ToggleShinyButton = ({ displayShiny, setDisplayShiny }: ButtonProps) => (
   <Button
     onClick={setDisplayShiny}
-    style={displayShiny ? "gold" : "normal"}
+    variant={displayShiny ? "gold" : "normal"}
     className="flex items-center gap-2 px-4 text-nowrap"
   >
     {displayShiny ? (

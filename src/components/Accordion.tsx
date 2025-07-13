@@ -18,7 +18,7 @@ const containerVariants = {
   }),
 };
 
-const CollapsingPanel = ({
+const Accordion = ({
   children,
   label,
   initialIsOpen,
@@ -41,7 +41,7 @@ const CollapsingPanel = ({
     >
       <button
         onClick={handleClick}
-        className="group relative flex w-full cursor-pointer rounded-xl px-3 py-2 transition-[background-color] hover:bg-base-200 dark:hover:bg-base-800"
+        className="group relative flex w-full cursor-pointer items-center rounded-xl bg-base-200 px-3 py-2 transition-[background-color] hover:bg-base-300 dark:bg-base-800 dark:hover:bg-base-700"
       >
         <h2 className="text-lg font-bold capitalize">{label}</h2>
 
@@ -49,9 +49,9 @@ const CollapsingPanel = ({
           initial={{ rotate: isOpen ? 180 : 0 }}
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ type: spring, bounce: 0, duration: 0.5 }}
-          className="absolute right-2 rounded-full border-2 border-transparent p-1 transition-[border-color] group-hover:border-base-500/30"
+          className="absolute right-2 rounded-full border-2 border-transparent p-1 transition-[background-color] group-hover:bg-base-500/20 dark:group-hover:bg-base-400/20"
         >
-          <ChevronDoubleDownIcon className="size-4" />
+          <ChevronDoubleDownIcon className="size-5" />
         </motion.div>
       </button>
 
@@ -78,4 +78,4 @@ const CollapsingPanel = ({
     </div>
   );
 };
-export default CollapsingPanel;
+export default Accordion;

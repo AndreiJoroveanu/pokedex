@@ -23,7 +23,7 @@ import GenerationText from "@/components/GenerationText.tsx";
 import PokemonCatchRate from "@/features/pokemon/components/pokemonDetails/PokemonCatchRate.tsx";
 import PokemonTypeEffectiveness from "@/features/pokemon/components/pokemonDetails/PokemonTypeEffectiveness.tsx";
 import FlavorTextEntries from "@/features/pokemon/components/pokemonDetails/FlavorTextEntries.tsx";
-import CollapsingPanel from "@/components/CollapsingPanel.tsx";
+import Accordion from "@/components/Accordion.tsx";
 import PokemonMoves from "@/features/pokemon/components/pokemonDetails/learnset/PokemonMoves.tsx";
 import PokemonLocations from "@/features/pokemon/components/pokemonDetails/PokemonLocations.tsx";
 import Footer from "@/components/Footer.tsx";
@@ -131,6 +131,7 @@ const PokemonDetails = () => {
           handleClick={(index) =>
             setFormIndex(index === 0 ? undefined : index + 1)
           }
+          placeholderName={pokemon?.name}
         />
 
         <PokemonAbilities abilities={pokemon?.abilities} />
@@ -156,15 +157,15 @@ const PokemonDetails = () => {
         {/* All english Dex descriptions */}
         <FlavorTextEntries textEntries={pokemonSpecies?.flavor_text_entries} />
 
-        <CollapsingPanel
+        <Accordion
           label="Learnset"
           initialIsOpen={isLearnsetOpen}
           toggleOpen={() => setLearnsetOpen(isLearnsetOpen ? undefined : true)}
         >
           <PokemonMoves moves={pokemon?.moves} />
-        </CollapsingPanel>
+        </Accordion>
 
-        <CollapsingPanel
+        <Accordion
           label="Locations"
           initialIsOpen={isLocationsOpen}
           toggleOpen={() =>
@@ -172,7 +173,7 @@ const PokemonDetails = () => {
           }
         >
           <PokemonLocations id={Number(pokemonId)} />
-        </CollapsingPanel>
+        </Accordion>
 
         <Footer />
       </div>

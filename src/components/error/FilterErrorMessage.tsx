@@ -13,7 +13,7 @@ const FilterErrorMessage = ({ itemType }: { itemType: string }) => {
         Try other filtering options or another search query
       </p>
 
-      <Button onClick={reset} style="indigo" className="w-full max-lg:hidden">
+      <Button onClick={reset} variant="indigo" className="w-full max-lg:hidden">
         Clear Filtering
       </Button>
     </div>

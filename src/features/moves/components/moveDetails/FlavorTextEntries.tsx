@@ -4,7 +4,7 @@ import { versionGroups } from "@/data/versionGroups.ts";
 import formatFlavorTextEntries from "@/features/moves/utils/formatFlavorTextEntries.ts";
 import { capitalize } from "@/utils/capitalize.ts";
 
-import CollapsingPanel from "@/components/CollapsingPanel.tsx";
+import Accordion from "@/components/Accordion.tsx";
 import Loader from "@/components/Loader.tsx";
 
 interface EntriesProps {
@@ -43,7 +43,7 @@ const FlavorTextEntries = ({ textEntries, moveName }: EntriesProps) => {
             </p>
 
             {sortedEntries.length > 1 && (
-              <CollapsingPanel label="More Descriptions">
+              <Accordion label="More Descriptions">
                 <ul>
                   {sortedEntries.slice(1).map((entry) => (
                     <li
@@ -54,7 +54,7 @@ const FlavorTextEntries = ({ textEntries, moveName }: EntriesProps) => {
                     </li>
                   ))}
                 </ul>
-              </CollapsingPanel>
+              </Accordion>
             )}
           </>
         ) : textEntries === undefined ? (

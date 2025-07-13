@@ -4,7 +4,7 @@ import { usePokemonDetailsParam } from "@/features/pokemon/hooks/usePokemonDetai
 import { games } from "@/data/games.ts";
 import { capitalize } from "@/utils/capitalize.ts";
 
-import CollapsingPanel from "@/components/CollapsingPanel.tsx";
+import Accordion from "@/components/Accordion.tsx";
 import Loader from "@/components/Loader.tsx";
 
 interface Entry {
@@ -56,7 +56,7 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
             </p>
 
             {sortedEntries.length > 1 && (
-              <CollapsingPanel
+              <Accordion
                 label="More Dex Entries"
                 initialIsOpen={isOpen}
                 toggleOpen={() => setIsOpen(isOpen ? undefined : true)}
@@ -71,7 +71,7 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
                     </li>
                   ))}
                 </ul>
-              </CollapsingPanel>
+              </Accordion>
             )}
           </>
         ) : (

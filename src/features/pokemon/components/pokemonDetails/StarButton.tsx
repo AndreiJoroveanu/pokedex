@@ -16,7 +16,7 @@ const StarButton = () => {
   return (
     <Button
       onClick={() => toggleStarredPokemonIds(pokemonIdAsNumber)}
-      style="gold"
+      variant="gold"
       className="pointer-events-auto ml-auto flex items-center gap-2 px-4"
     >
       {starredPokemonIds.includes(pokemonIdAsNumber) ? (

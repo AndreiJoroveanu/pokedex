@@ -17,7 +17,7 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
 
   return (
     <Link to="/pokemon/$pokemonId" params={{ pokemonId: String(id) }}>
-      <article className="group @container/card relative rounded-xl bg-base-100 shadow-lg transition-[background-color_shadow] hover:bg-base-200 hover:shadow-xl dark:bg-base-900 dark:shadow-none dark:hover:bg-base-800 dark:hover:shadow-none">
+      <article className="group @container/card relative rounded-xl bg-base-100 shadow-md transition-[background-color_shadow] hover:bg-base-200 hover:shadow-lg dark:bg-base-900 dark:shadow-none dark:hover:bg-base-800 dark:hover:shadow-none">
         {/* Gets the image from a raw link instead of waiting for */}
         {/* the Pokémon object to download because it is faster */}
         <img

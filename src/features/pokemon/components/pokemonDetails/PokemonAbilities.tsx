@@ -13,7 +13,7 @@ const PokemonAbilities = ({ abilities }: AbilitiesProps) => (
       {abilities?.length === 1 ? "Ability:" : "Abilities:"}
     </h2>
 
-    <div className="mb-2 flex max-w-lg flex-col gap-4 rounded-xl bg-base-100 p-2 pb-3 shadow-lg transition-[background-color] sm:px-4 dark:bg-base-900 dark:shadow-none">
+    <div className="mb-2 flex max-w-lg flex-col gap-4 rounded-xl bg-base-100 p-2 pb-3 shadow-md transition-[background-color] sm:px-4 dark:bg-base-900 dark:shadow-none">
       {abilities ? (
         // Deduplicates abilities by ability name
         Array.from(

@@ -10,7 +10,7 @@ const BackButton = () => {
   return canGoBack ? (
     <Button
       onClick={goBack}
-      style="indigo"
+      variant="indigo"
       className="pointer-events-auto flex items-center gap-2 px-4"
     >
       <ArrowUturnLeftIcon className="size-4" /> Back
