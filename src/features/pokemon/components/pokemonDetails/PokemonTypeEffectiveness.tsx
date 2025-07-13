@@ -42,7 +42,7 @@ const PokemonTypeEffectiveness = ({ types }: TypesProps) => {
       <>
         <h2 className="mb-1 text-lg font-semibold">Type effectiveness:</h2>
 
-        <div className="h-80 w-full rounded-lg bg-base-200 shadow-lg transition-[background-color] dark:bg-base-800 dark:shadow-none">
+        <div className="h-80 w-full rounded-lg bg-base-100 shadow-lg transition-[background-color] dark:bg-base-900 dark:shadow-none">
           <Loader size={24} displaysText={true} />
         </div>
       </>
@@ -56,7 +56,7 @@ const PokemonTypeEffectiveness = ({ types }: TypesProps) => {
         Type effectiveness:
       </h2>
 
-      <div className="mb-2 w-full rounded-xl bg-base-200 p-2 shadow-lg transition-[background-color] sm:px-4 dark:bg-base-800 dark:shadow-none">
+      <div className="mb-2 w-full rounded-xl bg-base-100 p-2 shadow-lg transition-[background-color] sm:px-4 dark:bg-base-900 dark:shadow-none">
         <p>This Pokémon is:</p>
 
         {Object.values(categories).map(({ types, label }) => (

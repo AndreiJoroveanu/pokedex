@@ -29,7 +29,7 @@ const Navbar = () => {
         className={`${
           isSettingsMenuOpen
             ? "max-sm:bg-base-200/80 max-sm:shadow-lg dark:max-sm:bg-base-800/80 dark:max-sm:shadow-none"
-            : "bg-base-100/80 sm:backdrop-blur-md dark:bg-base-900/80"
+            : "bg-base-50/80 sm:backdrop-blur-md dark:bg-base-950/80"
         } pointer-events-auto flex h-14 items-center gap-2 rounded-full transition-[background-color_shadow] ease-out max-sm:fixed max-sm:inset-x-2 max-sm:bottom-2 max-sm:z-50 max-sm:justify-center max-sm:backdrop-blur-md sm:px-2`}
       >
         <NavbarLinks />

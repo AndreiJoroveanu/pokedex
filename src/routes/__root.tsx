@@ -10,7 +10,7 @@ const RootComponent = () => (
     className="font-medium text-base-800 transition-[color] dark:text-base-200"
   >
     {/* App background */}
-    <div className="fixed inset-0 -z-50 h-screen bg-base-100 transition-[background-color] dark:bg-base-900" />
+    <div className="fixed inset-0 -z-50 h-screen bg-base-50 transition-[background-color] dark:bg-base-950" />
 
     <Navbar />
 

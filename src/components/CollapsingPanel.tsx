@@ -37,11 +37,11 @@ const CollapsingPanel = ({
     <div
       className={`${
         !isOpen ? "hover:shadow-lg dark:hover:shadow-none" : ""
-      } my-4 rounded-xl bg-base-200 shadow-md transition-[background-color_shadow] dark:bg-base-800 dark:shadow-none`.trim()}
+      } my-4 rounded-xl bg-base-100 shadow-md transition-[background-color_shadow] dark:bg-base-900 dark:shadow-none`.trim()}
     >
       <button
         onClick={handleClick}
-        className="group relative flex w-full cursor-pointer rounded-xl px-3 py-2 transition-[background-color] hover:bg-base-300 dark:hover:bg-base-700"
+        className="group relative flex w-full cursor-pointer rounded-xl px-3 py-2 transition-[background-color] hover:bg-base-200 dark:hover:bg-base-800"
       >
         <h2 className="text-lg font-bold capitalize">{label}</h2>
 

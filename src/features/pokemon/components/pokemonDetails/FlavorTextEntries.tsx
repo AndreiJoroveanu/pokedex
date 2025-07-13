@@ -44,7 +44,7 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
     <>
       <h2 className="mb-1 ml-2 text-lg font-semibold sm:ml-4">Dex Entries:</h2>
 
-      <div className="rounded-xl bg-base-200 transition-[background] dark:bg-base-800">
+      <div className="rounded-xl bg-base-100 transition-[background] dark:bg-base-900">
         {sortedEntries?.length ? (
           <>
             <p

@@ -10,7 +10,7 @@ interface ButtonProps {
 
 const buttonStyles = {
   normal:
-    "bg-base-300 dark:bg-base-700 enabled:hover:brightness-95 dark:enabled:hover:brightness-115",
+    "bg-base-200 dark:bg-base-800 enabled:hover:bg-base-300 dark:enabled:hover:bg-base-700",
   indigo:
     "bg-linear-to-br from-[#8BC6EC] to-[#9599E2] bg-origin-border text-base-700 enabled:hover:brightness-115",
   gold: "bg-linear-to-tr from-[#FBAB7E] to-[#F7CE68] bg-origin-border text-base-700 enabled:hover:brightness-115",

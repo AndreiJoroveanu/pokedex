@@ -13,7 +13,7 @@ const ErrorMessage = ({ errors = [] }: { errors: string[] }) => {
 
   return (
     <div className="fixed flex h-screen w-full items-center justify-center">
-      <div className="flex min-h-screen w-full flex-col justify-between p-4 pb-16 transition-[background-color] md:relative md:min-h-60 md:max-w-2xl md:rounded-xl md:bg-base-200 md:shadow-md dark:shadow-none dark:md:bg-base-800">
+      <div className="flex min-h-screen w-full flex-col justify-between p-4 pb-16 transition-[background-color] md:relative md:min-h-60 md:max-w-2xl md:rounded-xl md:bg-base-100 md:shadow-md dark:shadow-none dark:md:bg-base-900">
         <div className="mt-4 sm:mt-22 md:mt-2">
           <div className="mb-2 flex items-center gap-2">
             <ExclamationCircleIcon className="size-8" />

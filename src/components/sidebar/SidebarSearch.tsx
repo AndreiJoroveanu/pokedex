@@ -22,7 +22,7 @@ const SidebarSearch = ({ itemType }: { itemType: string }) => {
       placeholder={`Search by ${itemType} name`}
       value={query}
       onChange={(e) => handleChange(e.target.value)}
-      className="w-full rounded-xl bg-base-200 py-2 text-center shadow-md transition-[background-color_shadow] hover:bg-base-300 hover:shadow-lg focus:shadow-lg dark:bg-base-800 dark:shadow-none dark:hover:bg-base-700 dark:hover:shadow-none dark:focus:shadow-none"
+      className="w-full rounded-xl bg-base-100 py-2 text-center shadow-md transition-[background-color_shadow] hover:bg-base-200 hover:shadow-lg focus:shadow-lg dark:bg-base-900 dark:shadow-none dark:hover:bg-base-800 dark:hover:shadow-none dark:focus:shadow-none"
     />
   );
 };

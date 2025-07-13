@@ -23,7 +23,7 @@ const PokemonImage = ({ src, alt }: ImageProps) => {
 
       {/* Display a message if the selected Form doesn't have an image (the src is null) */}
       {src === null && (
-        <div className="absolute top-0 flex aspect-square max-h-128 w-full flex-col items-center justify-center gap-4 bg-base-100 transition-[background-color] dark:bg-base-900">
+        <div className="absolute top-0 flex aspect-square max-h-128 w-full flex-col items-center justify-center gap-4 bg-base-50 transition-[background-color] dark:bg-base-950">
           <h2 className="text-center text-2xl font-bold sm:text-3xl">
             This Pokémon Form does not have an image
           </h2>
@@ -36,7 +36,7 @@ const PokemonImage = ({ src, alt }: ImageProps) => {
 
       {/* Covers the image with a loader if the image hasn't loaded */}
       {(isLoadingImage || src === undefined) && src !== null && (
-        <div className="absolute top-0 aspect-square max-h-128 w-full bg-base-100 dark:bg-base-900">
+        <div className="absolute top-0 aspect-square max-h-128 w-full bg-base-50 dark:bg-base-950">
           <Loader size={24} displaysText={true} />
         </div>
       )}

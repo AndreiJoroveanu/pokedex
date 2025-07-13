@@ -23,7 +23,7 @@ export const router = createRouter({
   ),
   defaultNotFoundComponent: () => <ErrorMessage errors={["Page not found"]} />,
   defaultPendingComponent: () => (
-    <div className="h-screen w-full bg-base-100 transition-[background_color] max-sm:-mt-18 dark:bg-base-900">
+    <div className="h-screen w-full bg-base-50 transition-[background_color] max-sm:-mt-18 dark:bg-base-950">
       <Loader size={24} displaysText={true} />
     </div>
   ),

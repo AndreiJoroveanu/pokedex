@@ -17,7 +17,7 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
 
   return (
     <Link to="/pokemon/$pokemonId" params={{ pokemonId: String(id) }}>
-      <article className="group @container/card relative rounded-xl bg-base-200 shadow-lg transition-[background-color_shadow] hover:bg-base-300 hover:shadow-xl dark:bg-base-800 dark:shadow-none dark:hover:bg-base-700 dark:hover:shadow-none">
+      <article className="group @container/card relative rounded-xl bg-base-100 shadow-lg transition-[background-color_shadow] hover:bg-base-200 hover:shadow-xl dark:bg-base-900 dark:shadow-none dark:hover:bg-base-800 dark:hover:shadow-none">
         {/* Gets the image from a raw link instead of waiting for */}
         {/* the Pokémon object to download because it is faster */}
         <img
@@ -30,7 +30,7 @@ const PokemonCard = memo(({ pokemon: { id, name } }: CardProps) => {
 
         {/* Covers Pokémon image with the loader if the image hasn't loaded */}
         {isLoadingImage ? (
-          <div className="absolute top-0 aspect-square w-full rounded-xl bg-base-200 transition-[background-color] group-hover:bg-base-300 dark:bg-base-800 dark:group-hover:bg-base-700">
+          <div className="absolute top-0 aspect-square w-full rounded-xl bg-base-100 transition-[background-color] group-hover:bg-base-200 dark:bg-base-900 dark:group-hover:bg-base-800">
             <Loader size={8} />
           </div>
         ) : null}

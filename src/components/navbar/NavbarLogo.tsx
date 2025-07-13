@@ -11,7 +11,7 @@ const NavbarLogo = ({ isSettingsMenuOpen }: LogoProps) => (
     // Background is displayed only when the settings menu isn't open
     className={`${
       !isSettingsMenuOpen
-        ? "sm:bg-base-100/80 sm:backdrop-blur-md dark:sm:bg-base-900/80"
+        ? "sm:bg-base-50/80 sm:backdrop-blur-md dark:sm:bg-base-950/80"
         : ""
     } pointer-events-auto z-20 rounded-full sm:transition-[background-color]`}
   >
