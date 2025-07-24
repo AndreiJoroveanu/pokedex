@@ -44,7 +44,7 @@ const SettingsMenu = ({ onClose }: { onClose: () => void }) => {
       ref={ref}
       // Prevent touch scrolling on menu when screen height allows full display without overflow
       // 416px = 72px (navbar) + 328px (menu content) + 8px x2 (vertical margin)
-      className="fixed right-2 z-20 flex max-h-[calc(100vh-88px)] flex-col overflow-scroll rounded-xl bg-base-200/80 py-2 shadow-lg backdrop-blur-md transition-[background-color] max-sm:bottom-18 max-sm:[--y-from-container:50px] max-sm:[--y-from-item:20px] sm:top-20 sm:right-12 sm:[--y-from-container:-50px] sm:[--y-from-item:-20px] dark:bg-base-800/80 dark:shadow-none [@media(height>=416px)]:touch-none"
+      className="fixed right-2 z-20 flex max-h-[calc(100vh-88px)] flex-col overflow-scroll rounded-xl bg-base-200/80 py-2 shadow-lg backdrop-blur-md transition-[background-color] max-sm:bottom-18 max-sm:[--y-from-container:50px] max-sm:[--y-from-item:20px] sm:top-18 sm:right-12 sm:[--y-from-container:-50px] sm:[--y-from-item:-20px] dark:bg-base-800/80 dark:shadow-none [@media(height>=416px)]:touch-none"
     >
       <ThemeSwitcher />
 
