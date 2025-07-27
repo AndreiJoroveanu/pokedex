@@ -11,7 +11,7 @@ const SidebarGenerationFilter = () => {
       name="generation"
       values={pokemonGens}
       isOpen={isOpen}
-      toggleOpen={() => setIsOpen(isOpen ? undefined : true)}
+      setIsOpen={setIsOpen}
     />
   );
 };

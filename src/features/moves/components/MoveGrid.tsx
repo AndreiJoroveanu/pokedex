@@ -13,7 +13,7 @@ import FilterErrorMessage from "@/components/error/FilterErrorMessage.tsx";
 const MoveGrid = () => {
   // Fetching data
   const { data: allMoves, isLoading: isLoadingAM } = useAllMoves();
-  const { moveList, isLoading, isFiltered } = useFilteredMoves(allMoves);
+  const { moveList, isLoadingFM } = useFilteredMoves(allMoves);
 
   // Restore the scroll position when the grid loads
   const [gridLoaded, setGridLoaded] = useState<boolean>(false);
@@ -21,7 +21,7 @@ const MoveGrid = () => {
 
   return (
     <section className="@container/grid flex flex-col items-center p-4 max-sm:px-2 lg:absolute lg:right-0 lg:w-4/5 lg:max-w-[calc(100vw-248px)] lg:min-w-[calc(100vw-320px)] lg:pt-20 lg:pl-0">
-      {!isLoadingAM && !isLoading && moveList?.length ? (
+      {!isLoadingAM && !isLoadingFM && moveList?.length ? (
         <>
           <VirtuosoGrid
             totalCount={moveList.length}
@@ -40,13 +40,13 @@ const MoveGrid = () => {
       ) : null}
 
       {/* Cover with a loading screen while the data is fetching or the React Virtuoso grid is rendering */}
-      {isLoadingAM || isLoading || (!gridLoaded && moveList?.length) ? (
+      {isLoadingAM || isLoadingFM || (!gridLoaded && moveList?.length) ? (
         <div className="fixed top-0 z-10 flex h-screen w-full items-center justify-center bg-base-50 dark:bg-base-950">
           <Loader size={24} displaysText={true} />
         </div>
       ) : null}
 
-      {!moveList?.length && isFiltered && (
+      {!moveList?.length && !isLoadingFM && (
         <div className="top-0 lg:fixed lg:h-screen">
           <FilterErrorMessage itemType="moves" />
         </div>

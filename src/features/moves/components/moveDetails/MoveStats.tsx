@@ -5,22 +5,22 @@ const MoveStats = ({ move }: { move: Move | undefined }) => (
     {move ? (
       <>
         <p>
-          <span className="font-bold text-base-600 dark:text-base-400">
-            Power:{" "}
+          <span className="font-bold text-base-600 transition-[color] dark:text-base-400">
+            {"Power: "}
           </span>
           {move.power ?? "-"}
         </p>
 
         <p>
-          <span className="font-bold text-base-600 dark:text-base-400">
-            Accuracy:{" "}
+          <span className="font-bold text-base-600 transition-[color] dark:text-base-400">
+            {"Accuracy: "}
           </span>
           {move.accuracy ? `${move.accuracy}%` : "-"}
         </p>
 
         <p>
-          <span className="font-bold text-base-600 dark:text-base-400">
-            PP:{" "}
+          <span className="font-bold text-base-600 transition-[color] dark:text-base-400">
+            {"PP: "}
           </span>
           {move.pp}
         </p>

@@ -1,4 +1,3 @@
-import type { MouseEvent } from "react";
 import { useShallow } from "zustand/react/shallow";
 import { motion, type Variants } from "motion/react";
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from "@heroicons/react/24/outline";
@@ -20,21 +19,13 @@ const sliderVariants: Variants = {
 };
 
 const VolumeSlider = () => {
-  const [volume, setVolume, isMuted, toggleMuted] = useSettingsStore(
+  const [volume, setVolume, toggleMuted] = useSettingsStore(
     useShallow((state) => [
-      state.volume,
+      state.isMuted ? 0 : state.volume,
       state.changeVolume,
-      state.isMuted,
       state.toggleMuted,
     ]),
   );
-
-  const displayVolume = isMuted ? 0 : volume;
-
-  const handleToggleMute = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    toggleMuted();
-  };
 
   return (
     <>
@@ -51,10 +42,13 @@ const VolumeSlider = () => {
         className="mx-6 mb-4 flex flex-row gap-2"
       >
         <button
-          onClick={handleToggleMute}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleMuted();
+          }}
           className="cursor-pointer rounded-lg transition-[color] hover:text-blue-600 dark:hover:text-blue-400"
         >
-          {isMuted ? (
+          {volume === 0 ? (
             <SpeakerXMarkIcon className="size-6" />
           ) : (
             <SpeakerWaveIcon className="size-6" />
@@ -63,11 +57,11 @@ const VolumeSlider = () => {
 
         <Slider
           max={10}
-          value={displayVolume}
+          value={volume}
           onChange={(e) => setVolume(Number(e.target.value))}
         />
 
-        <p className="w-10 text-end">{displayVolume * 10}%</p>
+        <p className="w-10 text-end">{volume * 10}%</p>
       </motion.div>
     </>
   );

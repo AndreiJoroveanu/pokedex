@@ -13,34 +13,39 @@ interface CategoryProps {
   multipliers: Record<string, number>;
 }
 
-const EffectivenessCategory = ({ title, types, multipliers }: CategoryProps) =>
-  types.length ? (
-    <>
-      <p>{title}:</p>
+const EffectivenessCategory = ({
+  title,
+  types,
+  multipliers,
+}: CategoryProps) => (
+  <>
+    <p>{title}:</p>
 
-      {/* List of types from the specific category */}
-      <div className="flex flex-wrap gap-1 pt-1 pb-2">
-        {types.map((type) => (
-          <div key={type} className="flex w-34 items-center gap-1 pr-2">
-            <TypeDisplay type={type} />
+    {/* List of types from the specific category */}
+    <div className="flex flex-wrap gap-1 pt-1 pb-2">
+      {types.map((type) => (
+        <div key={type} className="flex w-34 items-center gap-1 pr-2">
+          <TypeDisplay type={type} />
 
-            {multipliers[type] === 0.25 ? (
-              // Reduce the X scale when the multiplier is 0.25 because otherwise it would take too much space
-              <span className="-ml-0.5 scale-x-90">{`${multipliers[type]}x`}</span>
-            ) : (
-              <span>{`${multipliers[type]}x`}</span>
-            )}
-          </div>
-        ))}
-      </div>
-    </>
-  ) : null;
+          {multipliers[type] === 0.25 ? (
+            // Reduce X scale when the multiplier is 0.25 since it would otherwise take too much horizontal space
+            <span className="-ml-0.5 scale-x-90">{`${multipliers[type]}x`}</span>
+          ) : (
+            <span>{`${multipliers[type]}x`}</span>
+          )}
+        </div>
+      ))}
+    </div>
+  </>
+);
 
 const PokemonTypeEffectiveness = ({ types }: TypesProps) => {
   if (!types)
     return (
       <>
-        <h2 className="mb-1 text-lg font-semibold">Type effectiveness:</h2>
+        <h2 className="mb-1 ml-2 text-lg font-semibold sm:ml-4">
+          Type effectiveness:
+        </h2>
 
         <div className="h-80 w-full rounded-lg bg-base-100 shadow-lg transition-[background-color] dark:bg-base-900 dark:shadow-none">
           <Loader size={24} displaysText={true} />
@@ -59,14 +64,16 @@ const PokemonTypeEffectiveness = ({ types }: TypesProps) => {
       <div className="mb-2 w-full rounded-xl bg-base-100 p-2 shadow-md transition-[background-color] sm:px-4 dark:bg-base-900 dark:shadow-none">
         <p>This Pokémon is:</p>
 
-        {Object.values(categories).map(({ types, label }) => (
-          <EffectivenessCategory
-            key={label}
-            title={label}
-            types={types}
-            multipliers={multipliers}
-          />
-        ))}
+        {Object.values(categories)
+          .filter(({ types }) => types.length)
+          .map(({ types, label }) => (
+            <EffectivenessCategory
+              key={label}
+              title={label}
+              types={types}
+              multipliers={multipliers}
+            />
+          ))}
       </div>
     </>
   );

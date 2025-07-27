@@ -8,11 +8,6 @@ interface Evolution extends ItemResource {
   evolutionMethod: string;
 }
 
-interface ReturnTypes {
-  previous: Evolution | null;
-  next: Evolution[];
-}
-
 // Extract the Pokémon name and the ID from the URL
 const extractData = (node: Chain, evolutionDetails: EvolutionDetail[]) => ({
   name: node.species.name,
@@ -21,7 +16,7 @@ const extractData = (node: Chain, evolutionDetails: EvolutionDetail[]) => ({
   evolutionMethod: formatEvolutionMethod(evolutionDetails),
 });
 
-const getEvolutionData = (chain: Chain, pokemonName: string): ReturnTypes => {
+const getEvolutionData = (chain: Chain, pokemonName: string) => {
   let previous: Evolution | null = null; // Previous Pokémon in the evolution chain
   let next: Evolution[] = []; // Next Pokémon(s) in the evolution chain
 
@@ -45,6 +40,9 @@ const getEvolutionData = (chain: Chain, pokemonName: string): ReturnTypes => {
   // Start the recursive traversal from the root of the evolution chain
   traverse(chain);
 
-  return { previous, next };
+  return { previous, next } as {
+    previous: Evolution | null;
+    next: Evolution[];
+  };
 };
 export default getEvolutionData;

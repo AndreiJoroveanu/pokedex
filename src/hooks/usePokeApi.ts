@@ -21,16 +21,16 @@ export const usePokemon = (id: number | undefined) =>
   });
 
 // Specific Pokémon Species
-export const usePokemonSpecies = (id: number | undefined) =>
+export const usePokemonSpecies = (id: number) =>
   useQuery({
-    queryFn: id ? () => pokeApi.getPokemonSpeciesByName(id) : skipToken,
+    queryFn: () => pokeApi.getPokemonSpeciesByName(id),
     queryKey: ["pokemonSpecies", id],
   });
 
 // Specific Move
-export const useMove = (id: number | undefined) =>
+export const useMove = (id: number) =>
   useQuery({
-    queryFn: id ? () => pokeApi.getMoveByName(id) : skipToken,
+    queryFn: () => pokeApi.getMoveByName(id),
     queryKey: ["move", id],
   });
 
@@ -42,10 +42,20 @@ export const useEvolutionChain = (id: number | undefined) =>
   });
 
 // Specific Pokémon Ability
-export const usePokemonAbility = (id: number | undefined) =>
+export const usePokemonAbility = (id: number) =>
   useQuery({
-    queryFn: id ? () => pokeApi.getAbilityByName(id) : skipToken,
+    queryFn: () => pokeApi.getAbilityByName(id),
     queryKey: ["ability", id],
+  });
+
+// Specific Pokémon encounter locations
+export const usePokemonLocations = (id: number) =>
+  useQuery({
+    queryFn: () =>
+      pokeApi.getResource(`/api/v2/pokemon/${id}/encounters`) as Promise<
+        PokemonEncounter[]
+      >,
+    queryKey: ["pokemonLocation", id],
   });
 
 // ---------- General List Hooks ----------
@@ -76,16 +86,6 @@ export const useAllMoves = () =>
         // Filtering as to not show "Shadow" moves, which have IDs over 10000
         .filter((m) => m.id < 10000) as ItemResource[],
     queryKey: ["allMoves"],
-  });
-
-// All of a Pokémon's encounter locations
-export const usePokemonLocations = (id: number | undefined) =>
-  useQuery({
-    queryFn: () =>
-      pokeApi.getResource(`/api/v2/pokemon/${id}/encounters`) as Promise<
-        PokemonEncounter[]
-      >,
-    queryKey: ["pokemonLocation", id],
   });
 
 // ---------- Filtered List Hooks ----------

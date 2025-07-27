@@ -12,14 +12,14 @@ export const useFilteredPokemon = (allPokemon: ItemResource[] | undefined) => {
   const [onlyStarred] = useAllItemsParam("onlyStarred");
   const [searchQuery] = useAllItemsParam("q");
 
+  // Get starred Pokémon
+  const { starredPokemonIds } = useStarredPokemon();
+
   // Fetch Pokémon filtered by gen/type
   const { data: filteredByGen, isLoading: isLoadingFG } =
     useAllPokemonByGen(currentGen);
   const { data: filteredByType, isLoading: isLoadingFT } =
     useAllPokemonByType(currentType);
-
-  // Get starred Pokémon
-  const { starredPokemonIds } = useStarredPokemon();
 
   // Pokémon filtering
   const filteredPokemon = useMemo(() => {
@@ -67,9 +67,6 @@ export const useFilteredPokemon = (allPokemon: ItemResource[] | undefined) => {
 
   return {
     pokemonList: searchedPokemon,
-    isLoading: isLoadingFG || isLoadingFT,
-    isFiltered: Boolean(
-      currentGen ?? currentType ?? onlyStarred ?? searchQuery,
-    ),
+    isLoadingFP: isLoadingFG || isLoadingFT,
   };
 };

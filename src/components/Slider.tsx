@@ -1,12 +1,6 @@
 import type { InputHTMLAttributes } from "react";
 import { motion } from "motion/react";
 
-interface SliderProps extends InputHTMLAttributes<HTMLInputElement> {
-  value: number;
-  min?: number;
-  max?: number;
-}
-
 const SLIDER_WIDTH = 192;
 const SLIDER_HEIGHT = 24;
 
@@ -14,9 +8,14 @@ const SLIDER_HEIGHT = 24;
 const THUMB_OFFSET = 28; // Thumb width (24px) + padding (2px each side)
 const PADDING_OFFSET = 2;
 
-const Slider = ({ value, min = 0, max = 100, ...rest }: SliderProps) => {
+const Slider = ({
+  value,
+  min = 0,
+  max = 100,
+  ...rest
+}: InputHTMLAttributes<HTMLInputElement>) => {
   // Calculate percentage progress between min and max
-  const percent = (value - min) / (max - min);
+  const percent = (Number(value) - Number(min)) / (Number(max) - Number(min));
 
   return (
     <div className="relative h-6 w-48">

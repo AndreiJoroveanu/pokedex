@@ -5,22 +5,22 @@ import Button from "@/components/button/Button.tsx";
 
 interface FilterProps {
   name: "generation" | "type";
-  values?: { value: string; label: string }[];
+  values: { value: string; label: string }[];
   isOpen: boolean | undefined;
-  toggleOpen: () => void;
+  setIsOpen: (value: true | undefined) => undefined;
 }
 
-const SidebarFilter = ({ name, values, isOpen, toggleOpen }: FilterProps) => {
+const SidebarFilter = ({ name, values, isOpen, setIsOpen }: FilterProps) => {
   const [currentValue, setCurrentValue] = useAllItemsParam(name);
 
   return (
     <Accordion
       label={`${name} Filtering`}
       initialIsOpen={isOpen}
-      toggleOpen={toggleOpen}
+      toggleOpen={() => setIsOpen(isOpen ? undefined : true)}
       className="grid grid-cols-3 gap-2 p-2 lg:grid-cols-2 xl:grid-cols-3"
     >
-      {values?.map(({ value, label }) => (
+      {values.map(({ value, label }) => (
         <Button
           key={value}
           onClick={() =>

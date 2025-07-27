@@ -13,7 +13,7 @@ const MoveDiscImage = ({ type }: { type: string | undefined }) =>
       }}
     />
   ) : (
-    // The loader has the same positioning classes as the image to ensure no layout shifts
+    // The loader has the same positioning classes as the image to prevent layout shifts
     <div className="my-2 inline-block h-34.25 w-33">
       <Loader size={12} />
     </div>

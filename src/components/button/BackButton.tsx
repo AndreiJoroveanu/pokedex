@@ -7,14 +7,16 @@ import Button from "@/components/button/Button.tsx";
 const BackButton = () => {
   const { goBack, canGoBack } = useGoBack();
 
-  return canGoBack ? (
-    <Button
-      onClick={goBack}
-      variant="indigo"
-      className="pointer-events-auto flex items-center gap-2 px-4"
-    >
-      <ArrowUturnLeftIcon className="size-4" /> Back
-    </Button>
-  ) : null;
+  return (
+    canGoBack && (
+      <Button
+        onClick={goBack}
+        variant="indigo"
+        className="pointer-events-auto flex items-center gap-2 px-4"
+      >
+        <ArrowUturnLeftIcon className="size-4" /> Back
+      </Button>
+    )
+  );
 };
 export default BackButton;

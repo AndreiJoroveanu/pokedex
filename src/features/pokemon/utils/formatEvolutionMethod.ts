@@ -56,7 +56,7 @@ const formatEvolutionMethod = (details: EvolutionDetail[]) => {
     if (detail.needs_overworld_rain) conditions.push(`when raining`);
 
     // Special case (Malamar)
-    if (detail.turn_upside_down) conditions.push(`when leveled up while holding the console upside down`);
+    if (detail.turn_upside_down) conditions.push(`while holding the console upside down`);
 
     return conditions.join(" ");
   })

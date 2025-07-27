@@ -12,26 +12,28 @@ const ErrorMessage = ({ errors = [] }: { errors: string[] }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed flex h-screen w-full items-center justify-center">
+    <div className="fixed inset-0 flex items-center justify-center">
       <div className="flex min-h-screen w-full flex-col justify-between p-4 pb-16 transition-[background-color] md:relative md:min-h-60 md:max-w-2xl md:rounded-xl md:bg-base-100 md:shadow-md dark:shadow-none dark:md:bg-base-900">
-        <div className="mt-4 sm:mt-22 md:mt-2">
+        <div className="mt-22 md:mt-2">
           <div className="mb-2 flex items-center gap-2">
             <ExclamationCircleIcon className="size-8" />
 
             <h1 className="text-2xl font-semibold">Something went wrong</h1>
           </div>
 
-          {[...new Set(errors)].map((error, index) => (
-            <p
-              key={index}
-              className="text-lg font-semibold text-base-600 dark:text-base-400"
-            >
-              {error}
-            </p>
-          ))}
+          <div className="max-h-[calc(100vh-260px)] overflow-y-scroll mask-y-from-99% mask-y-to-100% py-2 sm:max-h-[calc(100vh-204px)] md:max-h-[calc(100vh-272px)]">
+            {[...new Set(errors)].map((error, index) => (
+              <p
+                key={index}
+                className="text-lg font-semibold text-base-600 transition-[color] dark:text-base-400"
+              >
+                {error}
+              </p>
+            ))}
+          </div>
         </div>
 
-        <div className="fixed right-4 bottom-18 mt-6 flex space-x-2 sm:bottom-4 md:absolute">
+        <div className="fixed right-4 bottom-18 flex space-x-2 sm:bottom-4 md:absolute">
           <Button
             onClick={() => void router.invalidate()}
             className="flex items-center gap-2 px-4"

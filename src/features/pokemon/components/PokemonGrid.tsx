@@ -13,11 +13,7 @@ import FilterErrorMessage from "@/components/error/FilterErrorMessage.tsx";
 const PokemonGrid = () => {
   // Fetching data
   const { data: allPokemon, isLoading: isLoadingAP } = useAllPokemonSpecies();
-  const {
-    pokemonList,
-    isLoading: isLoadingFP,
-    isFiltered,
-  } = useFilteredPokemon(allPokemon);
+  const { pokemonList, isLoadingFP } = useFilteredPokemon(allPokemon);
 
   // Restore the scroll position when the grid loads
   const [gridLoaded, setGridLoaded] = useState<boolean>(false);
@@ -53,7 +49,7 @@ const PokemonGrid = () => {
         </div>
       ) : null}
 
-      {!pokemonList?.length && isFiltered && (
+      {!pokemonList?.length && !isLoadingFP && (
         <div className="top-0 lg:fixed lg:h-screen">
           <FilterErrorMessage itemType="Pokémon" />
         </div>

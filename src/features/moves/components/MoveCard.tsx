@@ -9,11 +9,7 @@ import tmDiscsImage from "/tm-discs.webp";
 import Loader from "@/components/Loader.tsx";
 import MoveInfoDisplay from "@/features/moves/components/MoveInfoDisplay.tsx";
 
-interface CardProps {
-  move: ItemResource;
-}
-
-const MoveCard = memo(({ move: { id, name } }: CardProps) => {
+const MoveCard = memo(({ move: { id, name } }: { move: ItemResource }) => {
   const { data: move } = useMove(id);
 
   return (
@@ -31,7 +27,7 @@ const MoveCard = memo(({ move: { id, name } }: CardProps) => {
           }}
         />
       ) : (
-        // The loader has the same positioning classes as the image to ensure no layout shifts
+        // The loader has the same positioning classes as the image to prevent layout shifts
         <div className="-m-7 inline-block h-34.25 w-33 scale-40">
           <Loader size={20} />
         </div>

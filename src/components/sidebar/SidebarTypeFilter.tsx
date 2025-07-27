@@ -14,7 +14,7 @@ const SidebarTypeFilter = () => {
         label,
       }))}
       isOpen={isOpen}
-      toggleOpen={() => setIsOpen(isOpen ? undefined : true)}
+      setIsOpen={setIsOpen}
     />
   );
 };

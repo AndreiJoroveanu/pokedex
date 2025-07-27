@@ -14,7 +14,7 @@ export const useStarredPokemon = () => {
           [...prevPokemon, pokemonId],
     );
 
-  const length = starredPokemonIds.length;
+  const { length } = starredPokemonIds;
 
   return { starredPokemonIds, toggleStarredPokemonIds, length };
 };

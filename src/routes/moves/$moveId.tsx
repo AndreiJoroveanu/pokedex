@@ -15,8 +15,7 @@ import FlavorTextEntries from "@/features/moves/components/moveDetails/FlavorTex
 import Footer from "@/components/Footer.tsx";
 
 const MoveDetails = () => {
-  // Fetching data
-  // Move ID using the URL Parameter
+  // Fetching move using the Path Param
   const { moveId } = Route.useParams();
   const { data: move, error: errorM } = useMove(Number(moveId));
 
@@ -37,7 +36,7 @@ const MoveDetails = () => {
           <MoveDiscImage type={move?.type.name} />
 
           <div className="max-w-[calc(100vw-148px)]">
-            <h1 className="overflow-scroll pb-1 text-2xl font-bold text-nowrap">
+            <h1 className="-ml-1 overflow-scroll mask-l-from-98% mask-l-to-100% pr-2 pb-1 pl-1 text-2xl font-bold text-nowrap">
               {capitalize(move?.name ?? "Loading...")}
             </h1>
 

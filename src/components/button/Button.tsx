@@ -21,7 +21,7 @@ const Button = ({
   ...props
 }: ButtonProps) => (
   <button
-    className={`cursor-pointer py-2 font-semibold shadow-sm transition-[background-color_shadow_filter] enabled:hover:shadow-md dark:shadow-none ${buttonStyles[variant]} ${className} ${!className?.includes("rounded-") ? "rounded-xl" : ""}`.trim()}
+    className={`cursor-pointer py-2 font-semibold shadow-sm transition-[background-color_shadow_filter] enabled:hover:shadow-md dark:shadow-none ${buttonStyles[variant]} ${className} ${!className?.includes("rounded-") ? "rounded-xl" : ""}`.trimEnd()}
     {...props}
   >
     {children}

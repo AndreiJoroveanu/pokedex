@@ -19,7 +19,7 @@ interface EntriesProps {
   textEntries: Entry[] | undefined;
 }
 
-const FlavorTextEntry = ({ entry }: { entry: Entry }) => (
+const flavorTextEntry = (entry: Entry) => (
   <>
     <span className="font-bold text-base-600 transition-[color] dark:text-base-400">
       {/* Display a hardcoded string for the version, with original one as a fallback */}
@@ -37,7 +37,7 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
   const sortedEntries = textEntries
     // Filter to display only the english Dex Entries
     ?.filter((entry) => entry.language.name === "en")
-    // Reverse the order to show Dex Entries from newest games first
+    // Reverse order to show Dex Entries from newest games first
     .reverse();
 
   return (
@@ -52,7 +52,7 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
                 sortedEntries.length > 1 ? "-mb-2" : "pb-2"
               } px-2 pt-2 sm:px-4`}
             >
-              <FlavorTextEntry entry={sortedEntries[0]} />
+              {flavorTextEntry(sortedEntries[0])}
             </p>
 
             {sortedEntries.length > 1 && (
@@ -67,7 +67,7 @@ const FlavorTextEntries = ({ textEntries }: EntriesProps) => {
                       key={entry.version?.name}
                       className="p-2 even:bg-base-500/15 sm:px-4"
                     >
-                      <FlavorTextEntry entry={entry} />
+                      {flavorTextEntry(entry)}
                     </li>
                   ))}
                 </ul>

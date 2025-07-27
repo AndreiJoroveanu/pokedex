@@ -10,24 +10,21 @@ const route = getRouteApi("/pokemon/$pokemonId");
 
 const StarButton = () => {
   const { pokemonId } = route.useParams();
-  const pokemonIdAsNumber = Number(pokemonId);
   const { starredPokemonIds, toggleStarredPokemonIds } = useStarredPokemon();
+  const isStarred = starredPokemonIds.includes(Number(pokemonId));
 
   return (
     <Button
-      onClick={() => toggleStarredPokemonIds(pokemonIdAsNumber)}
+      onClick={() => toggleStarredPokemonIds(Number(pokemonId))}
       variant="gold"
       className="pointer-events-auto ml-auto flex items-center gap-2 px-4"
     >
-      {starredPokemonIds.includes(pokemonIdAsNumber) ? (
-        <>
-          <StarIconSolid className="size-4" /> Starred
-        </>
+      {isStarred ? (
+        <StarIconSolid className="size-4" />
       ) : (
-        <>
-          <StarIconOutline className="size-4" /> Star
-        </>
+        <StarIconOutline className="size-4" />
       )}
+      {`Star${isStarred ? "red" : ""}`}
     </Button>
   );
 };

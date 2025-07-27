@@ -13,10 +13,10 @@ const PokemonStats = ({ pokemonStats }: StatsProps) => (
 
     <div className="mb-4 max-w-lg rounded-xl bg-base-100 p-2 pt-3 shadow-md transition-[background-color] sm:px-4 dark:bg-base-900 dark:shadow-none">
       <div className="grid grid-cols-[auto_auto_1fr] gap-2">
-        {stats?.map((stat, index) => (
-          <Fragment key={stat.label}>
+        {stats.map(({ label, color }, index) => (
+          <Fragment key={label}>
             {/* Stat name */}
-            <h3 className="font-semibold capitalize">{stat.label}:</h3>
+            <h3 className="font-semibold capitalize">{label}:</h3>
 
             {/* Stat number */}
             {pokemonStats ? (
@@ -31,14 +31,14 @@ const PokemonStats = ({ pokemonStats }: StatsProps) => (
             {pokemonStats ? (
               <div className="relative my-auto h-5">
                 <div
-                  style={{ backgroundColor: stats[index].color }}
+                  style={{ backgroundColor: color }}
                   className="absolute h-full w-full rounded-sm opacity-50 brightness-125 transition-[filter] dark:brightness-75"
                 />
 
                 <div
                   style={{
                     width: `${((pokemonStats[index].base_stat ?? 0) / 255) * 100}%`,
-                    backgroundColor: stats[index].color,
+                    backgroundColor: color,
                   }}
                   className="absolute h-full rounded-sm opacity-75 brightness-90 saturate-125 transition-[filter] dark:brightness-110"
                 />
@@ -52,11 +52,10 @@ const PokemonStats = ({ pokemonStats }: StatsProps) => (
 
       {pokemonStats ? (
         <h3 className="pt-2 font-semibold">
-          {`Base Stat Total: ${
-            pokemonStats
-              .map((stat) => stat.base_stat)
-              .reduce((acc, cur) => acc + cur, 0) ?? 0
-          }`}
+          {`Base Stat Total: ${pokemonStats.reduce(
+            (total, { base_stat }) => total + base_stat,
+            0,
+          )}`}
         </h3>
       ) : (
         <div className="mt-2 mb-1 h-5 w-36 animate-pulse rounded-sm bg-base-500/50" />

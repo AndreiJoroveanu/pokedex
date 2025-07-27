@@ -1,7 +1,5 @@
 import type { FlavorText } from "pokedex-promise-v2";
 
-import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
-
 // Removing line breaks is only needed for Gold and Silver & Crystal version groups
 const versionGroupsWithWordBreaks = new Set(["gold-silver", "crystal"]);
 
@@ -44,19 +42,14 @@ const formatFlavorTextEntries = (
         entry.flavor_text !==
         "This move can’t be used.\nIt’s recommended that this move is forgotten.\nOnce forgotten, this move can’t be remembered.",
     )
-    // Manually sort based on the version group ID in reverse order (newer first)
-    .sort(
-      (a, b) =>
-        (getIdFromUrl(b.version_group?.url) ?? 0) -
-        (getIdFromUrl(a.version_group?.url) ?? 0),
-    )
+    // Reverse order to show Dex Entries from newest games first
+    .reverse()
     // Remove erroneous line breaks in the specific version groups and for the specific moves
     .map((entry) => ({
       ...entry,
       flavor_text:
         versionGroupsWithWordBreaks.has(entry.version_group?.name ?? "") &&
-        moveName &&
-        movesWithWordBreaks.has(moveName)
+        movesWithWordBreaks.has(moveName ?? "")
           ? entry.flavor_text.replace(/\n/g, "")
           : entry.flavor_text,
     }));

@@ -4,13 +4,9 @@ import { usePokemonAbility } from "@/hooks/usePokeApi.ts";
 import { getIdFromUrl } from "@/utils/getIdFromUrl.ts";
 import { capitalize } from "@/utils/capitalize.ts";
 
-interface AbilityProps {
-  ability: PokemonAbility;
-}
-
-const PokemonAbilityDisplay = ({ ability }: AbilityProps) => {
+const PokemonAbilityDisplay = ({ ability }: { ability: PokemonAbility }) => {
   const { data: abilityData } = usePokemonAbility(
-    getIdFromUrl(ability.ability.url),
+    getIdFromUrl(ability.ability.url)!,
   );
 
   return (

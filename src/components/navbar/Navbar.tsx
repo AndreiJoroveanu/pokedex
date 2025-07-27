@@ -8,7 +8,7 @@ const Navbar = () => {
   const [isSettingsMenuOpen, setIsSettingsMenuOpen] = useState<boolean>(false);
 
   return (
-    <nav className="pointer-events-none relative flex h-18 w-full items-center sm:fixed sm:top-0 sm:z-50 sm:justify-between sm:px-12 sm:transition-[background-color_shadow]">
+    <nav className="pointer-events-none flex h-18 w-full items-center sm:fixed sm:top-0 sm:z-50 sm:justify-between sm:px-12 sm:transition-[background-color_shadow]">
       {/* Logo:
           - On sm- screens, placed at the top of the page
           - On sm+ screens, it floats in the top-left corner */}

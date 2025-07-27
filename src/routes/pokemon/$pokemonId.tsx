@@ -12,6 +12,7 @@ import type { PokemonDetailsParams } from "@/types/types.ts";
 import ErrorMessage from "@/components/error/ErrorMessage.tsx";
 import TopButtons from "@/features/pokemon/components/pokemonDetails/TopButtons.tsx";
 import PokemonImage from "@/features/pokemon/components/pokemonDetails/PokemonImage.tsx";
+import PokemonName from "@/features/pokemon/components/pokemonDetails/PokemonName.tsx";
 import ToggleShinyButton from "@/features/pokemon/components/pokemonDetails/ToggleShinyButton.tsx";
 import PokemonCategory from "@/features/pokemon/components/pokemonDetails/PokemonCategory.tsx";
 import PokemonTypesDisplay from "@/features/pokemon/components/PokemonTypesDisplay.tsx";
@@ -29,7 +30,7 @@ import PokemonLocations from "@/features/pokemon/components/pokemonDetails/Pokem
 import Footer from "@/components/Footer.tsx";
 
 const PokemonDetails = () => {
-  // State specific to this page
+  // Search Param states
   const [displayShiny, setDisplayShiny] =
     usePokemonDetailsParam("displayShiny");
   const [formIndex, setFormIndex] = usePokemonDetailsParam("form");
@@ -45,17 +46,19 @@ const PokemonDetails = () => {
   );
 
   // Fetching data
-  // Pokémon Species using the URL Parameter
+  // Pokémon Species using the Path Param
   const { pokemonId } = Route.useParams();
   const { data: pokemonSpecies, error: errorPS } = usePokemonSpecies(
     Number(pokemonId),
   );
 
-  // Pokémon based on the selected Form
+  // Pokémon based on the selected form
   const { data: pokemon, error: errorP } = usePokemon(
     currentFormIndex === 0
-      ? Number(pokemonId)
-      : getIdFromUrl(pokemonSpecies?.varieties[currentFormIndex].pokemon.url),
+      ? // Using the Path Param since the first form has the same ID
+        Number(pokemonId)
+      : // Get the ID from Pokémon Species' variety index
+        getIdFromUrl(pokemonSpecies?.varieties[currentFormIndex].pokemon.url),
   );
 
   // Play the Pokémon's cry when the page first loads, or when the form is changed
@@ -88,23 +91,26 @@ const PokemonDetails = () => {
         <PokemonImage
           key={`${currentFormIndex}${displayShiny ? "-shiny" : ""}`}
           src={
+            // Default image is from Pokémon HOME
             pokemon?.sprites.other.home[
               // Depending on the displayShiny state, display a different image
-              displayShiny ? "front_shiny" : "front_default"
+              `front_${displayShiny ? "shiny" : "default"}`
             ] ??
-            // The default image is from Pokémon HOME, with the official artwork as a fallback
+            // Official artwork as a fallback
             pokemon?.sprites.other["official-artwork"][
-              displayShiny ? "front_shiny" : "front_default"
+              `front_${displayShiny ? "shiny" : "default"}`
             ]
           }
           alt={pokemon?.name}
         />
 
         <div className="flex items-end justify-between px-2">
-          {/* Name */}
-          <h1 className="text-2xl font-bold capitalize">
-            {pokemon?.name.split("-").join(" ") ?? "Loading..."}
-          </h1>
+          <PokemonName
+            name={
+              pokemon?.name ??
+              pokemonSpecies?.varieties[currentFormIndex].pokemon?.name
+            }
+          />
 
           <ToggleShinyButton
             displayShiny={displayShiny ?? false}
@@ -127,11 +133,11 @@ const PokemonDetails = () => {
 
         <PokemonFormButtons
           pokemonSpecies={pokemonSpecies?.varieties}
+          placeholderName={pokemon?.name}
           currentForm={currentFormIndex}
           handleClick={(index) =>
             setFormIndex(index === 0 ? undefined : index + 1)
           }
-          placeholderName={pokemon?.name}
         />
 
         <PokemonAbilities abilities={pokemon?.abilities} />
@@ -196,14 +202,21 @@ export const Route = createFileRoute("/pokemon/$pokemonId")({
     if (isNaN(pokemonIdAsNumber))
       throw new Error("Pokémon ID must be a number");
 
-    // Prefetch the Pokémon Species data
+    // Prefetch Pokémon Species data
     void queryClient.ensureQueryData({
       queryFn: () => pokeApi.getPokemonSpeciesByName(pokemonIdAsNumber),
       queryKey: ["pokemonSpecies", pokemonIdAsNumber],
     });
 
-    // Don't prefetch the Pokémon details if the user has a different Pokémon Form selected,
-    // as the Pokémon ID is located in the Pokémon Species details, which aren't fetched yet
+    // Prefetch Pokémon location data
+    void queryClient.ensureQueryData({
+      queryFn: () =>
+        pokeApi.getResource(`/api/v2/pokemon/${pokemonIdAsNumber}/encounters`),
+      queryKey: ["pokemonLocation", pokemonIdAsNumber],
+    });
+
+    // Skip prefetching Pokémon data if a specific Pokémon form is selected,
+    // since the ID comes from Pokémon Species data, which isn't fetched yet
     if (!form)
       void queryClient.ensureQueryData({
         queryFn: () => pokeApi.getPokemonByName(pokemonIdAsNumber),

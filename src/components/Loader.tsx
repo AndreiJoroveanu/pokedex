@@ -6,7 +6,7 @@ interface LoaderProps {
 }
 
 const Loader = ({ size, displaysText = false }: LoaderProps) => (
-  <div className="flex aspect-square h-full w-full flex-col items-center justify-center">
+  <div className="flex aspect-square size-full flex-col items-center justify-center">
     <img
       src={pokeballLogo}
       alt="Pokéball spinning as a loading animation"

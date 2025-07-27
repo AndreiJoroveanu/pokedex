@@ -8,11 +8,7 @@ import Loader from "@/components/Loader.tsx";
 import Button from "@/components/button/Button.tsx";
 import PokemonMovesTable from "@/features/pokemon/components/pokemonDetails/learnset/PokemonMovesTable.tsx";
 
-interface MovesProps {
-  moves: MoveElement[] | undefined;
-}
-
-const PokemonMoves = ({ moves }: MovesProps) => {
+const PokemonMoves = ({ moves }: { moves: MoveElement[] | undefined }) => {
   const [versionGroup, setVersionGroup] =
     usePokemonDetailsParam("versionGroup");
   // Indexing from 1 instead of 0 since this value can be seen by the user
@@ -28,8 +24,8 @@ const PokemonMoves = ({ moves }: MovesProps) => {
   if (!moves?.length)
     return (
       <p className="p-2 sm:p-4">
-        There seems to be no learnset data for this Pokémon&apos;s Form. Try
-        checking another Form above.
+        There seems to be no learnset data for this Pokémon&apos;s form. Try
+        checking another form above.
       </p>
     );
 

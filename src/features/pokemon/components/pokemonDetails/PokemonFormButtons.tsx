@@ -4,16 +4,16 @@ import Button from "@/components/button/Button.tsx";
 
 interface FormButtonProps {
   pokemonSpecies: Variety[] | undefined;
+  placeholderName: string | undefined;
   currentForm: number;
   handleClick: (index: number) => void;
-  placeholderName: string | undefined;
 }
 
 const PokemonFormButtons = ({
   pokemonSpecies,
+  placeholderName,
   currentForm,
   handleClick,
-  placeholderName,
 }: FormButtonProps) => (
   <>
     <h2 className="ml-2 text-lg font-semibold sm:ml-4">Current Form:</h2>

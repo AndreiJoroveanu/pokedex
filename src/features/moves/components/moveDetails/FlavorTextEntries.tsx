@@ -12,7 +12,7 @@ interface EntriesProps {
   moveName: string | undefined;
 }
 
-const FlavorTextEntry = ({ entry }: { entry: FlavorText }) => (
+const flavorTextEntry = (entry: FlavorText) => (
   <>
     <span className="font-bold text-base-600 transition-[color] dark:text-base-400">
       {/* Display a hardcoded string for the version group, with original one as a fallback */}
@@ -32,14 +32,14 @@ const FlavorTextEntries = ({ textEntries, moveName }: EntriesProps) => {
       <h2 className="mb-1 ml-2 text-lg font-semibold sm:ml-4">Descriptions:</h2>
 
       <div className="rounded-xl bg-base-100 transition-[background] dark:bg-base-900">
-        {sortedEntries?.length && moveName ? (
+        {sortedEntries?.length ? (
           <>
             <p
               className={`${
                 sortedEntries.length > 1 ? "-mb-2" : "pb-2"
               } px-2 pt-2 sm:px-4`}
             >
-              <FlavorTextEntry entry={sortedEntries[0]} />
+              {flavorTextEntry(sortedEntries[0])}
             </p>
 
             {sortedEntries.length > 1 && (
@@ -50,7 +50,7 @@ const FlavorTextEntries = ({ textEntries, moveName }: EntriesProps) => {
                       key={entry.version_group?.name}
                       className="p-2 even:bg-base-500/15 sm:px-4"
                     >
-                      <FlavorTextEntry entry={entry} />
+                      {flavorTextEntry(entry)}
                     </li>
                   ))}
                 </ul>

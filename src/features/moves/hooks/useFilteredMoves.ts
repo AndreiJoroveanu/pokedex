@@ -51,7 +51,6 @@ export const useFilteredMoves = (allMoves: ItemResource[] | undefined) => {
 
   return {
     moveList: searchedMoves,
-    isLoading: isLoadingFG || isLoadingFT,
-    isFiltered: Boolean(currentGen ?? currentType ?? searchQuery),
+    isLoadingFM: isLoadingFG || isLoadingFT,
   };
 };

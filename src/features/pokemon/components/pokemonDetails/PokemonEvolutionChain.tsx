@@ -15,7 +15,7 @@ interface Evolution extends ItemResource {
 }
 
 // Link to the respective Pokémon page and the evolution description
-const PokemonEvolutionText = ({ pokemon }: { pokemon: Evolution }) => (
+const pokemonEvolutionText = (pokemon: Evolution) => (
   <>
     <Link
       to="/pokemon/$pokemonId"
@@ -30,17 +30,17 @@ const PokemonEvolutionText = ({ pokemon }: { pokemon: Evolution }) => (
 );
 
 // Format the list of evolutions
-const formatEvolutions = (pokemonList: Evolution[]) => {
+const formatNextEvolutions = (pokemonList: Evolution[]) => {
   // If this Pokémon has one evolution branch after it
-  if (pokemonList.length === 1)
-    return <PokemonEvolutionText pokemon={pokemonList[0]} />;
+  if (pokemonList.length === 1) return pokemonEvolutionText(pokemonList[0]);
 
   // If this Pokémon has two evolution branches after it
   if (pokemonList.length === 2)
     return (
       <>
-        <PokemonEvolutionText pokemon={pokemonList[0]} />, or{" "}
-        <PokemonEvolutionText pokemon={pokemonList[1]} />
+        {pokemonEvolutionText(pokemonList[0])}
+        {", or "}
+        {pokemonEvolutionText(pokemonList[1])}
       </>
     );
 
@@ -49,11 +49,12 @@ const formatEvolutions = (pokemonList: Evolution[]) => {
     <>
       {pokemonList.slice(0, pokemonList.length - 1).map((pokemon) => (
         <Fragment key={pokemon.name}>
-          <PokemonEvolutionText pokemon={pokemon} />,{" "}
+          {pokemonEvolutionText(pokemon)}
+          {", "}
         </Fragment>
       ))}
       {" or "}
-      <PokemonEvolutionText pokemon={pokemonList[pokemonList.length - 1]} />
+      {pokemonEvolutionText(pokemonList[pokemonList.length - 1])}
     </>
   );
 };
@@ -75,7 +76,7 @@ const PokemonEvolutionChain = ({ id, pokemonName }: ChainProps) => {
   if (!previous)
     return (
       <p className="mx-2">
-        This Pokémon evolves into {formatEvolutions(next)}.
+        This Pokémon evolves into {formatNextEvolutions(next)}.
       </p>
     );
 
@@ -83,15 +84,15 @@ const PokemonEvolutionChain = ({ id, pokemonName }: ChainProps) => {
   if (!next.length)
     return (
       <p className="mx-2">
-        This Pokémon evolves from <PokemonEvolutionText pokemon={previous} />.
+        This Pokémon evolves from {pokemonEvolutionText(previous)}.
       </p>
     );
 
   // If this Pokémon is a middle evolution
   return (
     <p className="mx-2">
-      This Pokémon evolves from <PokemonEvolutionText pokemon={previous} />, and
-      evolves into {formatEvolutions(next)}.
+      This Pokémon evolves from {pokemonEvolutionText(previous)}, and evolves
+      into {formatNextEvolutions(next)}.
     </p>
   );
 };

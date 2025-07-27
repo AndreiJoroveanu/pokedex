@@ -10,7 +10,7 @@ interface InfoProps {
 
 const MoveInfoDisplay = ({ move, className = "" }: InfoProps) =>
   move ? (
-    <div className={`flex ${className}`.trim()}>
+    <div className={`flex ${className}`.trimEnd()}>
       <TypeDisplay type={move.type.name} className="rounded-r-none" />
 
       <MoveCategoryDisplay
@@ -20,7 +20,7 @@ const MoveInfoDisplay = ({ move, className = "" }: InfoProps) =>
     </div>
   ) : (
     <div
-      className={`h-6 w-52 animate-pulse rounded-full bg-base-500/50 ${className}`.trim()}
+      className={`h-6 w-52 animate-pulse rounded-full bg-base-500/50 ${className}`.trimEnd()}
     />
   );
 export default MoveInfoDisplay;

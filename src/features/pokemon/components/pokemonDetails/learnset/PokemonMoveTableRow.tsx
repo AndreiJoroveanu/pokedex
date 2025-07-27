@@ -16,7 +16,7 @@ const PokemonMoveTableRow = ({ move, displayLevel }: RowProps) => {
   const { data: moveData } = useMove(move.id);
 
   return (
-    <tr className="group relative h-8 even:bg-base-500/15 hover:bg-blue-500/20 has-focus:bg-blue-500/20 pointer-coarse:h-12">
+    <tr className="group relative h-8 transition-[background-color] even:bg-base-500/15 hover:bg-blue-500/20 has-focus:bg-blue-500/20 pointer-coarse:h-12">
       {/* Invisible Link (has to be the first for the peer class to work) */}
       <td aria-hidden="true" className="peer">
         <Link
@@ -31,7 +31,7 @@ const PokemonMoveTableRow = ({ move, displayLevel }: RowProps) => {
       {displayLevel && <td className="min-w-14">{move.level || "Evo."}</td>}
 
       {/* Move name */}
-      <td className="min-w-36 font-semibold capitalize group-hover:text-blue-600 peer-focus-within:text-blue-600 dark:group-hover:text-blue-400 dark:peer-focus-within:text-blue-400">
+      <td className="min-w-36 font-semibold capitalize transition-[color] group-hover:text-blue-600 peer-focus-within:text-blue-600 dark:group-hover:text-blue-400 dark:peer-focus-within:text-blue-400">
         {move.name.split("-").join(" ")}
       </td>
 
@@ -68,7 +68,7 @@ const PokemonMoveTableRow = ({ move, displayLevel }: RowProps) => {
       <td className="min-w-6">{moveData?.pp ?? "-"}</td>
 
       {/* Arrow indicating that the row is clickable */}
-      <td className="pointer-events-none scale-75 rounded-lg group-hover:bg-blue-500/25 group-hover:text-blue-600 peer-focus-within:bg-blue-500/25 peer-focus-within:text-blue-600 dark:group-hover:text-blue-400 dark:peer-focus-within:text-blue-400">
+      <td className="pointer-events-none scale-75 rounded-lg transition-[background-color_color] group-hover:bg-blue-500/25 group-hover:text-blue-600 peer-focus-within:bg-blue-500/25 peer-focus-within:text-blue-600 dark:group-hover:text-blue-400 dark:peer-focus-within:text-blue-400">
         <ChevronRightIcon className="size-8 pointer-coarse:size-12 pointer-coarse:scale-75" />
       </td>
     </tr>

@@ -1,7 +1,6 @@
 import { usePokemonLocations } from "@/hooks/usePokeApi.ts";
-import { games } from "@/data/games.ts";
-
 import organizePokemonEncounters from "@/features/pokemon/utils/organizePokemonEncounters.ts";
+import { games } from "@/data/games.ts";
 
 import Loader from "@/components/Loader.tsx";
 
@@ -17,7 +16,7 @@ const PokemonLocations = ({ id }: { id: number }) => {
 
   if (encounters.length === 0)
     return (
-      <div className="p-4">
+      <div className="p-2 sm:px-4">
         There seems to be no location data for this Pokémon. Try checking
         another Pokemon from the same evolution line.
       </div>
@@ -28,22 +27,21 @@ const PokemonLocations = ({ id }: { id: number }) => {
 
   return (
     <div className="space-y-4 p-2 sm:px-4">
-      {Object.entries(games).map(
-        ([versionName, { label }]) =>
-          formattedEncounters[versionName] && (
-            <div key={versionName}>
-              <h2 className="text-xl font-bold">{label}</h2>
+      {Object.entries(games)
+        .filter(([versionName]) => formattedEncounters[versionName])
+        .map(([versionName, { label }]) => (
+          <div key={versionName}>
+            <h2 className="text-xl font-bold">{label}</h2>
 
-              <ul>
-                {formattedEncounters[versionName].map(({ location }) => (
-                  <li key={location} className="capitalize">
-                    {location.split("-").join(" ")}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ),
-      )}
+            <ul>
+              {formattedEncounters[versionName]!.map(({ location }) => (
+                <li key={location} className="capitalize">
+                  {location.split("-").join(" ")}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
     </div>
   );
 };
