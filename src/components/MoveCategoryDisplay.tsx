@@ -1,5 +1,5 @@
 import { moveCategories } from "@/data/moveCategories.ts";
-import categories from "/move-categories.webp";
+import categories from "@/assets/move-categories.webp";
 
 interface DisplayProps {
   category: string;

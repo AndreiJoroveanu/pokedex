@@ -1,4 +1,4 @@
-import pokeballLogo from "/pokéball.svg";
+import pokeballLogo from "@/assets/pokéball.svg";
 
 interface LoaderProps {
   size: number;

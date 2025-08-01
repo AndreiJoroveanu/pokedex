@@ -1,5 +1,5 @@
 import { tmDiscs } from "@/data/tmDiscs.ts";
-import tmDiscsImage from "/tm-discs.webp";
+import tmDiscsImage from "@/assets/tm-discs.webp";
 
 import Loader from "@/components/Loader.tsx";
 

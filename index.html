@@ -1,11 +1,33 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Metadata -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/pokéball.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Simple Pokédex app by Andrei Joroveanu" />
     <title>Pokédex</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Simple Pokédex app built with React by Andrei Joroveanu" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Pokédex" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://andreijoroveanu.github.io/pokedex" />
+    <meta property="og:title" content="Pokédex" />
+    <meta property="og:description" content="Simple Pokédex app built with React by Andrei Joroveanu" />
+    <meta property="og:image" content="/og-image.png" />
+
+    <!-- X (Twitter) -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content="https://andreijoroveanu.github.io/pokedex" />
+    <meta property="twitter:title" content="Pokédex" />
+    <meta property="twitter:description" content="Simple Pokédex app built with React by Andrei Joroveanu" />
+    <meta property="twitter:image" content="/og-image.png" />
 
     <style>
       /* Set a background that matches the system theme before the React app loads */
@@ -28,22 +50,14 @@
     <script type="text/javascript">
       const l = window.location;
       if (l.search[1] === "/") {
-        const decoded = l.search
-          .slice(1)
-          .split("&")
-          .map((s) => s.replace(/~and~/g, "&"))
-          .join("?");
-        window.history.replaceState(
-          null,
-          null,
-          l.pathname.slice(0, -1) + decoded + l.hash,
-        );
+        const decoded = l.search.slice(1).split("&").map((s) => s.replace(/~and~/g, "&")).join("?");
+        window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
       }
     </script>
 
     <!-- Preload the Pokéball SVG and the font -->
     <script type="module">
-      import pokeballUrl from "/pokéball.svg";
+      import pokeballUrl from "@/assets/pokéball.svg";
       import fontUrl from "@fontsource-variable/inter/files/inter-latin-opsz-normal.woff2";
 
       const preloadImage = document.createElement("link");
