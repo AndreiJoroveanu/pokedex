@@ -1,4 +1,6 @@
 {
+  "lang": "en",
+  "dir": "ltr",
   "name": "Pokédex",
   "short_name": "Pokédex",
   "icons": [
@@ -15,7 +17,11 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
+  "scope": "/pokedex/",
+  "id": "https://andreijoroveanu.github.io/pokedex",
+  "start_url": "/pokedex/index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#020618",
+  "background_color": "#020618"
 }
