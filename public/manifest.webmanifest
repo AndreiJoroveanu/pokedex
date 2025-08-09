@@ -1,0 +1,27 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "name": "Pokédex",
+  "short_name": "Pokédex",
+  "icons": [
+    {
+      "src": "web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "scope": "/pokedex/",
+  "id": "https://andreijoroveanu.github.io/pokedex",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#020618",
+  "background_color": "#020618"
+}

@@ -11,9 +11,13 @@
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#020618" media="(prefers-color-scheme: dark)" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="Pokédex" />
-    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -45,15 +49,6 @@
         color-scheme: dark;
       }
     </style>
-
-    <!-- Decode redirected path from query and restore original URL for the router to handle -->
-    <script type="text/javascript">
-      const l = window.location;
-      if (l.search[1] === "/") {
-        const decoded = l.search.slice(1).split("&").map((s) => s.replace(/~and~/g, "&")).join("?");
-        window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
-      }
-    </script>
 
     <!-- Preload the Pokéball SVG and the font -->
     <script type="module">
