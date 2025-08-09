@@ -19,7 +19,7 @@
   ],
   "scope": "/pokedex/",
   "id": "https://andreijoroveanu.github.io/pokedex",
-  "start_url": "/pokedex/index.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "orientation": "any",
   "theme_color": "#020618",
