@@ -83,7 +83,11 @@ export const useAllMoves = () =>
           id: getIdFromUrl(m.url)!,
           name: m.name,
         }))
-        // Filtering as to not show "Shadow" moves, which have IDs over 10000
+        // Filters common Z-Moves out
+        .filter(
+          (m) => !m.name.endsWith("physical") && !m.name.endsWith("special"),
+        )
+        // Filters "Shadow" moves out
         .filter((m) => m.id < 10000) as ItemResource[],
     queryKey: ["allMoves"],
   });
@@ -118,7 +122,7 @@ export const useAllPokemonByType = (type: string | undefined) =>
           id: getIdFromUrl(p.pokemon.url)!,
           name: p.pokemon.name,
         }))
-        // Filtering as to not show alternate forms, which have IDs over 10000
+        // Filters alternate forms out
         .filter((p) => p.id < 10000) as ItemResource[],
     queryKey: ["type", type],
   });
@@ -136,7 +140,11 @@ export const useAllMovesByGen = (gen: string | undefined) =>
           id: getIdFromUrl(m.url)!,
           name: m.name,
         }))
-        // Filtering as to not show "Shadow" moves, which have IDs over 10000
+        // Filters common Z-Moves out
+        .filter(
+          (m) => !m.name.endsWith("physical") && !m.name.endsWith("special"),
+        )
+        // Filters "Shadow" moves out
         .filter((m) => m.id < 10000) as ItemResource[],
     queryKey: ["generation", gen],
   });
@@ -146,10 +154,15 @@ export const useAllMovesByType = (type: string | undefined) =>
   useQuery({
     queryFn: type ? () => pokeApi.getTypeByName(type) : skipToken,
     select: (data) =>
-      data.moves.map((m) => ({
-        // Extract the move ID from the URL
-        id: getIdFromUrl(m.url)!,
-        name: m.name,
-      })) as ItemResource[],
+      data.moves
+        .map((m) => ({
+          // Extract the move ID from the URL
+          id: getIdFromUrl(m.url)!,
+          name: m.name,
+        }))
+        // Filters common Z-Moves out
+        .filter(
+          (m) => !m.name.endsWith("physical") && !m.name.endsWith("special"),
+        ) as ItemResource[],
     queryKey: ["type", type],
   });

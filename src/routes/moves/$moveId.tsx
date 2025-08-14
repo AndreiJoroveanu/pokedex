@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { useMove } from "@/hooks/usePokeApi.ts";
 import { capitalize } from "@/utils/capitalize.ts";
+import type { MoveDetailsParams } from "@/types/types.ts";
 
 import ErrorMessage from "@/components/error/ErrorMessage.tsx";
 import BackButton from "@/components/button/BackButton.tsx";
@@ -25,7 +26,7 @@ const MoveDetails = () => {
   return (
     <>
       {/* In React 19, you can now render the <title> tag in JSX */}
-      <title>{`Pokédex - ${capitalize(move?.name ?? "Loading")}`}</title>
+      {move && <title>{`Pokédex - ${capitalize(move.name)}`}</title>}
 
       <div className="pointer-events-none sticky top-4 z-20 px-2 sm:fixed sm:top-20 sm:px-4">
         <BackButton />
@@ -66,6 +67,7 @@ const MoveDetails = () => {
 
 export const Route = createFileRoute("/moves/$moveId")({
   component: MoveDetails,
+  validateSearch: (search) => ({ ...search }) as MoveDetailsParams,
   loader: ({ context: { queryClient, pokeApi }, params: { moveId } }) => {
     const moveIdAsNumber = Number(moveId);
 

@@ -20,3 +20,7 @@ export interface PokemonDetailsParams {
   isLearnsetPanelOpen?: true;
   isLocationsPanelOpen?: true;
 }
+
+export interface MoveDetailsParams {
+  isDescriptionsPanelOpen?: true;
+}

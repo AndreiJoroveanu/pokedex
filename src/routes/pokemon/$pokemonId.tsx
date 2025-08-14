@@ -83,7 +83,7 @@ const PokemonDetails = () => {
   return (
     <>
       {/* In React 19, you can now render the <title> tag in JSX */}
-      <title>{`Pokédex - ${capitalize(pokemon?.name ?? "Loading")}`}</title>
+      {pokemon && <title>{`Pokédex - ${capitalize(pokemon.name)}`}</title>}
 
       <TopButtons />
 

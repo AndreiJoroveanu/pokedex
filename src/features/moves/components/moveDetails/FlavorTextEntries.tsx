@@ -1,5 +1,6 @@
 import type { FlavorText } from "pokedex-promise-v2";
 
+import { useMoveDetailsParam } from "@/features/moves/hooks/useMoveDetailsParam.ts";
 import { versionGroups } from "@/data/versionGroups.ts";
 import formatFlavorTextEntries from "@/features/moves/utils/formatFlavorTextEntries.ts";
 import { capitalize } from "@/utils/capitalize.ts";
@@ -25,6 +26,8 @@ const flavorTextEntry = (entry: FlavorText) => (
 );
 
 const FlavorTextEntries = ({ textEntries, moveName }: EntriesProps) => {
+  const [isOpen, setIsOpen] = useMoveDetailsParam("isDescriptionsPanelOpen");
+
   const sortedEntries = formatFlavorTextEntries(textEntries, moveName);
 
   return (
@@ -43,7 +46,11 @@ const FlavorTextEntries = ({ textEntries, moveName }: EntriesProps) => {
             </p>
 
             {sortedEntries.length > 1 && (
-              <Accordion label="More Descriptions">
+              <Accordion
+                label="More Descriptions"
+                initialIsOpen={isOpen}
+                toggleOpen={() => setIsOpen(isOpen ? undefined : true)}
+              >
                 <ul>
                   {sortedEntries.slice(1).map((entry) => (
                     <li
