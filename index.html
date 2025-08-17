@@ -37,7 +37,10 @@
       /* Set a background that matches the system theme before the React app loads */
       body {
         color-scheme: light dark;
-        background-color: Canvas;
+        background-color: #f8fafc;
+        @media (prefers-color-scheme: dark) {
+          background-color: #020618;
+        }
       }
 
       /* Override the native color-scheme so scrollbars match the app’s actual theme */
@@ -51,8 +54,8 @@
     </style>
 
     <!-- Preload the Pokéball SVG and the font -->
-    <script type="module" crossorigin src="/pokedex/assets/index-DqBGcRR4.js"></script>
-    <link rel="stylesheet" crossorigin href="/pokedex/assets/index-CZvHxvhX.css">
+    <script type="module" crossorigin src="/pokedex/assets/index-knNv96ly.js"></script>
+    <link rel="stylesheet" crossorigin href="/pokedex/assets/index-D3zLe6qp.css">
   </head>
 
   <body>
