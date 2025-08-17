@@ -37,7 +37,10 @@
       /* Set a background that matches the system theme before the React app loads */
       body {
         color-scheme: light dark;
-        background-color: Canvas;
+        background-color: #f8fafc;
+        @media (prefers-color-scheme: dark) {
+          background-color: #020618;
+        }
       }
 
       /* Override the native color-scheme so scrollbars match the app’s actual theme */

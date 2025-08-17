@@ -23,7 +23,7 @@ const pokemonEvolutionText = (pokemon: Evolution) => (
       draggable="false"
       className="capitalize underline underline-offset-4 transition-[color] hover:text-blue-600 focus:text-blue-600 dark:hover:text-blue-400 dark:focus:text-blue-400"
     >
-      {pokemon.name}
+      {pokemon.name.split("-").join(" ")}
     </Link>
     {` ${pokemon.evolutionMethod || "(no data available)"}`}
   </>
